@@ -1,13 +1,16 @@
 import React from 'react';
 
-const MainLayout = ( { header, content, footer } ) => (
+import Navbar from '../components/navbar';
+import Footer from '../components/footer';
+
+const MainLayout = ( { content } ) => (
   <div>
-    { header }
+    <Navbar />
     <div className="container">
       { content }
     </div>
     <hr />
-    { footer }
+    <Footer />
   </div>
 );
 

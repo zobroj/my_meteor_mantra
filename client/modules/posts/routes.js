@@ -3,8 +3,6 @@ import { mount } from 'react-mounter';
 
 import {
   ListLayout,
-  Navbar,
-  Footer,
 } from '/client/configs/components.js';
 
 import PostList from './containers/post_list';
@@ -19,9 +17,8 @@ export default function ( injectDeps, { FlowRouter } ) {
     name: "posts.list",
     action() {
       mount( ListLayoutCtx, {
-        header: <Navbar activeLink="post" />,
+        // header: <Navbar activeLink="post" />,
         content: <PostList />,
-        footer: <Footer />,
       });
     }
   });
@@ -31,9 +28,8 @@ export default function ( injectDeps, { FlowRouter } ) {
     name: "posts.single",
     action( { postId } ) {
       mount( ListLayoutCtx, {
-        header: <Navbar activeLink="post" />,
+        // header: <Navbar activeLink="post" />,
         content: <PostSingle postId={ postId } />,
-        footer: <Footer />,
       });
     }
   });
