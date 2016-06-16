@@ -7,7 +7,7 @@ import CommentForm from './comment_form';
 class CommentBox extends React.Component {
   render() {
     return (
-      <div>
+      <div className="commentBox">
         <h1>Comments</h1>
         <CommentList />
         <CommentForm />
