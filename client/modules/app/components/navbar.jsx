@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Navbar = ( { activeLink } ) =>(
+const Navbar = ( { activeLink } ) => (
   <nav className="navbar navbar-default">
     <div className="container-fluid">
 

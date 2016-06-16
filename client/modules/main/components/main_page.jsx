@@ -1,4 +1,5 @@
 import React from 'react';
+import CommentBox from '../../_dev/comment_box';
 
 const MainPage = () => (
   <div>
@@ -14,6 +15,7 @@ const MainPage = () => (
           <button className="btn btn-primary">
             <a href={ FlowRouter.path( 'posts.list' ) }>Test Page</a>
           </button>
+          <CommentBox />
         </div>
       </div>
     </div>
