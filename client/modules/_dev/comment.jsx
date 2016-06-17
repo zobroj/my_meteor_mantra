@@ -2,6 +2,7 @@ import React from 'react';
 
 class Comment extends React.Component {
   render() {
+    
     return (
       <div className="comment">
         <h2 className="commentAuthor">
@@ -9,7 +10,8 @@ class Comment extends React.Component {
         </h2>
         {this.props.children}
       </div>
-    );
+    )
+
   }
 }
 

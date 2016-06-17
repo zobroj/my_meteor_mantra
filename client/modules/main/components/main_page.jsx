@@ -8,25 +8,31 @@ const data = [
   { id: 4, author: "Alice In Chains", text: "Man in a Hole" }
 ];
 
-const MainPage = () => (
-  <div>
-    <div className="jumbotron">
-      <div className="container">
-        <h1>Introduction</h1>
-        <p>Hello, World.</p>
-      </div>
-    </div>
-    <div className="container">
-      <div className="row">
-        <div className="col-md-12">
-          <button className="btn btn-primary">
-            <a href={ FlowRouter.path( 'posts.list' ) }>Test Page</a>
-          </button>
-          <CommentBox data={ data }/>
+class MainPage extends React.Component {
+  
+  render() {
+    return (
+      <div>
+        <div className="jumbotron">
+          <div className="container">
+            <h1>Introduction</h1>
+            <p>Hello, World.</p>
+          </div>
+        </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <button className="btn btn-primary">
+                <a href={ FlowRouter.path( 'posts.list' ) }>Test Page</a>
+              </button>
+              <CommentBox data={ data }/>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-);
+    )
+
+  }
+}
 
 export default MainPage;

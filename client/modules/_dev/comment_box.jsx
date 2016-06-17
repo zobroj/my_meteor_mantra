@@ -13,8 +13,8 @@ class CommentBox extends React.Component {
         <CommentList data={ this.props.data }/>
         <CommentForm />
       </div>
-    );
-  };
+    )
+  }
 
 }
 

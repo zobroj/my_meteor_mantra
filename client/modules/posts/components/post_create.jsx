@@ -2,7 +2,9 @@ import React from 'react';
 
 class PostCreate extends React.Component {
   render() {
-    const { error } = this.props;
+
+    const { error } = this.props
+
     return (
       <form id="create-post" onSubmit={ this.createPost.bind( this ) }>
         { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
@@ -20,16 +22,17 @@ class PostCreate extends React.Component {
         </div>
         <input type="submit" className="btn btn-success" value="New Post" />
       </form>
-    );
+    )
+
   }
 
   createPost( event ) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const { create } = this.props;
-    const { author, title, content } = this.refs;
+    const { create } = this.props
+    const { author, title, content } = this.refs
 
-    create( author.value, title.value, content.value );
+    create( author.value, title.value, content.value )
   }
 }
 

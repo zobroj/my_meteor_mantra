@@ -2,8 +2,8 @@ import React from 'react';
 import Comment from './comment';
 
 class CommentList extends React.Component {
-
   render() {
+
     const commentNodes = this.props.data.map( ( comment ) => {
       return (
         <Comment author={ comment.author } key={ comment.id }>
@@ -11,11 +11,12 @@ class CommentList extends React.Component {
         </Comment>
       )
     })
+
     return (
       <div className="commentList">
         { commentNodes }
       </div>
-    );
+    )
 
   }
 }
