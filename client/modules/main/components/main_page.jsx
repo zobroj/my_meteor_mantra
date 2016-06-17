@@ -1,6 +1,13 @@
 import React from 'react';
 import CommentBox from '../../_dev/comment_box';
 
+const data = [
+  { id: 1, author: "Pete Hunt", text: "This is one comment" },
+  { id: 2, author: "Jordan Walke", text: "This is *another* comment" },
+  { id: 3, author: "Bilbo Baggins", text: "Lord of the Rings character" },
+  { id: 4, author: "Alice In Chains", text: "Man in a Hole" }
+];
+
 const MainPage = () => (
   <div>
     <div className="jumbotron">
@@ -15,7 +22,7 @@ const MainPage = () => (
           <button className="btn btn-primary">
             <a href={ FlowRouter.path( 'posts.list' ) }>Test Page</a>
           </button>
-          <CommentBox />
+          <CommentBox data={ data }/>
         </div>
       </div>
     </div>

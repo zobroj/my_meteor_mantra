@@ -5,15 +5,17 @@ import CommentForm from './comment_form';
 
 // this pattern matchesn the post_create.jsx component
 class CommentBox extends React.Component {
+
   render() {
     return (
       <div className="commentBox">
         <h1>Comments</h1>
-        <CommentList />
+        <CommentList data={ this.props.data }/>
         <CommentForm />
       </div>
-    )
-  }
+    );
+  };
+
 }
 
 export default CommentBox;
