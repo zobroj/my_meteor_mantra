@@ -5,8 +5,8 @@ import CommentForm from './comment_form';
 
 // this pattern matchesn the post_create.jsx component
 class CommentBox extends React.Component {
-
   render() {
+
     return (
       <div className="commentBox">
         <h1>Comments</h1>
@@ -14,8 +14,8 @@ class CommentBox extends React.Component {
         <CommentForm />
       </div>
     )
+    
   }
-
 }
 
 export default CommentBox;
