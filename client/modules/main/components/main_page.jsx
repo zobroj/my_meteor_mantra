@@ -1,11 +1,7 @@
 import React from 'react';
 import CommentBox from '../../_dev/comment_box';
 
-const data = [
-];
-
 class MainPage extends React.Component {
-
   render() {
     return (
       <div>
@@ -27,7 +23,6 @@ class MainPage extends React.Component {
         </div>
       </div>
     )
-
   }
 }
 
