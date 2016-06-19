@@ -1,7 +1,4 @@
 import React from 'react';
-import CommentBox from '../../_dev/comment_box';
-import FilterableProductTable from '../../_dev2/filterable_product_table';
-import PRODUCTS from '../../_dev2/products.js';
 
 class MainPage extends React.Component {
   render() {
@@ -19,14 +16,6 @@ class MainPage extends React.Component {
               <button className="btn btn-primary">
                 <a href={ FlowRouter.path( 'posts.list' ) }>Test Page</a>
               </button>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-xs-6">
-              <CommentBox />
-            </div>
-            <div className="col-xs-6">
-              <FilterableProductTable products={PRODUCTS} />
             </div>
           </div>
         </div>
