@@ -6,7 +6,10 @@ const ProductTable = React.createClass({
   render: function() {
     const rows = [];
     let lastCategory = null;
-    this.props.products.forEach( ( product ) => {
+    this.props.products.forEach( function( product ) {
+      if ( product.name.indexOf( this.props.filterText ) === -1 || ( !product.stocked && this.props.inStockOnly ) ) {
+        return;
+      }
       if ( product.category !== lastCategory ) {
         rows.push(
           <ProductCategoryRow
@@ -22,7 +25,7 @@ const ProductTable = React.createClass({
         />
       );
       lastCategory = product.category;
-    });
+    }.bind( this ) );
     return (
       <table>
         <thead>
