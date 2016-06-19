@@ -26,7 +26,7 @@ class MainPage extends React.Component {
               <CommentBox />
             </div>
             <div className="col-xs-6">
-              <FilterableProductTable products={ PRODUCTS } />
+              <FilterableProductTable products={PRODUCTS} />
             </div>
           </div>
         </div>
