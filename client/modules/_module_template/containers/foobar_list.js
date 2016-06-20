@@ -10,7 +10,7 @@ export const composer = ( { context }, onData ) => {
       sort: { createdAt: -1 }
     };
 
-    const posts = Collections.Foobars.find( {}, options ).fetch();
+    const foobars = Collections.Foobars.find( {}, options ).fetch();
 
     onData( null, { foobars } );
 

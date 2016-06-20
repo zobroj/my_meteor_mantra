@@ -1,4 +1,5 @@
-import { Posts, Comments } from '/lib/collections';
+// Foobars is _module_template example
+import { Posts, Comments, Foobars } from '/lib/collections';
 
 export default function () {
 
@@ -19,6 +20,16 @@ export default function () {
         const createdAt = new Date();
         Comments.insert( { postId, author, content, createdAt } );
       }
+    }
+  }
+
+  // _module_template example
+  if ( !Foobars.findOne() ) {
+    for ( let lc = 1; lc <= 5; lc++ ) {
+      const name = `This is the test title ${ lc }`;
+      const createdAt = new Date();
+      const foobarId = Meteor.uuid();
+      Foobars.insert( { _id: foobarId, name, createdAt } );
     }
   }
 

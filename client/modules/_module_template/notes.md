@@ -25,8 +25,11 @@ Also...
 ```
 
 4. /server/publications/foobars.js
+* don't forget to update the index.js
 ```
 import { Foobars } from '/lib/collections';
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 
 export default function () {
   Meteor.publish( 'foobars.list', () => {
@@ -41,9 +44,12 @@ export default function () {
 }
 ```
 
-5. /server/methods/posts.js
+5. /server/methods/foobars.js
+* don't forget to update the index.js
 ```
-  import { Foobars } from 'lib/collections';
+  import { Foobars } from '/lib/collections';
+  import { Meteor } from 'meteor/meteor';
+  import { check } from 'meteor/check';
 
   export default function () {
     Meteor.methods({
