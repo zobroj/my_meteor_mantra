@@ -6,24 +6,6 @@ import { Tracker } from 'meteor/tracker';
 import { Accounts } from 'meteor/accounts-base';
 import _ from 'lodash';
 
-const authCommon = function () {
-
-  let userSubReady = Meteor.subscribe( 'users.current' ).ready();
-
-  const userId = Meteor.userId() || null;
-  const user = Meteor.user() || null;
-  const profile = _.get( Meteor.user(), 'profile', {} );
-  const email = _.get( Meteor.user(), 'emails[0].address', {} );
-
-  return {
-    userSubReady,
-    userId,
-    user,
-    profile,
-    email
-  };
-
-};
 export default function () {
 
   return {
@@ -33,7 +15,7 @@ export default function () {
     LocalState: new ReactiveDict(),
     Tracker,
     Accounts,
-    authCommon
+    _
   };
 
 }
