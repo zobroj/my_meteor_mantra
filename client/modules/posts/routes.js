@@ -3,7 +3,7 @@ import { mount } from 'react-mounter';
 
 import {
   ListLayout,
-} from '/client/configs/components.js';
+} from '/client/configs/components';
 
 import PostList from './containers/post_list';
 import PostSingle from './containers/post_single';
