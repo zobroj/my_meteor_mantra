@@ -18,6 +18,12 @@ export default {
     });
   },
 
+  logout( { Accounts, Meteor, FlowRouter } ) {
+    // Accounts.logout();
+    Meteor.logout();
+    FlowRouter.go( '/' );
+  },
+
   clearErrors( { LocalState } ) {
     return LocalState.set( 'REGISTER_ERROR', null );
   },

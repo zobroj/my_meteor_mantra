@@ -1,40 +1,42 @@
 import React from 'react';
+import NavbarUser from './navbar_user';
 
-const Navbar = ( { activeLink } ) => (
-  <nav className="navbar navbar-default">
-    <div className="container-fluid">
+class Navbar extends React.Component {
+  render() {
 
-      <div className="navbar-header">
-        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span className="sr-only">Toggle navigation</span>
-          <span className="icon-bar"></span>
-          <span className="icon-bar"></span>
-          <span className="icon-bar"></span>
-        </button>
-        <a className="navbar-brand" href={ FlowRouter.path( '/' ) }>My Mantra</a>
-      </div>
+    const { activeLink, loggedIn, loggingIn, logout } = this.props
 
-      <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul className="nav navbar-nav navbar-right">
-          <li className={ ( activeLink === "post" ) ? "active" : "" }>
-            <a href={ FlowRouter.path( 'posts.list' ) }>Posts</a>
-          </li>
-          <li><a href="/register">Sign Up</a></li>
-          <li className="dropdown">
-            <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Account<span className="caret"></span></a>
-            <ul className="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" className="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
-          </li>
-        </ul>
-      </div>
+    return(
+      <nav className="navbar navbar-default">
+        <div className="container-fluid">
 
-    </div>
-  </nav>
-);
+          <div className="navbar-header">
+            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <a className="navbar-brand" href={ FlowRouter.path( '/' ) }>My Mantra</a>
+          </div>
 
-export default Navbar;
+          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul className="nav navbar-nav navbar-right">
+              <li className={ ( activeLink === "post" ) ? "active" : "" }>
+                <a href={ FlowRouter.path( 'posts.list' ) }>Posts</a>
+              </li>
+              {
+                loggedIn ? <NavbarUser logout={ logout } /> :
+                loggingIn ? <div>Loading..</div> : <li><a href="/register">Sign Up</a></li>
+              }
+            </ul>
+          </div>
+
+        </div>
+      </nav>
+    )
+    
+  }
+}
+
+export default Navbar
