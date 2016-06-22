@@ -1,6 +1,7 @@
 import React from 'react';
+import { EnsureLoggedIn } from 'meteor-auth';
+import { NotLoggedInMessage } from '/client/configs/components.js';
 
-// HTML composition and logic
 class FoobarList extends React.Component {
   render() {
 
@@ -15,7 +16,9 @@ class FoobarList extends React.Component {
       <div>
         <h3>Foobars List</h3>
         <ul>
+          <EnsureLoggedIn unauthenticatedMessage={ NotLoggedInMessage }>
           { foobarNodes }
+          </EnsureLoggedIn>
         </ul>
       </div>
     )
