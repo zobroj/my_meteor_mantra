@@ -5,12 +5,14 @@ import { NotLoggedInMessage } from '/client/configs/components.js';
 class FoobarList extends React.Component {
   render() {
 
-    const { foobars } = this.props
+    const { foobars, loggedIn, loggingIn } = this.props
 
     const foobarNodes = foobars.map( foobar => (
         <li key={ foobar._id }>{ foobar.name }</li>
       )
     )
+
+    const notLoggedInMessage = NotLoggedInMessage
 
     return (
       <div>
@@ -20,6 +22,10 @@ class FoobarList extends React.Component {
           { foobarNodes }
           </EnsureLoggedIn>
         </ul>
+        {
+          loggedIn ? <div>Hide this if not logged in!</div> :
+          loggingIn ? <div>Loading...</div> : notLoggedInMessage
+        }
       </div>
     )
 
