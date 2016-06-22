@@ -1,4 +1,7 @@
+import accounts from './accounts.js';
 
-export default {
-  
-}
+const actions = {
+  accounts,
+};
+
+export default actions;

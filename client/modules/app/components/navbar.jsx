@@ -19,7 +19,7 @@ const Navbar = ( { activeLink } ) => (
           <li className={ ( activeLink === "post" ) ? "active" : "" }>
             <a href={ FlowRouter.path( 'posts.list' ) }>Posts</a>
           </li>
-          <li><a href="#">Log In</a></li>
+          <li><a href="/signup">Sign Up</a></li>
           <li className="dropdown">
             <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Account<span className="caret"></span></a>
             <ul className="dropdown-menu">
