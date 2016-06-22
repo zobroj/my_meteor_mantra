@@ -29,13 +29,16 @@ class Navbar extends React.Component {
                 loggedIn ? <NavbarUser logout={ logout } /> :
                 loggingIn ? <div>Loading..</div> : <li><a href="/register">Sign Up</a></li>
               }
+              {
+                !loggedIn ? <li><a href="/login">Log In</a></li> : null
+              }
             </ul>
           </div>
 
         </div>
       </nav>
     )
-    
+
   }
 }
 

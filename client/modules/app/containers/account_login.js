@@ -1,18 +1,18 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
-import Component from '../components/account_register';
+import Component from '../components/account_login';
 import { authComposer } from 'meteor-auth';
 
-export const composer = ( { context, clearRegisterErrors }, onData ) => {
+export const composer = ( { context, clearLoginErrors }, onData ) => {
   const { LocalState } = context();
-  const error = LocalState.get( 'REGISTER_ERROR' );
+  const error = LocalState.get( 'LOGIN_ERROR' );
   onData( null, { error } );
 
-  return clearRegisterErrors;
+  return clearLoginErrors;
 };
 
 export const depsMapper = ( context, actions ) => ({
-  register: actions.accounts.register,
-  clearRegisterErrors: actions.accounts.clearRegisterErrors,
+  login: actions.accounts.login,
+  clearLoginErrors: actions.accounts.clearLoginErrors,
   context: () => context,
 });
 
