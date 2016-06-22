@@ -1,6 +1,6 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import { authComposer } from 'meteor-auth';
-import Navbar from '../components/navbar';
+import NavbarMain from '../components/navbar_main';
 
 export const composer = ( {}, onData ) => {
 
@@ -17,4 +17,4 @@ export default composeAll(
   composeWithTracker( composer ),
   composeWithTracker( authComposer ),
   useDeps( depsMapper ),
-)( Navbar );
+)( NavbarMain );

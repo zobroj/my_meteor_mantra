@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Navbar from '../containers/navbar';
+import NavbarMain from '../containers/navbar_main';
 import Footer from '../components/footer';
 
 const MainLayout = ( { content } ) => (
   <div>
-    <Navbar />
+    <NavbarMain />
     <div className="container">
       { content }
     </div>

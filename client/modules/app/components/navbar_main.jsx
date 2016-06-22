@@ -1,7 +1,7 @@
 import React from 'react';
 import NavbarUser from './navbar_user';
 
-class Navbar extends React.Component {
+class NavbarMain extends React.Component {
   render() {
 
     const { activeLink, loggedIn, loggingIn, logout } = this.props
@@ -42,4 +42,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar
+export default NavbarMain
