@@ -3,7 +3,7 @@ export default {
   register( { Meteor, LocalState, FlowRouter, Accounts }, email, password1, password2 ) {
 
     if ( !email || !password1 || !password2 ) {
-      return LocalState.set( 'REGISTER_ERROR', 'Please fill out all the required fileds!' );
+      return LocalState.set( 'REGISTER_ERROR', 'Please fill out all the required fields!' );
     }
 
     if ( password1 !== password2 ) {
@@ -18,7 +18,7 @@ export default {
     });
   },
 
-  clearErrors( { LocalSate } ) {
+  clearErrors( { LocalState } ) {
     return LocalState.set( 'REGISTER_ERROR', null );
   },
 
