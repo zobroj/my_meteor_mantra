@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Navbar from '../components/navbar';
+import Navbar from '../containers/navbar';
 import Footer from '../components/footer';
 
 const MainLayout = ( { content } ) => (
