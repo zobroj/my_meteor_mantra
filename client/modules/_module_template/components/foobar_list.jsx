@@ -12,8 +12,6 @@ class FoobarList extends React.Component {
       )
     )
 
-    const notLoggedInMessage = NotLoggedInMessage
-
     return (
       <div>
         <h3>Foobars List</h3>
@@ -24,7 +22,7 @@ class FoobarList extends React.Component {
         </ul>
         {
           loggedIn ? <div>Hide this if not logged in!</div> :
-          loggingIn ? <div>Loading...</div> : notLoggedInMessage
+          loggingIn ? <div>Loading...</div> : NotLoggedInMessage
         }
       </div>
     )
