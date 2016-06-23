@@ -16,7 +16,7 @@ export default function ( injectDeps, { FlowRouter } ) {
     name: "accounts.register",
     action() {
       mount( LayoutCtx, {
-        content: <AccountRegister />,
+        content: () => ( <AccountRegister /> ),
       });
     }
   });
@@ -25,7 +25,7 @@ export default function ( injectDeps, { FlowRouter } ) {
     name: "accounts.login",
     action() {
       mount( LayoutCtx, {
-        content: <AccountLogin />,
+        content: () => ( <AccountLogin /> ),
       });
     }
   });

@@ -17,8 +17,7 @@ export default function ( injectDeps, { FlowRouter } ) {
     name: "posts.list",
     action() {
       mount( ListLayoutCtx, {
-        // header: <Navbar activeLink="post" />,
-        content: <PostList />,
+        content: () => ( <PostList /> ),
       });
     }
   });
@@ -28,8 +27,7 @@ export default function ( injectDeps, { FlowRouter } ) {
     name: "posts.single",
     action( { postId } ) {
       mount( ListLayoutCtx, {
-        // header: <Navbar activeLink="post" />,
-        content: <PostSingle postId={ postId } />,
+        content: ()=> ( <PostSingle postId={ postId } /> ),
       });
     }
   });

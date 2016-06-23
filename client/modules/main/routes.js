@@ -17,7 +17,7 @@ export default function ( injectDeps, { FlowRouter } ) {
     action() {
       mount( MainLayoutCtx, {
         // header: <Navbar activeLink="main" />,
-        content: <MainPage />,
+        content: () => ( <MainPage /> ),
       });
     }
   });

@@ -16,7 +16,7 @@ export default function ( injectDeps, { FlowRouter } ) {
     name: 'foobars.route',
     action() {
       mount( ListLayoutCtx, {
-        content: <FoobarList />
+        content: () => ( <FoobarList /> )
       });
     }
   });
