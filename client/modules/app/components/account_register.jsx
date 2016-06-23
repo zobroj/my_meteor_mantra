@@ -21,22 +21,22 @@ class AccountRegister extends React.Component {
     const { error } = this.props
 
     return(
-      <form id="register-form" onSubmit={ this._register.bind( this ) }>
+      <form role="form" id="register-form" onSubmit={ this._register.bind( this ) }>
         { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
         <h3>Create a New Account</h3>
         <div className="form-group">
           <label for="email">Email Address</label>
-          <input type="email" ref="email" />
+          <input className="form-control" type="email" ref="email" placeholder="Enter email" />
         </div>
         <div className="form-group">
           <label for="password1">Password</label>
-          <input type="password" ref="password1" />
+          <input className="form-control" type="password" ref="password1" placeholder="Enter password" />
         </div>
         <div className="form-group">
-          <label for="password1">Password Again</label>
-          <input type="password" ref="password2" />
+          <label for="password2">Password Again</label>
+          <input className="form-control" type="password" ref="password2" placeholder="Enter password again" />
         </div>
-        <input type="submit" className="btn btn-success" value="Create" />
+        <button className="btn btn-default" type="submit">Submit</button>
       </form>
     )
   }
