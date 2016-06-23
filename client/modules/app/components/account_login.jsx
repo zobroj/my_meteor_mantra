@@ -8,7 +8,7 @@ class AccountLogin extends React.Component {
     const loginUser = () => (
       <form id="login-form" onSubmit={ this._login.bind( this ) }>
         { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
-        <h3>Create a New Account</h3>
+        <h3>Log In to Your Account</h3>
         <div className="form-group">
           <label for="email">Email Address</label>
           <input type="email" ref="email" />
