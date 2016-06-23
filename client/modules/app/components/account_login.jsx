@@ -1,11 +1,17 @@
 import React from 'react'
-import AccountLoggedIn  from './account_logged_in'
+import AccountLoggedIn from './account_logged_in'
+import AppLoading from './app_loading'
 
 class AccountLogin extends React.Component {
 
   displayUser() {
     return(
       <AccountLoggedIn />
+    )
+  }
+  displayLoading() {
+    return(
+      <AppLoading />
     )
   }
 
@@ -30,20 +36,14 @@ class AccountLogin extends React.Component {
     )
   }
 
-  displayLoading() {
-    return(
-      <div>Loading...</div>
-    )
-  }
-
   render() {
     const { loggedIn, loggingIn } = this.props
 
+    if ( loggingIn ) { return this.displayLoading() }
+
     return (
       <div>
-      {
-        loggedIn ? this.displayUser() : this.displayGuest()
-      }
+      { loggedIn ? this.displayUser() : this.displayGuest() }
       </div>
     )
   }

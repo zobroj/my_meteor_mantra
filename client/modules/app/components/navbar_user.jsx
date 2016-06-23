@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import AppLoading from './app_loading'
 
 class NavbarUser extends React.Component {
 
@@ -28,16 +29,20 @@ class NavbarUser extends React.Component {
 
   displayLoading() {
     return(
-      <div>Loading...</div>
+      <AppLoading />
     )
   }
 
   render() {
-    const { loggedIn, loggingIn } = this.props;
+    const { loggedIn, loggingIn } = this.props
 
     if ( loggingIn ) { return this.displayLoading() }
 
-    return loggedIn ? this.displayUser() : this.displayGuest()
+    return (
+      <div>
+      { loggedIn ? this.displayUser() : this.displayGuest() }
+      </div>
+    )
   }
 
   _logout( event ) {
