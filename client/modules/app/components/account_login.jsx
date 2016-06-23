@@ -1,10 +1,11 @@
 import React from 'react'
+import AccountLoggedIn  from './account_logged_in'
 
 class AccountLogin extends React.Component {
 
   displayUser() {
     return(
-      <div>You're logged in already.</div>
+      <AccountLoggedIn />
     )
   }
 
@@ -12,7 +13,7 @@ class AccountLogin extends React.Component {
 
     const { error } = this.props
 
-    return(
+    return (
       <form id="login-form" onSubmit={ this._login.bind( this ) }>
         { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
         <h3>Log In to Your Account</h3>
@@ -38,11 +39,13 @@ class AccountLogin extends React.Component {
   render() {
     const { loggedIn, loggingIn } = this.props
 
-    if ( loggingIn ) {
-      return this.displayLoading()
-    }
-
-    return loggedIn ? this.displayUser() : this.displayGuest()
+    return (
+      <div>
+      {
+        loggedIn ? this.displayUser() : this.displayGuest()
+      }
+      </div>
+    )
   }
 
   _login( event ) {

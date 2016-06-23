@@ -1,10 +1,11 @@
 import React from 'react'
+import AccountLoggedIn from './account_logged_in'
 
 class AccountRegister extends React.Component {
 
   displayUser() {
     return(
-      <div>You're logged in already!</div>
+      <AccountLoggedIn />
     )
   }
 
@@ -47,7 +48,13 @@ class AccountRegister extends React.Component {
       return this.displayLoading()
     }
 
-    return loggedIn ? this.displayUser() : this.displayGuest()
+    return (
+      <div>
+      {
+        loggedIn ? this.displayUser() : this.displayGuest()
+      }
+      </div>
+    )
   }
 
   _register( event ) {
