@@ -21,10 +21,14 @@ class NavbarMain extends React.Component {
           </div>
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul className="nav navbar-nav navbar-right">
+
+            <ul className="nav navbar-nav navbar-left">
               <li className={ ( activeLink === "post" ) ? "active" : "" }>
                 <a href={ FlowRouter.path( 'posts.list' ) }>Posts</a>
               </li>
+            </ul>
+
+            <ul className="nav navbar-nav navbar-right">
               {
                 loggedIn ? <NavbarUser email={ email } logout={ logout } /> :
                 loggingIn ? <div>Loading..</div> : <li><a href="/register">Sign Up</a></li>
@@ -33,6 +37,7 @@ class NavbarMain extends React.Component {
                 !loggedIn ? <li><a href="/login">Log In</a></li> : null
               }
             </ul>
+
           </div>
 
         </div>
