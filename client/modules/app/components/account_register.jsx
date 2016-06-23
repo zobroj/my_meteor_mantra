@@ -1,5 +1,4 @@
 import React from 'react'
-import { NotLoggedInMessage } from '/client/configs/components.js';
 
 class AccountRegister extends React.Component {
   render() {
