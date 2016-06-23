@@ -28,15 +28,12 @@ class NavbarMain extends React.Component {
               </li>
             </ul>
 
-            <ul className="nav navbar-nav navbar-right">
-              {
-                loggedIn ? <NavbarUser email={ email } logout={ logout } /> :
-                loggingIn ? <div>Loading..</div> : <li><a href="/register">Sign Up</a></li>
-              }
-              {
-                !loggedIn ? <li><a href="/login">Log In</a></li> : null
-              }
-            </ul>
+            <NavbarUser
+              email={ email }
+              loggingIn={ loggingIn }
+              loggedIn={ loggedIn }
+              logout={ logout }
+            />
 
           </div>
 
