@@ -4,7 +4,7 @@ import NavbarUser from './navbar_user';
 class NavbarMain extends React.Component {
   render() {
 
-    const { activeLink, loggedIn, loggingIn, logout } = this.props
+    const { activeLink, loggedIn, loggingIn, logout, email } = this.props
 
     return(
       <nav className="navbar navbar-default">
@@ -26,7 +26,7 @@ class NavbarMain extends React.Component {
                 <a href={ FlowRouter.path( 'posts.list' ) }>Posts</a>
               </li>
               {
-                loggedIn ? <NavbarUser logout={ logout } /> :
+                loggedIn ? <NavbarUser email={ email } logout={ logout } /> :
                 loggingIn ? <div>Loading..</div> : <li><a href="/register">Sign Up</a></li>
               }
               {

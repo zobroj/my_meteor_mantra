@@ -2,9 +2,12 @@ import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import { authComposer } from 'meteor-auth';
 import NavbarMain from '../components/navbar_main';
 
-export const composer = ( {}, onData ) => {
+export const composer = ( { context }, onData ) => {
 
-  onData( null, {} );
+  const { LocalState, authCommon } = context();
+  const { email } = authCommon();
+
+  onData( null, { email } );
 
 };
 
