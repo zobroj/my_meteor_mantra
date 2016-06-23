@@ -4,8 +4,8 @@ import NavbarMain from '../components/navbar_main';
 
 export const composer = ( { context }, onData ) => {
 
-  const { LocalState, authCommon } = context();
-  const { email } = authCommon();
+  const { LocalState, Users } = context();
+  const { email } = Users();
 
   onData( null, { email } );
 
