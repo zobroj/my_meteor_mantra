@@ -1,11 +1,18 @@
 import React from 'react'
 
 class AccountRegister extends React.Component {
-  render() {
 
-    const { error, loggedIn, loggingIn } = this.props
+  displayUser() {
+    return(
+      <div>You're logged in already!</div>
+    )
+  }
 
-    const newUser = () => (
+  displayGuest() {
+
+    const { error } = this.props
+
+    return(
       <form id="register-form" onSubmit={ this._register.bind( this ) }>
         { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
         <h3>Create a New Account</h3>
@@ -24,22 +31,23 @@ class AccountRegister extends React.Component {
         <input type="submit" className="btn btn-success" value="Create" />
       </form>
     )
+  }
 
-    const existingUser = () => (
-      <div>
-        You're logged in already!
-      </div>
-    )
 
+  displayLoading() {
     return(
-      <div>
-      {
-        loggedIn ? existingUser() :
-        loggingIn ? <div>Loading...</div> : newUser()
-      }
-      </div>
+      <div>Loading...</div>
     )
+  }
 
+  render() {
+    const { loggedIn, loggingIn } = this.props
+
+    if ( loggingIn ) {
+      return this.displayLoading()
+    }
+
+    return loggedIn ? this.displayUser() : this.displayGuest()
   }
 
   _register( event ) {
