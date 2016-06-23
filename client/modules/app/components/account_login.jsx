@@ -1,11 +1,18 @@
 import React from 'react'
 
 class AccountLogin extends React.Component {
-  render() {
 
-    const { error, loggedIn, loggingIn } = this.props
+  displayUser() {
+    return(
+      <div>You're logged in already.</div>
+    )
+  }
 
-    const loginUser = () => (
+  displayGuest() {
+
+    const { error } = this.props
+
+    return(
       <form id="login-form" onSubmit={ this._login.bind( this ) }>
         { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
         <h3>Log In to Your Account</h3>
@@ -20,22 +27,22 @@ class AccountLogin extends React.Component {
         <input type="submit" className="btn btn-success" value="Log In" />
       </form>
     )
+  }
 
-    const existingUser = () => (
-      <div>
-        You're logged in already!
-      </div>
-    )
-
+  displayLoading() {
     return(
-      <div>
-      {
-        loggedIn ? existingUser() :
-        loggingIn ? <div>Loading...</div> : loginUser()
-      }
-      </div>
+      <div>Loading...</div>
     )
+  }
 
+  render() {
+    const { loggedIn, loggingIn } = this.props
+
+    if ( loggingIn ) {
+      return this.displayLoading()
+    }
+
+    return loggedIn ? this.displayUser() : this.displayGuest()
   }
 
   _login( event ) {
