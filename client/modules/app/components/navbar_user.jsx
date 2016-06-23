@@ -20,8 +20,8 @@ class NavbarUser extends React.Component {
   displayGuest() {
     return(
       <ul className="nav navbar-nav navbar-right">
-        <li><a href="/register">Sign Up</a></li>
-        <li><a href="/login">LogIn</a></li>
+        <li><a href="/login">LOGIN</a></li>
+        <li><a href="/register">SIGN UP</a></li>
       </ul>
     )
   }
