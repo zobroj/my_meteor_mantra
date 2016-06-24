@@ -4,7 +4,7 @@ import PostCreate from '../containers/post_create.js';
 class PostList extends React.Component {
   render() {
 
-    const { posts } = this.props
+    const { posts, error } = this.props
 
     const postNodes = posts.map( post => (
         <div key={ post._id } className="list-group-item">
@@ -18,8 +18,15 @@ class PostList extends React.Component {
       )
     )
 
+    const errorMsg = (
+      <div>
+      { error ? <p style={ { color: 'read' } }>{ error }</p> : null }
+      </div>
+    )
+
     return (
       <div className="row">
+        { errorMsg }
         <div className="col-md-12 panel-group">
           <div className="panel panel-default">
             <div className="panel-heading"><h4>Posts</h4></div>

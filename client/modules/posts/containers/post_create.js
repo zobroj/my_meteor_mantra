@@ -3,7 +3,7 @@ import Component from '../components/post_create';
 
 export const composer = ( { context, clearErrors }, onData ) => {
   const { LocalState } = context();
-  const error = LocalState.get( 'CREATE_POST_ERROR' );
+  const error = LocalState.get( 'POSTS_ERROR' );
   onData( null, { error } );
 
   return clearErrors;
