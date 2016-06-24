@@ -4,8 +4,8 @@ import { mount } from 'react-mounter'
 import {
   MainLayout,
   SplitLayout,
+  AppNotFound,
 } from '/client/configs/components'
-import AppNotFound from './components/app_not_found'
 
 import AccountRegister from './containers/account_register'
 import AccountLogin from './containers/account_login'
@@ -35,6 +35,7 @@ export default function ( injectDeps, { FlowRouter } ) {
 
   FlowRouter.notFound = {
     action() {
+      name: "app.notFound"
       mount( MainLayoutCtx, {
         content: () => ( <AppNotFound /> ),
       })

@@ -3,6 +3,7 @@ import { mount } from 'react-mounter';
 
 import {
   ListLayout,
+  AppNotFound,
 } from '/client/configs/components';
 
 import PostList from './containers/post_list';
@@ -21,6 +22,15 @@ export default function ( injectDeps, { FlowRouter } ) {
       });
     }
   });
+
+  FlowRouter.route( '/post/notfound', {
+    name: "posts.notFound",
+    action() {
+      mount( ListLayoutCtx, {
+        content: () => ( <AppNotFound /> )
+      })
+    }
+  })
 
   // Single conversation view
   FlowRouter.route( '/post/:postId', {
