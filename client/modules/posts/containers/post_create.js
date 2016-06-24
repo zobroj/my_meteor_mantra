@@ -3,10 +3,11 @@ import Component from '../components/post_create';
 
 export const composer = ( { context, clearErrors }, onData ) => {
   const { LocalState } = context();
-  const error = LocalState.get( 'POSTS_ERROR' );
+  const errorState = 'POSTS_CREATE_ERROR'
+  const error = LocalState.get( errorState );
   onData( null, { error } );
 
-  return clearErrors;
+  return clearErrors.bind( errorState );
 };
 
 export const depsMapper = ( context, actions ) => ({

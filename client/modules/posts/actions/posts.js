@@ -3,7 +3,7 @@ export default {
   create( { Meteor, LocalState, FlowRouter }, author, title, content ) {
 
     if ( !title || !content ) {
-      return LocalState.set( 'POSTS_ERROR', 'Title & Content are required!' );
+      return LocalState.set( 'POSTS_CREATE_ERROR', 'Title & Content are required!' );
     }
 
     LocalState.set( 'POSTS_ERROR', null );
@@ -13,7 +13,7 @@ export default {
     // That's how we are doing latency compensation
     Meteor.call( 'posts.create', id, author, title, content, (err) => {
       if (err) {
-        return LocalState.set( 'POSTS_ERROR', err.message );
+        return LocalState.set( 'POSTS_CREATE_ERROR', err.message );
       }
     });
 
@@ -21,8 +21,8 @@ export default {
 
   },
 
-  clearErrors( { LocalState } ) {
-    return LocalState.set( 'POSTS_ERROR', null );
+  clearErrors( { LocalState }, errorState ) {
+    return LocalState.set( errorState, null );
   },
 
 };

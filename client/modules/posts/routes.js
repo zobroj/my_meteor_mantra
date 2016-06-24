@@ -23,15 +23,6 @@ export default function ( injectDeps, { FlowRouter } ) {
     }
   });
 
-  FlowRouter.route( '/post/notfound', {
-    name: "posts.notFound",
-    action() {
-      mount( ListLayoutCtx, {
-        content: () => ( <AppNotFound /> )
-      })
-    }
-  })
-
   // Single conversation view
   FlowRouter.route( '/post/:postId', {
     name: "posts.single",

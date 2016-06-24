@@ -1,5 +1,6 @@
 import React from 'react';
 import PostCreate from '../containers/post_create.js';
+import { AppErrorMsg } from '/client/configs/components'
 
 class PostList extends React.Component {
   render() {
@@ -18,15 +19,9 @@ class PostList extends React.Component {
       )
     )
 
-    const errorMsg = (
-      <div>
-      { error ? <p style={ { color: 'read' } }>{ error }</p> : null }
-      </div>
-    )
-
     return (
       <div className="row">
-        { errorMsg }
+        <AppErrorMsg error={ error } />
         <div className="col-md-12 panel-group">
           <div className="panel panel-default">
             <div className="panel-heading"><h4>Posts</h4></div>
