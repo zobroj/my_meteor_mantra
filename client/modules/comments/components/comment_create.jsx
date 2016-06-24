@@ -10,7 +10,6 @@ class CommentCreate extends React.Component {
     return (
       <form onSubmit={ this.createComment.bind( this ) }>
         <AppErrorMsg error={ error } />
-        { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
         <div className="form-group">
           <label for="author">Your Name</label>
           <input ref="author" type="text" className="form-control" placeholder="Your Name" />
