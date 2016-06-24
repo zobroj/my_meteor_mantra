@@ -1,12 +1,15 @@
 import React from 'react';
+import { AppErrorMsg } from '/client/configs/components'
 
 class CommentCreate extends React.Component {
+
   render() {
 
     const { error } = this.props
 
     return (
       <form onSubmit={ this.createComment.bind( this ) }>
+        <AppErrorMsg error={ error } />
         { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
         <div className="form-group">
           <label for="author">Your Name</label>

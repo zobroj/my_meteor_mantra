@@ -1,13 +1,15 @@
 import React from 'react';
+import { AppErrorMsg } from '/client/configs/components'
 
 class PostCreate extends React.Component {
+
   render() {
 
     const { error } = this.props
 
     return (
       <form id="create-post" onSubmit={ this.createPost.bind( this ) }>
-        { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
+        <AppErrorMsg error={ error } />
         <div className="form-group">
           <label for="author">Your Name</label>
           <input ref="author" type="text" className="form-control" placeholder="Your Name" />
