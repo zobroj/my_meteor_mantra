@@ -3,25 +3,16 @@ import { useDeps, composeWithTracker, composeAll } from 'mantra-core'
 
 export const composer = ( { context, postId }, onData ) => {
 
-  const { Meteor, Collections, FlowRouter, LocalState } = context()
-  const error = LocalState.get( 'POSTS_ERROR' )
+  const { Meteor, Collections } = context()
+  const subscription = Meteor.subscribe( 'posts.single', postId )
 
-  if ( Meteor.subscribe( 'posts.single', postId ).ready() ) {
+  if ( subscription.ready() ) {
 
     const post = Collections.Posts.findOne( postId )
+    
+    onData( null, { post } )
 
-    if ( post ) {
-      onData( null, { post } )
-    } else {
-
-      LocalState.set( 'POSTS_ERROR', 'Post could not be found. Please try again.' )
-      console.log('post not found')
-      FlowRouter.go('/post/notFound')
-      // FlowRouter.path('/posts', { error } )
-    }
   }
-
-  return LocalState.set( 'POSTS_ERROR', null )
 }
 
 export default composeAll(
