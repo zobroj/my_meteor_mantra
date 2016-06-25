@@ -1,16 +1,17 @@
+// client
 import { check } from 'meteor/check';
 
 export default function ( { Meteor, Collections } ) {
   Meteor.methods({
-    'posts.create'( _id, author, title, content ) {
+    'posts.create'( _id, userId, title, content ) {
       check( _id, String );
-      check( author, String );
+      check( userId, String );
       check( title, String );
       check( content, String );
 
       const createdAt = new Date();
       const post = {
-        _id, author, title, content, createdAt,
+        _id, userId, title, content, createdAt,
         saving: true
       };
 

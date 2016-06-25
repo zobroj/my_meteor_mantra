@@ -11,10 +11,6 @@ class PostCreate extends React.Component {
       <form id="create-post" onSubmit={ this.createPost.bind( this ) }>
         <AppErrorMsg error={ error } />
         <div className="form-group">
-          <label for="author">Your Name</label>
-          <input ref="author" type="text" className="form-control" placeholder="Your Name" />
-        </div>
-        <div className="form-group">
           <label for="title">Title</label>
           <input ref="title" type="text" className="form-control" placeholder="Give a short title to your post." />
         </div>
@@ -55,11 +51,10 @@ class PostCreate extends React.Component {
 
   createPost( event ) {
     event.preventDefault()
-
     const { create } = this.props
-    const { author, title, content } = this.refs
+    const { title, content } = this.refs
 
-    create( author.value, title.value, content.value )
+    create( title.value, content.value )
   }
 }
 

@@ -1,21 +1,24 @@
+// server methods
 import { Posts, Comments } from '/lib/collections';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 export default function () {
   Meteor.methods({
-    'posts.create'( _id, author, title, content ) {
+    'posts.create'( _id, userId, title, content ) {
       check( _id, String );
-      check( author, String );
+      check( userId, String );
       check( title, String );
       check( content, String );
 
       // Demo the latency compensation (Delete this in production)
       Meteor._sleepForMs(500);
 
-      // XXX: Do some user authentication
       const createdAt = new Date();
-      const post = { _id, author, title, content, createdAt };
+      const post = {
+        _id, userId, title, content, createdAt
+      };
+
       Posts.insert( post );
     }
   });
