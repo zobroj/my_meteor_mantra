@@ -2,8 +2,10 @@ import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import Component from '../components/comment_create';
 
 export const composer = ( { context, clearErrors }, onData ) => {
+
   const { LocalState } = context();
   const error = LocalState.get( 'CREATE_COMMENT_ERROR' );
+
   onData( null, { error } );
 
   return clearErrors;

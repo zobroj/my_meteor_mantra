@@ -1,21 +1,22 @@
-import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
-import Component from '../components/comment_list';
+import { useDeps, composeWithTracker, composeAll } from 'mantra-core'
+import Component from '../components/comment_list'
 
-export const composer = ( { context, clearErrors, postId }, onData) => {
-  const { Meteor, Collections } = context();
+export const composer = ( { context, postId }, onData) => {
 
-  if ( Meteor.subscribe( 'posts.comments', postId ).ready() ) {
-    const options = {
-      sort: { createdAt: -1 }
-    };
-    const comments = Collections.Comments.find( { postId }, options ).fetch();
-    onData(null, { comments });
-  } else {
-    onData();
+  const { Meteor, Collections } = context()
+  const subscription = Meteor.subscribe( 'posts.comments', postId )
+
+  if ( subscription.ready() ) {
+
+    const options = { sort: { createdAt: -1 } }
+    const comments = Collections.Comments.find( { postId }, options ).fetch()
+
+    onData( null, { comments } )
+
   }
-};
+}
 
 export default composeAll(
   composeWithTracker( composer ),
   useDeps()
-)( Component );
+)( Component )
