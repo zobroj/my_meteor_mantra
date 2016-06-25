@@ -1,10 +1,11 @@
 import React from 'react';
 import NavbarUser from './navbar_user';
+import { isActiveRoute } from '../libs/helpers'
 
 class NavbarMain extends React.Component {
   render() {
 
-    const { activeLink, loggedIn, loggingIn, logout, email } = this.props
+    const { loggedIn, loggingIn, logout, email } = this.props
 
     return(
       <nav className="navbar navbar-default">
@@ -23,7 +24,7 @@ class NavbarMain extends React.Component {
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul className="nav navbar-nav navbar-left">
-              <li className={ ( activeLink === "post" ) ? "active" : "" }>
+              <li className={ isActiveRoute( 'posts' ) }>
                 <a href={ FlowRouter.path( 'posts.list' ) }>Posts</a>
               </li>
             </ul>
