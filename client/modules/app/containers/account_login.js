@@ -2,19 +2,20 @@ import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import Component from '../components/account_login';
 import { authComposer } from 'meteor-auth';
 
-export const composer = ( { context, clearLoginErrors }, onData ) => {
+export const composer = ( { context, clearErrors }, onData ) => {
   const { LocalState } = context();
-  const error = LocalState.get( 'LOGIN_ERROR' );
+  const errorState = 'LOGIN_ERROR'
+  const error = LocalState.get( errorState )
   onData( null, { error } );
 
-  return clearLoginErrors;
+  return clearErrors.bind( errorState )
 };
 
 export const depsMapper = ( context, actions ) => ({
   login: actions.accounts.login,
-  clearLoginErrors: actions.accounts.clearLoginErrors,
+  clearErrors: actions.accounts.clearErrors,
   context: () => context,
-});
+})
 
 export default composeAll(
   composeWithTracker( composer ),

@@ -40,12 +40,8 @@ export default {
     FlowRouter.go( '/' );
   },
 
-  clearRegisterErrors( { LocalState } ) {
-    return LocalState.set( 'REGISTER_ERROR', null );
-  },
-
-  clearLoginErrors( { LocalState } ) {
-    return LocalState.set( 'LOGIN_ERROR', null );
+  clearErrors( { LocalState }, errorState ) {
+    return LocalState.set( errorState, null )
   },
 
 };
