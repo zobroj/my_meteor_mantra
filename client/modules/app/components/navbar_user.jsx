@@ -1,5 +1,5 @@
 import React from 'react'
-import AppLoading from './app_loading'
+import { AppLoading } from '/client/configs/components'
 
 class NavbarUser extends React.Component {
 

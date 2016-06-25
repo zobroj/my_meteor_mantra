@@ -1,5 +1,6 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core'
 import Component from '../components/post_create'
+import { authComposer } from 'meteor-auth'
 
 export const composer = ( { context, clearErrors }, onData ) => {
 
@@ -20,5 +21,6 @@ export const depsMapper = ( context, actions ) => ({
 
 export default composeAll(
   composeWithTracker( composer ),
+  composeWithTracker( authComposer ),
   useDeps( depsMapper ),
 )( Component )

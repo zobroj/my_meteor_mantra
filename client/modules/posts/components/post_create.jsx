@@ -1,9 +1,9 @@
-import React from 'react';
-import { AppErrorMsg } from '/client/configs/components'
+import React from 'react'
+import { AppErrorMsg, AppLoading } from '/client/configs/components'
 
 class PostCreate extends React.Component {
 
-  render() {
+  displayUser() {
 
     const { error } = this.props
 
@@ -25,7 +25,32 @@ class PostCreate extends React.Component {
         <input type="submit" className="btn btn-success" value="New Post" />
       </form>
     )
+  }
 
+  displayGuest() {
+    return (
+      <div>
+        <p>Log in, or create an account to add a conversation.</p>
+      </div>
+    )
+  }
+
+  displayLoading() {
+    return (
+      <AppLoading />
+    )
+  }
+
+  render() {
+    const { loggedIn, loggingIn } = this.props
+
+    if ( loggingIn ) { return this.displayLoading() }
+
+    return (
+      <div>
+      { loggedIn ? this.displayUser() : this.displayGuest() }
+      </div>
+    )
   }
 
   createPost( event ) {
@@ -38,4 +63,4 @@ class PostCreate extends React.Component {
   }
 }
 
-export default PostCreate;
+export default PostCreate

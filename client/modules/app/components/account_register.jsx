@@ -1,6 +1,6 @@
 import React from 'react'
 import AccountLoggedIn from './account_logged_in'
-import AppLoading from './app_loading'
+import { AppLoading } from '/client/configs/components'
 
 class AccountRegister extends React.Component {
 
