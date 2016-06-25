@@ -18,5 +18,5 @@ export const composer = ( { context, postId }, onData) => {
 
 export default composeAll(
   composeWithTracker( composer ),
-  useDeps()
+  useDeps(),
 )( Component )
