@@ -17,7 +17,7 @@ export default {
       if (err) {
         return LocalState.set( 'POSTS_CREATE_ERROR', err.message )
       }
-    });
+    })
 
     FlowRouter.go( `/post/${ _id }` )
 
