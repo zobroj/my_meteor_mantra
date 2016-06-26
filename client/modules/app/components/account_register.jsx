@@ -29,12 +29,16 @@ class AccountRegister extends React.Component {
           <input className="form-control" type="email" ref="email" placeholder="Enter email" />
         </div>
         <div className="form-group">
+          <label for="username">Username</label>
+          <input className="form-control" type="text" ref="username" placeholder="Enter username" />
+        </div>
+        <div className="form-group">
           <label for="password1">Password</label>
           <input className="form-control" type="password" ref="password1" placeholder="Enter password" />
         </div>
         <div className="form-group">
           <label for="password2">Password Again</label>
-          <input className="form-control" type="password" ref="password2" placeholder="Enter password again" />
+          <input className="form-control" type="password" ref="password2" placeholder="Confirm password again" />
         </div>
         <button className="btn btn-default" type="submit">Submit</button>
       </form>
@@ -56,8 +60,8 @@ class AccountRegister extends React.Component {
   _register( event ) {
     event.preventDefault()
     const { register } = this.props
-    const { email, password1, password2 } = this.refs
-    register( email.value, password1.value, password2.value )
+    const { email, username, password1, password2 } = this.refs
+    register( email.value, username.value, password1.value, password2.value )
   }
 
 }

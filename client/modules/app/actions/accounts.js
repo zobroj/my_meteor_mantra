@@ -1,8 +1,9 @@
+// actions
 export default {
 
-  register( { Meteor, LocalState, FlowRouter, Accounts }, email, password1, password2 ) {
+  register( { Meteor, LocalState, FlowRouter, Accounts }, email, username, password1, password2 ) {
 
-    if ( !email || !password1 || !password2 ) {
+    if ( !email || !username || !password1 || !password2 ) {
       return LocalState.set( 'REGISTER_ERROR', 'Please fill out all the required fields!' )
     }
 
@@ -10,11 +11,19 @@ export default {
       return LocalState.set( 'REGISTER_ERROR', 'Passwords do not match!' )
     }
 
-    Accounts.createUser( { email, password: password1 }, ( err ) => {
+    const options = {
+      email: email,
+      password: password1,
+      username: username,
+    }
+
+    Accounts.createUser( options, ( err ) => {
       if ( err && err.reason ) {
         return LocalState.set( 'REGISTER_ERROR', err.reason )
       }
+
       FlowRouter.go( '/foobar' )
+
     })
   },
 
