@@ -11,9 +11,11 @@ export default {
 
     const _id = Meteor.uuid()
     const userId = Meteor.userId()
+    const author = Meteor.user().username
+    console.log("author is " + author)
     // There is a method stub for this in the config/method_stubs
     // That's how we are doing latency compensation
-    Meteor.call( 'posts.create', _id, userId, title, content, (err) => {
+    Meteor.call( 'posts.create', _id, userId, author, title, content, (err) => {
       if (err) {
         return LocalState.set( 'POSTS_CREATE_ERROR', err.message )
       }
