@@ -1,3 +1,4 @@
+// methods
 import posts from './posts';
 import foobars from './foobars';
 
