@@ -11,6 +11,13 @@ export default {
       return LocalState.set( 'REGISTER_ERROR', 'Passwords do not match!' )
     }
 
+    // check if username already exists
+    const usernameAlreadyExists = Meteor.users.find( { username: username } )
+
+    if ( usernameAlreadyExists ) {
+      return LocalState.set( 'REGISTER_ERROR', 'Username already exists' )
+    }
+
     const options = {
       email: email,
       password: password1,
