@@ -40,15 +40,16 @@ export default {
       return LocalState.set( 'LOGIN_ERROR', 'Login & Password are required!' )
     }
 
-    LocalState.set( 'LOGIN_ERROR', null )
-
     Meteor.loginWithPassword(email, password, (err) => {
+
       if (err && err.reason) {
+        console.log( err.reason )
         return LocalState.set('LOGIN_ERROR', err.reason)
       }
       FlowRouter.go('/foobar')
     })
 
+    LocalState.set( 'LOGIN_ERROR', null )
   },
 
   logout( { Meteor, FlowRouter } ) {
