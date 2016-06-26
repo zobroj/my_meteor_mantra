@@ -25,10 +25,11 @@ export default function () {
   })
 
   Meteor.methods({
-    'posts.createComment'( _id, postId, author, content ) {
+    'posts.createComment'( _id, userId, author, postId, content ) {
       check( _id, String )
-      check( postId, String )
+      check( userId, String )
       check( author, String )
+      check( postId, String )
       check( content, String )
 
       // Demo the latency compensation (Delete this in production)
@@ -36,7 +37,10 @@ export default function () {
 
       // XXX: Do some user authentication
       const createdAt = new Date()
-      const comment = { _id, postId, author, content, createdAt }
+      const comment = {
+        _id, userId, author, postId, content, createdAt
+      }
+
       Comments.insert( comment )
     }
   })

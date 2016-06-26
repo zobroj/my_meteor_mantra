@@ -11,10 +11,6 @@ class CommentCreate extends React.Component {
       <form onSubmit={ this.createComment.bind( this ) }>
         <AppErrorMsg error={ error } />
         <div className="form-group">
-          <label for="author">Your Name</label>
-          <input ref="author" type="text" className="form-control" placeholder="Your Name" />
-        </div>
-        <div className="form-group">
           <label for="content">Content</label>
           <textarea ref="content" className="form-control" placeholder="Your comment...."></textarea>
         </div>
@@ -54,11 +50,10 @@ class CommentCreate extends React.Component {
     event.preventDefault()
 
     const { create, postId } = this.props
-    const { author, content } = this.refs
+    const { content } = this.refs
 
-    create( postId, author.value, content.value )
+    create( postId, content.value )
 
-    this.refs.author.value = ''
     this.refs.content.value = ''
   }
 }
