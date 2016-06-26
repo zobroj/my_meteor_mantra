@@ -1,5 +1,5 @@
-import React from 'react';
-import Comment from './comment';
+import React from 'react'
+import Comment from './comment'
 
 const CommentList = React.createClass({
   render: function() {
@@ -16,6 +16,6 @@ const CommentList = React.createClass({
       </div>
     )
   }
-});
+})
 
-export default CommentList;
+export default CommentList

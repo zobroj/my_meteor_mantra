@@ -10,13 +10,13 @@ export default function ( { Collections, Meteor }) {
       check( postId, String )
       check( content, String )
 
-      const createdAt = new Date();
+      const createdAt = new Date()
       const comment = {
         _id, userId, author, postId, content, createdAt,
         saving: true
-      };
+      }
 
-      Collections.Comments.insert( comment );
+      Collections.Comments.insert( comment )
     }
-  });
+  })
 }
