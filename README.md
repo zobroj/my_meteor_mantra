@@ -15,7 +15,7 @@ My Meteor Mantra is a basic [Meteor](https://www.meteor.com) boilerplate based o
 * Add testing
 
 ## Reference
-* Architecture based on: [Mantra Kickstarter](https://github.com/mantrajs/meteor-mantra-kickstarter)
+* Inspird by: [Mantra Kickstarter](https://github.com/mantrajs/meteor-mantra-kickstarter)
 * Email tutorial: [Meteor Chef](https://themeteorchef.com/snippets/using-the-email-package/#tmc-configuration)
 
 ## License
