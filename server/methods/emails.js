@@ -1,5 +1,6 @@
 // server methods
 import { Meteor } from 'meteor/meteor'
+import _ from 'lodash'
 
 export default function () {
   Meteor.methods({
@@ -13,9 +14,12 @@ export default function () {
           Assets.getText( 'html-email.html')
         )
 
+        const username = Meteor.user().username
+        const email = _.get( Meteor.user(), 'emails[0].address', {} )
+
         let emailData = {
-          username: "VonIobro",
-          email: "von.iobro@gmail.com",
+          username: username,
+          email: email,
         }
 
         Email.send({
