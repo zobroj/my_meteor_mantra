@@ -29,7 +29,7 @@ export default {
         return LocalState.set( 'REGISTER_ERROR', err.reason )
       }
 
-      FlowRouter.go( '/foobar' )
+      FlowRouter.go( '/post' )
 
     })
 
@@ -57,7 +57,7 @@ export default {
         console.log( err.reason )
         return LocalState.set('LOGIN_ERROR', err.reason)
       }
-      FlowRouter.go('/foobar')
+      FlowRouter.go( '/post' )
     })
 
     LocalState.set( 'LOGIN_ERROR', null )
