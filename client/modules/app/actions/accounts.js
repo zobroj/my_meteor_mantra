@@ -32,6 +32,15 @@ export default {
       FlowRouter.go( '/foobar' )
 
     })
+
+    Meteor.call( 'emails.sendAccountVerificationLink', ( err, response ) => {
+      if ( err && err.reason ) {
+        return LocalState.set( 'REGISTER_ERROR', err.reason )
+      }
+
+      console.log( 'sendVerificationLink success' );
+
+    })
   },
 
   login( { Meteor, LocalState, FlowRouter, Accounts }, email, password ) {
