@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>HTML email test</title>
+  <link href="styles.css" media="all" rel="stylesheet" type="text/css" />
+</head>
+
+<body itemscope itemtype="http://schema.org/EmailMessage">
+  <h3>Welcome to My Mantra</h3>
+  <p>Thanks for signing up. Here is some of the information that you provided:</p>
+  <table>
+    <tr>
+      <td></td>
+      <td width="600">
+        <table width="100%" style="border: 1px solid #eee;">
+          <tr>
+            <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">Email</th>
+            <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">{{email}}</td>
+          </tr>
+          <tr>
+            <th style="text-align: left; padding: 10px; border-bottom: 1px solid #eee; border-right: 1px solid #eee;">Username</th>
+            <td style="text-align: left; padding: 10px; border-bottom: 1px solid #eee;">{{username}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <p>Have a great day!</p>
+</body>
+</html>
