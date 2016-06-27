@@ -12,7 +12,7 @@ export default {
     }
 
     // check if username already exists
-    const usernameAlreadyExists = Meteor.users.find( { username: username } )
+    const usernameAlreadyExists = Meteor.users.findOne( { username: username } )
 
     if ( usernameAlreadyExists ) {
       return LocalState.set( 'REGISTER_ERROR', 'Username already exists' )
