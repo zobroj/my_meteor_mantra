@@ -41,6 +41,8 @@ export default {
       console.log( 'sendVerificationLink success' );
 
     })
+
+    LocalState.set( 'REGISTER_ERROR', null )
   },
 
   login( { Meteor, LocalState, FlowRouter, Accounts }, email, password ) {
