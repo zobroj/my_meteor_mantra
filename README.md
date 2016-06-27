@@ -1,5 +1,5 @@
 ## Overview
-My Meteor Mantra is a [Meteor](https://www.meteor.com) boilerplate based on the [Mantra application architecture](https://github.com/kadirahq/mantra).
+My Meteor Mantra is a basic [Meteor](https://www.meteor.com) boilerplate based on the [Mantra application architecture](https://github.com/kadirahq/mantra).
 
 ## Features
 * Follows Mantra framework specific modules approach
