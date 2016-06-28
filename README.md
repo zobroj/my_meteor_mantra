@@ -11,7 +11,7 @@ My Meteor Mantra is a basic [Meteor](https://www.meteor.com) boilerplate based o
 
 ## Setup
 1. Clone or fork the repository.
-2. Run `meteor update` and then `npm install` in your console
+2. Run `npm install` in your console
 3. Setup email (optional)
   1. Comment out the respective lines in '/server/main.js' and '/client/modules/app/actions/accounts.js'
   2. Create a file '/server/configs/private_credentials.js'. (Don't forget to add this file to your '.gitignore')
