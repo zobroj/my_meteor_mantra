@@ -1,9 +1,13 @@
-import React from 'react';
+import React from 'react'
 
-const AccountNotLoggedIn = (
-  <div>
-    Please sign in to view this page. <a href='/'>Go back to the main page</a>.
-  </div>
-)
+class AccountNotLoggedIn extends React.Component {
+  render() {
+    return (
+      <div>
+        Please sign in to view this page. <a href='/'>Go back to the main page</a>.
+      </div>
+    )
+  }
+}
 
-export default AccountNotLoggedIn;
+export default AccountNotLoggedIn

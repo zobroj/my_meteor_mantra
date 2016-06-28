@@ -1,11 +1,11 @@
-import React from 'react';
-import { EnsureLoggedIn } from 'meteor-auth';
-import { AccountNotLoggedIn } from '/client/configs/components.js';
+import React from 'react'
+import { AccountNotLoggedIn, AppLoading } from '/client/configs/components'
 
 class FoobarList extends React.Component {
-  render() {
 
-    const { foobars, loggedIn, loggingIn } = this.props
+  displayUser() {
+
+    const { foobars } = this.props
 
     const foobarNodes = foobars.map( foobar => (
         <li key={ foobar._id }>{ foobar.name }</li>
@@ -16,14 +16,36 @@ class FoobarList extends React.Component {
       <div>
         <h3>Foobars List</h3>
         <ul>
-          <EnsureLoggedIn unauthenticatedMessage={ AccountNotLoggedIn }>
           { foobarNodes }
-          </EnsureLoggedIn>
         </ul>
-        {
-          loggedIn ? <div>Hide this if not logged in!</div> :
-          loggingIn ? <div>Loading...</div> : AccountNotLoggedIn
-        }
+      </div>
+    )
+  }
+
+  displayGuest() {
+    return (
+      <div>
+        <h3>Foobar Test Page</h3>
+        <AccountNotLoggedIn />
+      </div>
+    )
+  }
+
+  displayLoading() {
+    return (
+      <AppLoading />
+    )
+  }
+
+  render() {
+
+    const { loggedIn, loggingIn } = this.props
+
+    if ( loggingIn ) { return this.displayLoading() }
+
+    return (
+      <div>
+      { loggedIn ? this.displayUser() : this.displayGuest() }
       </div>
     )
 
