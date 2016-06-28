@@ -1,7 +1,7 @@
 ## Overview
 My Meteor Mantra is a basic [Meteor](https://www.meteor.com) boilerplate based on the [Mantra application architecture](https://github.com/kadirahq/mantra).
 
-## Features
+### Features
 * Follows Mantra framework specific modules approach
 * All components composed in React
 * Routing with FlowRouter highlights active route in navbar
@@ -10,8 +10,8 @@ My Meteor Mantra is a basic [Meteor](https://www.meteor.com) boilerplate based o
 * Basic Bootstrap theme installed from NPM
 
 ## Email Setup (Gmail)
-1. Create a file `/server/configs/private_credentials.js`
-2. Add the following code where X = username, and Y = password (Don't forget to add this file to your `.gitignore`)
+1. Create a file `/server/configs/private_credentials.js`. (Don't forget to add this file to your `.gitignore`)
+2. Add the following code where X = username, and Y = password
 ```javascript
 // private_credentials.js
 export default function () {
@@ -20,8 +20,7 @@ export default function () {
 ```
 3. If your credentials get rejected by Google, login to your Gmail account and change settings to 'use less secure apps'.
 
-
-# Todo
+## Todo
 * Add password recovery
 * Add admin mode
 * Add testing
