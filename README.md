@@ -18,6 +18,8 @@ export default function () {
   process.env.MAIL_URL = "smtp://XXXXXX%40gmail.com:YYYYYYY@smtp.gmail.com:465/"
 }
 ```
+3. If your credentials get rejected by Google, login to your Gmail account and change settings to 'use less secure apps'.
+
 
 # Todo
 * Add password recovery
