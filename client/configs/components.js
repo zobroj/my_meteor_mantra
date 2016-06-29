@@ -1,5 +1,5 @@
 import MainLayout from '/client/modules/core/layouts/main_layout'
-import ListLayout from '/client/modules/core/layouts/list_layout'
+import ListLayout from '/client/modules/core/containers/list_layout'
 import SplitLayout from '/client/modules/core/layouts/split_layout'
 import AccountNotLoggedIn from '/client/modules/core/components/account_not_logged_in'
 import AppNotFound from '/client/modules/core/components/app_not_found'
