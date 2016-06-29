@@ -1,5 +1,4 @@
 // server methods
-// import { Users } from '/lib/collections'
 import { Meteor } from 'meteor/meteor'
 import { check } from 'meteor/check'
 
@@ -13,7 +12,7 @@ export default function () {
       Meteor._sleepForMs(500)
 
       if ( Meteor.user() ) {
-        Meteor.users.remove( {_id: userId} )
+        Meteor.users.remove( { _id: userId } )
       }
 
     }
