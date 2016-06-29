@@ -69,6 +69,26 @@ export default {
     FlowRouter.go( '/' )
   },
 
+  deleteAccount( { Meteor, FlowRouter, LocalState } ) {
+
+    if ( confirm('Are you sure-sure?') ) {
+
+      let userId = Meteor.userId()
+
+      Meteor.call( 'accounts.deleteAccount', userId, (err) => {
+        if (err) {
+          return LocalState.set( 'ACCOUNT_ERROR', err.message )
+        }
+      })
+
+      FlowRouter.go( '/' )
+
+    } else {
+      // do nothings
+    }
+
+  },
+
   clearErrors( { LocalState }, errorState ) {
     return LocalState.set( errorState, null )
   },

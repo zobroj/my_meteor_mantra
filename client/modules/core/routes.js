@@ -9,6 +9,7 @@ import {
 
 import AccountRegister from './containers/account_register'
 import AccountLogin from './containers/account_login'
+import AccountPreferences from './containers/account_preferences'
 
 export default function ( injectDeps, { FlowRouter } ) {
 
@@ -29,6 +30,15 @@ export default function ( injectDeps, { FlowRouter } ) {
     action() {
       mount( SplitLayoutCtx, {
         content: () => ( <AccountLogin /> ),
+      })
+    }
+  })
+
+  FlowRouter.route( '/user/:username/preferences', {
+    name: "accounts.preferences",
+    action() {
+      mount( MainLayoutCtx, {
+        content: () => ( <AccountPreferences /> ),
       })
     }
   })
