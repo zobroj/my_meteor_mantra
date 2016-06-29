@@ -5,9 +5,9 @@ import NavbarMain from '../components/navbar_main';
 export const composer = ( { context }, onData ) => {
 
   const { LocalState, Users } = context();
-  const { email } = Users();
+  const { email, username } = Users();
 
-  onData( null, { email } );
+  onData( null, { email, username } );
 
 };
 

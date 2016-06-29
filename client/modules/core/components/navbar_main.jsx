@@ -5,7 +5,7 @@ import { isActiveRoute } from '../libs/helpers'
 class NavbarMain extends React.Component {
   render() {
 
-    const { loggedIn, loggingIn, logout, email } = this.props
+    const { loggedIn, loggingIn, logout, email, username } = this.props
 
     return(
       <nav className="navbar navbar-default">
@@ -31,6 +31,7 @@ class NavbarMain extends React.Component {
 
             <NavbarUser
               email={ email }
+              username={ username }
               loggingIn={ loggingIn }
               loggedIn={ loggedIn }
               logout={ logout }

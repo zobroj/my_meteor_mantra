@@ -4,7 +4,7 @@ import { AppLoading } from '/client/configs/components'
 class NavbarUser extends React.Component {
 
   displayUser() {
-    const { email } = this.props
+    const { email, username } = this.props
 
     return(
       <ul className="nav navbar-nav navbar-right">
@@ -12,7 +12,9 @@ class NavbarUser extends React.Component {
           <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{ email }<span className="caret"></span></a>
           <ul className="dropdown-menu">
               <li><a onClick={ this._logout.bind( this ) } href="#">Log Out</a></li>
-            </ul>
+              <li className="nav-divider"></li>
+              <li><a href={ FlowRouter.path( `/user/${username}/preferences` ) }>Preferences</a></li>
+          </ul>
         </li>
       </ul>
     )
