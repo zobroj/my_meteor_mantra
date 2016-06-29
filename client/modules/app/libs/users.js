@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 export default function Users() {
 
   let userSubReady = Meteor.subscribe( 'users.current', ).ready()
