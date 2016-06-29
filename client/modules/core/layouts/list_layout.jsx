@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
-import NavbarMain from '../containers/navbar_main';
-import Footer from '../components/footer';
+import NavbarMain from '../containers/navbar_main'
+import Footer from '../components/footer'
 import AppVerifiedMsg from '../components/app_verified_msg'
 
 class ListLayout extends React.Component {
@@ -23,4 +23,4 @@ class ListLayout extends React.Component {
   }
 }
 
-export default ListLayout;
+export default ListLayout
