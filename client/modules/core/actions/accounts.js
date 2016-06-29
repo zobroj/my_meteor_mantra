@@ -34,12 +34,14 @@ export default {
     })
 
     // uncomment below to enable email
+    /*
     Meteor.call( 'emails.sendAccountVerificationLink', ( err, response ) => {
       if ( err && err.reason ) {
         return LocalState.set( 'REGISTER_ERROR', err.reason )
       }
       console.log( 'sendVerificationLink success' );
     })
+    */
 
     LocalState.set( 'REGISTER_ERROR', null )
   },
