@@ -1,6 +1,6 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core'
 import { authComposer } from 'meteor-auth'
-import Component from '../layouts/split_layout'
+import Component from '../layouts/layout_split'
 
 export const composer = ( { context }, onData ) => {
 
