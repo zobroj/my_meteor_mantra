@@ -4,7 +4,7 @@ import NavbarMain from '../containers/navbar_main';
 import Footer from '../components/footer';
 import AppVerifiedMsg from '../components/app_verified_msg'
 
-class SplitLayout extends React.Component {
+class LayoutSplit extends React.Component {
 
   render() {
 
@@ -31,4 +31,4 @@ class SplitLayout extends React.Component {
   }
 }
 
-export default SplitLayout;
+export default LayoutSplit;

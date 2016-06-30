@@ -4,7 +4,7 @@ import NavbarMain from '../containers/navbar_main'
 import Footer from '../components/footer'
 import AppVerifiedMsg from '../components/app_verified_msg'
 
-class MainLayout extends React.Component {
+class LayoutMain extends React.Component {
 
   render() {
 
@@ -22,4 +22,4 @@ class MainLayout extends React.Component {
   }
 }
 
-export default MainLayout
+export default LayoutMain

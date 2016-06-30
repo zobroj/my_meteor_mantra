@@ -4,7 +4,7 @@ import NavbarMain from '../containers/navbar_main'
 import Footer from '../components/footer'
 import AppVerifiedMsg from '../components/app_verified_msg'
 
-class ListLayout extends React.Component {
+class LayoutList extends React.Component {
 
   render() {
     const { content = () => null, emailVerified, loggedIn } = this.props
@@ -23,4 +23,4 @@ class ListLayout extends React.Component {
   }
 }
 
-export default ListLayout
+export default LayoutList

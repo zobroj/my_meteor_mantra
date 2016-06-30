@@ -2,8 +2,8 @@ import React from 'react';
 import { mount } from 'react-mounter'
 
 import {
-  MainLayout,
-  SplitLayout,
+  LayoutMain,
+  LayoutSplit,
   AppNotFound,
 } from '/client/configs/components'
 
@@ -13,13 +13,13 @@ import AccountPreferences from './containers/account_preferences'
 
 export default function ( injectDeps, { FlowRouter } ) {
 
-  const MainLayoutCtx = injectDeps ( MainLayout )
-  const SplitLayoutCtx = injectDeps ( SplitLayout )
+  const LayoutMainCtx = injectDeps ( LayoutMain )
+  const LayoutSplitCtx = injectDeps ( LayoutSplit )
 
   FlowRouter.route( '/register', {
     name: "accounts.register",
     action() {
-      mount( SplitLayoutCtx, {
+      mount( LayoutSplitCtx, {
         content: () => ( <AccountRegister /> ),
       })
     }
@@ -28,7 +28,7 @@ export default function ( injectDeps, { FlowRouter } ) {
   FlowRouter.route( '/login', {
     name: "accounts.login",
     action() {
-      mount( SplitLayoutCtx, {
+      mount( LayoutSplitCtx, {
         content: () => ( <AccountLogin /> ),
       })
     }
@@ -37,7 +37,7 @@ export default function ( injectDeps, { FlowRouter } ) {
   FlowRouter.route( '/user/:username/preferences', {
     name: "accounts.preferences",
     action() {
-      mount( MainLayoutCtx, {
+      mount( LayoutMainCtx, {
         content: () => ( <AccountPreferences /> ),
       })
     }
@@ -46,7 +46,7 @@ export default function ( injectDeps, { FlowRouter } ) {
   FlowRouter.notFound = {
     action() {
       name: "app.notFound"
-      mount( MainLayoutCtx, {
+      mount( LayoutMainCtx, {
         content: () => ( <AppNotFound /> ),
       })
     }

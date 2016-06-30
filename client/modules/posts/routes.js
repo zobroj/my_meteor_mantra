@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'react-mounter';
 
 import {
-  ListLayout,
+  LayoutList,
   AppNotFound,
 } from '/client/configs/components';
 
@@ -11,13 +11,13 @@ import PostSingle from './containers/post_single';
 
 export default function ( injectDeps, { FlowRouter } ) {
 
-  const ListLayoutCtx = injectDeps( ListLayout );
+  const LayoutListCtx = injectDeps( LayoutList );
 
   // Overview of all conversations
   FlowRouter.route( '/post', {
     name: "posts.list",
     action() {
-      mount( ListLayoutCtx, {
+      mount( LayoutListCtx, {
         content: () => ( <PostList /> ),
       });
     }
@@ -27,7 +27,7 @@ export default function ( injectDeps, { FlowRouter } ) {
   FlowRouter.route( '/post/:postId', {
     name: "posts.single",
     action( { postId } ) {
-      mount( ListLayoutCtx, {
+      mount( LayoutListCtx, {
         content: ()=> ( <PostSingle postId={ postId } /> ),
       });
     }
