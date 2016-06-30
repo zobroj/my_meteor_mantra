@@ -50,6 +50,16 @@ export default {
     LocalState.set( 'REGISTER_ERROR', null )
   },
 
+  resendVerificationEmail( { Meteor } ) {
+
+    Meteor.call( 'emails.sendAccountVerificationLink', ( err, response ) => {
+      if ( err && err.reason ) {
+        return LocalState.set( 'REGISTER_ERROR', err.reason )
+      }
+    })
+
+  },
+
   login( { Meteor, LocalState, FlowRouter, Accounts }, email, password ) {
 
     if (!email || !password) {

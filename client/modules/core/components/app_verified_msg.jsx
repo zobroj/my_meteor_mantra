@@ -8,7 +8,8 @@ class AppVerifiedMsg extends React.Component {
         <div className="row">
           <div className="col-xs-12">
             <div className="alert alert-danger">
-              <strong>Please verify your email to continue.</strong>
+              <p><strong>Please verify your email to continue. </strong>
+              <a onClick={ this._resendVerificationEmail.bind( this ) } href="#">Resend verification link</a></p>
             </div>
           </div>
         </div>
@@ -25,6 +26,12 @@ class AppVerifiedMsg extends React.Component {
     } else {
         return ( <div></div> )
     }
+  }
+
+  _resendVerificationEmail( event ) {
+    event.preventDefault()
+    const { resendVerificationEmail } = this.props
+    resendVerificationEmail()
   }
 }
 

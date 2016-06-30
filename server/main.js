@@ -9,7 +9,7 @@ addInitialData()
 accountsConfig()
 
 // uncomment below to enable emails, create file and put in smtp settings:
-/*
+// /*
 import private_credentials from './configs/private_credentials'
 private_credentials()
-*/
+// */
