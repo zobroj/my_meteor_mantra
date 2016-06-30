@@ -2,7 +2,7 @@ import React from 'react';
 
 import NavbarMain from '../containers/navbar_main';
 import Footer from '../components/footer';
-import AppVerifiedMsg from '../containers/app_verified_msg'
+import { AppVerifiedMsg } from '/client/configs/components'
 
 class LayoutSplit extends React.Component {
 
