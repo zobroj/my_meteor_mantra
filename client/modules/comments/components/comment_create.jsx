@@ -36,8 +36,15 @@ class CommentCreate extends React.Component {
 
   render() {
     const { loggedIn, loggingIn } = this.props
+    const { emailVerified } = this.props.Users()
 
     if ( loggingIn ) { return this.displayLoading() }
+
+    if ( loggedIn && !emailVerified ) {
+      return (
+        <div>This functionality is not available to unverfied users.</div>
+      )
+    }
 
     return (
       <div>

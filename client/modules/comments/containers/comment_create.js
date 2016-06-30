@@ -4,10 +4,10 @@ import { authComposer } from 'meteor-auth'
 
 export const composer = ( { context, clearErrors }, onData ) => {
 
-  const { LocalState } = context()
+  const { LocalState, Users } = context()
   const error = LocalState.get( 'CREATE_COMMENT_ERROR' )
 
-  onData( null, { error } )
+  onData( null, { error, Users } )
 
   return clearErrors
 
