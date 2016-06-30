@@ -1,6 +1,4 @@
 // actions
-import { _sendVerificationEmail } from '../libs/helpers'
-
 export default {
 
   register( { Meteor, LocalState, FlowRouter, Accounts }, email, username, password1, password2 ) {
@@ -34,7 +32,13 @@ export default {
 
       } else {
 
-        _sendVerificationEmail( this )
+        Meteor.call( 'emails.sendAccountVerificationLink', ( err, response ) => {
+          if ( err && err.reason ) {
+            return LocalState.set( 'REGISTER_ERROR', err.reason )
+          }
+        })
+
+        console.log( 'send verification email sent')
 
         FlowRouter.go( '/post' )
 
@@ -44,8 +48,18 @@ export default {
     LocalState.set( 'REGISTER_ERROR', null )
   },
 
-  sendVerificationEmail( { Meteor } ) {
-    _sendVerificationEmail()
+  resendVerificationEmail( { Meteor, LocalState } ) {
+
+    Meteor.call( 'emails.sendAccountVerificationLink', ( err, response ) => {
+      if ( err && err.reason ) {
+        return LocalState.set( 'REGISTER_ERROR', err.reason )
+      }
+    })
+
+    //set LocalState with time
+
+    console.log( 'send verification email sent')
+
   },
 
   login( { Meteor, LocalState, FlowRouter, Accounts }, email, password ) {

@@ -1,4 +1,3 @@
-import { Meteor } from 'meteor/meteor'
 // component helper
 export function isActiveRoute( compareRoute ) {
 
@@ -17,17 +16,5 @@ export function isActiveRoute( compareRoute ) {
     return '';
 
   }
-
-}
-
-// actions helper
-export function _sendVerificationEmail() {
-
-  Meteor.call( 'emails.sendAccountVerificationLink', ( err, response ) => {
-    if ( err && err.reason ) {
-      return LocalState.set( 'REGISTER_ERROR', err.reason )
-    }
-  })
-  console.log( 'send verification email sent')
 
 }

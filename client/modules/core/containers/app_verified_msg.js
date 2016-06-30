@@ -9,7 +9,7 @@ export const composer = ( { context }, onData ) => {
 }
 
 export const depsMapper = ( context, actions ) => ({
-  sendVerificationEmail: actions.accounts.sendVerificationEmail,
+  resendVerificationEmail: actions.accounts.resendVerificationEmail,
   context: () => context,
 })
 
