@@ -1,4 +1,6 @@
 // actions
+import { _sendVerificationEmail } from '../libs/helpers'
+
 export default {
 
   register( { Meteor, LocalState, FlowRouter, Accounts }, email, username, password1, password2 ) {
@@ -32,14 +34,15 @@ export default {
 
       } else {
 
+        _sendVerificationEmail( this )
         // uncomment below to enable email
         // /*
-        Meteor.call( 'emails.sendAccountVerificationLink', ( err, response ) => {
-          if ( err && err.reason ) {
-            return LocalState.set( 'REGISTER_ERROR', err.reason )
-          }
-          console.log( 'sendVerificationLink success' );
-        })
+        // Meteor.call( 'emails.sendAccountVerificationLink', ( err, response ) => {
+        //   if ( err && err.reason ) {
+        //     return LocalState.set( 'REGISTER_ERROR', err.reason )
+        //   }
+        //   console.log( 'sendVerificationLink success' );
+        // })
         // */
 
         FlowRouter.go( '/post' )
@@ -50,15 +53,19 @@ export default {
     LocalState.set( 'REGISTER_ERROR', null )
   },
 
-  resendVerificationEmail( { Meteor } ) {
-
-    Meteor.call( 'emails.sendAccountVerificationLink', ( err, response ) => {
-      if ( err && err.reason ) {
-        return LocalState.set( 'REGISTER_ERROR', err.reason )
-      }
-    })
-
+  sendVerificationEmail( { Meteor } ) {
+    _sendVerificationEmail()
   },
+  // sendVerificationEmail( { Meteor } ) {
+  //
+  //   Meteor.call( 'emails.sendAccountVerificationLink', ( err, response ) => {
+  //     if ( err && err.reason ) {
+  //       return LocalState.set( 'REGISTER_ERROR', err.reason )
+  //     }
+  //   })
+  //   console.log( 'send verification email sent')
+  //
+  // },
 
   login( { Meteor, LocalState, FlowRouter, Accounts }, email, password ) {
 

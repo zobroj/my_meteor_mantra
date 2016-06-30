@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor'
+// component helper
 export function isActiveRoute( compareRoute ) {
 
   let currentRoute = FlowRouter.getRouteName()
@@ -13,7 +15,19 @@ export function isActiveRoute( compareRoute ) {
   } else {
 
     return '';
-    
+
   }
+
+}
+
+// actions helper
+export function _sendVerificationEmail() {
+
+  Meteor.call( 'emails.sendAccountVerificationLink', ( err, response ) => {
+    if ( err && err.reason ) {
+      return LocalState.set( 'REGISTER_ERROR', err.reason )
+    }
+  })
+  console.log( 'send verification email sent')
 
 }
