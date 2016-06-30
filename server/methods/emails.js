@@ -9,30 +9,29 @@ export default function () {
 
       if ( userId ) {
 
-        SSR.compileTemplate(
-          'htmlEmail',
-          Assets.getText( 'html-email.html')
-        )
+        return Accounts.sendVerificationEmail( userId )
 
-        const username = Meteor.user().username
-        const email = _.get( Meteor.user(), 'emails[0].address', {} )
+        // SSR.compileTemplate(
+        //   'htmlEmail',
+        //   Assets.getText( 'html-email.html')
+        // )
+        //
+        // const username = Meteor.user().username
+        // const email = _.get( Meteor.user(), 'emails[0].address', {} )
+        //
+        // let emailData = {
+        //   username: username,
+        //   email: email,
+        // }
+        //
+        // Email.send({
+        //   to: "von.iobro@gmail.com",
+        //   from: "abctutorme123@gmail.com",
+        //   subject: "My Mantra Signup",
+        //   html: SSR.render( 'htmlEmail', emailData ),
+        // })
 
-        let emailData = {
-          username: username,
-          email: email,
-        }
-
-        Email.send({
-          to: "von.iobro@gmail.com",
-          from: "abctutorme123@gmail.com",
-          subject: "My Mantra Signup",
-          html: SSR.render( 'htmlEmail', emailData ),
-        })
-
-        // return Accounts.sendVerificationEmail( userId )
       }
-
     }
   })
-
 }
