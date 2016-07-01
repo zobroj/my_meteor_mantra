@@ -1,8 +1,36 @@
 import React from 'react'
 import AccountLoggedIn from './account_logged_in'
 import { AppLoading } from '/client/configs/components'
+import {
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  Button,
+} from 'react-bootstrap'
 
 class AccountRegister extends React.Component {
+  constructor( props ){
+    super( props )
+    this.state = {
+      email: '',
+      username: '',
+      password1: '',
+      password2: '',
+    }
+  }
+
+  handleEmailChange( event ) {
+    this.setState({ email: event.target.value })
+  }
+  handleUsernameChange( event ) {
+    this.setState({ username: event.target.value })
+  }
+  handlePassword1Change( event ) {
+    this.setState({ password1: event.target.value })
+  }
+  handlePassword2Change( event ) {
+    this.setState({ password2: event.target.value })
+  }
 
   displayUser() {
     return(
@@ -17,30 +45,48 @@ class AccountRegister extends React.Component {
   }
 
   displayGuest() {
-
     const { error } = this.props
-
     return(
-      <form role="form" id="register-form" onSubmit={ this._register.bind( this ) }>
+      <form onSubmit={ this._register.bind( this ) }>
         { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
         <h3>Create a New Account</h3>
-        <div className="form-group">
-          <label for="email">Email Address</label>
-          <input className="form-control" type="email" ref="email" placeholder="Enter email" />
-        </div>
-        <div className="form-group">
-          <label for="username">Username</label>
-          <input className="form-control" type="text" ref="username" placeholder="Enter username" />
-        </div>
-        <div className="form-group">
-          <label for="password1">Password</label>
-          <input className="form-control" type="password" ref="password1" placeholder="Enter password" />
-        </div>
-        <div className="form-group">
-          <label for="password2">Password Again</label>
-          <input className="form-control" type="password" ref="password2" placeholder="Confirm password again" />
-        </div>
-        <button className="btn btn-default" type="submit">Submit</button>
+        <FormGroup>
+          <ControlLabel>Email Address</ControlLabel>
+          <FormControl
+            type="email"
+            placeholder="Enter email"
+            value={ this.state.email }
+            onChange={ this.handleEmailChange.bind( this ) }
+          />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>Username</ControlLabel>
+          <FormControl
+            type="text"
+            placeholder="Enter username"
+            value={ this.state.username }
+            onChange={ this.handleUsernameChange.bind( this ) }
+          />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>Password</ControlLabel>
+          <FormControl
+            type="password"
+            placeholder="Enter password"
+            value={ this.state.password1 }
+            onChange={ this.handlePassword1Change.bind( this ) }
+          />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>Password Again</ControlLabel>
+          <FormControl
+            type="password"
+            placeholder="Confirm password"
+            value={ this.state.password2 }
+            onChange={ this.handlePassword2Change.bind( this ) }
+          />
+        </FormGroup>
+        <Button type="submit">Submit</Button>
       </form>
     )
   }
@@ -60,8 +106,8 @@ class AccountRegister extends React.Component {
   _register( event ) {
     event.preventDefault()
     const { register } = this.props
-    const { email, username, password1, password2 } = this.refs
-    register( email.value, username.value, password1.value, password2.value )
+    const { email, username, password1, password2 } = this.state
+    register( email, username, password1, password2 )
   }
 
 }
