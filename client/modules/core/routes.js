@@ -4,6 +4,7 @@ import { mount } from 'react-mounter'
 import {
   LayoutMain,
   LayoutSplit,
+  LayoutList,
   AppNotFound,
 } from '/client/configs/components'
 
@@ -15,6 +16,7 @@ export default function ( injectDeps, { FlowRouter } ) {
 
   const LayoutMainCtx = injectDeps ( LayoutMain )
   const LayoutSplitCtx = injectDeps ( LayoutSplit )
+  const LayoutListCtx = injectDeps ( LayoutList )
 
   FlowRouter.route( '/register', {
     name: "accounts.register",
