@@ -66,6 +66,14 @@ class AppVerifiedMsg extends React.Component {
 
     this.setState({ resendLinkClicked: true })
     resendVerificationEmail()
+
+    // user can click link after 60 seconds
+    const resetState = () => {
+      this.setState({ resendLinkClicked: false })
+      console.log( this.state.resendLinkClicked )
+    }
+    setTimeout( resetState, 60000 )
+
   }
 }
 
