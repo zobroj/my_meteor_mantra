@@ -43,6 +43,19 @@ export default function ( injectDeps, { FlowRouter } ) {
     }
   })
 
+  FlowRouter.route( '/verify-email/:token', {
+    name: 'verify-email',
+    action( params ) {
+      Accounts.verifyEmail( params.token, ( error ) => {
+        if ( error ) {
+          // Bert.alert( error.reason, 'danger' )
+        } else {
+          FlowRouter.go( '/' )
+          // Bert.alert( 'Email verfied! Thanks!', 'success' )
+        }
+      })
+    }
+  })
   FlowRouter.notFound = {
     action() {
       name: "app.notFound"
