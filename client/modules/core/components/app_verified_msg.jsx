@@ -1,4 +1,9 @@
 import React from 'react'
+import {
+  Row,
+  Col,
+  Alert,
+} from 'react-bootstrap'
 
 class AppVerifiedMsg extends React.Component {
   constructor( props ) {
@@ -11,14 +16,14 @@ class AppVerifiedMsg extends React.Component {
 
   displayPendingUser() {
     return (
-      <div clasName="container">
-        <div className="row">
-          <div className="col-xs-12">
-            <div className="alert alert-danger">
+      <div className="container">
+        <Row>
+          <Col xs={12}>
+            <Alert bsStyle="danger">
               { this.linkAvailability() }
-            </div>
-          </div>
-        </div>
+            </Alert>
+          </Col>
+        </Row>
       </div>
     )
   }
