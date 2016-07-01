@@ -1,12 +1,15 @@
 import React from 'react';
+import {
+  Row,
+  Col,
+} from 'react-bootstrap'
 
 class Footer extends React.Component {
   render() {
-
     return (
       <footer className="container">
-        <div className="row">
-          <div className="col-sm-4">
+        <Row>
+          <Col sm={4}>
             <h5>My Meteor</h5>
             <ul>
               <li><a href="#">About Us</a></li>
@@ -14,8 +17,8 @@ class Footer extends React.Component {
               <li><a href="#">Terms of Use</a></li>
               <li><a href="#">Privacy Policy</a></li>
             </ul>
-          </div>
-          <div className="col-sm-4">
+          </Col>
+          <Col sm={4}>
             <h5>Connect</h5>
             <ul>
               <li><a href="#">Twitter</a></li>
@@ -24,14 +27,13 @@ class Footer extends React.Component {
               <li><a href="#">Instagram</a></li>
               <li><a href="#">Imgur</a></li>
             </ul>
-          </div>
-          <div className="col-sm-4">
+          </Col>
+          <Col sm={4}>
             <img src="http://placehold.it/240x160" />
-          </div>
-        </div>
+          </Col>
+        </Row>
       </footer>
     )
-
   }
 }
 
