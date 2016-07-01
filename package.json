@@ -12,6 +12,7 @@
     "meteor-auth": "^0.2.0",
     "meteor-node-stubs": "~0.2.0",
     "react": "^15.1.0",
+    "react-bootstrap": "^0.29.5",
     "react-dom": "^15.1.0",
     "react-komposer": "^1.8.0",
     "react-mounter": "^1.2.0"
