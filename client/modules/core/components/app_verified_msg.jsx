@@ -1,6 +1,13 @@
 import React from 'react'
 
 class AppVerifiedMsg extends React.Component {
+  constructor( props ) {
+    super( props )
+    // initial state
+    this.state = {
+      resendLinkClicked: false
+    }
+  }
 
   displayPendingUser() {
     return (
@@ -8,13 +15,38 @@ class AppVerifiedMsg extends React.Component {
         <div className="row">
           <div className="col-xs-12">
             <div className="alert alert-danger">
-              <p><strong>Please verify your email to continue. </strong>
-              <a onClick={ this._resendVerificationEmail.bind( this ) } href="#">Resend verification link</a></p>
+              { this.linkAvailability() }
             </div>
           </div>
         </div>
       </div>
     )
+  }
+
+  linkAvailability() {
+
+    const canSendLink = () => {
+      return (
+        <p><strong>Please verify your email to continue. </strong>
+        <a onClick={ this._resendVerificationEmail.bind( this ) } href="#">Resend verification link</a></p>
+      )
+    }
+
+    const mustWait = () => {
+      return (
+        <div>Check your email. Link has been set. You can resend in 60 seconds.</div>
+      )
+    }
+
+    // setTimeout( () => { return canSendLink() }, 600)
+    let emailSent = this.state.resendLinkClicked
+    console.log('emailsent? ' + emailSent)
+    if ( emailSent ) {
+      return mustWait()
+    } else {
+      return canSendLink()
+    }
+
   }
 
   render() {
@@ -31,6 +63,8 @@ class AppVerifiedMsg extends React.Component {
   _resendVerificationEmail( event ) {
     event.preventDefault()
     const { resendVerificationEmail } = this.props
+
+    this.setState({ resendLinkClicked: true })
     resendVerificationEmail()
   }
 }
