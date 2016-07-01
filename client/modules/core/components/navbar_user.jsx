@@ -1,31 +1,33 @@
 import React from 'react'
 import { AppLoading } from '/client/configs/components'
+import {
+  Nav,
+  NavDropdown,
+  NavItem,
+  MenuItem,
+} from 'react-bootstrap'
 
 class NavbarUser extends React.Component {
 
   displayUser() {
     const { email, username } = this.props
-
     return(
-      <ul className="nav navbar-nav navbar-right">
-        <li className="dropdown">
-          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{ email }<span className="caret"></span></a>
-          <ul className="dropdown-menu">
-              <li><a onClick={ this._logout.bind( this ) } href="#">Log Out</a></li>
-              <li className="nav-divider"></li>
-              <li><a href={ FlowRouter.path( `/user/${username}/preferences` ) }>Preferences</a></li>
-          </ul>
-        </li>
-      </ul>
+      <Nav pullRight>
+        <NavDropdown eventKey={1} title={ email }>
+          <MenuItem eventKey={1.1} onClick={ this._logout.bind( this ) }>Log Out</MenuItem>
+          <MenuItem divider />
+          <MenuItem eventKey={1.2} href={ FlowRouter.path( `/user/${username}/preferences` ) }>Preferences</MenuItem>
+        </NavDropdown>
+      </Nav>
     )
   }
 
   displayGuest() {
     return(
-      <ul className="nav navbar-nav navbar-right">
-        <li><a href="/login">LOGIN</a></li>
-        <li><a href="/register">SIGN UP</a></li>
-      </ul>
+      <Nav pullRight>
+        <NavItem eventKey={1} href="/login">LOGIN</NavItem>
+        <NavItem eventKey={2} href="/register">SIGN UP</NavItem>
+      </Nav>
     )
   }
 
@@ -40,11 +42,12 @@ class NavbarUser extends React.Component {
 
     if ( loggingIn ) { return this.displayLoading() }
 
-    return (
-      <div>
-      { loggedIn ? this.displayUser() : this.displayGuest() }
-      </div>
-    )
+    if ( loggedIn ) {
+      return this.displayUser()
+    } else {
+      return this.displayGuest()
+    }
+
   }
 
   _logout( event ) {
