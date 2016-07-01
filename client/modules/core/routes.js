@@ -39,7 +39,7 @@ export default function ( injectDeps, { FlowRouter } ) {
   FlowRouter.route( '/user/:username/preferences', {
     name: "accounts.preferences",
     action() {
-      mount( LayoutMainCtx, {
+      mount( LayoutListCtx, {
         content: () => ( <AccountPreferences /> ),
       })
     }

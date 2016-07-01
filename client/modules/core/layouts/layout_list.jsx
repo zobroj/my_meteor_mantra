@@ -1,14 +1,11 @@
 import React from 'react'
-
 import NavbarMain from '../containers/navbar_main'
 import Footer from '../components/footer'
 import { AppVerifiedMsg } from '/client/configs/components'
 
 class LayoutList extends React.Component {
-
   render() {
     const { content = () => null, emailVerified, loggedIn } = this.props
-
     return (
       <div>
         <NavbarMain />
