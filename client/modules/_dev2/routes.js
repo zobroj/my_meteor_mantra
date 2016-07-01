@@ -13,7 +13,7 @@ export default function ( injectDeps, { FlowRouter } ) {
     name: "dev2",
     action() {
       mount( MainLayoutCtx, {
-        content: <FilterableProductTable products={PRODUCTS} />
+        content: () => ( <FilterableProductTable products={PRODUCTS} /> ),
       });
     }
   });
