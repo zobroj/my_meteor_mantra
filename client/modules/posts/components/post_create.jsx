@@ -1,24 +1,54 @@
 import React from 'react'
 import { AppErrorMsg, AppLoading } from '/client/configs/components'
+import {
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  Button,
+} from 'react-bootstrap'
 
 class PostCreate extends React.Component {
+  constructor( props ) {
+    super( props )
+    this.state = {
+      title: '',
+      content: '',
+    }
+  }
+
+  handleTitleChange( event ) {
+    this.setState({ title: event.target.value })
+  }
+  handleContentChange( event ) {
+    this.setState({ content: event.target.value })
+  }
 
   displayUser() {
 
     const { error } = this.props
 
     return (
-      <form id="create-post" onSubmit={ this.createPost.bind( this ) }>
+      <form onSubmit={ this.createPost.bind( this ) }>
         <AppErrorMsg error={ error } />
-        <div className="form-group">
-          <label for="title">Title</label>
-          <input ref="title" type="text" className="form-control" placeholder="Give a short title to your post." />
-        </div>
-        <div className="form-group">
-          <label for="content">Content</label>
-          <input ref="content" type="text" className="form-control" placeholder="Something interesting..." />
-        </div>
-        <input type="submit" className="btn btn-success" value="New Post" />
+        <FormGroup>
+          <ControlLabel>Title</ControlLabel>
+          <FormControl
+            type="text"
+            placeholder="Give a short title to your post."
+            value={ this.state.title }
+            onChange={ this.handleTitleChange.bind( this ) }
+          />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>Content</ControlLabel>
+          <FormControl
+            type="text"
+            placeholder="Something interesting..."
+            value={ this.state.content }
+            onChange={ this.handleContentChange.bind( this ) }
+          />
+        </FormGroup>
+        <Button type="submit">New Post</Button>
       </form>
     )
   }
@@ -49,19 +79,19 @@ class PostCreate extends React.Component {
       )
     }
 
-    return (
-      <div>
-      { loggedIn ? this.displayUser() : this.displayGuest() }
-      </div>
-    )
+    if ( loggedIn ) {
+      return this.displayUser()
+    } else {
+      return this.displayGuet()
+    }
   }
 
   createPost( event ) {
     event.preventDefault()
     const { create } = this.props
-    const { title, content } = this.refs
+    const { title, content } = this.state
 
-    create( title.value, content.value )
+    create( title, content )
   }
 }
 
