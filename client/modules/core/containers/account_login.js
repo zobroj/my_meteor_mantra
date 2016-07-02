@@ -15,6 +15,7 @@ export const composer = ( { context, clearErrors }, onData ) => {
 
 export const depsMapper = ( context, actions ) => ({
   login: actions.accounts.login,
+  sendResetPasswordLink: actions.accounts.sendResetPasswordLink,
   clearErrors: actions.accounts.clearErrors,
   context: () => context,
 })

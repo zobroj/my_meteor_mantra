@@ -121,8 +121,10 @@ class AccountLogin extends React.Component {
   }
   _resetPassword( event ) {
     event.preventDefault()
+    const { sendResetPasswordLink } = this.props
     const { resetEmail } = this.state
-    console.log( `send reset email link to ${resetEmail}` )
+    console.log( `jsx send reset email link to ${resetEmail}` )
+    sendResetPasswordLink( resetEmail )
   }
 }
 

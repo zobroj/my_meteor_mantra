@@ -62,6 +62,13 @@ export default {
 
   },
 
+  sendResetPasswordLink( { Meteor, LocalState }, resetEmail ) {
+    if ( !resetEmail ) {
+      return LocalState.set( 'LOGIN_ERROR', 'Please enter an email.')
+    }
+    console.log( `accounts.actions called to send email to ${resetEmail}`)
+  },
+
   login( { Meteor, LocalState, FlowRouter, Accounts }, email, password ) {
 
     if (!email || !password) {
