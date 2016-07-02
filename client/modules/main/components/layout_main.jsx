@@ -1,5 +1,8 @@
 import React from 'react'
 import {
+  Grid,
+} from 'react-bootstrap'
+import {
   NavbarMain,
   Footer,
   AppVerifiedMsg,
@@ -16,7 +19,10 @@ class LayoutMain extends React.Component {
     return (
       <div>
         <NavbarMain />
-        <AppVerifiedMsg loggedIn={ loggedIn } emailVerified={ emailVerified }/>
+        <AppVerifiedMsg
+          loggedIn={ loggedIn }
+          emailVerified={ emailVerified }
+        />
         { jumbotron() }
         { content() }
         <hr />
