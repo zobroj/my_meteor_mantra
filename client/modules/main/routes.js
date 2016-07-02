@@ -1,7 +1,9 @@
 import React from 'react';
 import { mount } from 'react-mounter';
-import MainPage from './containers/main_page';
 import LayoutMain from './containers/layout_main';
+import JumboGuest from './components/jumbo_guest'
+import SummaryGuest from './components/summary_guest'
+
 
 export default function ( injectDeps, { FlowRouter } ) {
 
@@ -12,8 +14,8 @@ export default function ( injectDeps, { FlowRouter } ) {
     name: "main",
     action() {
       mount( LayoutMainCtx, {
-        // header: <Navbar activeLink="main" />,
-        content: () => ( <MainPage /> ),
+        jumbotron: () => ( <JumboGuest /> ),
+        content: () => ( <SummaryGuest /> ),
       });
     }
   });

@@ -7,14 +7,10 @@ import {
   Col,
 } from 'react-bootstrap'
 
-class MainPage extends React.Component {
+class SummaryGuest extends React.Component {
   render() {
     return (
       <Grid>
-        <Jumbotron>
-          <h1>Introduction</h1>
-          <p>Hello, World.</p>
-        </Jumbotron>
         <Row container>
           <Col md={12}>
             <Button bsStyle="primary" href={ FlowRouter.path( 'posts.list' ) }>Test Page</Button>
@@ -25,4 +21,4 @@ class MainPage extends React.Component {
   }
 }
 
-export default MainPage;
+export default SummaryGuest;

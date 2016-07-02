@@ -6,15 +6,18 @@ import {
 } from '/client/configs/components'
 
 class LayoutMain extends React.Component {
-
   render() {
-
-    const { content = () => null, emailVerified, loggedIn } = this.props
-
+    const {
+      jumbotron = () => null,
+      content = () => null,
+      emailVerified,
+      loggedIn
+    } = this.props
     return (
       <div>
         <NavbarMain />
         <AppVerifiedMsg loggedIn={ loggedIn } emailVerified={ emailVerified }/>
+        { jumbotron() }
         { content() }
         <hr />
         <Footer />
