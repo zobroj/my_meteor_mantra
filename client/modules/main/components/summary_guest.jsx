@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Grid,
   Jumbotron,
@@ -21,4 +21,4 @@ class SummaryGuest extends React.Component {
   }
 }
 
-export default SummaryGuest;
+export default SummaryGuest

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Jumbotron,
   Grid,
@@ -17,4 +17,4 @@ class JumboGuest extends React.Component {
   }
 }
 
-export default JumboGuest;
+export default JumboGuest
