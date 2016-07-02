@@ -1,8 +1,12 @@
 import React from 'react';
-
 import NavbarMain from '../containers/navbar_main';
 import Footer from '../components/footer';
 import { AppVerifiedMsg } from '/client/configs/components'
+import {
+  Grid,
+  Row,
+  Col,
+} from 'react-bootstrap'
 
 class LayoutSplit extends React.Component {
 
@@ -14,16 +18,16 @@ class LayoutSplit extends React.Component {
       <div>
         <NavbarMain />
         <AppVerifiedMsg loggedIn={ loggedIn } emailVerified={ emailVerified }/>
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-6">
+        <Grid>
+          <Row>
+            <Col sm={6}>
               <h3>Why hello there.</h3>
-            </div>
-            <div className="col-sm-6">
+            </Col>
+            <Col sm={6}>
               { content() }
-            </div>
-          </div>
-        </div>
+            </Col>
+          </Row>
+        </Grid>
         <hr />
         <Footer />
       </div>

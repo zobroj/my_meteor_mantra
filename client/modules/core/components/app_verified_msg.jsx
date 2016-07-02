@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  Grid,
   Row,
   Col,
   Alert,
@@ -16,7 +17,7 @@ class AppVerifiedMsg extends React.Component {
 
   displayPendingUser() {
     return (
-      <div className="container">
+      <Grid>
         <Row>
           <Col xs={12}>
             <Alert bsStyle="danger">
@@ -24,7 +25,7 @@ class AppVerifiedMsg extends React.Component {
             </Alert>
           </Col>
         </Row>
-      </div>
+      </Grid>
     )
   }
 
