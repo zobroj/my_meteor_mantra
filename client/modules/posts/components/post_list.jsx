@@ -11,9 +11,7 @@ import {
 
 class PostList extends React.Component {
   render() {
-
     const { posts, error } = this.props
-
     const postNodes = posts.map( post => (
         <ListGroupItem key={ post._id }>
           <a href={ `/post/${ post._id }` }>{ post.title }</a>
@@ -21,7 +19,6 @@ class PostList extends React.Component {
         </ListGroupItem>
       )
     )
-
     return (
       <Row>
         <AppErrorMsg error={ error } />
@@ -37,7 +34,6 @@ class PostList extends React.Component {
         </Col>
       </Row>
     )
-
   }
 }
 
