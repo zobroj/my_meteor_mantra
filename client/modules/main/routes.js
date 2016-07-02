@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'react-mounter';
 import MainPage from './containers/main_page';
-import LayoutMain from './components/layout_main';
+import LayoutMain from './containers/layout_main';
 
 export default function ( injectDeps, { FlowRouter } ) {
 

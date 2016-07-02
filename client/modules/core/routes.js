@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'react-mounter'
 
 import {
-  LayoutMain,
   LayoutSplit,
   LayoutList,
   AppNotFound,
@@ -14,7 +13,6 @@ import AccountPreferences from './containers/account_preferences'
 
 export default function ( injectDeps, { FlowRouter } ) {
 
-  const LayoutMainCtx = injectDeps ( LayoutMain )
   const LayoutSplitCtx = injectDeps ( LayoutSplit )
   const LayoutListCtx = injectDeps ( LayoutList )
 
@@ -61,7 +59,7 @@ export default function ( injectDeps, { FlowRouter } ) {
   FlowRouter.notFound = {
     action() {
       name: "app.notFound"
-      mount( LayoutMainCtx, {
+      mount( LayoutListCtx, {
         content: () => ( <AppNotFound /> ),
       })
     }
