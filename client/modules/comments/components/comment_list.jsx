@@ -10,9 +10,7 @@ import {
 
 class CommentList extends React.Component {
   render() {
-
     const { comments, postId } = this.props
-
     const commentNodes = comments.map( comment => {
       return (
         <ListGroupItem key={ comment._id }>
@@ -22,11 +20,9 @@ class CommentList extends React.Component {
         </ListGroupItem>
       )
     })
-
     const commentNone = (
       <p>No comments yet!</p>
     )
-
     return (
       <Row>
         <Col xs={12} sm={8} smOffset={2}>
