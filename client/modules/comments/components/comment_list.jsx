@@ -1,5 +1,12 @@
 import React from 'react';
 import CommentCreate from '../containers/comment_create.js';
+import {
+  Row,
+  Col,
+  Panel,
+  ListGroup,
+  ListGroupItem,
+} from 'react-bootstrap'
 
 class CommentList extends React.Component {
   render() {
@@ -8,11 +15,11 @@ class CommentList extends React.Component {
 
     const commentNodes = comments.map( comment => {
       return (
-        <div key={ comment._id } className="list-group-item">
+        <ListGroupItem key={ comment._id }>
           <strong>{ comment.author }</strong> - { comment.createdAt.toLocaleDateString() }
           <p>{ comment.content }</p>
           { comment.saving ? '...' : null }
-        </div>
+        </ListGroupItem>
       )
     })
 
@@ -21,27 +28,19 @@ class CommentList extends React.Component {
     )
 
     return (
-      <div className="row comments">
-        <div className="col-xs-12 col-sm-8 col-sm-offset-2">
-          <div className="panel-group">
-            <div className="panel panel-default">
-              <div className="panel-heading">Add Comment</div>
-              <div className="panel-body">
-                <CommentCreate postId={ postId } />
-              </div>
-            </div>
-            <div className="panel panel-default">
-              <div className="panel-heading">Comments</div>
-              <div className="panel-body">
-                <div className="list-group">
-                  { comments.length === 0 ? commentNone : null }
-                  { commentNodes }
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Row>
+        <Col xs={12} sm={8} smOffset={2}>
+          <Panel header="Add Comment">
+            <CommentCreate postId={ postId } />
+          </Panel>
+          <Panel header="Comments">
+            <ListGroup fill>
+              { comments.length === 0 ? commentNone : null }
+              { commentNodes }
+            </ListGroup>
+          </Panel>
+        </Col>
+      </Row>
     )
   }
 }
