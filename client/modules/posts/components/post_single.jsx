@@ -1,5 +1,10 @@
 import React from 'react';
 import CommentList from '../../comments/containers/comment_list';
+import {
+  Row,
+  Col,
+  PageHeader,
+} from 'react-bootstrap'
 
 class PostSingle extends React.Component {
   render() {
@@ -8,18 +13,16 @@ class PostSingle extends React.Component {
 
     return (
       <div>
-        <div className="row">
-          <div className="col-xs-12 col-sm-8 col-sm-offset-2">
+        <Row>
+          <Col xs={12} sm={8} smOffset={2}>
             <a href={ FlowRouter.path( 'posts.list' ) }>&lt; Back</a>
-            <div className="page-header">
-              <h3>{ post.title }</h3>
-              <p><strong>{ post.author }</strong> - { post.createdAt.toLocaleDateString() }</p>
-            </div>
-            <div class="content">
-              <p>{ post.content }</p>
-            </div>
-          </div>
-        </div>
+            <PageHeader>
+              { post.title }
+            </PageHeader>
+            <p><strong>{ post.author }</strong> - { post.createdAt.toLocaleDateString() }</p>
+            <p>{ post.content }</p>
+          </Col>
+        </Row>
         <CommentList postId={ post._id } />
       </div>
     )
