@@ -26,5 +26,20 @@ export default function () {
       return emailBody
     },
   }
+  Accounts.emailTemplates.resetPassword = {
+    subject() {
+      return '[My Meteor Mantra] Reset Password Link'
+    },
+    text( user, url ) {
+      let emailAddress   = user.emails[0].address,
+          urlWithoutHash = url.replace( '#/', '' ),
+          supportEmail   = 'support@testwebsite.com',
+          emailBody      = `To reset the password for email address (${emailAddress}) visit the following link:\n\n${urlWithoutHash}\n\n If you did not request this verification, please ignore this email. If you feel something is wrong, please contact our support team: ${supportEmail}.`
+
+      console.log( `email sent to (${emailAddress}) with content: ${emailBody}` )
+
+      return emailBody
+    },
+  }
 
 }
