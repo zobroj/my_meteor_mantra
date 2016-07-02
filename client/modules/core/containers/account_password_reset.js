@@ -5,7 +5,7 @@ import { authComposer } from 'meteor-auth'
 export const composer = ( { context, clearErrors }, onData ) => {
 
   const { LocalState } = context()
-  const errorState = 'LOGIN_ERROR'
+  const errorState = 'RESET_PASSWORD_ERROR'
   const error = LocalState.get( errorState )
 
   onData( null, { error } )

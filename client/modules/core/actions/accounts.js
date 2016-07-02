@@ -39,46 +39,48 @@ export default {
       }
     })
     console.log( 'send verification email sent')
+    LocalState.set( 'REGISTER_ERROR', null )
   },
 
   sendResetPasswordLink( { Meteor, LocalState, FlowRouter }, resetEmail ) {
     if ( !resetEmail ) {
-      return LocalState.set( 'LOGIN_ERROR', 'Please enter an email.')
+      return LocalState.set( 'RESET_PASSWORD_ERROR', 'Please enter an email.')
     }
     Meteor.call( 'accounts.sendResetPasswordLink', resetEmail, (err) => {
       if (err && err.reason) {
         console.log( err.reason )
-        return LocalState.set('LOGIN_ERROR', err.reason)
+        return LocalState.set('RESET_PASSWORD_ERROR', err.reason)
       } else {
         // TODO: return something to let user know email was sent
         // TODO: return something to make the modal close
         FlowRouter.go( '/' )
       }
     })
-    LocalState.set( 'LOGIN_ERROR', null )
+    LocalState.set( 'RESET_PASSWORD_ERROR', null )
   },
 
   resetPassword( { Meteor, LocalState, FlowRouter }, token, password1, password2 ) {
     if ( !password1 || !password2 ) {
-      return LocalState.set( 'LOGIN_ERROR', 'Both password fields are required')
+      return LocalState.set( 'RESET_PASSWORD_ERROR', 'Both password fields are required')
     }
     if ( password1 !== password2 ) {
-      return LocalState.set( 'LOGIN_ERROR', 'Password fields do not match. Try again.')
+      return LocalState.set( 'RESET_PASSWORD_ERROR', 'Password fields do not match. Try again.')
     }
     if ( !token ) {
-      return LocalState.set( 'LOGIN_ERROR', 'Sorry please check the link, again, or reset your password from the login page again.')
+      return LocalState.set( 'RESET_PASSWORD_ERROR', 'Sorry please check the link, again, or reset your password from the login page again.')
     }
     Accounts.resetPassword( token, password1, (err) => {
       // TODO: check( newPassword, String )
       // TODO: check( token, String )
       if ( err & err.reason ) {
         console.log( err.reason )
-        return LocalState.set( 'LOGIN_ERROR', err.reason )
+        return LocalState.set( 'RESET_PASSWORD_ERROR', err.reason )
       } else {
         // TODO: return something to let user know password was reset
         FlowRouter.go( '/' )
       }
     })
+    LocalState.set( 'RESET_PASSWORD_ERROR', null )
   },
 
   login( { Meteor, LocalState, FlowRouter, Accounts }, email, password ) {

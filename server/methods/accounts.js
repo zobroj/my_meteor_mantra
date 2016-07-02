@@ -20,7 +20,7 @@ export default function () {
       if ( !userId ) {
         console.log(`no user account with the address: ${email}`)
         throw new Meteor.Error(
-          'sendResetPaswordError.LOGIN_ERROR',
+          'sendResetPaswordLink.RESET_PASSWORD_ERROR',
           `User account with the address: ${email} not found. Please try again.`,
           'no user found',
         )

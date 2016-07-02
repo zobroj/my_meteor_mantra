@@ -46,10 +46,10 @@ class AccountLogin extends React.Component {
     )
   }
   displayGuest() {
-    const { error } = this.props
+    const { errorLogin } = this.props
     return (
       <form onSubmit={ this._login.bind( this ) }>
-        { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
+        { errorLogin ? <p style={ { color: 'red' } }>{ errorLogin }</p> : null }
         <FormGroup>
           <ControlLabel>Email Address</ControlLabel>
           <FormControl
@@ -75,7 +75,7 @@ class AccountLogin extends React.Component {
   render() {
     const { loggedIn, loggingIn } = this.props
     // testing for modal
-    const { error } = this.props
+    const { errorReset } = this.props
     // tetsing for modal
     const footerText = () => (
       <p>Forgot your pasword? <a onClick={ this.modalOpen.bind( this ) } href="#">Reset it here.</a></p>
@@ -95,7 +95,7 @@ class AccountLogin extends React.Component {
           <Modal.Body>
             <p>Enter the email address for your account</p>
             <form >
-              { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
+              { errorReset ? <p style={ { color: 'red' } }>{ errorReset }</p> : null }
               <FormGroup>
                 <FormControl
                   type="email"
