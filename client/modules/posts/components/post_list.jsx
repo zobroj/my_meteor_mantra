@@ -1,6 +1,13 @@
 import React from 'react';
 import PostCreate from '../containers/post_create.js';
 import { AppErrorMsg } from '/client/configs/components'
+import {
+  Row,
+  Col,
+  Panel,
+  ListGroup,
+  ListGroupItem,
+} from 'react-bootstrap'
 
 class PostList extends React.Component {
   render() {
@@ -8,37 +15,27 @@ class PostList extends React.Component {
     const { posts, error } = this.props
 
     const postNodes = posts.map( post => (
-        <div key={ post._id } className="list-group-item">
-          <a href={ `/post/${ post._id }` }>
-            { post.title }
-          </a>
-          <p className="small">
-            <strong>{ post.author }</strong> - { post.createdAt.toLocaleDateString() }
-          </p>
-        </div>
+        <ListGroupItem key={ post._id }>
+          <a href={ `/post/${ post._id }` }>{ post.title }</a>
+          <p className="small"><strong>{ post.author }</strong> - { post.createdAt.toLocaleDateString() }</p>
+        </ListGroupItem>
       )
     )
 
     return (
-      <div className="row">
+      <Row>
         <AppErrorMsg error={ error } />
-        <div className="col-md-12 panel-group">
-          <div className="panel panel-default">
-            <div className="panel-heading"><h4>Posts</h4></div>
-            <div className="panel-body">
-              <div className="list-group">
-                { postNodes }
-              </div>
-            </div>
-          </div>
-          <div className="panel panel-default">
-            <div className="panel-heading">Add a Conversation</div>
-            <div className="panel-body">
-              <PostCreate />
-            </div>
-          </div>
-        </div>
-      </div>
+        <Col md={12}>
+          <Panel header="Posts">
+            <ListGroup fill>
+              { postNodes }
+            </ListGroup>
+          </Panel>
+          <Panel header="Create a post">
+            <PostCreate />
+          </Panel>
+        </Col>
+      </Row>
     )
 
   }
