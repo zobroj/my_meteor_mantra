@@ -3,10 +3,10 @@ My Meteor Mantra is a basic [Meteor](https://www.meteor.com) boilerplate based o
 
 ## Features
 * Follows Mantra framework specific modules approach
-* All components composed in React
+* All components composed in React and react-bootstrap
 * Routing with FlowRouter highlights active route in navbar
 * User registration, login, and logout with [meteor-auth](https://github.com/remotebase/meteor-auth)
-* Account email verification via Gmail SMTP
+* Account email verification and password reset tokens sent via Gmail SMTP
 * Basic Bootstrap theme installed from NPM
 
 ## Setup
@@ -23,7 +23,6 @@ My Meteor Mantra is a basic [Meteor](https://www.meteor.com) boilerplate based o
   ```
   
 ## Todo
-* Add password recovery
 * Add admin mode
 * Add testing
 
