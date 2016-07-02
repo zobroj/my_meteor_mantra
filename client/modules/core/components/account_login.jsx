@@ -2,6 +2,7 @@ import React from 'react'
 import AccountLoggedIn from './account_logged_in'
 import { AppLoading } from '/client/configs/components'
 import {
+  Panel,
   FormGroup,
   ControlLabel,
   FormControl,
@@ -16,15 +17,12 @@ class AccountLogin extends React.Component {
       password: '',
     }
   }
-
   handleEmailChange( event ) {
     this.setState({ email: event.target.value })
   }
-
   handlePasswordChange( event ) {
     this.setState({ password: event.target.value })
   }
-
   displayUser() {
     return(
       <AccountLoggedIn />
@@ -35,13 +33,11 @@ class AccountLogin extends React.Component {
       <AppLoading />
     )
   }
-
   displayGuest() {
     const { error } = this.props
     return (
       <form onSubmit={ this._login.bind( this ) }>
         { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
-        <h3>Log In to Your Account</h3>
         <FormGroup>
           <ControlLabel>Email Address</ControlLabel>
           <FormControl
@@ -60,28 +56,34 @@ class AccountLogin extends React.Component {
             onChange={ this.handlePasswordChange.bind( this ) }
           />
         </FormGroup>
-        <Button type="submit" >Log In</Button>
+        <Button bsStyle="primary" type="submit" >Log In</Button>
       </form>
     )
   }
-
   render() {
     const { loggedIn, loggingIn } = this.props
+    const footerText = () => (
+      <p>Forgot your pasword? <a onClick={ this._forgotPassword.bind( this ) } href="#">Reset it here.</a></p>
+    )
     if ( loggingIn ) { return this.displayLoading() }
     return (
-      <div>
-      { loggedIn ? this.displayUser() : this.displayGuest() }
-      </div>
+      <Panel
+        header="Log In to Your Account"
+        footer={ footerText() }>
+        { loggedIn ? this.displayUser() : this.displayGuest() }
+      </Panel>
     )
   }
-
   _login( event ) {
     event.preventDefault()
     const { login } = this.props
     const { email, password } = this.state
     login( email, password )
   }
-
+  _forgotPassword( event ) {
+    event.preventDefault()
+    console.log( 'yes, you clicked it!')
+  }
 }
 
 export default AccountLogin
