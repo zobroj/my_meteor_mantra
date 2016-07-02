@@ -15,18 +15,14 @@ class PostCreate extends React.Component {
       content: '',
     }
   }
-
   handleTitleChange( event ) {
     this.setState({ title: event.target.value })
   }
   handleContentChange( event ) {
     this.setState({ content: event.target.value })
   }
-
   displayUser() {
-
     const { error } = this.props
-
     return (
       <form onSubmit={ this.createPost.bind( this ) }>
         <AppErrorMsg error={ error } />
@@ -52,7 +48,6 @@ class PostCreate extends React.Component {
       </form>
     )
   }
-
   displayGuest() {
     return (
       <div>
@@ -60,32 +55,26 @@ class PostCreate extends React.Component {
       </div>
     )
   }
-
   displayLoading() {
     return (
       <AppLoading />
     )
   }
-
   render() {
     const { loggedIn, loggingIn } = this.props
     const { emailVerified } = this.props.Users()
-
     if ( loggingIn ) { return this.displayLoading() }
-
     if ( loggedIn && !emailVerified ) {
       return (
         <div>This functionality is not available to unverfied users.</div>
       )
     }
-
     if ( loggedIn ) {
       return this.displayUser()
     } else {
       return this.displayGuet()
     }
   }
-
   createPost( event ) {
     event.preventDefault()
     const { create } = this.props
