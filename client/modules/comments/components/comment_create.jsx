@@ -18,9 +18,7 @@ class CommentCreate extends React.Component {
     this.setState({ comment: event.target.value })
   }
   displayUser() {
-
     const { error } = this.props
-
     return (
       <form onSubmit={ this.createComment.bind( this ) }>
         <AppErrorMsg error={ error } />
@@ -35,9 +33,7 @@ class CommentCreate extends React.Component {
         <Button type="submit">Add Comment</Button>
       </form>
     )
-
   }
-
   displayGuest() {
     return (
       <div>
@@ -45,19 +41,15 @@ class CommentCreate extends React.Component {
       </div>
     )
   }
-
   displayLoading() {
     return (
       <AppLoading />
     )
   }
-
   render() {
     const { loggedIn, loggingIn } = this.props
     const { emailVerified } = this.props.Users()
-
     if ( loggingIn ) { return this.displayLoading() }
-
     if ( loggedIn && !emailVerified ) {
       return (
         <div>This functionality is not available to unverfied users.</div>
@@ -69,15 +61,11 @@ class CommentCreate extends React.Component {
       return this.displayGuest()
     }
   }
-
   createComment( event ) {
     event.preventDefault()
-
     const { create, postId } = this.props
     const { comment } = this.state
-
     create( postId, comment )
-
     this.state.comment.value = ''
   }
 }
