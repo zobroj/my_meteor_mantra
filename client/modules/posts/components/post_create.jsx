@@ -79,8 +79,11 @@ class PostCreate extends React.Component {
     event.preventDefault()
     const { create } = this.props
     const { title, content } = this.state
-
     create( title, content )
+    this.setState({
+      title: '',
+      content: '',
+    })
   }
 }
 

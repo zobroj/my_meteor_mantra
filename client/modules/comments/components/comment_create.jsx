@@ -66,7 +66,7 @@ class CommentCreate extends React.Component {
     const { create, postId } = this.props
     const { comment } = this.state
     create( postId, comment )
-    this.state.comment.value = ''
+    this.setState({ comment: '' })
   }
 }
 
