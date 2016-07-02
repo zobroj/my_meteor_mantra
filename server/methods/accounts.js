@@ -11,7 +11,6 @@ export default function () {
       if ( Meteor.user() ) {
         Meteor.users.remove( { _id: userId } )
       }
-
     },
     'accounts.sendResetPasswordLink'( email ) {
       check( email, String )
