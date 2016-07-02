@@ -17,7 +17,14 @@ class AccountLogin extends React.Component {
       email: '',
       password: '',
       resetEmail: '',
+      showModal: false,
     }
+  }
+  modalClose() {
+    this.setState({ showModal: false })
+  }
+  modalOpen() {
+    this.setState({ showModal: true })
   }
   handleEmailChange( event ) {
     this.setState({ email: event.target.value })
@@ -71,41 +78,39 @@ class AccountLogin extends React.Component {
     const { error } = this.props
     // tetsing for modal
     const footerText = () => (
-      <p>Forgot your pasword? <a onClick={ this._forgotPassword.bind( this ) } href="#">Reset it here.</a></p>
+      <p>Forgot your pasword? <a onClick={ this.modalOpen.bind( this ) } href="#">Reset it here.</a></p>
     )
     if ( loggingIn ) { return this.displayLoading() }
     return (
       <div>
-      <Panel
-        header="Log In to Your Account"
-        footer={ footerText() }>
-        { loggedIn ? this.displayUser() : this.displayGuest() }
-      </Panel>
-        <div className="static-modal">
-          <Modal.Dialog>
-            <Modal.Header>
-              <Modal.Title>Send Reset Password Link</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <p>Enter the email address for your account</p>
-              <form >
-                { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
-                <FormGroup>
-                  <FormControl
-                    type="email"
-                    placeholder="Enter email"
-                    value={ this.state.resetEmail }
-                    onChange={ this.handleResetEmailChange.bind( this ) }
-                  />
-                </FormGroup>
-              </form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button>Close</Button>
-              <Button onClick={ this._resetPassword.bind( this ) } bsStyle="primary">Reset Password</Button>
-            </Modal.Footer>
-          </Modal.Dialog>
-        </div>
+        <Panel
+          header="Log In to Your Account"
+          footer={ footerText() }>
+          { loggedIn ? this.displayUser() : this.displayGuest() }
+        </Panel>
+        <Modal show={ this.state.showModal } onHide={ this.modalClose.bind( this ) }>
+          <Modal.Header closeButton>
+            <Modal.Title>Send Reset Password Link</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Enter the email address for your account</p>
+            <form >
+              { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
+              <FormGroup>
+                <FormControl
+                  type="email"
+                  placeholder="Enter email"
+                  value={ this.state.resetEmail }
+                  onChange={ this.handleResetEmailChange.bind( this ) }
+                />
+              </FormGroup>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={ this.modalClose.bind( this ) }>Close</Button>
+            <Button onClick={ this._resetPassword.bind( this ) } bsStyle="primary">Reset Password</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     )
   }
@@ -115,15 +120,10 @@ class AccountLogin extends React.Component {
     const { email, password } = this.state
     login( email, password )
   }
-  _forgotPassword( event ) {
-    event.preventDefault()
-    console.log( 'yes, you clicked it!')
-  }
   _resetPassword( event ) {
     event.preventDefault()
     const { sendResetPasswordLink } = this.props
     const { resetEmail } = this.state
-    console.log( `jsx send reset email link to ${resetEmail}` )
     sendResetPasswordLink( resetEmail )
   }
 }
