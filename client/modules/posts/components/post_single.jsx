@@ -1,5 +1,5 @@
 import React from 'react';
-import CommentList from '../../comments/containers/comment_list';
+import CommentList from '../../comments/containers/comment_list'
 import {
   Row,
   Col,
@@ -8,9 +8,7 @@ import {
 
 class PostSingle extends React.Component {
   render() {
-
     const { post } = this.props
-
     return (
       <div>
         <Row>
@@ -26,8 +24,7 @@ class PostSingle extends React.Component {
         <CommentList postId={ post._id } />
       </div>
     )
-
   }
 }
 
-export default PostSingle;
+export default PostSingle
