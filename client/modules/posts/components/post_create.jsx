@@ -72,7 +72,7 @@ class PostCreate extends React.Component {
     if ( loggedIn ) {
       return this.displayUser()
     } else {
-      return this.displayGuet()
+      return this.displayGuest()
     }
   }
   createPost( event ) {
