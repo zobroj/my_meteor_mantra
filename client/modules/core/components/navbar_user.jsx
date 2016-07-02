@@ -13,7 +13,7 @@ class NavbarUser extends React.Component {
     const { email, username } = this.props
     return(
       <Nav pullRight>
-        <NavDropdown eventKey={1} title={ email }>
+        <NavDropdown eventKey={1} title={ email } id="navbar-user-dropdown">
           <MenuItem eventKey={1.1} onClick={ this._logout.bind( this ) }>Log Out</MenuItem>
           <MenuItem divider />
           <MenuItem eventKey={1.2} href={ FlowRouter.path( `/user/${username}/preferences` ) }>Preferences</MenuItem>
