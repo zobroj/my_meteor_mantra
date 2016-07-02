@@ -9,6 +9,7 @@ import {
 
 import AccountRegister from './containers/account_register'
 import AccountLogin from './containers/account_login'
+import AccountPasswordReset from './containers/account_password_reset'
 import AccountPreferences from './containers/account_preferences'
 
 export default function ( injectDeps, { FlowRouter } ) {
@@ -53,6 +54,14 @@ export default function ( injectDeps, { FlowRouter } ) {
           FlowRouter.go( '/' )
           // Bert.alert( 'Email verfied! Thanks!', 'success' )
         }
+      })
+    }
+  })
+  FlowRouter.route( '/reset-password/:token', {
+    name: 'reset-password',
+    action( params ) {
+      mount( LayoutListCtx, {
+        content: () => ( <AccountPasswordReset token={ params.token }/> ),
       })
     }
   })

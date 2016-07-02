@@ -12,9 +12,7 @@ export default function () {
         Meteor.users.remove( { _id: userId } )
       }
 
-    }
-  })
-  Meteor.methods({
+    },
     'accounts.sendResetPasswordLink'( email ) {
       check( email, String )
       let userId = Meteor.users.findOne({ 'emails.address': email })
@@ -30,6 +28,6 @@ export default function () {
       } else if ( userId ) {
         return Accounts.sendResetPasswordEmail( userId )
       }
-    }
+    },
   })
 }
