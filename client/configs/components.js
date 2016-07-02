@@ -1,3 +1,5 @@
+import NavbarMain from '/client/modules/core/containers/navbar_main'
+import Footer from '/client/modules/core/components/footer'
 import LayoutMain from '/client/modules/core/containers/layout_main'
 import LayoutList from '/client/modules/core/containers/layout_list'
 import LayoutSplit from '/client/modules/core/containers/layout_split'
@@ -8,6 +10,8 @@ import AppVerifiedMsg from '/client/modules/core/containers/app_verified_msg'
 import AppLoading from '/client/modules/core/components/app_loading'
 
 export {
+  NavbarMain,
+  Footer,
   LayoutMain,
   LayoutList,
   LayoutSplit,
