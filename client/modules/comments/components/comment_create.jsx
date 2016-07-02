@@ -1,8 +1,22 @@
 import React from 'react'
 import { AppErrorMsg, AppLoading } from '/client/configs/components'
+import {
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  Button,
+} from 'react-bootstrap'
 
 class CommentCreate extends React.Component {
-
+  constructor( props ) {
+    super( props )
+    this.state = {
+      comment: '',
+    }
+  }
+  handleCommentChange( event ) {
+    this.setState({ comment: event.target.value })
+  }
   displayUser() {
 
     const { error } = this.props
@@ -10,11 +24,15 @@ class CommentCreate extends React.Component {
     return (
       <form onSubmit={ this.createComment.bind( this ) }>
         <AppErrorMsg error={ error } />
-        <div className="form-group">
-          <label for="content">Content</label>
-          <textarea ref="content" className="form-control" placeholder="Your comment...."></textarea>
-        </div>
-        <input type="submit" className="btn btn-success" value="Add Comment" />
+        <FormGroup>
+          <FormControl
+            type="text"
+            placeholder="Your comment...."
+            value={ this.state.comment }
+            onChange={ this.handleCommentChange.bind( this ) }
+          />
+        </FormGroup>
+        <Button type="submit">Add Comment</Button>
       </form>
     )
 
@@ -45,23 +63,22 @@ class CommentCreate extends React.Component {
         <div>This functionality is not available to unverfied users.</div>
       )
     }
-
-    return (
-      <div>
-      { loggedIn ? this.displayUser() : this.displayGuest() }
-      </div>
-    )
+    if ( loggedIn ) {
+      return this.displayUser()
+    } else {
+      return this.displayGuest()
+    }
   }
 
   createComment( event ) {
     event.preventDefault()
 
     const { create, postId } = this.props
-    const { content } = this.refs
+    const { comment } = this.state
 
-    create( postId, content.value )
+    create( postId, comment )
 
-    this.refs.content.value = ''
+    this.state.comment.value = ''
   }
 }
 
