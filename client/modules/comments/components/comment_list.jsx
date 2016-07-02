@@ -21,7 +21,9 @@ class CommentList extends React.Component {
       )
     })
     const commentNone = (
-      <p>No comments yet!</p>
+      <ListGroupItem>
+        No comments yet!
+      </ListGroupItem>
     )
     return (
       <Row>
