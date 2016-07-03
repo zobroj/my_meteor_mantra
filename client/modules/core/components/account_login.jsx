@@ -2,12 +2,12 @@ import React from 'react'
 import AccountLoggedIn from './account_logged_in'
 import { AppLoading } from '/client/configs/components'
 import {
-  Panel,
-  FormGroup,
+  Button,
   ControlLabel,
   FormControl,
-  Button,
+  FormGroup,
   Modal,
+  Panel,
 } from 'react-bootstrap'
 
 class AccountLogin extends React.Component {
@@ -19,6 +19,13 @@ class AccountLogin extends React.Component {
       resetEmail: '',
       showModal: false,
     }
+    this.modalOpen = this.modalOpen.bind( this )
+    this.modalClose = this.modalClose.bind( this )
+    this._login = this._login.bind( this )
+    this._resetPassword = this._resetPassword.bind( this )
+    this.handleEmailChange = this.handleEmailChange.bind( this )
+    this.handlePasswordChange = this.handlePasswordChange.bind( this )
+    this.handleResetEmailChange = this.handleResetEmailChange.bind( this )
   }
   modalClose() {
     this.setState({ showModal: false })
@@ -48,7 +55,7 @@ class AccountLogin extends React.Component {
   displayGuest() {
     const { errorLogin } = this.props
     return (
-      <form onSubmit={ this._login.bind( this ) }>
+      <form onSubmit={ this._login }>
         { errorLogin ? <p style={ { color: 'red' } }>{ errorLogin }</p> : null }
         <FormGroup>
           <ControlLabel>Email Address</ControlLabel>
@@ -56,7 +63,7 @@ class AccountLogin extends React.Component {
             type="email"
             placeholder="Enter email"
             value={ this.state.email }
-            onChange={ this.handleEmailChange.bind( this ) }
+            onChange={ this.handleEmailChange }
           />
         </FormGroup>
         <FormGroup>
@@ -65,7 +72,7 @@ class AccountLogin extends React.Component {
             type="password"
             placeholder="Enter password"
             value={ this.state.pasword }
-            onChange={ this.handlePasswordChange.bind( this ) }
+            onChange={ this.handlePasswordChange }
           />
         </FormGroup>
         <Button bsStyle="primary" type="submit" >Log In</Button>
@@ -74,11 +81,9 @@ class AccountLogin extends React.Component {
   }
   render() {
     const { loggedIn, loggingIn } = this.props
-    // testing for modal
     const { errorReset } = this.props
-    // tetsing for modal
     const footerText = () => (
-      <p>Forgot your pasword? <a onClick={ this.modalOpen.bind( this ) } href="#">Reset it here.</a></p>
+      <p>Forgot your pasword? <a onClick={ this.modalOpen } href="#">Reset it here.</a></p>
     )
     if ( loggingIn ) { return this.displayLoading() }
     return (
@@ -88,7 +93,7 @@ class AccountLogin extends React.Component {
           footer={ footerText() }>
           { loggedIn ? this.displayUser() : this.displayGuest() }
         </Panel>
-        <Modal show={ this.state.showModal } onHide={ this.modalClose.bind( this ) }>
+        <Modal show={ this.state.showModal } onHide={ this.modalClose }>
           <Modal.Header closeButton>
             <Modal.Title>Send Reset Password Link</Modal.Title>
           </Modal.Header>
@@ -101,14 +106,14 @@ class AccountLogin extends React.Component {
                   type="email"
                   placeholder="Enter email"
                   value={ this.state.resetEmail }
-                  onChange={ this.handleResetEmailChange.bind( this ) }
+                  onChange={ this.handleResetEmailChange }
                 />
               </FormGroup>
             </form>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={ this.modalClose.bind( this ) }>Close</Button>
-            <Button onClick={ this._resetPassword.bind( this ) } bsStyle="primary">Reset Password</Button>
+            <Button onClick={ this.modalClose }>Close</Button>
+            <Button onClick={ this._resetPassword } bsStyle="primary">Reset Password</Button>
           </Modal.Footer>
         </Modal>
       </div>
