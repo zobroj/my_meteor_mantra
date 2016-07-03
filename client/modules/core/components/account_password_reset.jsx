@@ -2,12 +2,12 @@ import React from 'react'
 import AccountLoggedIn from './account_logged_in'
 import { AppLoading } from '/client/configs/components'
 import {
-  Panel,
-  FormGroup,
-  ControlLabel,
-  FormControl,
   Button,
+  ControlLabel,
+  FormGroup,
+  FormControl,
   Modal,
+  Panel,
 } from 'react-bootstrap'
 
 class AccountPasswordReset extends React.Component {
@@ -17,6 +17,9 @@ class AccountPasswordReset extends React.Component {
       password1: '',
       password2: '',
     }
+    this.handlePassword1Change = this.handlePassword1Change.bind( this )
+    this.handlePassword2Change = this.handlePassword2Change.bind( this )
+    this._resetPassword = this._resetPassword.bind( this )
   }
   handlePassword1Change( event ) {
     this.setState({ password1: event.target.value })
@@ -37,7 +40,7 @@ class AccountPasswordReset extends React.Component {
   displayGuest() {
     const { error } = this.props
     return (
-      <form onSubmit={ this._resetPassword.bind( this ) }>
+      <form onSubmit={ this._resetPassword }>
         { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
         <FormGroup>
           <ControlLabel>New Password</ControlLabel>
@@ -45,7 +48,7 @@ class AccountPasswordReset extends React.Component {
             type="password"
             placeholder="Enter password"
             value={ this.state.password1 }
-            onChange={ this.handlePassword1Change.bind( this ) }
+            onChange={ this.handlePassword1Change }
           />
         </FormGroup>
         <FormGroup>
@@ -54,7 +57,7 @@ class AccountPasswordReset extends React.Component {
             type="password"
             placeholder="Enter password again"
             value={ this.state.pasword2 }
-            onChange={ this.handlePassword2Change.bind( this ) }
+            onChange={ this.handlePassword2Change }
           />
         </FormGroup>
         <Button bsStyle="primary" type="submit">Submit</Button>
