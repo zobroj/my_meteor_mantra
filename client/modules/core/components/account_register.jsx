@@ -22,6 +22,7 @@ class AccountRegister extends React.Component {
     this.handleUsernameChange = this.handleUsernameChange.bind( this )
     this.handlePassword1Change = this.handlePassword1Change.bind( this )
     this.handlePassword2Change = this.handlePassword2Change.bind( this )
+    this._register = this._register.bind( this )
   }
   handleEmailChange( event ) {
     this.setState({ email: event.target.value })
