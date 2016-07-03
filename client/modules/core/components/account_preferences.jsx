@@ -2,13 +2,17 @@ import React from 'react'
 import AccountNotLoggedIn from './account_not_logged_in'
 import { AppLoading } from '/client/configs/components'
 import {
-  Row,
-  Col,
-  Well,
   Button,
+  Col,
+  Row,
+  Well,
 } from 'react-bootstrap'
 
 class AccountPreferences extends React.Component {
+  constructor( props ) {
+    super( props )
+    this._deleteAccount = this._deleteAccount.bind( this )
+  }
   displayUser() {
     const { email, username } = this.props
     return (
@@ -20,7 +24,7 @@ class AccountPreferences extends React.Component {
           </ul>
           <Well>
             <p>For testing purposes: </p>
-            <Button bsStyle="danger" onClick={ this._deleteAccount.bind( this ) }>Delete account</Button>
+            <Button bsStyle="danger" onClick={ this._deleteAccount }>Delete account</Button>
           </Well>
         </Col>
       </Row>
@@ -38,7 +42,6 @@ class AccountPreferences extends React.Component {
       <AccountNotLoggedIn />
     )
   }
-
   render() {
     const { loggedIn, loggingIn } = this.props
     if ( loggingIn ) { return this.displayLoading() }
@@ -48,7 +51,6 @@ class AccountPreferences extends React.Component {
       return this.displayGuest()
     }
   }
-
   _deleteAccount( event ) {
     event.preventDefault()
     const{ deleteAccount } = this.props

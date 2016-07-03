@@ -1,12 +1,12 @@
-import React from 'react';
-import PostCreate from '../containers/post_create.js';
+import React from 'react'
+import PostCreate from '../containers/post_create.js'
 import { AppErrorMsg } from '/client/configs/components'
 import {
-  Row,
   Col,
-  Panel,
   ListGroup,
   ListGroupItem,
+  Panel,
+  Row,
 } from 'react-bootstrap'
 
 class PostList extends React.Component {

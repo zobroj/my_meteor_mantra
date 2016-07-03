@@ -1,10 +1,10 @@
 import React from 'react'
 import { AppErrorMsg, AppLoading } from '/client/configs/components'
 import {
-  FormGroup,
+  Button,
   ControlLabel,
   FormControl,
-  Button,
+  FormGroup,
 } from 'react-bootstrap'
 
 class CommentCreate extends React.Component {
@@ -13,6 +13,8 @@ class CommentCreate extends React.Component {
     this.state = {
       comment: '',
     }
+    this._createComment = this._createComment.bind( this )
+    this.handleCommentChange = this.handleCommentChange.bind( this )
   }
   handleCommentChange( event ) {
     this.setState({ comment: event.target.value })
@@ -20,14 +22,14 @@ class CommentCreate extends React.Component {
   displayUser() {
     const { error } = this.props
     return (
-      <form onSubmit={ this.createComment.bind( this ) }>
+      <form onSubmit={ this._createComment }>
         <AppErrorMsg error={ error } />
         <FormGroup>
           <FormControl
             type="text"
             placeholder="Your comment...."
             value={ this.state.comment }
-            onChange={ this.handleCommentChange.bind( this ) }
+            onChange={ this.handleCommentChange }
           />
         </FormGroup>
         <Button type="submit">Add Comment</Button>
@@ -61,7 +63,7 @@ class CommentCreate extends React.Component {
       return this.displayGuest()
     }
   }
-  createComment( event ) {
+  _createComment( event ) {
     event.preventDefault()
     const { create, postId } = this.props
     const { comment } = this.state

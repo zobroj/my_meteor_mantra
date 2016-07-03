@@ -1,10 +1,10 @@
 import React from 'react'
 import {
+  Button,
+  Col,
   Grid,
   Jumbotron,
-  Button,
   Row,
-  Col,
 } from 'react-bootstrap'
 
 class SummaryGuest extends React.Component {

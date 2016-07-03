@@ -2,11 +2,11 @@ import React from 'react'
 import AccountLoggedIn from './account_logged_in'
 import { AppLoading } from '/client/configs/components'
 import {
-  FormGroup,
-  Panel,
-  ControlLabel,
-  FormControl,
   Button,
+  ControlLabel,
+  FormGroup,
+  FormControl,
+  Panel,
 } from 'react-bootstrap'
 
 class AccountRegister extends React.Component {
@@ -18,6 +18,10 @@ class AccountRegister extends React.Component {
       password1: '',
       password2: '',
     }
+    this.handleEmailChange = this.handleEmailChange.bind( this )
+    this.handleUsernameChange = this.handleUsernameChange.bind( this )
+    this.handlePassword1Change = this.handlePassword1Change.bind( this )
+    this.handlePassword2Change = this.handlePassword2Change.bind( this )
   }
   handleEmailChange( event ) {
     this.setState({ email: event.target.value })
@@ -32,20 +36,20 @@ class AccountRegister extends React.Component {
     this.setState({ password2: event.target.value })
   }
   displayUser() {
-    return(
+    return (
       <AccountLoggedIn />
     )
   }
   displayLoading() {
-    return(
+    return (
       <AppLoading />
     )
   }
   displayGuest() {
     const { error } = this.props
-    return(
+    return (
       <Panel header="Create a New Account">
-        <form onSubmit={ this._register.bind( this ) }>
+        <form onSubmit={ this._register }>
           { error ? <p style={ { color: 'red' } }>{ error }</p> : null }
           <FormGroup>
             <ControlLabel>Email Address</ControlLabel>
@@ -53,7 +57,7 @@ class AccountRegister extends React.Component {
               type="email"
               placeholder="Enter email"
               value={ this.state.email }
-              onChange={ this.handleEmailChange.bind( this ) }
+              onChange={ this.handleEmailChange }
             />
           </FormGroup>
           <FormGroup>
@@ -62,7 +66,7 @@ class AccountRegister extends React.Component {
               type="text"
               placeholder="Enter username"
               value={ this.state.username }
-              onChange={ this.handleUsernameChange.bind( this ) }
+              onChange={ this.handleUsernameChange }
             />
           </FormGroup>
           <FormGroup>
@@ -71,7 +75,7 @@ class AccountRegister extends React.Component {
               type="password"
               placeholder="Enter password"
               value={ this.state.password1 }
-              onChange={ this.handlePassword1Change.bind( this ) }
+              onChange={ this.handlePassword1Change }
             />
           </FormGroup>
           <FormGroup>
@@ -80,7 +84,7 @@ class AccountRegister extends React.Component {
               type="password"
               placeholder="Confirm password"
               value={ this.state.password2 }
-              onChange={ this.handlePassword2Change.bind( this ) }
+              onChange={ this.handlePassword2Change }
             />
           </FormGroup>
           <Button type="submit">Submit</Button>

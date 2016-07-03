@@ -1,10 +1,10 @@
 import React from 'react'
 import { AppErrorMsg, AppLoading } from '/client/configs/components'
 import {
-  FormGroup,
+  Button,
   ControlLabel,
   FormControl,
-  Button,
+  FormGroup,
 } from 'react-bootstrap'
 
 class PostCreate extends React.Component {
@@ -14,6 +14,9 @@ class PostCreate extends React.Component {
       title: '',
       content: '',
     }
+    this.handleTitleChange = this.handleTitleChange.bind( this )
+    this.handleContentChange = this.handleContentChange.bind( this )
+    this._createPost = this._createPost.bind( this )
   }
   handleTitleChange( event ) {
     this.setState({ title: event.target.value })
@@ -24,7 +27,7 @@ class PostCreate extends React.Component {
   displayUser() {
     const { error } = this.props
     return (
-      <form onSubmit={ this.createPost.bind( this ) }>
+      <form onSubmit={ this._createPost }>
         <AppErrorMsg error={ error } />
         <FormGroup>
           <ControlLabel>Title</ControlLabel>
@@ -32,7 +35,7 @@ class PostCreate extends React.Component {
             type="text"
             placeholder="Give a short title to your post."
             value={ this.state.title }
-            onChange={ this.handleTitleChange.bind( this ) }
+            onChange={ this.handleTitleChange }
           />
         </FormGroup>
         <FormGroup>
@@ -41,7 +44,7 @@ class PostCreate extends React.Component {
             type="text"
             placeholder="Something interesting..."
             value={ this.state.content }
-            onChange={ this.handleContentChange.bind( this ) }
+            onChange={ this.handleContentChange }
           />
         </FormGroup>
         <Button type="submit">New Post</Button>
@@ -75,7 +78,7 @@ class PostCreate extends React.Component {
       return this.displayGuest()
     }
   }
-  createPost( event ) {
+  _createPost( event ) {
     event.preventDefault()
     const { create } = this.props
     const { title, content } = this.state

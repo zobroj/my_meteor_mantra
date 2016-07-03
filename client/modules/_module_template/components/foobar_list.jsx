@@ -1,11 +1,11 @@
 import React from 'react'
 import { AccountNotLoggedIn, AppLoading } from '/client/configs/components'
 import {
-  Row,
   Col,
-  Panel,
   ListGroup,
   ListGroupItem,
+  Panel,
+  Row,
 } from 'react-bootstrap'
 
 class FoobarList extends React.Component {

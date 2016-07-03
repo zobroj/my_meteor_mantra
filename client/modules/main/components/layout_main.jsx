@@ -1,12 +1,12 @@
 import React from 'react'
 import {
+  AppVerifiedMsg,
+  Footer,
+  NavbarMain,
+} from '/client/configs/components'
+import {
   Grid,
 } from 'react-bootstrap'
-import {
-  NavbarMain,
-  Footer,
-  AppVerifiedMsg,
-} from '/client/configs/components'
 
 class LayoutMain extends React.Component {
   render() {

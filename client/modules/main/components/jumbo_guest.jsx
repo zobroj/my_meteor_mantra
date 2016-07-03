@@ -1,7 +1,7 @@
 import React from 'react'
 import {
-  Jumbotron,
   Grid,
+  Jumbotron,
 } from 'react-bootstrap'
 
 class JumboGuest extends React.Component {

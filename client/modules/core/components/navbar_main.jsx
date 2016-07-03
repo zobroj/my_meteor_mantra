@@ -2,10 +2,10 @@ import React from 'react';
 import NavbarUser from './navbar_user';
 import { isActiveRoute } from '../libs/helpers'
 import {
+  Button,
   Nav,
   Navbar,
   NavItem,
-  Button,
 } from 'react-bootstrap'
 
 class NavbarMain extends React.Component {
@@ -36,7 +36,6 @@ class NavbarMain extends React.Component {
         </Navbar.Collapse>
       </Navbar>
     )
-
   }
 }
 

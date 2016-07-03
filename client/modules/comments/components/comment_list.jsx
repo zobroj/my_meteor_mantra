@@ -1,11 +1,11 @@
 import React from 'react';
 import CommentCreate from '../containers/comment_create.js';
 import {
-  Row,
   Col,
-  Panel,
   ListGroup,
   ListGroupItem,
+  Panel,
+  Row,
 } from 'react-bootstrap'
 
 class CommentList extends React.Component {

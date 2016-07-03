@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  Row,
   Col,
+  Row,
 } from 'react-bootstrap'
 
 class Footer extends React.Component {

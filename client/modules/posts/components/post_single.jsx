@@ -1,9 +1,9 @@
 import React from 'react';
 import CommentList from '../../comments/containers/comment_list'
 import {
-  Row,
   Col,
   PageHeader,
+  Row,
 } from 'react-bootstrap'
 
 class PostSingle extends React.Component {
