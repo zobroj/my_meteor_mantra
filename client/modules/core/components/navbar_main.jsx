@@ -8,35 +8,30 @@ import {
   NavItem,
 } from 'react-bootstrap'
 
-class NavbarMain extends React.Component {
-  render() {
-    const { loggedIn, loggingIn, logout, email, username } = this.props
-    return(
-      <Navbar>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <a href={ FlowRouter.path( '/' ) }>My Meteor Mantra</a>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <NavItem eventKey={1}
-              className={ isActiveRoute( 'posts' ) }
-              href={ FlowRouter.path( 'posts.list' ) }>Posts
-            </NavItem>
-          </Nav>
-          <NavbarUser
-            email={ email }
-            username={ username }
-            loggingIn={ loggingIn }
-            loggedIn={ loggedIn }
-            logout={ logout }
-          />
-        </Navbar.Collapse>
-      </Navbar>
-    )
-  }
-}
+const NavbarMain = ({ loggedIn, loggingIn, logout, email, username }) => (
+  <Navbar>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <a href={ FlowRouter.path( '/' ) }>My Meteor Mantra</a>
+      </Navbar.Brand>
+      <Navbar.Toggle />
+    </Navbar.Header>
+    <Navbar.Collapse>
+      <Nav>
+        <NavItem eventKey={1}
+          className={ isActiveRoute( 'posts' ) }
+          href={ FlowRouter.path( 'posts.list' ) }>Posts
+        </NavItem>
+      </Nav>
+      <NavbarUser
+        email={ email }
+        username={ username }
+        loggingIn={ loggingIn }
+        loggedIn={ loggedIn }
+        logout={ logout }
+      />
+    </Navbar.Collapse>
+  </Navbar>
+)
 
 export default NavbarMain

@@ -8,28 +8,18 @@ import {
   Grid,
 } from 'react-bootstrap'
 
-class LayoutMain extends React.Component {
-  render() {
-    const {
-      jumbotron = () => null,
-      content = () => null,
-      emailVerified,
-      loggedIn
-    } = this.props
-    return (
-      <div>
-        <NavbarMain />
-        <AppVerifiedMsg
-          loggedIn={ loggedIn }
-          emailVerified={ emailVerified }
-        />
-        { jumbotron() }
-        { content() }
-        <hr />
-        <Footer />
-      </div>
-    )
-  }
-}
+const LayoutMain = ({ jumbotron = () => null, content = () => null, emailVerified, loggedIn }) => (
+  <div>
+    <NavbarMain />
+    <AppVerifiedMsg
+      loggedIn={ loggedIn }
+      emailVerified={ emailVerified }
+    />
+    { jumbotron() }
+    { content() }
+    <hr />
+    <Footer />
+  </div>
+)
 
 export default LayoutMain
