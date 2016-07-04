@@ -1,6 +1,7 @@
 import React from 'react'
 import { AccountNotLoggedIn, AppLoading } from '/client/configs/components'
 import {
+  Button,
   Col,
   ListGroup,
   ListGroupItem,
@@ -9,11 +10,23 @@ import {
 } from 'react-bootstrap'
 
 class FoobarList extends React.Component {
+  constructor( props ) {
+    super( props )
+    this.state = {
+      exampleState: '',
+    }
+    this.handleButtonClick = this.handleButtonClick.bind( this )
+  }
+  handleButtonClick() {
+    console.log('you clicky the button!')
+  }
   displayUser() {
     const { foobars } = this.props
     const foobarNodes = foobars.map( foobar => (
         <ListGroupItem key={ foobar._id }>
-          { foobar.name }
+          <a onClick={ this.handleButtonClick }
+            href={ `/foobar/${foobar.name}` }>{ foobar.name }
+          </a>
         </ListGroupItem>
       )
     )
