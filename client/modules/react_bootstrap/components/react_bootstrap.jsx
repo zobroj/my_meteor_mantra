@@ -1,33 +1,43 @@
 import React from 'react'
 import { AccountNotLoggedIn, AppLoading } from '/client/configs/components'
-import { Button, Col, ListGroup, ListGroupItem, Panel, Row, } from 'react-bootstrap'
+import { Button, Col, DropdownButton, ListGroup, ListGroupItem, MenuItem, Panel, Row, } from 'react-bootstrap'
 
 class BootstrapExamples extends React.Component {
   constructor( props ) {
     super( props )
-    this.state = {
-      exampleState: '',
-    }
-    this.handleButtonClick = this.handleButtonClick.bind( this )
+    this.state = { fruitDropdown: 'None', }
+    this.handleFruitSelectChange = this.handleFruitSelectChange.bind( this )
   }
-  handleButtonClick() {
+  handleFruitSelectChange( event, eventKey ) {
     console.log('you clicky the button!')
+    this.setState({ fruitDropdown: eventKey.target.value })
   }
-  displayUser() {
-    const { foobars } = this.props
-    const foobarNodes = foobars.map( foobar => (
-        <ListGroupItem key={ foobar._id }>
-          <a onClick={ this.handleButtonClick }
-            href={ `/foobar/${foobar.name}` }>{ foobar.name }
-          </a>
-        </ListGroupItem>
-      )
-    )
+  fruitSelect() {
     return (
       <Row>
-        <Panel header="Foobars List">
+        <Col sm={3}>
+        <DropdownButton title="Select Fruit" id="select-fruit"
+          onSelect={this.handleFruitSelectChange}
+          key={this.state.fruitDropdown}>
+          <MenuItem value="None" eventKey="1">None</MenuItem>
+          <MenuItem divider />
+          <MenuItem value="Apple" eventKey="2">Apple</MenuItem>
+          <MenuItem value="Orange" eventKey="3">Orange</MenuItem>
+          <MenuItem value="Banana" eventKey="4">Banana</MenuItem>
+        </DropdownButton>
+        </Col>
+        <Col sm={3}>
+          { `Selected fruit is: ${this.state.fruitDropdown}`}
+        </Col>
+      </Row>
+    )
+  }
+  displayUser() {
+    return (
+      <Row>
+        <Panel header="Buttons">
           <ListGroup fill>
-            { foobarNodes }
+            { this.fruitSelect() }
           </ListGroup>
         </Panel>
       </Row>
