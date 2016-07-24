@@ -1,5 +1,5 @@
 import foobars from './foobars';
 
-export default function ( context ) {
-  foobars( context );
+export default function (context) {
+  foobars(context);
 }

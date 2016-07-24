@@ -1,7 +1,7 @@
-import { check } from 'meteor/check';
+// import { check } from 'meteor/check';
 
 // client-side method, overidden by /server/methods
-export default function ( { Meteor, Collections } ) {
+export default function () {
   // Meteor.methods({
   //   'foobars.create'( _id, name ) {
   //     check( _id, String );
