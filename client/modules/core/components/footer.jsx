@@ -1,8 +1,5 @@
-import React from 'react'
-import {
-  Col,
-  Row,
-} from 'react-bootstrap'
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
 
 const Footer = () => (
   <footer className="container">
@@ -27,10 +24,10 @@ const Footer = () => (
         </ul>
       </Col>
       <Col sm={4}>
-        <img src="http://placehold.it/240x160" />
+        <img alt="test" src="http://placehold.it/240x160" />
       </Col>
     </Row>
   </footer>
-)
+);
 
-export default Footer
+export default Footer;

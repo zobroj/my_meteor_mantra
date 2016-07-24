@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-const AppErrorMsg = ( props ) => (
+const AppErrorMsg = (props) => (
   <div>
-  { props.error ? <p style={ { color: 'red' } }>{ props.error }</p> : null }
+    {props.error ? <p style={{ color: 'red' }}>{props.error}</p> : null}
   </div>
-)
+);
 
-export default AppErrorMsg
+export default AppErrorMsg;
+
+AppErrorMsg.propTypes = {
+  error: React.PropTypes.string,
+};
