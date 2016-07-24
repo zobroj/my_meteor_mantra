@@ -15,8 +15,11 @@ export default {
     const author = Meteor.user().username;
 
     return Meteor.call('posts.createComment', _id, userId, author, postId, content,
-      (err) => (LocalState.set('CREATE_COMMENT_ERROR', err.message)
-    ));
+      (err) => {
+        if (err) {
+          LocalState.set('CREATE_COMMENT_ERROR', err.message);
+        }
+      });
   },
 
   clearErrors({ LocalState }) {
