@@ -32,6 +32,6 @@ export default class PostList extends React.Component {
 }
 
 PostList.propTypes = {
-  error: React.PropType.string,
-  posts: React.PropType.array,
+  error: React.PropTypes.string,
+  posts: React.PropTypes.array,
 };
