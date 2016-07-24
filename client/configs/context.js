@@ -7,7 +7,6 @@ import { Accounts } from 'meteor/accounts-base';
 import Users from '/client/modules/core/libs/users';
 
 export default function () {
-
   return {
     Meteor,
     FlowRouter,
@@ -17,5 +16,4 @@ export default function () {
     Accounts,
     Users,
   };
-
 }
