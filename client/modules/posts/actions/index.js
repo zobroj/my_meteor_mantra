@@ -1,7 +1,7 @@
 import posts from './posts';
 
 const actions = {
-  posts
+  posts,
 };
 
 export default actions;
