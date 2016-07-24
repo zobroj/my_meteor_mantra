@@ -5,7 +5,7 @@ import routes from './routes';
 export default {
   routes,
   actions,
-  load( context ) {
-    methodStubs( context );
-  }
+  load(context) {
+    methodStubs(context);
+  },
 };

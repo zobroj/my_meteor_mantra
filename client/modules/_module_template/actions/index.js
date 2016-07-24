@@ -1,7 +1,7 @@
 import foobars from './foobars';
 
 const actions = {
-  foobars
+  foobars,
 };
 
 export default actions;
