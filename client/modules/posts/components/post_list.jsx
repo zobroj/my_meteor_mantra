@@ -1,31 +1,25 @@
-import React from 'react'
-import PostCreate from '../containers/post_create.js'
-import { AppErrorMsg } from '/client/configs/components'
-import {
-  Col,
-  ListGroup,
-  ListGroupItem,
-  Panel,
-  Row,
-} from 'react-bootstrap'
+import React from 'react';
+import PostCreate from '../containers/post_create.js';
+import { AppErrorMsg } from '/client/configs/components';
+import { Col, ListGroup, ListGroupItem, Panel, Row } from 'react-bootstrap';
 
-class PostList extends React.Component {
+export default class PostList extends React.Component {
   render() {
-    const { posts, error } = this.props
-    const postNodes = posts.map( post => (
-        <ListGroupItem key={ post._id }>
-          <a href={ `/post/${ post._id }` }>{ post.title }</a>
-          <p className="small"><strong>{ post.author }</strong> - { post.createdAt.toLocaleDateString() }</p>
-        </ListGroupItem>
-      )
-    )
+    const postNodes = this.props.posts.map(post => (
+      <ListGroupItem key={post._id}>
+        <a href={`/post/${post._id}`}>{post.title}</a>
+        <p className="small">
+          <strong>{post.author}</strong> - {post.createdAt.toLocaleDateString()}
+        </p>
+      </ListGroupItem>
+    ));
     return (
       <Row>
-        <AppErrorMsg error={ error } />
+        <AppErrorMsg error={this.props.error} />
         <Col md={12}>
           <Panel header="Posts">
             <ListGroup fill>
-              { postNodes }
+              {postNodes}
             </ListGroup>
           </Panel>
           <Panel header="Create a post">
@@ -33,8 +27,11 @@ class PostList extends React.Component {
           </Panel>
         </Col>
       </Row>
-    )
+    );
   }
 }
 
-export default PostList
+PostList.propTypes = {
+  error: React.PropType.string,
+  posts: React.PropType.array,
+};
