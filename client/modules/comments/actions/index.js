@@ -1,7 +1,7 @@
 import comments from './comments';
 
 const actions = {
-  comments
+  comments,
 };
 
 export default actions;

@@ -1,22 +1,22 @@
 // method_stub
-import { check } from 'meteor/check'
+import { check } from 'meteor/check';
 
-export default function ( { Collections, Meteor }) {
+export default function ({ Collections, Meteor }) {
   Meteor.methods({
-    'posts.createComment'( _id, userId, author, postId, content ) {
-      check( _id, String )
-      check( userId, String )
-      check( author, String )
-      check( postId, String )
-      check( content, String )
+    'posts.createComment'(_id, userId, author, postId, content) {
+      check(_id, String);
+      check(userId, String);
+      check(author, String);
+      check(postId, String);
+      check(content, String);
 
-      const createdAt = new Date()
+      const createdAt = new Date();
       const comment = {
         _id, userId, author, postId, content, createdAt,
-        saving: true
-      }
+        saving: true,
+      };
 
-      Collections.Comments.insert( comment )
-    }
-  })
+      Collections.Comments.insert(comment);
+    },
+  });
 }

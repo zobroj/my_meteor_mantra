@@ -1,9 +1,6 @@
 import React from 'react';
 import { mount } from 'react-mounter';
-
-// Define a layout from the shared components
 import { LayoutList } from '/client/configs/components.js';
-
 import FoobarList from './containers/foobar_list';
 import FoobarSingle from './components/foobar_single';
 
