@@ -23,7 +23,7 @@ const LayoutSplit = ({ content = () => null, emailVerified, loggedIn }) => (
   </div>
 );
 
-export default LayoutSplit
+export default LayoutSplit;
 
 LayoutSplit.propTypes = {
   content: React.PropTypes.func,

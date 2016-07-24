@@ -57,6 +57,7 @@ export default function (injectDeps, { FlowRouter }) {
       });
     },
   });
+  /* eslint-disable no-param-reassign */
   FlowRouter.notFound = {
     name: 'app.notFound',
     action() {
