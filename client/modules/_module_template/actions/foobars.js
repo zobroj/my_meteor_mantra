@@ -8,11 +8,9 @@ export default {
 
     LocalState.set('CREATE_FOOBAR_ERROR', null);
 
-    Meteor.call('foobar.createFoobar', foo, bar, (err) => {
-      if (err) {
-        return LocalState.set('CREATE_FOOBAR_ERROR', err.message);
-      }
-    });
+    return Meteor.call('foobar.createFoobar', foo, bar,
+      (err) => (LocalState.set('CREATE_FOOBAR_ERROR', err.message))
+    );
   },
   clearErrors({ LocalState }) {
     return LocalState.set('CREATE_COMMENT_ERROR', null);

@@ -19,5 +19,5 @@ export const composer = ({ context }, onData) => {
 export default composeAll(
   composeWithTracker(composer),
   composeWithTracker(authComposer),
-  useDeps(),
+  useDeps()
 )(FoobarList);
