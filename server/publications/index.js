@@ -1,9 +1,9 @@
-import posts from './posts'
-import foobars from './foobars'
-import users from './users'
+import posts from './posts';
+import foobars from './foobars';
+import users from './users';
 
 export default function () {
-  posts()
-  foobars()
-  users()
+  posts();
+  foobars();
+  users();
 }

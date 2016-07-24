@@ -1,15 +1,13 @@
 // server methods
-import { Meteor } from 'meteor/meteor'
-import _ from 'lodash'
+import { Meteor } from 'meteor/meteor';
+// import _ from 'lodash';
 
 export default function () {
   Meteor.methods({
     'emails.sendAccountVerificationLink'() {
-      let userId = Meteor.userId()
-
-      if ( userId ) {
-
-        return Accounts.sendVerificationEmail( userId )
+      const userId = Meteor.userId();
+      if (userId) {
+        return Accounts.sendVerificationEmail(userId);
 
         // SSR.compileTemplate(
         //   'htmlEmail',
@@ -30,8 +28,7 @@ export default function () {
         //   subject: "My Mantra Signup",
         //   html: SSR.render( 'htmlEmail', emailData ),
         // })
-
       }
-    }
-  })
+    },
+  });
 }
