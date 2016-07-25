@@ -1,7 +1,7 @@
 import React from 'react';
 import { Alert, Col, Grid, Row } from 'react-bootstrap';
 
-class AppVerifiedMsg extends React.Component {
+export default class AppVerifiedMsg extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,14 +32,10 @@ class AppVerifiedMsg extends React.Component {
       <div>Check your email. Link has been set. You can resend in 60 seconds.</div>
     );
     const emailSent = this.state.resendLinkClicked;
-    console.log(`emailsent? ${emailSent}`);
-    if (emailSent) {
-      return mustWait();
-    }
+    if (emailSent) { return mustWait(); }
     return canSendLink();
   }
-  _resendVerificationEmail(event) {
-    event.preventDefault();
+  _resendVerificationEmail() {
     this.setState({ resendLinkClicked: true });
     this.props.resendVerificationEmail();
     // user can click link after 60 seconds
@@ -47,6 +43,7 @@ class AppVerifiedMsg extends React.Component {
       this.setState({ resendLinkClicked: false });
       console.log(this.state.resendLinkClicked);
     };
+    /* TODO this is stupid */
     setTimeout(resetState, 60000);
   }
   render() {
@@ -58,11 +55,8 @@ class AppVerifiedMsg extends React.Component {
   }
 }
 
-export default AppVerifiedMsg;
-
 AppVerifiedMsg.propTypes = {
   emailVerified: React.PropTypes.bool,
   loggedIn: React.PropTypes.bool,
-  loggingIn: React.PropTypes.bool,
   resendVerificationEmail: React.PropTypes.func,
 };
