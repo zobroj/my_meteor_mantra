@@ -4,10 +4,16 @@ import Footer from '../components/footer';
 import { AppVerifiedMsg } from '/client/configs/components';
 import { Col, Grid, Row } from 'react-bootstrap';
 
-const LayoutSplit = ({ content = () => null, emailVerified, loggedIn }) => (
+const LayoutSplit = ({
+    content = () => null,
+    loggedIn, emailVerified,
+  }) => (
   <div>
     <NavbarMain />
-    <AppVerifiedMsg loggedIn={loggedIn} emailVerified={emailVerified} />
+    <AppVerifiedMsg
+      logedIn={loggedIn}
+      emailVerified={emailVerified}
+    />
     <Grid>
       <Row>
         <Col sm={6}>
