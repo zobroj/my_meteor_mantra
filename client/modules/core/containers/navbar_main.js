@@ -1,13 +1,5 @@
-import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
-import { authComposer } from 'meteor-auth';
+import { useDeps, composeAll } from 'mantra-core';
 import NavbarMain from '../components/navbar_main';
-
-export const composer = ({ context }, onData) => {
-  const { Users } = context();
-  const { email, username } = Users();
-
-  onData(null, { email, username });
-};
 
 export const depsMapper = (context, actions) => ({
   logout: actions.accounts.logout,
@@ -15,7 +7,5 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default composeAll(
-  composeWithTracker(composer),
-  composeWithTracker(authComposer),
   useDeps(depsMapper)
 )(NavbarMain);

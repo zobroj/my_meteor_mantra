@@ -6,10 +6,16 @@ import { Grid } from 'react-bootstrap';
 
 const LayoutList = ({
     content = () => null,
-    emailVerified, loggedIn,
+    email, emailVerified, loggedIn, loggingIn, username,
   }) => (
   <div>
-    <NavbarMain />
+    <NavbarMain
+      loggedIn={loggedIn}
+      loggingIn={loggingIn}
+      emailVerified={emailVerified}
+      email={email}
+      username={username}
+    />
     <AppVerifiedMsg
       loggedIn={loggedIn}
       emailVerified={emailVerified}
@@ -26,6 +32,9 @@ export default LayoutList;
 
 LayoutList.propTypes = {
   content: React.PropTypes.func,
-  loggedIn: React.PropTypes.bool,
+  email: React.PropTypes.string,
   emailVerified: React.PropTypes.bool,
+  loggedIn: React.PropTypes.bool,
+  loggingIn: React.PropTypes.bool,
+  username: React.PropTypes.string,
 };

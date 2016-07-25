@@ -4,10 +4,16 @@ import { AppVerifiedMsg, Footer, NavbarMain } from '/client/configs/components';
 const LayoutMain = ({
     jumbotron = () => null,
     content = () => null,
-    emailVerified, loggedIn,
+    email, emailVerified, loggedIn, loggingIn, username,
   }) => (
   <div>
-    <NavbarMain />
+    <NavbarMain
+      loggedIn={loggedIn}
+      loggingIn={loggingIn}
+      emailVerified={emailVerified}
+      email={email}
+      username={username}
+    />
     <AppVerifiedMsg
       loggedIn={loggedIn}
       emailVerified={emailVerified}
@@ -23,7 +29,10 @@ export default LayoutMain;
 
 LayoutMain.propTypes = {
   content: React.PropTypes.func,
+  email: React.PropTypes.string,
+  emailVerified: React.PropTypes.bool,
   jumbotron: React.PropTypes.func,
   loggedIn: React.PropTypes.bool,
-  emailVerified: React.PropTypes.bool,
+  loggingIn: React.PropTypes.bool,
+  username: React.PropTypes.string,
 };

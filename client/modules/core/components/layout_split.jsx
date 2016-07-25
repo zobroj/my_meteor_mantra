@@ -6,10 +6,16 @@ import { Col, Grid, Row } from 'react-bootstrap';
 
 const LayoutSplit = ({
     content = () => null,
-    loggedIn, emailVerified,
+    email, emailVerified, loggedIn, loggingIn, username,
   }) => (
   <div>
-    <NavbarMain />
+    <NavbarMain
+      loggedIn={loggedIn}
+      loggingIn={loggingIn}
+      emailVerified={emailVerified}
+      email={email}
+      username={username}
+    />
     <AppVerifiedMsg
       logedIn={loggedIn}
       emailVerified={emailVerified}
@@ -35,4 +41,7 @@ LayoutSplit.propTypes = {
   content: React.PropTypes.func,
   emailVerified: React.PropTypes.bool,
   loggedIn: React.PropTypes.bool,
+  loggingIn: React.PropTypes.bool,
+  email: React.PropTypes.string,
+  username: React.PropTypes.string,
 };
