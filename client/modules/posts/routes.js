@@ -12,7 +12,11 @@ export default function (injectDeps, { FlowRouter }) {
     name: 'posts.list',
     action() {
       mount(LayoutListCtx, {
-        content: () => (<PostList />),
+        content: ({ loggedIn, loggingIn, emailVerified }) => (<PostList
+          loggedIn={loggedIn}
+          loggingIn={loggingIn}
+          emailVerified={emailVerified}
+        />),
       });
     },
   });

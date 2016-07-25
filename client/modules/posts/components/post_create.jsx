@@ -69,8 +69,7 @@ class PostCreate extends React.Component {
     });
   }
   render() {
-    const { loggedIn, loggingIn } = this.props;
-    const { emailVerified } = this.props.Users();
+    const { loggedIn, loggingIn, emailVerified } = this.props;
     if (loggingIn) { return this.displayLoading(); }
     if (loggedIn && !emailVerified) {
       return (
@@ -85,9 +84,9 @@ class PostCreate extends React.Component {
 export default PostCreate;
 
 PostCreate.propTypes = {
-  loggedIn: React.PropTypes.bool,
-  error: React.PropTypes.string,
-  loggingIn: React.PropTypes.bool,
-  emailVerified: React.PropTypes.bool,
   create: React.PropTypes.func,
+  error: React.PropTypes.string,
+  emailVerified: React.PropTypes.bool,
+  loggedIn: React.PropTypes.bool,
+  loggingIn: React.PropTypes.bool,
 };

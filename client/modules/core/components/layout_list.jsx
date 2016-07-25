@@ -21,7 +21,7 @@ const LayoutList = ({
       emailVerified={emailVerified}
     />
     <Grid>
-      {content()}
+      {content({ email, emailVerified, loggedIn, loggingIn, username })}
     </Grid>
     <hr />
     <Footer />
