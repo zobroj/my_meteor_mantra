@@ -2,7 +2,10 @@ import React from 'react';
 import CommentCreate from '../containers/comment_create.js';
 import { Col, ListGroup, ListGroupItem, Panel, Row } from 'react-bootstrap';
 
-const CommentList = ({ comments, postId }) => {
+const CommentList = ({
+    comments, postId,
+    emailVerified, loggingIn, loggedIn,
+  }) => {
   const commentNodes = comments.map(comment => (
     <ListGroupItem key={comment._id}>
       <strong>{comment.author}</strong> - {comment.createdAt.toLocaleDateString()}
@@ -19,7 +22,12 @@ const CommentList = ({ comments, postId }) => {
     <Row>
       <Col xs={12} sm={8} smOffset={2}>
         <Panel header="Add Comment">
-          <CommentCreate postId={postId} />
+          <CommentCreate
+            emailVerified={emailVerified}
+            loggingIn={loggingIn}
+            loggedIn={loggedIn}
+            postId={postId}
+          />
         </Panel>
         <Panel header="Comments">
           <ListGroup fill>
@@ -35,6 +43,9 @@ const CommentList = ({ comments, postId }) => {
 export default CommentList;
 
 CommentList.propTypes = {
+  emailVerified: React.PropTypes.bool,
+  loggingIn: React.PropTypes.bool,
+  loggedIn: React.PropTypes.bool,
   comments: React.PropTypes.array,
   postId: React.PropTypes.string,
 };

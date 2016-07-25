@@ -25,7 +25,12 @@ export default function (injectDeps, { FlowRouter }) {
     name: 'posts.single',
     action({ postId }) {
       mount(LayoutListCtx, {
-        content: () => (<PostSingle postId={postId} />),
+        content: ({ loggedIn, loggingIn, emailVerified }) => (<PostSingle
+          postId={postId}
+          loggedIn={loggedIn}
+          loggingIn={loggingIn}
+          emailVerified={emailVerified}
+        />),
       });
     },
   });
