@@ -14,7 +14,7 @@ const PostSingle = ({ post }) => (
         <p>{post.content}</p>
       </Col>
     </Row>
-    <CommentList />
+    <CommentList postId={post._id} />
   </div>
 );
 

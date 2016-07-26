@@ -68,7 +68,6 @@ class CommentCreate extends React.Component {
 export default CommentCreate;
 
 CommentCreate.propTypes = {
-  Users: React.PropTypes.func,
   create: React.PropTypes.func,
   postId: React.PropTypes.string,
   error: React.PropTypes.string,
