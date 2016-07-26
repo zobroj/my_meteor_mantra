@@ -12,11 +12,7 @@ export default function (injectDeps, { FlowRouter }) {
     name: 'posts.list',
     action() {
       mount(LayoutListCtx, {
-        content: ({ loggedIn, loggingIn, emailVerified }) => (<PostList
-          loggedIn={loggedIn}
-          loggingIn={loggingIn}
-          emailVerified={emailVerified}
-        />),
+        content: () => (<PostList />),
       });
     },
   });
@@ -25,12 +21,7 @@ export default function (injectDeps, { FlowRouter }) {
     name: 'posts.single',
     action({ postId }) {
       mount(LayoutListCtx, {
-        content: ({ loggedIn, loggingIn, emailVerified }) => (<PostSingle
-          postId={postId}
-          loggedIn={loggedIn}
-          loggingIn={loggingIn}
-          emailVerified={emailVerified}
-        />),
+        content: () => (<PostSingle postId={postId} />),
       });
     },
   });

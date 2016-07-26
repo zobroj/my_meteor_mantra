@@ -9,13 +9,13 @@ export function authComposer({ context }, onData) {
 
   function userId() {
     if (Meteor.subscribe('users.current').ready()) {
-      return Meteor.userId() || null;
+      return Meteor.userId();
     }
     return null;
   }
 
   onData(null, {
-    userId,
+    userId: userId(),
     loggedIn: Boolean(Meteor.userId()),
     loggingIn: Meteor.loggingIn(),
     username: _.get(Meteor.user(), 'username', null),

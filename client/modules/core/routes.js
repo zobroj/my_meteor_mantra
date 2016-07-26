@@ -32,12 +32,7 @@ export default function (injectDeps, { FlowRouter }) {
     name: 'accounts.preferences',
     action() {
       mount(LayoutListCtx, {
-        content: ({ email, username, loggingIn, loggedIn }) => (<AccountPreferences
-          email={email}
-          loggingIn={loggingIn}
-          loggedIn={loggedIn}
-          username={username}
-        />),
+        content: () => (<AccountPreferences />),
       });
     },
   });

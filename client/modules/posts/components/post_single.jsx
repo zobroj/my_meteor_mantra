@@ -2,7 +2,7 @@ import React from 'react';
 import CommentList from '../../comments/containers/comment_list';
 import { Col, PageHeader, Row } from 'react-bootstrap';
 
-const PostSingle = ({ post, emailVerified, loggingIn, loggedIn }) => (
+const PostSingle = ({ post }) => (
   <div>
     <Row>
       <Col xs={12} sm={8} smOffset={2}>
@@ -14,12 +14,7 @@ const PostSingle = ({ post, emailVerified, loggingIn, loggedIn }) => (
         <p>{post.content}</p>
       </Col>
     </Row>
-    <CommentList
-      emailVerified={emailVerified}
-      loggingIn={loggingIn}
-      loggedIn={loggedIn}
-      postId={post._id}
-    />
+    <CommentList />
   </div>
 );
 
@@ -27,7 +22,4 @@ export default PostSingle;
 
 PostSingle.propTypes = {
   post: React.PropTypes.object,
-  emailVerified: React.PropTypes.bool,
-  loggingIn: React.PropTypes.bool,
-  loggedIn: React.PropTypes.bool,
 };

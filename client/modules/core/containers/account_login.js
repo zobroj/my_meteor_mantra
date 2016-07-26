@@ -1,6 +1,6 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import Component from '../components/account_login';
-import { authComposer } from 'meteor-auth';
+import { authComposer } from '/client/configs/composers';
 
 export const composer = ({ context, clearErrors }, onData) => {
   const { LocalState } = context();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'react-mounter';
-import { LayoutList } from '/client/configs/components.js';
+import { LayoutList } from '/client/configs/components';
 import FoobarList from './containers/foobar_list';
 import FoobarSingle from './components/foobar_single';
 

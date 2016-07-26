@@ -1,6 +1,6 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import FoobarList from '../components/foobar_list.jsx';
-import { authComposer } from 'meteor-auth';
+import { authComposer } from '/client/configs/composers';
 
 export const composer = ({ context }, onData) => {
   const { Meteor, Collections } = context();

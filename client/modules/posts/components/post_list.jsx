@@ -3,10 +3,7 @@ import PostCreate from '../containers/post_create.js';
 import { AppErrorMsg } from '/client/configs/components';
 import { Col, ListGroup, ListGroupItem, Panel, Row } from 'react-bootstrap';
 
-const PostList = ({
-    posts, error,
-    loggedIn, loggingIn, emailVerified,
-  }) => {
+const PostList = ({ posts, error }) => {
   const postNodes = posts.map(post => (
     <ListGroupItem key={post._id}>
       <a href={`/post/${post._id}`}>{post.title}</a>
@@ -25,11 +22,7 @@ const PostList = ({
           </ListGroup>
         </Panel>
         <Panel header="Create a post">
-          <PostCreate
-            emailVerified={emailVerified}
-            loggingIn={loggingIn}
-            loggedIn={loggedIn}
-          />
+          <PostCreate />
         </Panel>
       </Col>
     </Row>
@@ -39,9 +32,6 @@ const PostList = ({
 export default PostList;
 
 PostList.propTypes = {
-  emailVerified: React.PropTypes.bool,
   error: React.PropTypes.string,
-  loggedIn: React.PropTypes.bool,
-  loggingIn: React.PropTypes.bool,
   posts: React.PropTypes.array,
 };

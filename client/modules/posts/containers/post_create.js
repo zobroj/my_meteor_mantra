@@ -1,4 +1,5 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
+import { authComposer } from '/client/configs/composers';
 import Component from '../components/post_create';
 
 export const composer = ({ context, clearErrors }, onData) => {
@@ -19,5 +20,6 @@ export const depsMapper = (context, actions) => ({
 
 export default composeAll(
   composeWithTracker(composer),
+  composeWithTracker(authComposer),
   useDeps(depsMapper)
 )(Component);
