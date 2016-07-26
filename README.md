@@ -5,7 +5,7 @@ My Meteor Mantra is a basic [Meteor](https://www.meteor.com) boilerplate based o
 * Follows Mantra framework specific modules approach
 * All components composed in React and react-bootstrap
 * Routing with FlowRouter highlights active route in navbar
-* User registration, login, and logout with [meteor-auth](https://github.com/remotebase/meteor-auth)
+* User registration, email verification, login, and logout
 * Account email verification and password reset tokens sent via Gmail SMTP
 * Basic Bootstrap theme installed from NPM
 
@@ -21,7 +21,14 @@ My Meteor Mantra is a basic [Meteor](https://www.meteor.com) boilerplate based o
     process.env.MAIL_URL = "smtp://XXXXXX%40gmail.com:YYYYYYY@smtp.gmail.com:465/"
   }
   ```
-  
+
+## User Authentication
+User authentication is at the component level. For each component that needs access to user authentication: import { authComposer } into the component's container; and then add `composeWithTracker(authComposer)` to the `composeAll()` method call.
+
+The tracking the authComposer will add the props: userId, loggedIn, username, profile, email, emailVerified to the component.
+
+Based on [meteor-auth](https://github.com/remotebase/meteor-auth)
+
 ## Todo
 * Add admin mode
 * Add testing
