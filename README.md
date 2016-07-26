@@ -23,9 +23,9 @@ My Meteor Mantra is a basic [Meteor](https://www.meteor.com) boilerplate based o
   ```
 
 ## User Authentication
-User authentication is at the component level. For each component that needs access to user authentication: import { authComposer } into the component's container; and then add `composeWithTracker(authComposer)` to the `composeAll()` method call.
+User authentication is at the component level. For each component that needs access: import { authComposer } into the component's container; and, then add `composeWithTracker(authComposer)` to the `composeAll()` method call.
 
-The tracking the authComposer will add the props: userId, loggedIn, username, profile, email, emailVerified to the component.
+Tracking the authComposer will add the props: userId, loggedIn, username, profile, email, emailVerified to the component.
 
 Based on [meteor-auth](https://github.com/remotebase/meteor-auth)
 
