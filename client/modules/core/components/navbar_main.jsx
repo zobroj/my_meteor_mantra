@@ -1,6 +1,6 @@
 import React from 'react';
 import NavbarUser from './navbar_user';
-import { isActiveRoute } from '../libs/helpers';
+import { isActiveRoute } from '../lib/helpers';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 
 const NavbarMain = ({ loggedIn, loggingIn, logout, email, username }) => (
