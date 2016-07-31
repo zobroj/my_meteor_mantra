@@ -15,10 +15,9 @@ const NavbarMain = ({ loggedIn, loggingIn, logout, email, username }) => (
       <Nav>
         <NavItem
           eventKey={1}
-          className={isActiveRoute('posts')} href={FlowRouter.path('posts.list')}
-        >
-          Posts
-        </NavItem>
+          className={isActiveRoute('posts')}
+          href={FlowRouter.path('posts.list')}
+        >Posts</NavItem>
       </Nav>
       <NavbarUser
         email={email}

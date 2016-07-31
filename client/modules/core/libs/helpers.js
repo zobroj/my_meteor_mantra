@@ -1,13 +1,11 @@
 // component helper
 export function isActiveRoute(compareRoute) {
-  const currentRoute = FlowRouter.getRouteName();
+  // remove characters after '.' in route name
+  const currentRoute = FlowRouter.getRouteName().split('.', 1).toString();
 
   // if user goes to route w/o
   if (currentRoute !== undefined) {
-    // remove characters after '.' in route name
-    const _currentRoute = FlowRouter.getRouteName().split('.', 1);
-
-    return _currentRoute === compareRoute ? 'active' : '';
+    return currentRoute === compareRoute ? 'active' : '';
   }
   return '';
 }
