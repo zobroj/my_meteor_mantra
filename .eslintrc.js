@@ -7,8 +7,12 @@ module.exports = {
   "env": {
     "es6": true,
   },
+  "plugins": [
+    "mocha"
+  ],
   "extends": "eslint-config-airbnb",
   "rules": {
+    "mocha/no-exclusive-tests": "error",
     // override defaults for rule from base configurations
     "import/no-unresolved": 0, // Mantra imports files automagically
     "no-undef": 0, // Mantra imports files automagically
