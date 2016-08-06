@@ -1,7 +1,7 @@
-/* eslint-env node, mocha */
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable no-var */
 /* eslint-disable func-names */
+/*
 var assert = require('assert');
 describe('Array', function () {
   describe('#indexOf()', function () {
@@ -10,3 +10,4 @@ describe('Array', function () {
     });
   });
 });
+*/
