@@ -1,4 +1,6 @@
 {
+  "author": "VonIobro",
+  "version": "0.0.1",
   "name": "my_meteor_mantra",
   "description": "Meteor Mantra boilerplate",
   "scripts": {
@@ -6,22 +8,21 @@
     "lintfix": "npm run lint -- --fix",
     "testonly": "mocha .scripts/mocha_boot.js client/**/tests/**/*.js --compilers js:babel-core/register",
     "test": "npm run lint && npm run testonly",
-    "test-watch": "npm run testonly -- --watch --watch-extensions js"
+    "test-watch": "npm run testonly -- --watch --watch-extensions js",
+    "storybook": "start-storybook -p 9001 -s ./public"
   },
   "dependencies": {
     "bootstrap-sass": "^3.3.6",
     "domready": "^1.0.8",
     "lodash": "^4.13.1",
-    "mantra-core": "^1.6.1",
-    "meteor-node-stubs": "~0.2.0",
+    "mantra-core": "^1.7.0",
     "react": "^15.3.0",
     "react-bootstrap": "^0.30.2",
     "react-dom": "^15.1.0",
-    "react-komposer": "^1.8.0",
     "react-mounter": "^1.2.0"
   },
-  "author": "VonIobro",
   "devDependencies": {
+    "@kadira/storybook": "1.22.1",
     "babel-core": "6.x.x",
     "babel-plugin-react-require": "2.x.x",
     "babel-polyfill": "6.x.x",
