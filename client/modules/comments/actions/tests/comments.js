@@ -5,6 +5,24 @@ import actions from '../comments';
 
 describe('comments.actions.comments', () => {
   describe('create', () => {
+    it('should reject if userId is not there', () => {
+      const LocalState = {set: spy()};
+      actions.create({LocalState}, 'userId', null);
+      const args = LocalState.set.args[0];
+
+      expect(args[0]).to.be.equal('CREATE_COMMENT_ERROR');
+      expect(args[1]).to.match(/required/);
+    });
+
+    it('should reject if username is not there', () => {
+      const LocalState = {set: spy()};
+      actions.create({LocalState}, 'username', null);
+      const args = LocalState.set.args[0];
+
+      expect(args[0]).to.be.equal('CREATE_COMMENT_ERROR');
+      expect(args[1]).to.match(/required/);
+    });
+
     it('should reject if text is not there', () => {
       const LocalState = {set: spy()};
       actions.create({LocalState}, 'postId', null);
@@ -26,29 +44,21 @@ describe('comments.actions.comments', () => {
     it('should clear older LocalState for CREATE_COMMENT_ERROR', () => {
       const Meteor = {
         uuid: spy(),
-        userId: spy(),
-        user: stub().returns('username'),
         call: spy(),
       };
       const LocalState = {set: spy()};
       const FlowRouter = {go: spy()};
 
-      actions.create({LocalState, Meteor, FlowRouter}, 'postId', 'text');
+      actions.create({LocalState, Meteor, FlowRouter}, 'userId', 'username', 'postId', 'text');
       expect(LocalState.set.args[0]).to.deep.equal([ 'CREATE_COMMENT_ERROR', null ]);
     });
 
     it('should call Meteor.call to save the comment', () => {
-      const Meteor = {
-        uuid: () => 'id',
-        userId: () => 'userId',
-        // user: () => stub().returns('username'),
-        call: spy(),
-      };
-      Meteor.user = stub().returns('username');
+      const Meteor = { uuid: () => 'id', call: spy() };
       const LocalState = {set: spy()};
       const FlowRouter = {go: spy()};
 
-      actions.create({LocalState, Meteor, FlowRouter}, 'postId', 'text');
+      actions.create({LocalState, Meteor, FlowRouter}, 'userId', 'username', 'postId', 'text');
       const methodArgs = Meteor.call.args[0];
 
       expect(methodArgs.slice(0, 6)).to.deep.equal([
@@ -64,9 +74,9 @@ describe('comments.actions.comments', () => {
           const LocalState = {set: spy()};
           const FlowRouter = {go: spy()};
           const err = {message: 'Oops'};
-          Meteor.call.callsArgWith(4, err);
+          Meteor.call.callsArgWith(6, err);
 
-          actions.create({Meteor, LocalState, FlowRouter}, 'postId', 'text');
+          actions.create({Meteor, LocalState, FlowRouter}, 'userId', 'username', 'postId', 'text');
           expect(LocalState.set.args[1]).to.deep.equal([ 'CREATE_COMMENT_ERROR', err.message ]);
         });
       });
