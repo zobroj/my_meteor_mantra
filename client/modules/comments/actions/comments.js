@@ -1,7 +1,13 @@
 // actions
 export default {
-  create({ Meteor, LocalState }, postId, content) {
-    if (!content) {
+  create({ Meteor, LocalState }, userId, username, postId, text) {
+    if (!userId) {
+      return LocalState.set('CREATE_COMMENT_ERROR', 'userId is required.');
+    }
+    if (!username) {
+      return LocalState.set('CREATE_COMMENT_ERROR', 'username is required.');
+    }
+    if (!text) {
       return LocalState.set('CREATE_COMMENT_ERROR', 'Author & Comment are required.');
     }
     if (!postId) {
@@ -10,11 +16,9 @@ export default {
 
     LocalState.set('CREATE_COMMENT_ERROR', null);
 
-    const _id = Meteor.uuid();
-    const userId = Meteor.userId();
-    const author = Meteor.user().username;
+    const id = Meteor.uuid();
 
-    return Meteor.call('posts.createComment', _id, userId, author, postId, content,
+    return Meteor.call('posts.createComment', id, userId, username, postId, text,
       (err) => {
         if (err) {
           LocalState.set('CREATE_COMMENT_ERROR', err.message);

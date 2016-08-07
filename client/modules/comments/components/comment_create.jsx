@@ -45,9 +45,9 @@ class CommentCreate extends React.Component {
   }
   _createComment(event) {
     event.preventDefault();
-    const { create, postId } = this.props;
+    const { create, postId, user } = this.props;
     const { comment } = this.state;
-    create(postId, comment);
+    create( user.id, user.username, postId, comment);
     this.setState({ comment: '' });
   }
   render() {
@@ -74,4 +74,5 @@ CommentCreate.propTypes = {
   emailVerified: React.PropTypes.bool,
   loggingIn: React.PropTypes.bool,
   loggedIn: React.PropTypes.bool,
+  user: React.PropTypes.object,
 };
