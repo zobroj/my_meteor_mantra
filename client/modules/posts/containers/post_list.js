@@ -1,4 +1,4 @@
-import PostList from '../components/post_list.jsx';
+import PostList from '../components/post_list';
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 
 export const composer = ({ context, clearErrors }, onData) => {

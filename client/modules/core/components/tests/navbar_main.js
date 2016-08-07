@@ -1,11 +1,11 @@
 const {describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
-import Navigation from '../navigation';
+import NavbarMain from '../navbar_main';
 
 describe('core.components.navigation', () => {
   it('should contain a link to home', () => {
-    const el = shallow(<Navigation />);
+    const el = shallow(<NavbarMain />);
     const homeLink = el.find('a').at(0);
     expect(homeLink.text()).to.be.equal('Home');
     expect(homeLink.prop('href')).to.be.equal('/');

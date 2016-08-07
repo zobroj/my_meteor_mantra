@@ -1,5 +1,5 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
-import FoobarList from '../components/foobar_list.jsx';
+import FoobarList from '../components/foobar_list';
 import { authComposer } from '/client/configs/composers';
 
 export const composer = ({ context }, onData) => {
