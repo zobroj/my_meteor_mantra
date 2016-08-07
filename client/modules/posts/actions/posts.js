@@ -1,17 +1,21 @@
 // actions
 export default {
-  create({ Meteor, LocalState, FlowRouter }, title, content) {
-    if (!title || !content) {
-      return LocalState.set('POSTS_CREATE_ERROR', 'Title & Content are required!');
+  create({ Meteor, LocalState, FlowRouter }, userId, username, title, text) {
+    if (!userId) {
+      return LocalState.set('POSTS_CREATE_ERROR', 'userId is required');
+    }
+    if (!username) {
+      return LocalState.set('POSTS_CREATE_ERROR', 'username is required');
+    }
+    if (!title || !text) {
+      return LocalState.set('POSTS_CREATE_ERROR', 'Title & text are required');
     }
 
     LocalState.set('POSTS_CREATE_ERROR', null);
 
     const _id = Meteor.uuid();
-    const userId = Meteor.userId();
-    const author = Meteor.user().username;
 
-    Meteor.call('posts.create', _id, userId, author, title, content, (err) => {
+    Meteor.call('posts.create', _id, userId, username, title, text, (err) => {
       if (err) {
         return LocalState.set('POSTS_CREATE_ERROR', err.message);
       }

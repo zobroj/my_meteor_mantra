@@ -7,7 +7,7 @@ class PostCreate extends React.Component {
     super(props);
     this.state = {
       title: '',
-      content: '',
+      text: '',
     };
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleContentChange = this.handleContentChange.bind(this);
@@ -17,7 +17,7 @@ class PostCreate extends React.Component {
     this.setState({ title: event.target.value });
   }
   handleContentChange(event) {
-    this.setState({ content: event.target.value });
+    this.setState({ text: event.target.value });
   }
   displayUser() {
     const { error } = this.props;
@@ -38,7 +38,7 @@ class PostCreate extends React.Component {
           <FormControl
             type="text"
             placeholder="Something interesting..."
-            value={this.state.content}
+            value={this.state.text}
             onChange={this.handleContentChange}
           />
         </FormGroup>
@@ -60,12 +60,12 @@ class PostCreate extends React.Component {
   }
   _createPost(event) {
     event.preventDefault();
-    const { create } = this.props;
-    const { title, content } = this.state;
-    create(title, content);
+    const { create, user } = this.props;
+    const { title, text } = this.state;
+    create(user.id, user.username, title, text);
     this.setState({
       title: '',
-      content: '',
+      text: '',
     });
   }
   render() {
@@ -89,4 +89,5 @@ PostCreate.propTypes = {
   emailVerified: React.PropTypes.bool,
   loggedIn: React.PropTypes.bool,
   loggingIn: React.PropTypes.bool,
+  user: React.PropTypes.object,
 };

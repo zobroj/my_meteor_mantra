@@ -3,16 +3,16 @@ import { check } from 'meteor/check';
 
 export default function ({ Collections, Meteor }) {
   Meteor.methods({
-    'posts.createComment'(_id, userId, author, postId, content) {
+    'posts.createComment'(_id, userId, username, postId, text) {
       check(_id, String);
       check(userId, String);
-      check(author, String);
+      check(username, String);
       check(postId, String);
-      check(content, String);
+      check(text, String);
 
       const createdAt = new Date();
       const comment = {
-        _id, userId, author, postId, content, createdAt,
+        _id, userId, username, postId, text, createdAt,
         saving: true,
       };
 

@@ -16,9 +16,9 @@ export default {
 
     LocalState.set('CREATE_COMMENT_ERROR', null);
 
-    const id = Meteor.uuid();
+    const _id = Meteor.uuid();
 
-    return Meteor.call('posts.createComment', id, userId, username, postId, text,
+    return Meteor.call('posts.createComment', _id, userId, username, postId, text,
       (err) => {
         if (err) {
           LocalState.set('CREATE_COMMENT_ERROR', err.message);

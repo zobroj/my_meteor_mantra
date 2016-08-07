@@ -5,31 +5,31 @@ import { check } from 'meteor/check';
 
 export default function () {
   Meteor.methods({
-    'posts.create'(_id, userId, author, title, content) {
+    'posts.create'(_id, userId, username, title, text) {
       check(_id, String);
       check(userId, String);
-      check(author, String);
+      check(username, String);
       check(title, String);
-      check(content, String);
+      check(text, String);
 
       // Demo the latency compensation (Delete this in production)
       Meteor._sleepForMs(500);
 
       const createdAt = new Date();
       const post = {
-        _id, userId, author, title, content, createdAt,
+        _id, userId, username, title, text, createdAt,
       };
 
       Posts.insert(post);
     },
   });
   Meteor.methods({
-    'posts.createComment'(_id, userId, author, postId, content) {
+    'posts.createComment'(_id, userId, username, postId, text) {
       check(_id, String);
       check(userId, String);
-      check(author, String);
+      check(username, String);
       check(postId, String);
-      check(content, String);
+      check(text, String);
 
       // Demo the latency compensation (Delete this in production)
       Meteor._sleepForMs(500);
@@ -37,7 +37,7 @@ export default function () {
       // XXX: Do some user authentication
       const createdAt = new Date();
       const comment = {
-        _id, userId, author, postId, content, createdAt,
+        _id, userId, username, postId, text, createdAt,
       };
 
       Comments.insert(comment);

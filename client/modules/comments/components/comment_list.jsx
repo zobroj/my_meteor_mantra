@@ -5,8 +5,8 @@ import { Col, ListGroup, ListGroupItem, Panel, Row } from 'react-bootstrap';
 const CommentList = ({ comments, postId }) => {
   const commentNodes = comments.map(comment => (
     <ListGroupItem key={comment._id}>
-      <strong>{comment.author}</strong> - {comment.createdAt.toLocaleDateString()}
-      <p>{comment.content}</p>
+      <strong>{comment.username}</strong> - {comment.createdAt.toLocaleDateString()}
+      <p>{comment.text}</p>
       {comment.saving ? '...' : null}
     </ListGroupItem>
   ));

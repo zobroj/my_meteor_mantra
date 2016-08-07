@@ -6,7 +6,7 @@ export default function () {
   Meteor.publish('posts.list', () => {
     const selector = { category: { $ne: 'private' } };
     const options = {
-      fields: { _id: 1, title: 1, author: 1, createdAt: 1 },
+      fields: { _id: 1, title: 1, username: 1, createdAt: 1 },
       sort: { createdAt: -1 },
       limit: 3,
     };

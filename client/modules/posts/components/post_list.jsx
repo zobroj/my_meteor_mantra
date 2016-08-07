@@ -8,7 +8,7 @@ const PostList = ({ posts, error }) => {
     <ListGroupItem key={post._id}>
       <a href={`/post/${post._id}`}>{post.title}</a>
       <p className="small">
-        <strong>{post.author}</strong> - {post.createdAt.toLocaleDateString()}
+        <strong>{post.username}</strong> - {post.createdAt.toLocaleDateString()}
       </p>
     </ListGroupItem>
   ));
