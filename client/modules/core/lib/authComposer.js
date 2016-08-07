@@ -14,13 +14,17 @@ export function authComposer({ context }, onData) {
     return null;
   }
 
+  const user = {
+    id: userId(),
+    email: _.get(Meteor.user(), 'emails[0].address', null),
+    profile: _.get(Meteor.user(), 'profile', null),
+    username: _.get(Meteor.user(), 'username', null),
+  };
+
   onData(null, {
-    userId: userId(),
+    emailVerified: emailVerified(),
     loggedIn: Boolean(Meteor.userId()),
     loggingIn: Meteor.loggingIn(),
-    username: _.get(Meteor.user(), 'username', null),
-    profile: _.get(Meteor.user(), 'profile', null),
-    email: _.get(Meteor.user(), 'emails[0].address', null),
-    emailVerified: emailVerified(),
+    user,
   });
 }

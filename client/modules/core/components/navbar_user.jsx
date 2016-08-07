@@ -8,15 +8,15 @@ class NavbarUser extends React.Component {
     this._logout = this._logout.bind(this);
   }
   displayUser() {
-    const { email, username } = this.props;
+    const { user } = this.props;
     return (
       <Nav pullRight>
-        <NavDropdown eventKey={1} title={email} id="navbar-user-dropdown">
+        <NavDropdown eventKey={1} title={user.username} id="navbar-user-dropdown">
           <MenuItem eventKey={1.1} onClick={this._logout}>Log Out</MenuItem>
           <MenuItem divider />
           <MenuItem
             eventKey={1.2}
-            href={FlowRouter.path(`/user/${username}/preferences`)}
+            href={FlowRouter.path(`/user/${user.username}/preferences`)}
           >Preferences</MenuItem>
         </NavDropdown>
       </Nav>
@@ -51,9 +51,8 @@ class NavbarUser extends React.Component {
 export default NavbarUser;
 
 NavbarUser.propTypes = {
-  email: React.PropTypes.string,
-  username: React.PropTypes.string,
   loggingIn: React.PropTypes.bool,
   loggedIn: React.PropTypes.bool,
   logout: React.PropTypes.func,
+  user: React.PropTypes.object,
 };

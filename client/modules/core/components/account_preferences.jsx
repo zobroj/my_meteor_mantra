@@ -9,13 +9,13 @@ class AccountPreferences extends React.Component {
     this._deleteAccount = this._deleteAccount.bind(this);
   }
   displayUser() {
-    const { email, username } = this.props;
+    const { user } = this.props;
     return (
       <Row>
         <Col sm={12}>
           <ul>
-            <li>Email: {email}</li>
-            <li>Username: {username}</li>
+            <li>Email: {user.email}</li>
+            <li>Username: {user.username}</li>
           </ul>
           <Well>
             <p>For testing purposes: </p>
@@ -51,9 +51,8 @@ class AccountPreferences extends React.Component {
 export default AccountPreferences;
 
 AccountPreferences.propTypes = {
-  email: React.PropTypes.string,
-  username: React.PropTypes.string,
   loggedIn: React.PropTypes.bool,
   loggingIn: React.PropTypes.bool,
   deleteAccount: React.PropTypes.func,
+  user: React.PropTypes.object,
 };

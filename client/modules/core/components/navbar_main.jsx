@@ -3,7 +3,7 @@ import NavbarUser from './navbar_user';
 import { isActiveRoute } from '../lib/helpers';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 
-const NavbarMain = ({ loggedIn, loggingIn, logout, email, username }) => (
+const NavbarMain = ({ loggedIn, loggingIn, logout, user }) => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
@@ -20,11 +20,10 @@ const NavbarMain = ({ loggedIn, loggingIn, logout, email, username }) => (
         >Posts</NavItem>
       </Nav>
       <NavbarUser
-        email={email}
-        username={username}
         loggingIn={loggingIn}
         loggedIn={loggedIn}
         logout={logout}
+        user={user}
       />
     </Navbar.Collapse>
   </Navbar>
@@ -34,10 +33,9 @@ export default NavbarMain;
 
 NavbarMain.propTypes = {
   content: React.PropTypes.func,
-  email: React.PropTypes.string,
-  username: React.PropTypes.string,
   emailVerified: React.PropTypes.bool,
   loggedIn: React.PropTypes.bool,
   loggingIn: React.PropTypes.bool,
   logout: React.PropTypes.func,
+  user: React.PropTypes.object,
 };
