@@ -1,3 +1,4 @@
+/*
 const {describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
@@ -22,3 +23,4 @@ describe('core.components.post', () => {
     expect(el.find('p').first().text()).to.be.match(/saving/i);
   });
 });
+*/

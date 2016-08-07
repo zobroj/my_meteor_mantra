@@ -1,4 +1,4 @@
-const {describe, it} = global;
+/* const {describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import PostCreate from '../post_create';
@@ -42,3 +42,4 @@ describe('core.components.post_create', () => {
     el.find('form').simulate('submit');
   });
 });
+*/

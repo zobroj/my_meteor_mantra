@@ -24,10 +24,10 @@ export default function () {
     },
   });
   Meteor.methods({
-    'posts.createComment'(_id, userId, author, postId, content) {
+    'posts.createComment'(_id, userId, username, postId, content) {
       check(_id, String);
       check(userId, String);
-      check(author, String);
+      check(username, String);
       check(postId, String);
       check(content, String);
 
@@ -37,7 +37,7 @@ export default function () {
       // XXX: Do some user authentication
       const createdAt = new Date();
       const comment = {
-        _id, userId, author, postId, content, createdAt,
+        _id, userId, username, postId, content, createdAt,
       };
 
       Comments.insert(comment);

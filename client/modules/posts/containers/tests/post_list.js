@@ -1,3 +1,4 @@
+/*
 const { describe, it } = global;
 import {expect} from 'chai';
 import {stub, spy} from 'sinon';
@@ -36,3 +37,4 @@ describe('core.containers.post_list', () => {
     });
   });
 });
+*/

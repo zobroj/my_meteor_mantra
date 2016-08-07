@@ -24,7 +24,12 @@ describe('comments.actions.comments', () => {
     });
 
     it('should clear older LocalState for CREATE_COMMENT_ERROR', () => {
-      const Meteor = {uuid: spy(), call: spy()};
+      const Meteor = {
+        uuid: spy(),
+        userId: spy(),
+        user: stub().returns('username'),
+        call: spy(),
+      };
       const LocalState = {set: spy()};
       const FlowRouter = {go: spy()};
 
@@ -33,17 +38,23 @@ describe('comments.actions.comments', () => {
     });
 
     it('should call Meteor.call to save the comment', () => {
-      const Meteor = {uuid: () => 'id', call: spy()};
+      const Meteor = {
+        uuid: () => 'id',
+        userId: () => 'userId',
+        // user: () => stub().returns('username'),
+        call: spy(),
+      };
+      Meteor.user = stub().returns('username');
       const LocalState = {set: spy()};
       const FlowRouter = {go: spy()};
 
       actions.create({LocalState, Meteor, FlowRouter}, 'postId', 'text');
       const methodArgs = Meteor.call.args[0];
 
-      expect(methodArgs.slice(0, 4)).to.deep.equal([
-        'posts.createComment', 'id', 'postId', 'text'
+      expect(methodArgs.slice(0, 6)).to.deep.equal([
+        'posts.createComment', 'id', 'userId', 'username', 'postId', 'text'
       ]);
-      expect(methodArgs[4]).to.be.a('function');
+      expect(methodArgs[6]).to.be.a('function');
     });
 
     describe('after Meteor.call', () => {
