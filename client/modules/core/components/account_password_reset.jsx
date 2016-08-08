@@ -1,6 +1,6 @@
 import React from 'react';
 import AccountLoggedIn from './account_logged_in';
-import { AppLoading } from '/client/configs/components';
+import { AuthCheck } from '/client/configs/components';
 import { Button, ControlLabel, FormGroup, FormControl, Panel } from 'react-bootstrap';
 
 class AccountPasswordReset extends React.Component {
@@ -19,16 +19,6 @@ class AccountPasswordReset extends React.Component {
   }
   handlePassword2Change(event) {
     this.setState({ password2: event.target.value });
-  }
-  displayUser() {
-    return (
-      <AccountLoggedIn />
-    );
-  }
-  displayLoading() {
-    return (
-      <AppLoading />
-    );
   }
   displayGuest() {
     const { error } = this.props;
@@ -64,11 +54,11 @@ class AccountPasswordReset extends React.Component {
     resetPassword(token, password1, password2);
   }
   render() {
-    const { loggedIn, loggingIn } = this.props;
-    if (loggingIn) { return this.displayLoading(); }
     return (
       <Panel header="Change your password" >
-        {loggedIn ? this.displayUser() : this.displayGuest()}
+        <AuthCheck guestMessage={this.displayGuest()}>
+          <AccountLoggedIn />
+        </AuthCheck>
       </Panel>
     );
   }
@@ -78,8 +68,6 @@ export default AccountPasswordReset;
 
 AccountPasswordReset.propTypes = {
   error: React.PropTypes.string,
-  loggedIn: React.PropTypes.bool,
-  loggingIn: React.PropTypes.bool,
   token: React.PropTypes.string,
   resetPassword: React.PropTypes.func,
 };
