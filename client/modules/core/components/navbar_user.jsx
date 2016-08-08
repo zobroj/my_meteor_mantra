@@ -7,6 +7,11 @@ class NavbarUser extends React.Component {
     super(props);
     this._logout = this._logout.bind(this);
   }
+  _logout(event) {
+    event.preventDefault();
+    const { logout } = this.props;
+    logout();
+  }
   displayGuest() {
     return (
       <Nav pullRight>
@@ -15,26 +20,26 @@ class NavbarUser extends React.Component {
       </Nav>
     );
   }
-  _logout(event) {
-    event.preventDefault();
-    const { logout } = this.props;
-    logout();
-  }
-  render() {
+  displayUser() {
     const { user } = this.props;
     return (
-      <AuthCheck guestMessage={this.displayGuest()}>
-        <Nav pullRight>
-          <NavDropdown eventKey={1} title={user.username} id="navbar-user-dropdown">
-            <MenuItem eventKey={1.1} onClick={this._logout}>Log Out</MenuItem>
-            <MenuItem divider />
-            <MenuItem
-              eventKey={1.2}
-              href={FlowRouter.path(`/user/${user.username}/preferences`)}
-            >Preferences</MenuItem>
-          </NavDropdown>
-        </Nav>
-      </AuthCheck>
+      <Nav pullRight>
+        <NavDropdown eventKey={1} title={user.username} id="navbar-user-dropdown">
+          <MenuItem eventKey={1.1} onClick={this._logout}>Log Out</MenuItem>
+          <MenuItem divider />
+          <MenuItem
+            eventKey={1.2}
+            href={FlowRouter.path(`/user/${user.username}/preferences`)}
+          >Preferences</MenuItem>
+        </NavDropdown>
+      </Nav>
+    );
+  }
+  render() {
+    return (
+      <AuthCheck
+        guestMessage={this.displayGuest()} unverifiedMessage={this.displayUser()}
+      >{this.displayUser()}</AuthCheck>
     );
   }
 }
