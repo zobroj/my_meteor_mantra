@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthCheck } from '/client/configs/components';
 import { Alert, Col, Grid, Row } from 'react-bootstrap';
 
 export default class AppVerifiedMsg extends React.Component {
@@ -9,18 +10,16 @@ export default class AppVerifiedMsg extends React.Component {
     };
     this._resendVerificationEmail = this._resendVerificationEmail.bind(this);
   }
-  displayPendingUser() {
-    return (
-      <Grid>
-        <Row>
-          <Col xs={12}>
-            <Alert bsStyle="danger">
-              {this.linkAvailability()}
-            </Alert>
-          </Col>
-        </Row>
-      </Grid>
-    );
+  _resendVerificationEmail() {
+    this.setState({ resendLinkClicked: true });
+    this.props.resendVerificationEmail();
+    // user can click link after 60 seconds
+    const resetState = () => {
+      this.setState({ resendLinkClicked: false });
+      console.log(this.state.resendLinkClicked);
+    };
+    /* TODO this is stupid */
+    setTimeout(resetState, 60000);
   }
   linkAvailability() {
     const canSendLink = () => (
@@ -35,28 +34,29 @@ export default class AppVerifiedMsg extends React.Component {
     if (emailSent) { return mustWait(); }
     return canSendLink();
   }
-  _resendVerificationEmail() {
-    this.setState({ resendLinkClicked: true });
-    this.props.resendVerificationEmail();
-    // user can click link after 60 seconds
-    const resetState = () => {
-      this.setState({ resendLinkClicked: false });
-      console.log(this.state.resendLinkClicked);
-    };
-    /* TODO this is stupid */
-    setTimeout(resetState, 60000);
+  displayPendingUser() {
+    return (
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <Alert bsStyle="danger">
+              {this.linkAvailability()}
+            </Alert>
+          </Col>
+        </Row>
+      </Grid>
+    );
   }
   render() {
-    const { loggedIn, emailVerified } = this.props;
-    if (loggedIn && !emailVerified) { return this.displayPendingUser(); }
     return (
-      <div></div>
+      <AuthCheck
+        unverifiedMessage={this.displayPendingUser()}
+      >
+      </AuthCheck>
     );
   }
 }
 
 AppVerifiedMsg.propTypes = {
-  emailVerified: React.PropTypes.bool,
-  loggedIn: React.PropTypes.bool,
   resendVerificationEmail: React.PropTypes.func,
 };
