@@ -30,6 +30,12 @@ class AccountRegister extends React.Component {
   handlePassword2Change(event) {
     this.setState({ password2: event.target.value });
   }
+  _register(event) {
+    event.preventDefault();
+    const { register } = this.props;
+    const { email, username, password1, password2 } = this.state;
+    register(email, username, password1, password2);
+  }
   displayGuest() {
     const { error } = this.props;
     return (
@@ -76,12 +82,6 @@ class AccountRegister extends React.Component {
         </form>
       </Panel>
     );
-  }
-  _register(event) {
-    event.preventDefault();
-    const { register } = this.props;
-    const { email, username, password1, password2 } = this.state;
-    register(email, username, password1, password2);
   }
   render() {
     return (
