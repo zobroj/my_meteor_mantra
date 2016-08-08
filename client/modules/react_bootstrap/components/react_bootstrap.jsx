@@ -1,5 +1,5 @@
 import React from 'react';
-import { AccountNotLoggedIn, AppLoading } from '/client/configs/components';
+import { AuthCheck } from '/client/configs/components';
 import { Col, DropdownButton, ListGroup, MenuItem, Panel, Row } from 'react-bootstrap';
 
 class BootstrapExamples extends React.Component {
@@ -35,44 +35,19 @@ class BootstrapExamples extends React.Component {
       </Row>
     );
   }
-  displayUser() {
-    return (
-      <Row>
-        <Panel header="Buttons">
-          <ListGroup fill>
-            {this.fruitSelect()}
-          </ListGroup>
-        </Panel>
-      </Row>
-    );
-  }
-  displayGuest() {
-    return (
-      <Row>
-        <Panel header="Foobars Test Page">
-          <ListGroup>
-            <AccountNotLoggedIn />
-          </ListGroup>
-        </Panel>
-      </Row>
-    );
-  }
-  displayLoading() {
-    return (
-      <AppLoading />
-    );
-  }
   render() {
-    const { loggedIn, loggingIn } = this.props;
-    if (loggingIn) { return this.displayLoading(); }
-    if (loggedIn) { return this.displayUser(); }
-    return this.displayGuest();
+    return (
+        <Row>
+          <Panel header="Buttons">
+            <AuthCheck>
+              <ListGroup fill>
+                {this.fruitSelect()}
+              </ListGroup>
+            </AuthCheck>
+          </Panel>
+        </Row>
+    );
   }
 }
 
 export default BootstrapExamples;
-
-BootstrapExamples.propTypes = {
-  loggedIn: React.PropTypes.bool,
-  loggingIn: React.PropTypes.bool,
-};
