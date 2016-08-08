@@ -1,7 +1,6 @@
 import React from 'react';
-import NavbarMain from '../containers/navbar_main';
 import Footer from '../components/footer';
-import { AppVerifiedMsg } from '/client/configs/components';
+import { AppVerifiedMsg, NavbarMain } from '/client/configs/components';
 import { Col, Grid, Row } from 'react-bootstrap';
 
 const LayoutSplit = ({ content = () => null }) => (

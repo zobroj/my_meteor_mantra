@@ -1,4 +1,4 @@
-import NavbarMain from '/client/modules/core/containers/navbar_main';
+import NavbarMain from '/client/modules/core/components/navbar_main';
 import Footer from '/client/modules/core/components/footer';
 import LayoutList from '/client/modules/core/components/layout_list';
 import LayoutSplit from '/client/modules/core/components/layout_split';

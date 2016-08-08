@@ -1,6 +1,6 @@
 import { useDeps, composeAll, composeWithTracker } from 'mantra-core';
 import { authComposer } from '/client/configs/composers';
-import NavbarMain from '../components/navbar_main';
+import NavbarUser from '../components/navbar_user';
 
 export const depsMapper = (context, actions) => ({
   logout: actions.accounts.logout,
@@ -10,4 +10,4 @@ export const depsMapper = (context, actions) => ({
 export default composeAll(
   composeWithTracker(authComposer),
   useDeps(depsMapper)
-)(NavbarMain);
+)(NavbarUser);

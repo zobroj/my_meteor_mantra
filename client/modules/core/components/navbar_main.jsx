@@ -1,9 +1,9 @@
 import React from 'react';
-import NavbarUser from './navbar_user';
+import NavbarUser from '../containers/navbar_user';
 import { isActiveRoute } from '../lib/helpers';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 
-const NavbarMain = ({ loggedIn, loggingIn, logout, user }) => (
+const NavbarMain = () => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
@@ -19,23 +19,9 @@ const NavbarMain = ({ loggedIn, loggingIn, logout, user }) => (
           href={FlowRouter.path('posts.list')}
         >Posts</NavItem>
       </Nav>
-      <NavbarUser
-        loggingIn={loggingIn}
-        loggedIn={loggedIn}
-        logout={logout}
-        user={user}
-      />
+      <NavbarUser />
     </Navbar.Collapse>
   </Navbar>
 );
 
 export default NavbarMain;
-
-NavbarMain.propTypes = {
-  content: React.PropTypes.func,
-  emailVerified: React.PropTypes.bool,
-  loggedIn: React.PropTypes.bool,
-  loggingIn: React.PropTypes.bool,
-  logout: React.PropTypes.func,
-  user: React.PropTypes.object,
-};
