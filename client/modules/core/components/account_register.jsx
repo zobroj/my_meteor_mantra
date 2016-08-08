@@ -1,6 +1,6 @@
 import React from 'react';
 import AccountLoggedIn from './account_logged_in';
-import { AppLoading } from '/client/configs/components';
+import { AuthCheck } from '/client/configs/components';
 import { Button, ControlLabel, FormGroup, FormControl, Panel } from 'react-bootstrap';
 
 class AccountRegister extends React.Component {
@@ -29,16 +29,6 @@ class AccountRegister extends React.Component {
   }
   handlePassword2Change(event) {
     this.setState({ password2: event.target.value });
-  }
-  displayUser() {
-    return (
-      <AccountLoggedIn />
-    );
-  }
-  displayLoading() {
-    return (
-      <AppLoading />
-    );
   }
   displayGuest() {
     const { error } = this.props;
@@ -94,12 +84,10 @@ class AccountRegister extends React.Component {
     register(email, username, password1, password2);
   }
   render() {
-    const { loggedIn, loggingIn } = this.props;
-    if (loggingIn) { return this.displayLoading(); }
     return (
-      <div>
-      {loggedIn ? this.displayUser() : this.displayGuest()}
-      </div>
+      <AuthCheck guestMessage={this.displayGuest()}>
+        <AccountLoggedIn />
+      </AuthCheck>
     );
   }
 }
@@ -108,7 +96,5 @@ export default AccountRegister;
 
 AccountRegister.propTypes = {
   error: React.PropTypes.string,
-  loggedIn: React.PropTypes.bool,
-  loggingIn: React.PropTypes.bool,
   register: React.PropTypes.func,
 };
