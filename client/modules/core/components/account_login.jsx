@@ -35,33 +35,6 @@ class AccountLogin extends React.Component {
   handleResetEmailChange(event) {
     this.setState({ resetEmail: event.target.value });
   }
-  displayGuest() {
-    const { errorLogin } = this.props;
-    return (
-      <form onSubmit={this._login}>
-        {errorLogin ? <p style={{ color: 'red' }}>{errorLogin}</p> : null}
-        <FormGroup>
-          <ControlLabel>Email Address</ControlLabel>
-          <FormControl
-            type="email"
-            placeholder="Enter email"
-            value={this.state.email}
-            onChange={this.handleEmailChange}
-          />
-        </FormGroup>
-        <FormGroup>
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
-            type="password"
-            placeholder="Enter password"
-            value={this.state.pasword}
-            onChange={this.handlePasswordChange}
-          />
-        </FormGroup>
-        <Button bsStyle="primary" type="submit">Log In</Button>
-      </form>
-    );
-  }
   _login(event) {
     event.preventDefault();
     const { login } = this.props;
@@ -74,42 +47,71 @@ class AccountLogin extends React.Component {
     const { resetEmail } = this.state;
     sendResetPasswordLink(resetEmail);
   }
-  render() {
-    const { errorReset } = this.props;
-    const footerText = () => (
+  displayGuest() {
+    const { errorLogin } = this.props;
+    const footerText = (
       <p>Forgot your pasword? <a onClick={this.modalOpen} href="#">Reset it here.</a></p>
     );
     return (
-      <div>
-        <Panel header="Log In to Your Account" footer={footerText()} >
-          <AuthCheck guestMessage={this.displayGuest()}>
-            <AccountLoggedIn />
-          </AuthCheck>
-        </Panel>
-        <Modal show={this.state.showModal} onHide={this.modalClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Send Reset Password Link</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <p>Enter the email address for your account</p>
-            <form >
-              {errorReset ? <p style={{ color: 'red' }}>{errorReset}</p> : null}
-              <FormGroup>
-                <FormControl
-                  type="email"
-                  placeholder="Enter email"
-                  value={this.state.resetEmail}
-                  onChange={this.handleResetEmailChange}
-                />
-              </FormGroup>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.modalClose}>Close</Button>
-            <Button onClick={this._resetPassword} bsStyle="primary">Reset Password</Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
+      <Panel header="Log In to Your Account" footer={footerText} >
+        <form onSubmit={this._login}>
+          {errorLogin ? <p style={{ color: 'red' }}>{errorLogin}</p> : null}
+          <FormGroup>
+            <ControlLabel>Email Address</ControlLabel>
+            <FormControl
+              type="email"
+              placeholder="Enter email"
+              value={this.state.email}
+              onChange={this.handleEmailChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <ControlLabel>Password</ControlLabel>
+            <FormControl
+              type="password"
+              placeholder="Enter password"
+              value={this.state.pasword}
+              onChange={this.handlePasswordChange}
+            />
+          </FormGroup>
+          <Button bsStyle="primary" type="submit">Log In</Button>
+        </form>
+      </Panel>
+    );
+  }
+  modalResetPasword() {
+    const { errorReset } = this.props;
+    return (
+      <Modal show={this.state.showModal} onHide={this.modalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Send Reset Password Link</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Enter the email address for your account</p>
+          <form >
+            {errorReset ? <p style={{ color: 'red' }}>{errorReset}</p> : null}
+            <FormGroup>
+              <FormControl
+                type="email"
+                placeholder="Enter email"
+                value={this.state.resetEmail}
+                onChange={this.handleResetEmailChange}
+              />
+            </FormGroup>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.modalClose}>Close</Button>
+          <Button onClick={this._resetPassword} bsStyle="primary">Reset Password</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+  render() {
+    return (
+      <AuthCheck guestMessage={this.displayGuest()}>
+        <AccountLoggedIn />
+      </AuthCheck>
     );
   }
 }
