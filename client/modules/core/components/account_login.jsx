@@ -1,6 +1,6 @@
 import React from 'react';
 import AccountLoggedIn from './account_logged_in';
-import { AppLoading } from '/client/configs/components';
+import { AuthCheck } from '/client/configs/components';
 import { Button, ControlLabel, FormControl, FormGroup, Modal, Panel } from 'react-bootstrap';
 
 class AccountLogin extends React.Component {
@@ -34,16 +34,6 @@ class AccountLogin extends React.Component {
   }
   handleResetEmailChange(event) {
     this.setState({ resetEmail: event.target.value });
-  }
-  displayUser() {
-    return (
-      <AccountLoggedIn />
-    );
-  }
-  displayLoading() {
-    return (
-      <AppLoading />
-    );
   }
   displayGuest() {
     const { errorLogin } = this.props;
@@ -85,18 +75,16 @@ class AccountLogin extends React.Component {
     sendResetPasswordLink(resetEmail);
   }
   render() {
-    const { loggedIn, loggingIn, errorReset } = this.props;
+    const { errorReset } = this.props;
     const footerText = () => (
       <p>Forgot your pasword? <a onClick={this.modalOpen} href="#">Reset it here.</a></p>
     );
-    if (loggingIn) { return this.displayLoading(); }
     return (
       <div>
-        <Panel
-          header="Log In to Your Account"
-          footer={footerText()}
-        >
-          {loggedIn ? this.displayUser() : this.displayGuest()}
+        <Panel header="Log In to Your Account" footer={footerText()} >
+          <AuthCheck guestMessage={this.displayGuest()}>
+            <AccountLoggedIn />
+          </AuthCheck>
         </Panel>
         <Modal show={this.state.showModal} onHide={this.modalClose}>
           <Modal.Header closeButton>
@@ -132,7 +120,5 @@ AccountLogin.propTypes = {
   errorLogin: React.PropTypes.string,
   errorReset: React.PropTypes.string,
   login: React.PropTypes.func,
-  loggingIn: React.PropTypes.bool,
-  loggedIn: React.PropTypes.bool,
   sendResetPasswordLink: React.PropTypes.func,
 };

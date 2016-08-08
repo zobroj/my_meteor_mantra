@@ -1,8 +1,18 @@
 import React from 'react';
 
-const AuthCheck = ({ loggedIn, emailVerified, children, guestMessage, unverifiedMessage }) => {
+const AuthCheck = ({
+    loggingIn, loggedIn, emailVerified, children, guestMessage, loadingMessage, unverifiedMessage,
+  }) => {
   let guestComponent = guestMessage || DefaultGuestMessage;
   let unverifiedComponent = unverifiedMessage || DefaultUnverifidMessage;
+  let loadingComponent = loadingMessage || DefaultLoadingMessage;
+  if (loggingIn) {
+    return (
+      <div>
+        {loadingComponent}
+      </div>
+    );
+  }
   if (loggedIn && emailVerified) {
     return (
       <div>
@@ -26,6 +36,12 @@ const AuthCheck = ({ loggedIn, emailVerified, children, guestMessage, unverified
 const DefaultGuestMessage = (
   <div>
     Please log in to view this content.
+  </div>
+);
+
+const DefaultLoadingMessage = (
+  <div>
+    Loading... Please be patient ^_^
   </div>
 );
 
