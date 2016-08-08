@@ -1,26 +1,11 @@
 import React from 'react';
-import { AppLoading } from '/client/configs/components';
+import { AuthCheck } from '/client/configs/components';
 import { MenuItem, Nav, NavDropdown, NavItem } from 'react-bootstrap';
 
 class NavbarUser extends React.Component {
   constructor(props) {
     super(props);
     this._logout = this._logout.bind(this);
-  }
-  displayUser() {
-    const { user } = this.props;
-    return (
-      <Nav pullRight>
-        <NavDropdown eventKey={1} title={user.username} id="navbar-user-dropdown">
-          <MenuItem eventKey={1.1} onClick={this._logout}>Log Out</MenuItem>
-          <MenuItem divider />
-          <MenuItem
-            eventKey={1.2}
-            href={FlowRouter.path(`/user/${user.username}/preferences`)}
-          >Preferences</MenuItem>
-        </NavDropdown>
-      </Nav>
-    );
   }
   displayGuest() {
     return (
@@ -30,29 +15,33 @@ class NavbarUser extends React.Component {
       </Nav>
     );
   }
-  displayLoading() {
-    return (
-      <AppLoading />
-    );
-  }
   _logout(event) {
     event.preventDefault();
     const { logout } = this.props;
     logout();
   }
   render() {
-    const { loggedIn, loggingIn } = this.props;
-    if (loggingIn) { return this.displayLoading(); }
-    if (loggedIn) { return this.displayUser(); }
-    return this.displayGuest();
+    const { user } = this.props;
+    return (
+      <AuthCheck guestMessage={this.displayGuest()}>
+        <Nav pullRight>
+          <NavDropdown eventKey={1} title={user.username} id="navbar-user-dropdown">
+            <MenuItem eventKey={1.1} onClick={this._logout}>Log Out</MenuItem>
+            <MenuItem divider />
+            <MenuItem
+              eventKey={1.2}
+              href={FlowRouter.path(`/user/${user.username}/preferences`)}
+            >Preferences</MenuItem>
+          </NavDropdown>
+        </Nav>
+      </AuthCheck>
+    );
   }
 }
 
 export default NavbarUser;
 
 NavbarUser.propTypes = {
-  loggingIn: React.PropTypes.bool,
-  loggedIn: React.PropTypes.bool,
   logout: React.PropTypes.func,
   user: React.PropTypes.object,
 };
