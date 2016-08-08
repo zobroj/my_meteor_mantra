@@ -32,7 +32,7 @@ class PostCreate extends React.Component {
   render() {
     const { error } = this.props;
     return (
-      <AuthCheck>
+      <AuthCheck guestMessage={GuestMessage}>
         <form onSubmit={this._createPost}>
           <AppErrorMsg error={error} />
           <FormGroup>
@@ -59,6 +59,12 @@ class PostCreate extends React.Component {
     );
   }
 }
+
+const GuestMessage = (
+  <div>
+    Please login to create a post.
+  </div>
+);
 
 export default PostCreate;
 

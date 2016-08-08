@@ -24,7 +24,7 @@ class CommentCreate extends React.Component {
   render() {
     const { error } = this.props;
     return (
-      <AuthCheck>
+      <AuthCheck guestMessage={GuestMessage}>
         <form onSubmit={this._createComment}>
           <AppErrorMsg error={error} />
           <FormGroup>
@@ -41,6 +41,12 @@ class CommentCreate extends React.Component {
     );
   }
 }
+
+const GuestMessage = (
+  <div>
+    Please login to create a comment.
+  </div>
+);
 
 export default CommentCreate;
 
