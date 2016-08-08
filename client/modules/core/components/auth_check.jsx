@@ -1,18 +1,37 @@
 import React from 'react';
 
-const AuthCheck = ({ loggedIn, children, unauthenticatedMesage }) => {
-  let errorComponent = unauthenticatedMesage || DefaultUnauthenticatedMessage;
-
+const AuthCheck = ({ loggedIn, emailVerified, children, guestMessage, unverifiedMessage }) => {
+  let guestComponent = guestMessage || DefaultGuestMessage;
+  let unverifiedComponent = unverifiedMessage || DefaultUnverifidMessage;
+  if (loggedIn && emailVerified) {
+    return (
+      <div>
+        {children}
+      </div>
+    );
+  } else if (loggedIn && !emailVerified) {
+    return (
+      <div>
+        {unverifiedComponent}
+      </div>
+    );
+  }
   return (
     <div>
-      {loggedIn ? children : errorComponent}
+      {guestComponent}
     </div>
   );
 };
 
-const DefaultUnauthenticatedMessage = (
+const DefaultGuestMessage = (
   <div>
-    Please log in to view this page.
+    Please log in to view this content.
+  </div>
+);
+
+const DefaultUnverifidMessage = (
+  <div>
+    This functionality is not available to unverified users.
   </div>
 );
 
