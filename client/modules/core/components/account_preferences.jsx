@@ -16,6 +16,7 @@ class AccountPreferences extends React.Component {
           <ul>
             <li>Email: {user.email}</li>
             <li>Username: {user.username}</li>
+            <li>ID: {user.id}</li>
           </ul>
           <Well>
             <p>For testing purposes: </p>
