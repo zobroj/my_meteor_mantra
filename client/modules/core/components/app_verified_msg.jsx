@@ -47,10 +47,16 @@ export default class AppVerifiedMsg extends React.Component {
       </Grid>
     );
   }
+  displayGuest() {
+    return (
+      <div></div>
+    );
+  }
   render() {
     return (
       <AuthCheck
         unverifiedMessage={this.displayPendingUser()}
+        guestMessage={this.displayGuest()}
       >
       </AuthCheck>
     );
