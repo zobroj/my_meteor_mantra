@@ -1,7 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 
 export default function () {
-  Meteor.publish('users.current', () => (
-    Meteor.users.find(this.userId)
-  ));
+  /* TODO make sure we're not publishing EVERYONES data */
+  Meteor.publish('users.current', () => {
+    return Meteor.users.find();
+  });
+  Meteor.publish('users.data', () => {
+    return Meteor.users.find({}, {fields: {profile: 1}});
+  });
 }
