@@ -15,10 +15,10 @@ describe('comments.components.comment_create', () => {
     const wrapper = shallow(<CommentCreate />);
     const form = wrapper.find('form').first();
     const textarea = wrapper.find(FormControl).first();
-    // const button = wrapper.find(Button).first();
 
     expect(form.prop('onSubmit')).to.be.a('function');
     expect(textarea.prop('value')).to.be.equal('');
+    expect(wrapper.find(Button)).to.have.length(1);
   });
 
 /*
