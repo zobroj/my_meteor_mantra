@@ -1,24 +1,25 @@
 const { describe, it } = global;
 import { expect } from 'chai';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import CommentCreate from '../comment_create';
 import { AppErrorMsg } from '/client/configs/components';
+import { Button, FormControl } from 'react-bootstrap';
 
 describe('comments.components.comment_create', () => {
   it('contains an <AppErrorMsg/> component', () => {
     const wrapper = shallow(<CommentCreate />);
     expect(wrapper.find(AppErrorMsg)).to.have.length(1);
   });
-  /*
-  it('should display the create comment form', () => {
-    const el = shallow(<CommentCreate loggedIn="true" />);
-    const textarea = el.find('textarea').first();
-    const button = el.find('button').first();
 
-    expect(textarea.node.ref).to.be.equal('text');
-    expect(button.prop('onClick')).to.be.a('function');
+  it('should display the create comment form', () => {
+    const wrapper = shallow(<CommentCreate />);
+    const form = wrapper.find('form').first();
+    const textarea = wrapper.find(FormControl).first();
+    // const button = wrapper.find(Button).first();
+
+    expect(form.prop('onSubmit')).to.be.a('function');
+    expect(textarea.prop('value')).to.be.equal('');
   });
-  */
 
 /*
   it('should create a new comment when click on the button', done => {
