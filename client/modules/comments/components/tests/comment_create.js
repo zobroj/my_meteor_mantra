@@ -23,6 +23,10 @@ describe('comments.components.comment_create', () => {
   it('should create a new comment when click on the button', done => {
     const postId = 'the-id';
     const text = 'the-text';
+    const user = {
+      id: 'the-user-id',
+      username: 'the-username',
+    };
 
     const onCreate = () => {
       expect(postId).to.be.equal(postId);
@@ -31,7 +35,7 @@ describe('comments.components.comment_create', () => {
     };
 
     const wrapper = shallow(
-      <CommentCreate create={onCreate} postId={postId} />
+      <CommentCreate create={onCreate} postId={postId} user={user}/>
     );
     const button = wrapper.find(Button).first();
     const instance = wrapper.instance();
