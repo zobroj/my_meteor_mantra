@@ -11,12 +11,6 @@ describe('comments.components.comment_create', () => {
     expect(wrapper.find(AppErrorMsg)).to.have.length(1);
   });
 
-/* TODO create test for  error message
-  it('should display error message', () => {
-    // test in the AppErrorMsg
-  });
-*/
-
   it('should display the create comment form', () => {
     const wrapper = shallow(<CommentCreate />);
     const textarea = wrapper.find(FormControl).first();
