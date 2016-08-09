@@ -1,8 +1,7 @@
 const {describe, it} = global;
 import {expect} from 'chai';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import CommentList from '../comment_list';
-import { ListGroupItem } from 'react-bootstrap';
 
 describe('comments.components.comment_list', () => {
   const comments = [
@@ -35,16 +34,14 @@ describe('comments.components.comment_list', () => {
     });
   });
 
-/* TODO add test for saving status
   it('should list saving status for each item', () => {
     const el = shallow(<CommentList comments={comments}/>);
     const divs = el.find('.comment');
     divs.forEach((div, i) => {
-      const text = div.find(ListGroupItem).text();
+      const text = div.html();
       if (comments[i].saving) {
-        expect(text).to.match(/\.\.\.$/);
+        expect(text).to.have.string('saving');
       }
     });
   });
-*/
 });
