@@ -1,15 +1,15 @@
-/*
 const {describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import CommentList from '../comment_list';
+import { ListGroupItem } from 'react-bootstrap';
 
 describe('comments.components.comment_list', () => {
   const comments = [
-    {author: 'c-one', text: 't-one', saving: true, _id: 'one'},
-    {author: 'c-two', text: 't-two', saving: false, _id: 'two'},
-    {author: 'c-three', text: 't-three', saving: true, _id: 'three'},
-    {author: 'c-four', text: 't-four', saving: false, _id: 'four'}
+    {_id: 'one', username: 'u-1', text: 't-1', createdAt: new Date(), saving: true },
+    {_id: 'two', username: 'u-2', text: 't-2', createdAt: new Date(), saving: false },
+    {_id: 'three', username: 'u-3', text: 't-3', createdAt: new Date(), saving: true },
+    {_id: 'four', username: 'u-4', text: 't-4', createdAt: new Date(), saving: false }
   ];
 
   it('should list given number of items', () => {
@@ -20,30 +20,31 @@ describe('comments.components.comment_list', () => {
   it('should list comment author for each item', () => {
     const el = shallow(<CommentList comments={comments}/>);
     const divs = el.find('.comment');
-    divs.forEach((div, index) => {
-      const author = div.find('b').first().text();
-      expect(author).to.be.equal(`${comments[index].author}:`);
+    divs.forEach((div, i) => {
+      const username = div.find('strong').first().text();
+      expect(username).to.be.equal(comments[i].username);
     });
   });
 
   it('should list comment text for each item', () => {
     const el = shallow(<CommentList comments={comments}/>);
     const divs = el.find('.comment');
-    divs.forEach((div, index) => {
-      const text = div.text();
-      expect(text).to.have.string(comments[index].text);
+    divs.forEach((div, i) => {
+      const text = div.find('p').first().text();
+      expect(text).to.have.string(comments[i].text);
     });
   });
 
+/* TODO add test for saving status
   it('should list saving status for each item', () => {
     const el = shallow(<CommentList comments={comments}/>);
     const divs = el.find('.comment');
-    divs.forEach((div, index) => {
-      const text = div.text();
-      if (comments[index].saving) {
+    divs.forEach((div, i) => {
+      const text = div.find(ListGroupItem).text();
+      if (comments[i].saving) {
         expect(text).to.match(/\.\.\.$/);
       }
     });
   });
-});
 */
+});

@@ -4,7 +4,7 @@ import { Col, ListGroup, ListGroupItem, Panel, Row } from 'react-bootstrap';
 
 const CommentList = ({ comments, postId }) => {
   const commentNodes = comments.map(comment => (
-    <ListGroupItem key={comment._id}>
+    <ListGroupItem key={comment._id} className="comment">
       <strong>{comment.username}</strong> - {comment.createdAt.toLocaleDateString()}
       <p>{comment.text}</p>
       {comment.saving ? '...' : null}
@@ -17,7 +17,7 @@ const CommentList = ({ comments, postId }) => {
   );
   return (
     <Row>
-      <Col xs={12} sm={8} smOffset={2}>
+      <Col xs={12} sm={8} smOffset={2} className="comments">
         <Panel header="Add Comment">
           <CommentCreate postId={postId} />
         </Panel>
