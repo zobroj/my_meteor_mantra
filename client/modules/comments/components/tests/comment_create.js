@@ -13,15 +13,13 @@ describe('comments.components.comment_create', () => {
 
   it('should display the create comment form', () => {
     const wrapper = shallow(<CommentCreate />);
-    const form = wrapper.find('form').first();
     const textarea = wrapper.find(FormControl).first();
+    const button = wrapper.find(Button).first();
 
-    expect(form.prop('onSubmit')).to.be.a('function');
     expect(textarea.prop('value')).to.be.equal('');
-    expect(wrapper.find(Button)).to.have.length(1);
+    expect(button.prop('onClick')).to.be.a('function');
   });
 
-/*
   it('should create a new comment when click on the button', done => {
     const postId = 'the-id';
     const text = 'the-text';
@@ -32,14 +30,17 @@ describe('comments.components.comment_create', () => {
       done();
     };
 
-    const el = shallow(<CommentCreate create={onCreate} postId={postId} />);
-    const instance = el.instance();
+    const wrapper = shallow(
+      <CommentCreate create={onCreate} postId={postId} />
+    );
+    const button = wrapper.find(Button).first();
+    const instance = wrapper.instance();
 
     instance.refs = {
       text: {value: text}
     };
 
-    el.find('button').simulate('click');
+    button.simulate('click');
   });
-  */
+
 });

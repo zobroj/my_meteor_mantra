@@ -18,14 +18,14 @@ class CommentCreate extends React.Component {
     event.preventDefault();
     const { create, postId, user } = this.props;
     const { comment } = this.state;
-    create( user.id, user.username, postId, comment);
+    create(user.id, user.username, postId, comment);
     this.setState({ comment: '' });
   }
   render() {
     const { error } = this.props;
     return (
       <AuthCheck guestMessage={GuestMessage}>
-        <form onSubmit={this._createComment}>
+        <form>
           <AppErrorMsg error={error} />
           <FormGroup>
             <FormControl
@@ -35,7 +35,7 @@ class CommentCreate extends React.Component {
               onChange={this.handleCommentChange}
             />
           </FormGroup>
-          <Button type="submit">Add Comment</Button>
+          <Button onClick={this._createComment}>Add Comment</Button>
         </form>
       </AuthCheck>
     );

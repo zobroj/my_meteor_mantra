@@ -8,7 +8,7 @@ export default {
       return LocalState.set('CREATE_COMMENT_ERROR', 'username is required.');
     }
     if (!text) {
-      return LocalState.set('CREATE_COMMENT_ERROR', 'Author & Comment are required.');
+      return LocalState.set('CREATE_COMMENT_ERROR', 'comment text is required');
     }
     if (!postId) {
       return LocalState.set('CREATE_COMMENT_ERROR', 'postId is required.');
