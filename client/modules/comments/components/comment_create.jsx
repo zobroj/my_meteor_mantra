@@ -14,8 +14,7 @@ class CommentCreate extends React.Component {
   handleCommentChange(event) {
     this.setState({ comment: event.target.value });
   }
-  _createComment(event) {
-    event.preventDefault();
+  _createComment() {
     const { create, postId, user } = this.props;
     const { comment } = this.state;
     create(user.id, user.username, postId, comment);
