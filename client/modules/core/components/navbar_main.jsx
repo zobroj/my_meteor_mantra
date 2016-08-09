@@ -1,13 +1,12 @@
 import React from 'react';
-import NavbarUser from '../containers/navbar_user';
-import { isActiveRoute } from '../lib/helpers';
+import NavbarUser from '../components/navbar_user';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 
-const NavbarMain = () => (
+const NavbarMain = ({ isActiveRoute, logout, user }) => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <a href={FlowRouter.path('/')}>My Meteor Mantra</a>
+        <a href="/">My Meteor Mantra</a>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>
@@ -16,12 +15,21 @@ const NavbarMain = () => (
         <NavItem
           eventKey={1}
           className={isActiveRoute('posts')}
-          href={FlowRouter.path('posts.list')}
+          href="/post"
         >Posts</NavItem>
       </Nav>
-      <NavbarUser />
+      <NavbarUser
+        logout={logout}
+        user={user}
+      />
     </Navbar.Collapse>
   </Navbar>
 );
 
 export default NavbarMain;
+
+NavbarMain.propTypes = {
+  isActiveRoute: React.PropTypes.func,
+  logout: React.PropTypes.func,
+  user: React.PropTypes.object,
+};
