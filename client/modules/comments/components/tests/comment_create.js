@@ -11,6 +11,12 @@ describe('comments.components.comment_create', () => {
     expect(wrapper.find(AppErrorMsg)).to.have.length(1);
   });
 
+/* TODO create test for  error message
+  it('should display error message', () => {
+    // test in the AppErrorMsg
+  });
+*/
+
   it('should display the create comment form', () => {
     const wrapper = shallow(<CommentCreate />);
     const textarea = wrapper.find(FormControl).first();
@@ -22,7 +28,7 @@ describe('comments.components.comment_create', () => {
 
   it('should create a new comment when click on the button', done => {
     const postId = 'the-id';
-    const text = 'the-text';
+    const comment = 'the-text';
     const user = {
       id: 'the-user-id',
       username: 'the-username',
@@ -30,20 +36,16 @@ describe('comments.components.comment_create', () => {
 
     const onCreate = () => {
       expect(postId).to.be.equal(postId);
-      expect(text).to.be.equal(text);
+      expect(comment).to.be.equal(comment);
       done();
     };
 
     const wrapper = shallow(
       <CommentCreate create={onCreate} postId={postId} user={user}/>
     );
+    wrapper.setState({ comment });
+
     const button = wrapper.find(Button).first();
-    const instance = wrapper.instance();
-
-    instance.refs = {
-      text: {value: text}
-    };
-
     button.simulate('click');
   });
 
