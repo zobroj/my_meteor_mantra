@@ -2,22 +2,13 @@ const { describe, it } = global;
 import { expect } from 'chai';
 import { mount, shallow } from 'enzyme';
 import CommentCreate from '../comment_create';
-import AppErrorMsg from '../../../core/components/app_error_msg';
+import { AppErrorMsg } from '/client/configs/components';
 
 describe('comments.components.comment_create', () => {
   it('contains an <AppErrorMsg/> component', () => {
-    const wrapper = shallow(<CommentCreate loggedIn={true} />);
+    const wrapper = shallow(<CommentCreate />);
     expect(wrapper.find(AppErrorMsg)).to.have.length(1);
-    wrapper.debug();
   });
-  /* TODO move this to AppErrorMsg?
-  it('should show the error if there are any', () => {
-    const error = 'TheError';
-    const el = shallow(<CommentCreate error={error} />);
-    expect(el.html()).to.match(/TheError/);
-  });
-  */
-
   /*
   it('should display the create comment form', () => {
     const el = shallow(<CommentCreate loggedIn="true" />);
