@@ -1,11 +1,20 @@
 // actions
 export default {
   signup({ Meteor, LocalState, FlowRouter, Accounts }, email, username, password1, password2) {
-    if (!email || !username || !password1 || !password2) {
-      return LocalState.set('SIGNUP_ERROR', 'Please fill out all the required fields!');
+    if (!email) {
+      return LocalState.set('SIGNUP_ERROR', 'email is required');
+    }
+    if (!username) {
+      return LocalState.set('SIGNUP_ERROR', 'username is required');
+    }
+    if (!password1) {
+      return LocalState.set('SIGNUP_ERROR', 'password1 is required');
+    }
+    if (!password2) {
+      return LocalState.set('SIGNUP_ERROR', 'password2 is required');
     }
     if (password1 !== password2) {
-      return LocalState.set('SIGNUP_ERROR', 'Passwords do not match!');
+      return LocalState.set('SIGNUP_ERROR', 'password are required to match');
     }
 
     const usernameAlreadyExists = Meteor.users.findOne({ username });
@@ -23,7 +32,7 @@ export default {
           return LocalState.set('SIGNUP_ERROR', err.reason);
         }
       });
-      return FlowRouter.go('/post');
+      return FlowRouter.go('/');
     });
     LocalState.set('SIGNUP_ERROR', null);
   },
