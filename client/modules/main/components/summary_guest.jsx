@@ -3,7 +3,7 @@ import { Button, Col, Grid, Row } from 'react-bootstrap';
 
 const SummaryGuest = () => (
   <Grid>
-    <Row container>
+    <Row>
       <Col md={12}>
         <Button bsStyle="primary" href={FlowRouter.path('posts.list')}>Test Page</Button>
         <Button href={FlowRouter.path('reactbootstrap.examples')}>React Bootstrap Examples</Button>
