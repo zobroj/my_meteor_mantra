@@ -1,8 +1,9 @@
 import React from 'react';
 import NavbarUser from '../components/navbar_user';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
+import { isActiveRoute } from '../lib/helpers.js';
 
-const NavbarMain = ({ isActiveRoute, logout, user }) => (
+const NavbarMain = ({ logout, user }) => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
@@ -29,7 +30,6 @@ const NavbarMain = ({ isActiveRoute, logout, user }) => (
 export default NavbarMain;
 
 NavbarMain.propTypes = {
-  isActiveRoute: React.PropTypes.func,
   logout: React.PropTypes.func,
   user: React.PropTypes.object,
 };
