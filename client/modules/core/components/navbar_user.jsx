@@ -16,7 +16,7 @@ class NavbarUser extends React.Component {
     return (
       <Nav pullRight>
         <NavItem eventKey={1} href="/login">LOGIN</NavItem>
-        <NavItem eventKey={2} href="/register">SIGN UP</NavItem>
+        <NavItem eventKey={2} href="/signup">SIGN UP</NavItem>
       </Nav>
     );
   }

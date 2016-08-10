@@ -1,41 +1,41 @@
 // actions
 export default {
-  register({ Meteor, LocalState, FlowRouter, Accounts }, email, username, password1, password2) {
+  signup({ Meteor, LocalState, FlowRouter, Accounts }, email, username, password1, password2) {
     if (!email || !username || !password1 || !password2) {
-      return LocalState.set('REGISTER_ERROR', 'Please fill out all the required fields!');
+      return LocalState.set('SIGNUP_ERROR', 'Please fill out all the required fields!');
     }
     if (password1 !== password2) {
-      return LocalState.set('REGISTER_ERROR', 'Passwords do not match!');
+      return LocalState.set('SIGNUP_ERROR', 'Passwords do not match!');
     }
 
     const usernameAlreadyExists = Meteor.users.findOne({ username });
     if (usernameAlreadyExists) {
-      return LocalState.set('REGISTER_ERROR', 'Username already exists');
+      return LocalState.set('SIGNUP_ERROR', 'Username already exists');
     }
 
     const options = { email, password: password1, username };
     Accounts.createUser(options, (err) => {
       if (err && err.reason) {
-        return LocalState.set('REGISTER_ERROR', err.reason);
+        return LocalState.set('SIGNUP_ERROR', err.reason);
       }
       Meteor.call('emails.sendAccountVerificationLink', (err) => {
         if (err && err.reason) {
-          return LocalState.set('REGISTER_ERROR', err.reason);
+          return LocalState.set('SIGNUP_ERROR', err.reason);
         }
       });
       return FlowRouter.go('/post');
     });
-    LocalState.set('REGISTER_ERROR', null);
+    LocalState.set('SIGNUP_ERROR', null);
   },
 
   resendVerificationEmail({ Meteor, LocalState }) {
     Meteor.call('emails.sendAccountVerificationLink', (err) => {
       if (err && err.reason) {
-        return LocalState.set('REGISTER_ERROR', err.reason);
+        return LocalState.set('SIGNUP_ERROR', err.reason);
       }
     });
     console.log('send verification email sent');
-    LocalState.set('REGISTER_ERROR', null);
+    LocalState.set('SIGNUP_ERROR', null);
   },
 
   sendResetPasswordLink({ Meteor, LocalState, FlowRouter }, resetEmail) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'react-mounter';
 import { LayoutSplit, LayoutList, AppNotFound } from '/client/configs/components';
-import AccountRegister from './containers/account_register';
+import AccountSignup from './containers/account_signup';
 import AccountLogin from './containers/account_login';
 import AccountPasswordReset from './containers/account_password_reset';
 import AccountPreferences from './containers/account_preferences';
@@ -10,11 +10,11 @@ export default function (injectDeps, { FlowRouter }) {
   const LayoutSplitCtx = injectDeps(LayoutSplit);
   const LayoutListCtx = injectDeps(LayoutList);
 
-  FlowRouter.route('/register', {
-    name: 'accounts.register',
+  FlowRouter.route('/signup', {
+    name: 'accounts.signup',
     action() {
       mount(LayoutSplitCtx, {
-        content: () => (<AccountRegister />),
+        content: () => (<AccountSignup />),
       });
     },
   });

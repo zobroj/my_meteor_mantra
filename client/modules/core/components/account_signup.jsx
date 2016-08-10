@@ -3,7 +3,7 @@ import AccountLoggedIn from './account_logged_in';
 import { AuthCheck } from '/client/configs/components';
 import { Button, ControlLabel, FormGroup, FormControl, Panel } from 'react-bootstrap';
 
-class AccountRegister extends React.Component {
+class AccountSignup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,7 +16,7 @@ class AccountRegister extends React.Component {
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePassword1Change = this.handlePassword1Change.bind(this);
     this.handlePassword2Change = this.handlePassword2Change.bind(this);
-    this._register = this._register.bind(this);
+    this._signup = this._signup.bind(this);
   }
   handleEmailChange(event) {
     this.setState({ email: event.target.value });
@@ -30,17 +30,17 @@ class AccountRegister extends React.Component {
   handlePassword2Change(event) {
     this.setState({ password2: event.target.value });
   }
-  _register(event) {
+  _signup(event) {
     event.preventDefault();
-    const { register } = this.props;
+    const { signup } = this.props;
     const { email, username, password1, password2 } = this.state;
-    register(email, username, password1, password2);
+    signup(email, username, password1, password2);
   }
   displayGuest() {
     const { error } = this.props;
     return (
       <Panel header="Create a New Account">
-        <form onSubmit={this._register}>
+        <form onSubmit={this._signup}>
           {error ? <p style={{ color: 'red' }}>{error}</p> : null}
           <FormGroup>
             <ControlLabel>Email Address</ControlLabel>
@@ -92,9 +92,9 @@ class AccountRegister extends React.Component {
   }
 }
 
-export default AccountRegister;
+export default AccountSignup;
 
-AccountRegister.propTypes = {
+AccountSignup.propTypes = {
   error: React.PropTypes.string,
-  register: React.PropTypes.func,
+  signup: React.PropTypes.func,
 };
