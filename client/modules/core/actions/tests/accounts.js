@@ -120,21 +120,27 @@ describe('core.actions.accounts', () => {
         });
       });
 
-      describe('if no error', () => {
-        it('should call Metetor to send a verification email'/* , () => {
-          const Meteor = { uuid: () => 'id', call: spy() };
-          const LocalState = {set: spy()};
-          const FlowRouter = {go: spy()};
+      it('should call Metetor to send a verification email', () => {
+        const Meteor = {call: spy(), users: stub()};
+        Meteor.users = {findOne: stub().returns(null)};
+        const LocalState = {set: spy()};
+        const FlowRouter = {go: spy()};
+        const Accounts = {createUser: stub()};
+        Accounts.createUser.callsArgWith(1, null);
 
-          actions.create({LocalState, Meteor, FlowRouter}, 'userId', 'username', 'postId', 'text');
-          const methodArgs = Meteor.call.args[0];
+        actions.signup(
+          {Accounts, LocalState, Meteor, FlowRouter},
+          'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
+        );
+        const methodArgs = Meteor.call.args[0];
 
-          expect(methodArgs.slice(0, 6)).to.deep.equal([
-            'posts.createComment', 'id', 'userId', 'username', 'postId', 'text'
-          ]);
-          expect(methodArgs[6]).to.be.a('function');
-        }*/);
+        expect(Meteor.call.callCount).to.be.equal(1);
+        expect(methodArgs.slice(0, 1)).to.deep.equal([
+          'emails.sendAccountVerificationLink'
+        ]);
+        console.log(methodArgs.slice(0,1))
       });
+
       describe('after Meteor call', () => {
         describe('if there is an error', () => {
           it('should set SIGNUP_ERROR with error message'/* , () => {
