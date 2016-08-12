@@ -103,17 +103,23 @@ describe('core.actions.accounts', () => {
 
     describe('after Accounts call', () => {
       describe('if there is an error', () => {
-        it('should set SIGNUP_ERROR with error message'/* , () => {
-          const Meteor = {uuid: () => 'id', call: stub()};
+        it('should set SIGNUP_ERROR with error message', () => {
+          const Meteor = {call: spy(), users: stub()};
+          Meteor.users = {findOne: stub().returns(null)};
           const LocalState = {set: spy()};
           const FlowRouter = {go: spy()};
-          const err = {message: 'Oops'};
-          Meteor.call.callsArgWith(6, err);
+          const err = {reason: 'Oops'};
+          const Accounts = {createUser: stub()};
+          Accounts.createUser.callsArgWith(1, err);
 
-          actions.create({Meteor, LocalState, FlowRouter}, 'userId', 'username', 'postId', 'text');
-          expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.message ]);
-        }*/);
+          actions.signup(
+            {Accounts, LocalState, Meteor, FlowRouter},
+            'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
+          );
+          expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.reason ]);
+        });
       });
+
       describe('if no error', () => {
         it('should call Metetor to send a verification email'/* , () => {
           const Meteor = { uuid: () => 'id', call: spy() };
