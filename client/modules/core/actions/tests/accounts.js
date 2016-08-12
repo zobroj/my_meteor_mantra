@@ -50,8 +50,16 @@ describe('core.actions.accounts', () => {
       expect(args[1]).to.match(/required/);
     });
 
-    it('should reject if username already exists'/* , () => {
-    }*/);
+    it('should reject if username already exists', () => {
+      const Meteor = { users: stub() };
+      Meteor.users = { findOne: stub().returns({ _id: 'someId' }) };
+      const LocalState = { set: spy() };
+      actions.signup({ LocalState, Meteor }, 'email', 'existingUsername', 'passwordsMatch', 'passwordsMatch');
+      const args = LocalState.set.args[0];
+
+      expect(args[0]).to.be.equal('SIGNUP_ERROR');
+      expect(args[1]).to.match(/exists/);
+    });
 
     it('should clear older LocalState for SIGNUP_ERROR'/* , () => {
       const Meteor = {
