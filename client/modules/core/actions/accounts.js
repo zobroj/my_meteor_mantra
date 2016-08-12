@@ -22,6 +22,8 @@ export default {
       return LocalState.set('SIGNUP_ERROR', 'Username already exists');
     }
 
+    LocalState.set('SIGNUP_ERROR', null);
+
     const options = { email, password: password1, username };
     Accounts.createUser(options, (err) => {
       if (err && err.reason) {
@@ -34,7 +36,6 @@ export default {
       });
       return FlowRouter.go('/');
     });
-    LocalState.set('SIGNUP_ERROR', null);
   },
 
   resendVerificationEmail({ Meteor, LocalState }) {

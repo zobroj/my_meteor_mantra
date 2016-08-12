@@ -54,37 +54,52 @@ describe('core.actions.accounts', () => {
       const Meteor = { users: stub() };
       Meteor.users = { findOne: stub().returns({ _id: 'someId' }) };
       const LocalState = { set: spy() };
-      actions.signup({ LocalState, Meteor }, 'email', 'existingUsername', 'passwordsMatch', 'passwordsMatch');
+      actions.signup(
+        { LocalState, Meteor },
+        'email', 'existingUsername', 'passwordsMatch', 'passwordsMatch'
+      );
       const args = LocalState.set.args[0];
 
       expect(args[0]).to.be.equal('SIGNUP_ERROR');
       expect(args[1]).to.match(/exists/);
     });
 
-    it('should clear older LocalState for SIGNUP_ERROR'/* , () => {
-      const Meteor = {
-        uuid: spy(),
-        call: spy(),
-      };
+    it('should clear older LocalState for SIGNUP_ERROR', () => {
+      const Accounts = { createUser: spy() };
+      const Meteor = { call: spy(), users: stub() };
+      Meteor.users = { findOne: stub().returns(null) };
       const LocalState = {set: spy()};
       const FlowRouter = {go: spy()};
-      actions.create({LocalState, Meteor, FlowRouter}, 'userId', 'username', 'postId', 'text');
+
+      actions.signup(
+        {Accounts, LocalState, Meteor, FlowRouter},
+        'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
+      );
       expect(LocalState.set.args[0]).to.deep.equal([ 'SIGNUP_ERROR', null ]);
-    }*/);
+    });
 
-    it('should call Accounts to create the user'/* , () => {
-      const Meteor = { uuid: () => 'id', call: spy() };
+    it('should call Accounts to create the user', () => {
+      const Accounts = { createUser: spy() };
+      const Meteor = { call: spy(), users: stub() };
+      Meteor.users = { findOne: stub().returns(null) };
       const LocalState = {set: spy()};
       const FlowRouter = {go: spy()};
 
-      actions.create({LocalState, Meteor, FlowRouter}, 'userId', 'username', 'postId', 'text');
-      const methodArgs = Meteor.call.args[0];
+      actions.signup(
+        {Accounts, LocalState, Meteor, FlowRouter},
+        'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
+      );
 
-      expect(methodArgs.slice(0, 6)).to.deep.equal([
-        'posts.createComment', 'id', 'userId', 'username', 'postId', 'text'
+      const methodArgs = Accounts.createUser.args[0];
+      expect(methodArgs.slice(0, 1)).to.deep.equal([
+        {
+          email: 'email',
+          password: 'passwordsMatch',
+          username: 'uniqueUsername'
+        }
       ]);
-      expect(methodArgs[6]).to.be.a('function');
-    }*/);
+      expect(methodArgs[1]).to.be.a('function');
+    });
 
     describe('after Accounts call', () => {
       describe('if there is an error', () => {
