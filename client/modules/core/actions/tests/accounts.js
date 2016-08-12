@@ -115,7 +115,7 @@ describe('core.actions.accounts', () => {
         }*/);
       });
       describe('if no error', () => {
-        it('should call Metetor to send a verificaiton email'/* , () => {
+        it('should call Metetor to send a verification email'/* , () => {
           const Meteor = { uuid: () => 'id', call: spy() };
           const LocalState = {set: spy()};
           const FlowRouter = {go: spy()};
@@ -157,15 +157,6 @@ describe('core.actions.accounts', () => {
       });
     });
 
-    it('should call Meteor.call to save the comment'/* , () => {
-    }*/);
-
-    describe('after Meteor.call', () => {
-      describe('if there is error', () => {
-        it('should set SIGNUP_ERROR with the error message'/* , () => {
-        }*/);
-      });
-    });
   });
 
   describe('clearErrors', () => {
