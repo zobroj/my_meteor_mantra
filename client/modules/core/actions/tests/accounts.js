@@ -38,8 +38,22 @@ describe('core.actions.accounts', () => {
   });
 
   describe('resetPassword', () => {
-    it('should reject if password1 is not there');
-    it('should reject if password2 is not there');
+    it('should reject if password1 is not there', () => {
+      const LocalState = {set: spy()};
+      actions.resetPassword({LocalState}, 'token', null, 'password2');
+      const args = LocalState.set.args[0];
+      expect(args[0]).to.be.equal('RESET_PASSWORD_ERROR');
+      expect(args[1]).to.be.match(/\bpassword\b.*\brequired\b|\brequired\b.*\bpassword\b/);
+    });
+
+    it('should reject if password2 is not there', () => {
+      const LocalState = {set: spy()};
+      actions.resetPassword({LocalState}, 'token', 'password1', null);
+      const args = LocalState.set.args[0];
+      expect(args[0]).to.be.equal('RESET_PASSWORD_ERROR');
+      expect(args[1]).to.be.match(/\bpassword\b.*\brequired\b|\brequired\b.*\bpassword\b/);
+    });
+
     it('should reject if password1 and password2 do not match');
     it('should reject if token is not there');
     it('should clear older LocalState for RESET_PASSWORD_ERROR');
