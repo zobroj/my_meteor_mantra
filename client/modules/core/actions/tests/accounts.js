@@ -13,6 +13,17 @@ describe('core.actions.accounts', () => {
     });
   });
 
+  describe('login', () => {
+    it('should reject if email is not there');
+    it('should reject if password is not there');
+    it('should clear older LocalState for LOGIN_ERROR');
+    it('should call Meteor to loginWithPassword');
+    describe('after Meter call', () => {
+      it('should set LOGIN_ERROR with error reason');
+      it(`should redirect to '/post'`);
+    });
+  });
+
   describe('resendVerificationEmail', () => {
     it('should call Meteor to resend verification email', () => {
       const Meteor = {call: spy()};

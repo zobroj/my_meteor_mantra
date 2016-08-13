@@ -88,17 +88,18 @@ export default {
     });
   },
 
-  login({ Meteor, LocalState, FlowRouter, Accounts }, email, password) {
+  login({Meteor, LocalState, FlowRouter}, email, password) {
     if (!email || !password) {
       return LocalState.set('LOGIN_ERROR', 'Login & Password are required!');
     }
+    LocalState.set('LOGIN_ERROR', null);
     Meteor.loginWithPassword(email, password, (err) => {
       if (err && err.reason) {
-        return LocalState.set('LOGIN_ERROR', err.reason);
+        LocalState.set('LOGIN_ERROR', err.reason);
+      } else {
+        FlowRouter.go('/post');
       }
-      FlowRouter.go('/post');
     });
-    LocalState.set('LOGIN_ERROR', null);
   },
 
   logout({ Meteor, FlowRouter }) {
