@@ -36,6 +36,16 @@ describe('core.actions.accounts', () => {
       expect(args[0]).to.be.equal('RESET_PASSWORD_ERROR');
       expect(args[1]).to.be.match(/\bemail\b.*\brequired\b|\brequired\b.*\bemail\b/);
     });
+    it('should call Meteor to send reset password link', () => {
+      const Meteor = {call: spy()};
+      const LocalState = {set: spy()};
+      actions.sendResetPasswordLink({Meteor, LocalState}, 'email');
+      const methodArgs = Meteor.call.args[0];
+      expect(Meteor.call.callCount).to.be.equal(1);
+      expect(methodArgs.slice(0, 2)).to.deep.equal([
+        'accounts.sendResetPasswordLink', 'email'
+      ]);
+    });
   });
 
   describe('signup', () => {
