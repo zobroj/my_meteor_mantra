@@ -51,6 +51,9 @@ export default {
     if (!resetEmail) {
       return LocalState.set('RESET_PASSWORD_ERROR', 'email address is required');
     }
+
+    LocalState.set('RESET_PASSWORD_ERROR', null);
+
     Meteor.call('accounts.sendResetPasswordLink', resetEmail, (err) => {
       if (err && err.reason) {
         console.log(err.reason);
@@ -60,7 +63,6 @@ export default {
       // TODO: return something to make the modal close
       return FlowRouter.go('/');
     });
-    LocalState.set('RESET_PASSWORD_ERROR', null);
   },
 
   resetPassword({ Meteor, LocalState, FlowRouter }, token, password1, password2) {

@@ -37,6 +37,13 @@ describe('core.actions.accounts', () => {
       expect(args[1]).to.be.match(/\bemail\b.*\brequired\b|\brequired\b.*\bemail\b/);
     });
 
+    it('should clear older LocalState for RESET_PASSWORD_ERROR', () => {
+      const Meteor = {call: spy()};
+      const LocalState = {set: spy()};
+      actions.sendResetPasswordLink({Meteor, LocalState}, 'email');
+      expect(LocalState.set.args[0]).to.deep.equal([ 'RESET_PASSWORD_ERROR', null ]);
+    });
+
     it('should call Meteor to send reset password link', () => {
       const Meteor = {call: spy()};
       const LocalState = {set: spy()};
@@ -55,7 +62,7 @@ describe('core.actions.accounts', () => {
       Meteor.call.callsArgWith(2, err);
 
       actions.sendResetPasswordLink({Meteor, LocalState}, 'email');
-      expect(LocalState.set.args[0]).to.deep.equal([ 'RESET_PASSWORD_ERROR', err.reason ]);
+      expect(LocalState.set.args[1]).to.deep.equal([ 'RESET_PASSWORD_ERROR', err.reason ]);
     });
 
     it(`should redirect to '/'`, () => {
