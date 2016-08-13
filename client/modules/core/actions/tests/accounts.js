@@ -57,6 +57,16 @@ describe('core.actions.accounts', () => {
       actions.sendResetPasswordLink({Meteor, LocalState}, 'email');
       expect(LocalState.set.args[0]).to.deep.equal([ 'RESET_PASSWORD_ERROR', err.reason ]);
     });
+
+    it(`should redirect to '/'`, () => {
+      const Meteor = {call: stub()};
+      const LocalState = {set: spy()};
+      const FlowRouter = {go: spy()};
+      Meteor.call.callsArgWith(2, null);
+
+      actions.sendResetPasswordLink({Meteor, LocalState, FlowRouter}, 'email');
+      expect(FlowRouter.go.args[0][0]).to.be.equal('/');
+    });
   });
 
   describe('signup', () => {
