@@ -4,6 +4,12 @@ import {spy, stub} from 'sinon';
 import actions from '../accounts';
 
 describe('core.actions.accounts', () => {
+  describe('resendVerificationEmail', () => {
+    it('should do something', () => {
+
+    });
+  });
+
   describe('signup', () => {
     it('should reject if email is not there', () => {
       const LocalState = {set: spy()};
@@ -11,7 +17,7 @@ describe('core.actions.accounts', () => {
       const args = LocalState.set.args[0];
 
       expect(args[0]).to.be.equal('SIGNUP_ERROR');
-      expect(args[1]).to.match(/required/);
+      expect(args[1]).to.match(/\bemail\b.*\brequired\b|\brequired\b.*\bemail\b/);
     });
 
     it('should reject if username is not there', () => {
@@ -20,7 +26,7 @@ describe('core.actions.accounts', () => {
       const args = LocalState.set.args[0];
 
       expect(args[0]).to.be.equal('SIGNUP_ERROR');
-      expect(args[1]).to.match(/required/);
+      expect(args[1]).to.match(/\busername\b.*\brequired\b|\brequired\b.*\busername\b/);
     });
 
     it('should reject if password1 is not there', () => {
@@ -29,7 +35,7 @@ describe('core.actions.accounts', () => {
       const args = LocalState.set.args[0];
 
       expect(args[0]).to.be.equal('SIGNUP_ERROR');
-      expect(args[1]).to.match(/required/);
+      expect(args[1]).to.match(/password.*\brequired\b|\brequired\b.*password/);
     });
 
     it('should reject if password2 is not there', () => {
@@ -38,7 +44,7 @@ describe('core.actions.accounts', () => {
       const args = LocalState.set.args[0];
 
       expect(args[0]).to.be.equal('SIGNUP_ERROR');
-      expect(args[1]).to.match(/required/);
+      expect(args[1]).to.match(/password.*\brequired\b|\brequired\b.*password/);
     });
 
     it('should reject if password1 and password2 do not match', () => {
@@ -47,7 +53,7 @@ describe('core.actions.accounts', () => {
       const args = LocalState.set.args[0];
 
       expect(args[0]).to.be.equal('SIGNUP_ERROR');
-      expect(args[1]).to.match(/required/);
+      expect(args[1]).to.match(/\bmatch\b.*\brequired\b|\brequired\b.*\bmatch\b/);
     });
 
     it('should reject if username already exists', () => {
