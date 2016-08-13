@@ -78,7 +78,17 @@ describe('core.actions.accounts', () => {
       expect(LocalState.set.args[0]).to.deep.equal([ 'RESET_PASSWORD_ERROR', null ]);
     });
 
-    it('should call Accounts to change the password');
+    it('should call Accounts to change the password', () => {
+      const Accounts = {resetPassword: spy()};
+      const LocalState = {set: spy()};
+      actions.resetPassword({Accounts, LocalState}, 'token', 'password', 'password');
+      const methodArgs = Accounts.resetPassword.args[0];
+      expect(Accounts.resetPassword.callCount).to.be.equal(1);
+      expect(methodArgs.slice(0, 2)).to.deep.equal(
+        [ 'token', 'password' ]
+      );
+    });
+
     describe('after Accounts call', () => {
       it('should set RESET_PASSWORD_ERROR with error reason');
       it(`should redirect to '/'`);
