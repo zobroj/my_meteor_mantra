@@ -36,6 +36,7 @@ describe('core.actions.accounts', () => {
       expect(args[0]).to.be.equal('RESET_PASSWORD_ERROR');
       expect(args[1]).to.be.match(/\bemail\b.*\brequired\b|\brequired\b.*\bemail\b/);
     });
+
     it('should call Meteor to send reset password link', () => {
       const Meteor = {call: spy()};
       const LocalState = {set: spy()};
@@ -45,6 +46,16 @@ describe('core.actions.accounts', () => {
       expect(methodArgs.slice(0, 2)).to.deep.equal([
         'accounts.sendResetPasswordLink', 'email'
       ]);
+    });
+
+    it('should set RESET_PASSWORD_ERROR with error reason', () => {
+      const Meteor = {call: stub()};
+      const LocalState = {set: spy()};
+      const err = {reason: 'reset passwordy error, yo'};
+      Meteor.call.callsArgWith(2, err);
+
+      actions.sendResetPasswordLink({Meteor, LocalState}, 'email');
+      expect(LocalState.set.args[0]).to.deep.equal([ 'RESET_PASSWORD_ERROR', err.reason ]);
     });
   });
 
