@@ -49,7 +49,7 @@ export default {
 
   sendResetPasswordLink({ Meteor, LocalState, FlowRouter }, resetEmail) {
     if (!resetEmail) {
-      return LocalState.set('RESET_PASSWORD_ERROR', 'Please enter an email.');
+      return LocalState.set('RESET_PASSWORD_ERROR', 'email address is required');
     }
     Meteor.call('accounts.sendResetPasswordLink', resetEmail, (err) => {
       if (err && err.reason) {

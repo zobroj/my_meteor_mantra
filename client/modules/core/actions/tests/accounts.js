@@ -28,6 +28,16 @@ describe('core.actions.accounts', () => {
     });
   });
 
+  describe('sendResetPasswordLink', () => {
+    it('should rejct if email is not there', () => {
+      const LocalState = {set: spy()};
+      actions.sendResetPasswordLink({LocalState}, null);
+      const args = LocalState.set.args[0];
+      expect(args[0]).to.be.equal('RESET_PASSWORD_ERROR');
+      expect(args[1]).to.be.match(/\bemail\b.*\brequired\b|\brequired\b.*\bemail\b/);
+    });
+  });
+
   describe('signup', () => {
     it('should reject if email is not there', () => {
       const LocalState = {set: spy()};
