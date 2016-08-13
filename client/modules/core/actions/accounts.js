@@ -27,14 +27,15 @@ export default {
     const options = { email, password: password1, username };
     Accounts.createUser(options, (err) => {
       if (err && err.reason) {
-        return LocalState.set('SIGNUP_ERROR', err.reason);
+        LocalState.set('SIGNUP_ERROR', err.reason);
+      } else {
+        Meteor.call('emails.sendAccountVerificationLink', (err) => {
+          if (err && err.reason) {
+            return LocalState.set('SIGNUP_ERROR', err.reason);
+          }
+        });
+        return FlowRouter.go('/');
       }
-      Meteor.call('emails.sendAccountVerificationLink', (err) => {
-        if (err && err.reason) {
-          return LocalState.set('SIGNUP_ERROR', err.reason);
-        }
-      });
-      return FlowRouter.go('/');
     });
   },
 
