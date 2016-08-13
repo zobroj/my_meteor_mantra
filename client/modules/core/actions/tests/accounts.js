@@ -54,9 +54,30 @@ describe('core.actions.accounts', () => {
       expect(args[1]).to.be.match(/\bpassword\b.*\brequired\b|\brequired\b.*\bpassword\b/);
     });
 
-    it('should reject if password1 and password2 do not match');
-    it('should reject if token is not there');
-    it('should clear older LocalState for RESET_PASSWORD_ERROR');
+    it('should reject if password1 and password2 do not match', () => {
+      const LocalState = {set: spy()};
+      actions.resetPassword({LocalState}, 'token', 'password1', 'password2');
+      const args = LocalState.set.args[0];
+
+      expect(args[0]).to.be.equal('RESET_PASSWORD_ERROR');
+      expect(args[1]).to.match(/\bmatch\b.*\brequired\b|\brequired\b.*\bmatch\b/);
+    });
+
+    it('should reject if token is not there', () => {
+      const LocalState = {set: spy()};
+      actions.resetPassword({LocalState}, null, 'password1', 'password1');
+      const args = LocalState.set.args[0];
+      expect(args[0]).to.be.equal('RESET_PASSWORD_ERROR');
+      expect(args[1]).to.be.match(/token.*\brequired\b|\brequired\b.*token/);
+    });
+
+    it('should clear older LocalState for RESET_PASSWORD_ERROR', () => {
+      const Accounts = {resetPassword: spy()};
+      const LocalState = {set: spy()};
+      actions.resetPassword({Accounts, LocalState}, 'token', 'password1', 'password1');
+      expect(LocalState.set.args[0]).to.deep.equal([ 'RESET_PASSWORD_ERROR', null ]);
+    });
+
     it('should call Accounts to change the password');
     describe('after Accounts call', () => {
       it('should set RESET_PASSWORD_ERROR with error reason');

@@ -65,15 +65,15 @@ export default {
     });
   },
 
-  resetPassword({ Meteor, LocalState, FlowRouter }, token, password1, password2) {
+  resetPassword({ Accounts, Meteor, LocalState, FlowRouter }, token, password1, password2) {
     if (!password1 || !password2) {
       return LocalState.set('RESET_PASSWORD_ERROR', 'Both password fields are required');
     }
     if (password1 !== password2) {
-      return LocalState.set('RESET_PASSWORD_ERROR', 'Password fields do not match. Try again.');
+      return LocalState.set('RESET_PASSWORD_ERROR', 'Password are required to match');
     }
     if (!token) {
-      return LocalState.set('RESET_PASSWORD_ERROR', 'Sorry please check the link, again, or reset your password from the login page again.');
+      return LocalState.set('RESET_PASSWORD_ERROR', 'token is required');
     }
     LocalState.set('RESET_PASSWORD_ERROR', null);
     Accounts.resetPassword(token, password1, (err) => {
