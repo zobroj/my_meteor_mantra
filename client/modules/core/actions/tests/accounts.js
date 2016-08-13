@@ -81,16 +81,27 @@ describe('core.actions.accounts', () => {
     it('should call Accounts to change the password', () => {
       const Accounts = {resetPassword: spy()};
       const LocalState = {set: spy()};
+
       actions.resetPassword({Accounts, LocalState}, 'token', 'password', 'password');
       const methodArgs = Accounts.resetPassword.args[0];
-      expect(Accounts.resetPassword.callCount).to.be.equal(1);
       expect(methodArgs.slice(0, 2)).to.deep.equal(
         [ 'token', 'password' ]
       );
+      expect(methodArgs[2]).to.be.a('function');
     });
 
     describe('after Accounts call', () => {
-      it('should set RESET_PASSWORD_ERROR with error reason');
+      it('should set RESET_PASSWORD_ERROR with error reason', () => {
+        const FlowRouter = {go: spy()};
+        const LocalState = {set: spy()};
+        const err = {reason: 'reset password err yo'};
+        const Accounts = {resetPassword: stub()};
+        Accounts.resetPassword.callsArgWith(2, err);
+
+        actions.resetPassword({Accounts, LocalState, FlowRouter}, 'token', 'password', 'password');
+        expect(Accounts.resetPassword.callCount).to.be.equal(1);
+        expect(LocalState.set.args[1]).to.deep.equal([ 'RESET_PASSWORD_ERROR', err.reason ]);
+      });
       it(`should redirect to '/'`);
     });
   });
@@ -100,15 +111,15 @@ describe('core.actions.accounts', () => {
       const LocalState = {set: spy()};
       actions.sendResetPasswordLink({LocalState}, null);
       const args = LocalState.set.args[0];
-      expect(args[0]).to.be.equal('RESET_PASSWORD_ERROR');
+      expect(args[0]).to.be.equal('SEND_RESET_PASSWORD_LINK');
       expect(args[1]).to.be.match(/\bemail\b.*\brequired\b|\brequired\b.*\bemail\b/);
     });
 
-    it('should clear older LocalState for RESET_PASSWORD_ERROR', () => {
+    it('should clear older LocalState for SEND_RESET_PASSWORD_LINK', () => {
       const Meteor = {call: spy()};
       const LocalState = {set: spy()};
       actions.sendResetPasswordLink({Meteor, LocalState}, 'email');
-      expect(LocalState.set.args[0]).to.deep.equal([ 'RESET_PASSWORD_ERROR', null ]);
+      expect(LocalState.set.args[0]).to.deep.equal([ 'SEND_RESET_PASSWORD_LINK', null ]);
     });
 
     it('should call Meteor to send reset password link', () => {
@@ -122,14 +133,14 @@ describe('core.actions.accounts', () => {
       ]);
     });
 
-    it('should set RESET_PASSWORD_ERROR with error reason', () => {
+    it('should set SEND_RESET_PASSWORD_LINK with error reason', () => {
       const Meteor = {call: stub()};
       const LocalState = {set: spy()};
       const err = {reason: 'reset passwordy error, yo'};
       Meteor.call.callsArgWith(2, err);
 
       actions.sendResetPasswordLink({Meteor, LocalState}, 'email');
-      expect(LocalState.set.args[1]).to.deep.equal([ 'RESET_PASSWORD_ERROR', err.reason ]);
+      expect(LocalState.set.args[1]).to.deep.equal([ 'SEND_RESET_PASSWORD_LINK', err.reason ]);
     });
 
     it(`should redirect to '/'`, () => {

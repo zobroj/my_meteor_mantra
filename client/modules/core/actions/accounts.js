@@ -49,15 +49,14 @@ export default {
 
   sendResetPasswordLink({ Meteor, LocalState, FlowRouter }, resetEmail) {
     if (!resetEmail) {
-      return LocalState.set('RESET_PASSWORD_ERROR', 'email address is required');
+      return LocalState.set('SEND_RESET_PASSWORD_LINK', 'email address is required');
     }
 
-    LocalState.set('RESET_PASSWORD_ERROR', null);
+    LocalState.set('SEND_RESET_PASSWORD_LINK', null);
 
     Meteor.call('accounts.sendResetPasswordLink', resetEmail, (err) => {
       if (err && err.reason) {
-        console.log(err.reason);
-        return LocalState.set('RESET_PASSWORD_ERROR', err.reason);
+        return LocalState.set('SEND_RESET_PASSWORD_LINK', err.reason);
       }
       // TODO: return something to let user know email was sent
       // TODO: return something to make the modal close
@@ -65,7 +64,7 @@ export default {
     });
   },
 
-  resetPassword({ Accounts, Meteor, LocalState, FlowRouter }, token, password1, password2) {
+  resetPassword({ Accounts, LocalState, FlowRouter }, token, password1, password2) {
     if (!password1 || !password2) {
       return LocalState.set('RESET_PASSWORD_ERROR', 'Both password fields are required');
     }
@@ -79,11 +78,12 @@ export default {
     Accounts.resetPassword(token, password1, (err) => {
       // TODO: check( newPassword, String )
       // TODO: check( token, String )
-      if (err & err.reason) {
-        return LocalState.set('RESET_PASSWORD_ERROR', err.reason);
+      if (err && err.reason) {
+        LocalState.set('RESET_PASSWORD_ERROR', err.reason);
+      } else {
+        // TODO: return something to let user know password was reset
+        return FlowRouter.go('/');
       }
-      // TODO: return something to let user know password was reset
-      return FlowRouter.go('/');
     });
   },
 

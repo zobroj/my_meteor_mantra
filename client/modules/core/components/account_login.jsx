@@ -46,6 +46,7 @@ class AccountLogin extends React.Component {
     const { sendResetPasswordLink } = this.props;
     const { resetEmail } = this.state;
     sendResetPasswordLink(resetEmail);
+    console.log('sent?');
   }
   displayGuest() {
     const { errorLogin } = this.props;
@@ -76,10 +77,11 @@ class AccountLogin extends React.Component {
           </FormGroup>
           <Button bsStyle="primary" type="submit">Log In</Button>
         </form>
+        {this.modalResetPassword()}
       </Panel>
     );
   }
-  modalResetPasword() {
+  modalResetPassword() {
     const { errorReset } = this.props;
     return (
       <Modal show={this.state.showModal} onHide={this.modalClose}>
