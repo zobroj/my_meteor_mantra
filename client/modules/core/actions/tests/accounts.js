@@ -77,6 +77,22 @@ describe('core.actions.accounts', () => {
     });
   });
 
+  describe('logout', () => {
+    it('should call Meteor to logout user', () => {
+      const Meteor = {logout: spy()};
+      const FlowRouter = {go: spy()};
+      actions.logout({Meteor, FlowRouter});
+      const methodArgs = Meteor.logout.args[0];
+
+      expect(Meteor.logout.callCount).to.be.equal(1);
+      expect(methodArgs[0]).to.be.a('function');
+    });
+    describe('after ', () => {
+      it('should set LOGOUT_ERROR with error reason');
+      it(`should redirect user to '/'`);
+    });
+  });
+
   describe('resendVerificationEmail', () => {
     it('should call Meteor to resend verification email', () => {
       const Meteor = {call: spy()};
@@ -88,6 +104,7 @@ describe('core.actions.accounts', () => {
       expect(methodArgs.slice(0, 1)).to.deep.equal([
         'emails.sendAccountVerificationLink'
       ]);
+      expect(methodArgs[1]).to.be.a('function');
     });
 
     it('should set SIGNUP_ERROR with error reason', () => {

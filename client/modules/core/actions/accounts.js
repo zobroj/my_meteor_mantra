@@ -102,9 +102,14 @@ export default {
     });
   },
 
-  logout({ Meteor, FlowRouter }) {
-    Meteor.logout();
-    FlowRouter.go('/');
+  logout({FlowRouter, LocalState, Meteor}) {
+    Meteor.logout((err) => {
+      if (err && err.reason) {
+        LocalState.set('LOGOUT_ERROR', err.reason);
+      } else {
+        FlowRouter.go('/');
+      }
+    });
   },
 
   deleteAccount({ Meteor, FlowRouter, LocalState }) {
