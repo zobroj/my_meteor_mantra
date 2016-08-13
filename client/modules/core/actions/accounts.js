@@ -82,7 +82,7 @@ export default {
         LocalState.set('RESET_PASSWORD_ERROR', err.reason);
       } else {
         // TODO: return something to let user know password was reset
-        return FlowRouter.go('/');
+        FlowRouter.go('/');
       }
     });
   },

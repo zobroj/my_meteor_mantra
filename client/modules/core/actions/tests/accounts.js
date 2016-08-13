@@ -102,7 +102,16 @@ describe('core.actions.accounts', () => {
         expect(Accounts.resetPassword.callCount).to.be.equal(1);
         expect(LocalState.set.args[1]).to.deep.equal([ 'RESET_PASSWORD_ERROR', err.reason ]);
       });
-      it(`should redirect to '/'`);
+
+      it(`should redirect to '/'`, () => {
+        const LocalState = {set: spy()};
+        const FlowRouter = {go: spy()};
+        const Accounts = {resetPassword: stub()};
+        Accounts.resetPassword.callsArgWith(2, null);
+
+        actions.resetPassword({Accounts, LocalState, FlowRouter}, 'token', 'password', 'password');
+        expect(FlowRouter.go.args[0][0]).to.be.equal('/');
+      });
     });
   });
 
@@ -133,24 +142,26 @@ describe('core.actions.accounts', () => {
       ]);
     });
 
-    it('should set SEND_RESET_PASSWORD_LINK with error reason', () => {
-      const Meteor = {call: stub()};
-      const LocalState = {set: spy()};
-      const err = {reason: 'reset passwordy error, yo'};
-      Meteor.call.callsArgWith(2, err);
+    describe('after Meteor call', () => {
+      it('should set SEND_RESET_PASSWORD_LINK with error reason', () => {
+        const Meteor = {call: stub()};
+        const LocalState = {set: spy()};
+        const err = {reason: 'reset passwordy error, yo'};
+        Meteor.call.callsArgWith(2, err);
 
-      actions.sendResetPasswordLink({Meteor, LocalState}, 'email');
-      expect(LocalState.set.args[1]).to.deep.equal([ 'SEND_RESET_PASSWORD_LINK', err.reason ]);
-    });
+        actions.sendResetPasswordLink({Meteor, LocalState}, 'email');
+        expect(LocalState.set.args[1]).to.deep.equal([ 'SEND_RESET_PASSWORD_LINK', err.reason ]);
+      });
 
-    it(`should redirect to '/'`, () => {
-      const Meteor = {call: stub()};
-      const LocalState = {set: spy()};
-      const FlowRouter = {go: spy()};
-      Meteor.call.callsArgWith(2, null);
+      it(`should redirect to '/'`, () => {
+        const Meteor = {call: stub()};
+        const LocalState = {set: spy()};
+        const FlowRouter = {go: spy()};
+        Meteor.call.callsArgWith(2, null);
 
-      actions.sendResetPasswordLink({Meteor, LocalState, FlowRouter}, 'email');
-      expect(FlowRouter.go.args[0][0]).to.be.equal('/');
+        actions.sendResetPasswordLink({Meteor, LocalState, FlowRouter}, 'email');
+        expect(FlowRouter.go.args[0][0]).to.be.equal('/');
+      });
     });
   });
 
