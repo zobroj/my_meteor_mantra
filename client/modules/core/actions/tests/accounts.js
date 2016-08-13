@@ -112,7 +112,16 @@ describe('core.actions.accounts', () => {
           [ 'LOGOUT_ERROR', err.reason ]
         );
       });
-      it(`should redirect user to '/'`);
+
+      it(`should redirect user to '/'`, () => {
+        const FlowRouter = {go: spy()};
+        const LocalState = {set: spy()};
+        const Meteor = {logout: stub()};
+        Meteor.logout.callsArgWith(0, null);
+
+        actions.logout({FlowRouter, LocalState, Meteor});
+        expect(FlowRouter.go.args[0][0]).to.be.equal('/');
+      });
     });
   });
 
