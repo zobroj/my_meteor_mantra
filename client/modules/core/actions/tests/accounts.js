@@ -14,10 +14,43 @@ describe('core.actions.accounts', () => {
   });
 
   describe('login', () => {
-    it('should reject if email is not there');
-    it('should reject if password is not there');
-    it('should clear older LocalState for LOGIN_ERROR');
-    it('should call Meteor to loginWithPassword');
+    it('should reject if email is not there', () => {
+      const LocalState = {set: spy()};
+      actions.login({LocalState}, null, 'password');
+      const args = LocalState.set.args[0];
+
+      expect(args[0]).to.be.equal('LOGIN_ERROR');
+      expect(args[1]).to.be.match(/\bemail\b.*\brequired\b|\brequired\b.*\bemail\b/);
+    });
+
+    it('should reject if password is not there', () => {
+      const LocalState = {set: spy()};
+      actions.login({LocalState}, 'email', null);
+      const args = LocalState.set.args[0];
+
+      expect(args[0]).to.be.equal('LOGIN_ERROR');
+      expect(args[1]).to.be.match(/\bemail\b.*\brequired\b|\brequired\b.*\bemail\b/);
+    });
+
+    it('should clear older LocalState for LOGIN_ERROR', () => {
+      const Meteor = {loginWithPassword: spy()};
+      const LocalState = {set: spy()};
+      actions.login({LocalState, Meteor}, 'email', 'password');
+      expect(LocalState.set.args[0]).to.deep.equal([ 'LOGIN_ERROR', null ]);
+    });
+
+    it('should call Meteor to loginWithPassword', () => {
+      const Meteor = {loginWithPassword: spy()};
+      const LocalState = {set: spy()};
+
+      actions.login({LocalState, Meteor}, 'email', 'password');
+      expect(Meteor.loginWithPassword.callCount).to.be.equal(1);
+      const methodArgs = Meteor.loginWithPassword.args[0];
+      expect(methodArgs.slice(0, 2)).to.deep.equal(
+        [ 'email', 'password' ]
+      );
+      expect(methodArgs[2]).to.be.a('function');
+    });
     describe('after Meter call', () => {
       it('should set LOGIN_ERROR with error reason');
       it(`should redirect to '/post'`);
