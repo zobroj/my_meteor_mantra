@@ -44,7 +44,6 @@ export default {
         return LocalState.set('SIGNUP_ERROR', err.reason);
       }
     });
-    console.log('send verification email sent');
     LocalState.set('SIGNUP_ERROR', null);
   },
 

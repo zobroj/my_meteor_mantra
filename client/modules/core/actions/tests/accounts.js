@@ -5,8 +5,26 @@ import actions from '../accounts';
 
 describe('core.actions.accounts', () => {
   describe('resendVerificationEmail', () => {
-    it('should do something', () => {
+    it('should call Meteor to resend verification email', () => {
+      const Meteor = {call: spy()};
+      const LocalState = {set: spy()};
+      actions.resendVerificationEmail({Meteor, LocalState});
+      const methodArgs = Meteor.call.args[0];
 
+      expect(Meteor.call.callCount).to.be.equal(1);
+      expect(methodArgs.slice(0, 1)).to.deep.equal([
+        'emails.sendAccountVerificationLink'
+      ]);
+    });
+
+    it('should set SIGNUP_ERROR with error reason', () => {
+      const Meteor = {call: stub()};
+      const LocalState = {set: spy()};
+      const err = { reason: 'resend error Opps!'};
+      Meteor.call.callsArgWith(1, err);
+
+      actions.resendVerificationEmail({Meteor, LocalState});
+      expect(LocalState.set.args[0]).to.deep.equal([ 'SIGNUP_ERROR', err.reason ]);
     });
   });
 
