@@ -102,22 +102,20 @@ describe('core.actions.accounts', () => {
     });
 
     describe('after Accounts call', () => {
-      describe('if there is an error', () => {
-        it('should set SIGNUP_ERROR with error message', () => {
-          const Meteor = {call: spy(), users: stub()};
-          Meteor.users = {findOne: stub().returns(null)};
-          const LocalState = {set: spy()};
-          const FlowRouter = {go: spy()};
-          const err = {reason: 'Oops'};
-          const Accounts = {createUser: stub()};
-          Accounts.createUser.callsArgWith(1, err);
+      it('should set SIGNUP_ERROR with error reason', () => {
+        const Meteor = {call: spy(), users: stub()};
+        Meteor.users = {findOne: stub().returns(null)};
+        const LocalState = {set: spy()};
+        const FlowRouter = {go: spy()};
+        const err = {reason: 'after Accounts Oops'};
+        const Accounts = {createUser: stub()};
+        Accounts.createUser.callsArgWith(1, err);
 
-          actions.signup(
-            {Accounts, LocalState, Meteor, FlowRouter},
-            'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
-          );
-          expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.reason ]);
-        });
+        actions.signup(
+          {Accounts, LocalState, Meteor, FlowRouter},
+          'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
+        );
+        expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.reason ]);
       });
 
       it('should call Metetor to send a verification email', () => {
@@ -138,34 +136,36 @@ describe('core.actions.accounts', () => {
         expect(methodArgs.slice(0, 1)).to.deep.equal([
           'emails.sendAccountVerificationLink'
         ]);
-        console.log(methodArgs.slice(0,1))
       });
 
       describe('after Meteor call', () => {
-        describe('if there is an error', () => {
-          it('should set SIGNUP_ERROR with error message'/* , () => {
-            const Meteor = {uuid: () => 'id', call: stub()};
-            const LocalState = {set: spy()};
-            const FlowRouter = {go: spy()};
-            const err = {message: 'Oops'};
-            Meteor.call.callsArgWith(6, err);
+        it('should set SIGNUP_ERROR with error reason', () => {
+          const Meteor = {call: stub(), users: stub()};
+          Meteor.users = {findOne: stub().returns(null)};
+          const LocalState = {set: spy()};
+          const FlowRouter = {go: spy()};
+          const err = {reason: 'after Meteor Oops'};
+          const Accounts = {createUser: stub()};
+          Accounts.createUser.callsArgWith(1, null);
+          Meteor.call.callsArgWith(1, err);
 
-            actions.create({Meteor, LocalState, FlowRouter}, 'userId', 'username', 'postId', 'text');
-            expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.message ]);
-          }*/);
+          actions.signup(
+            {Accounts, LocalState, Meteor, FlowRouter},
+            'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
+          );
+          expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.reason ]);
         });
-        describe('if no error', () => {
-          it(`should redirect to '/'`/* , () => {
-            const Meteor = {uuid: () => 'id', call: stub()};
-            const LocalState = {set: spy()};
-            const FlowRouter = {go: spy()};
-            const err = {message: 'Oops'};
-            Meteor.call.callsArgWith(6, err);
 
-            actions.create({Meteor, LocalState, FlowRouter}, 'userId', 'username', 'postId', 'text');
-            expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.message ]);
-          }*/);
-        });
+        it(`should redirect to '/'`/* , () => {
+          const Meteor = {uuid: () => 'id', call: stub()};
+          const LocalState = {set: spy()};
+          const FlowRouter = {go: spy()};
+          const err = {message: 'Oops'};
+          Meteor.call.callsArgWith(6, err);
+
+          actions.create({Meteor, LocalState, FlowRouter}, 'userId', 'username', 'postId', 'text');
+          expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.message ]);
+        }*/);
       });
     });
 
