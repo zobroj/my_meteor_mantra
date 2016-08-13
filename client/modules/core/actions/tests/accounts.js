@@ -52,8 +52,28 @@ describe('core.actions.accounts', () => {
       expect(methodArgs[2]).to.be.a('function');
     });
     describe('after Meter call', () => {
-      it('should set LOGIN_ERROR with error reason');
-      it(`should redirect to '/post'`);
+      it('should set LOGIN_ERROR with error reason', () => {
+        const FlowRouter = {go: spy()};
+        const LocalState = {set: spy()};
+        const err = {reason: 'login errr probyo'};
+        const Meteor = {loginWithPassword: stub()};
+        Meteor.loginWithPassword.callsArgWith(2, err);
+
+        actions.login({FlowRouter, LocalState, Meteor}, 'email', 'password');
+        expect(Meteor.loginWithPassword.callCount).to.be.equal(1);
+        expect(LocalState.set.args[1]).to.deep.equal(
+          [ 'LOGIN_ERROR', err.reason ]
+        );
+      });
+      it(`should redirect to '/post'`, () => {
+        const FlowRouter = {go: spy()};
+        const LocalState = {set: spy()};
+        const Meteor = {loginWithPassword: stub()};
+        Meteor.loginWithPassword.callsArgWith(2, null);
+
+        actions.login({FlowRouter, LocalState, Meteor}, 'email', 'password');
+        expect(FlowRouter.go.args[0][0]).to.be.equal('/post');
+      });
     });
   });
 
