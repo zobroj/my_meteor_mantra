@@ -78,16 +78,26 @@ describe('core.actions.accounts', () => {
   });
 
   describe('logout', () => {
-    it('should call Meteor to logout user', () => {
+    it('should clear older LocalState for LOGOUT_ERROR', () => {
+      const FlowRouter = ({go: spy()});
+      const LocalState = {set: spy()};
       const Meteor = {logout: spy()};
+      actions.logout({FlowRouter, LocalState, Meteor});
+      expect(LocalState.set.args[0]).to.be.deep.equal(
+        [ 'LOGOUT_ERROR', null ]
+      );
+    });
+    it('should call Meteor to logout user', () => {
       const FlowRouter = {go: spy()};
-      actions.logout({Meteor, FlowRouter});
+      const Meteor = {logout: spy()};
+      const LocalState = {set: spy()};
+      actions.logout({FlowRouter, LocalState, Meteor});
       const methodArgs = Meteor.logout.args[0];
 
       expect(Meteor.logout.callCount).to.be.equal(1);
       expect(methodArgs[0]).to.be.a('function');
     });
-    describe('after ', () => {
+    describe('after Meteor call', () => {
       it('should set LOGOUT_ERROR with error reason');
       it(`should redirect user to '/'`);
     });

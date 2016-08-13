@@ -103,6 +103,7 @@ export default {
   },
 
   logout({FlowRouter, LocalState, Meteor}) {
+    LocalState.set('LOGOUT_ERROR', null);
     Meteor.logout((err) => {
       if (err && err.reason) {
         LocalState.set('LOGOUT_ERROR', err.reason);
