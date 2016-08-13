@@ -79,7 +79,7 @@ describe('core.actions.accounts', () => {
 
   describe('logout', () => {
     it('should clear older LocalState for LOGOUT_ERROR', () => {
-      const FlowRouter = ({go: spy()});
+      const FlowRouter = {go: spy()};
       const LocalState = {set: spy()};
       const Meteor = {logout: spy()};
       actions.logout({FlowRouter, LocalState, Meteor});
@@ -87,6 +87,7 @@ describe('core.actions.accounts', () => {
         [ 'LOGOUT_ERROR', null ]
       );
     });
+
     it('should call Meteor to logout user', () => {
       const FlowRouter = {go: spy()};
       const Meteor = {logout: spy()};
@@ -98,7 +99,19 @@ describe('core.actions.accounts', () => {
       expect(methodArgs[0]).to.be.a('function');
     });
     describe('after Meteor call', () => {
-      it('should set LOGOUT_ERROR with error reason');
+      it('should set LOGOUT_ERROR with error reason', () => {
+        const FlowRouter = {go: spy()};
+        const LocalState = {set: spy()};
+        const Meteor = {logout: stub()};
+        const err = {reason: 'logout probyo'};
+        Meteor.logout.callsArgWith(0, err);
+
+        actions.logout({FlowRouter, LocalState, Meteor});
+        expect(Meteor.logout.callCount).to.be.equal(1);
+        expect(LocalState.set.args[1]).to.deep.equal(
+          [ 'LOGOUT_ERROR', err.reason ]
+        );
+      });
       it(`should redirect user to '/'`);
     });
   });
