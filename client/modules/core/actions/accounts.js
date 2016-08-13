@@ -75,17 +75,16 @@ export default {
     if (!token) {
       return LocalState.set('RESET_PASSWORD_ERROR', 'Sorry please check the link, again, or reset your password from the login page again.');
     }
+    LocalState.set('RESET_PASSWORD_ERROR', null);
     Accounts.resetPassword(token, password1, (err) => {
       // TODO: check( newPassword, String )
       // TODO: check( token, String )
       if (err & err.reason) {
-        console.log(err.reason);
         return LocalState.set('RESET_PASSWORD_ERROR', err.reason);
       }
       // TODO: return something to let user know password was reset
       return FlowRouter.go('/');
     });
-    LocalState.set('RESET_PASSWORD_ERROR', null);
   },
 
   login({ Meteor, LocalState, FlowRouter, Accounts }, email, password) {
@@ -94,7 +93,6 @@ export default {
     }
     Meteor.loginWithPassword(email, password, (err) => {
       if (err && err.reason) {
-        console.log(err.reason);
         return LocalState.set('LOGIN_ERROR', err.reason);
       }
       FlowRouter.go('/post');

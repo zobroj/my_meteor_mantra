@@ -4,6 +4,15 @@ import {spy, stub} from 'sinon';
 import actions from '../accounts';
 
 describe('core.actions.accounts', () => {
+  describe('clearErrors', () => {
+    it('should clear SIGNUP_ERROR local state', () => {
+      const LocalState = {set: spy()};
+      actions.clearErrors({LocalState}, 'SIGNUP_ERROR');
+      expect(LocalState.set.callCount).to.be.equal(1);
+      expect(LocalState.set.args[0]).to.deep.equal([ 'SIGNUP_ERROR', null ]);
+    });
+  });
+
   describe('resendVerificationEmail', () => {
     it('should call Meteor to resend verification email', () => {
       const Meteor = {call: spy()};
@@ -28,8 +37,21 @@ describe('core.actions.accounts', () => {
     });
   });
 
+  describe('resetPassword', () => {
+    it('should reject if password1 is not there');
+    it('should reject if password2 is not there');
+    it('should reject if password1 and password2 do not match');
+    it('should reject if token is not there');
+    it('should clear older LocalState for RESET_PASSWORD_ERROR');
+    it('should call Accounts to change the password');
+    describe('after Accounts call', () => {
+      it('should set RESET_PASSWORD_ERROR with error reason');
+      it(`should redirect to '/'`);
+    });
+  });
+
   describe('sendResetPasswordLink', () => {
-    it('should rejct if email is not there', () => {
+    it('should reject if email is not there', () => {
       const LocalState = {set: spy()};
       actions.sendResetPasswordLink({LocalState}, null);
       const args = LocalState.set.args[0];
@@ -246,14 +268,5 @@ describe('core.actions.accounts', () => {
       });
     });
 
-  });
-
-  describe('clearErrors', () => {
-    it('should clear SIGNUP_ERROR local state', () => {
-      const LocalState = {set: spy()};
-      actions.clearErrors({LocalState}, 'SIGNUP_ERROR');
-      expect(LocalState.set.callCount).to.be.equal(1);
-      expect(LocalState.set.args[0]).to.deep.equal([ 'SIGNUP_ERROR', null ]);
-    });
   });
 });
