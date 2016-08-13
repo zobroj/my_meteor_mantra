@@ -156,27 +156,32 @@ describe('core.actions.accounts', () => {
           expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.reason ]);
         });
 
-        it(`should redirect to '/'`/* , () => {
-          const Meteor = {uuid: () => 'id', call: stub()};
+        it(`should redirect to '/'`, () => {
+          const Meteor = {call: stub(), users: stub()};
+          Meteor.users = {findOne: stub().returns(null)};
           const LocalState = {set: spy()};
           const FlowRouter = {go: spy()};
-          const err = {message: 'Oops'};
-          Meteor.call.callsArgWith(6, err);
+          const Accounts = {createUser: stub()};
+          Accounts.createUser.callsArgWith(1, null);
+          Meteor.call.callsArgWith(1, null);
 
-          actions.create({Meteor, LocalState, FlowRouter}, 'userId', 'username', 'postId', 'text');
-          expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.message ]);
-        }*/);
+          actions.signup(
+            {Accounts, LocalState, Meteor, FlowRouter},
+            'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
+          );
+          expect(FlowRouter.go.args[0][0]).to.be.equal('/');
+        });
       });
     });
 
   });
 
   describe('clearErrors', () => {
-    it('should clear SIGNUP_ERROR local state'/* , () => {
+    it('should clear SIGNUP_ERROR local state', () => {
       const LocalState = {set: spy()};
-      actions.clearErrors({LocalState});
+      actions.clearErrors({LocalState}, 'SIGNUP_ERROR');
       expect(LocalState.set.callCount).to.be.equal(1);
       expect(LocalState.set.args[0]).to.deep.equal([ 'SIGNUP_ERROR', null ]);
-    }*/);
+    });
   });
 });
