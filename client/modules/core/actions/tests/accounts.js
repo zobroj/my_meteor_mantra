@@ -28,7 +28,7 @@ describe('core.actions.accounts', () => {
         const Meteor = {call: spy(), userId: () => 'someuserid'};
         actions.deleteAccount({FlowRouter, LocalState, Meteor});
         const methodArgs = Meteor.call.args[0];
-        expect(methodArgs.slice(0,2)).to.deep.equal(
+        expect(methodArgs.slice(0, 2)).to.deep.equal(
           [ 'accounts.deleteAccount', 'someuserid' ]
         );
         confirmStub.restore();
@@ -49,7 +49,18 @@ describe('core.actions.accounts', () => {
           confirmStub.restore();
         });
 
-        it(`should redirect to '/'`);
+        it(`should redirect to '/'`, () => {
+          const confirmStub = stub(window, 'confirm');
+          confirmStub.returns(true);
+          const FlowRouter = {go: spy()};
+          const Meteor = {call: stub(), userId: () => 'someuserid'};
+          const LocalState = {set: spy()};
+          Meteor.call.callsArgWith(2, null);
+
+          actions.deleteAccount({FlowRouter, LocalState, Meteor});
+          expect(FlowRouter.go.args[0][0]).to.be.equal('/');
+          confirmStub.restore();
+        });
       });
     });
 

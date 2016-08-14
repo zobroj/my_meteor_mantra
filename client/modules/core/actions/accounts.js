@@ -121,12 +121,12 @@ export default {
         if (err && err.reason) {
           LocalState.set('ACCOUNT_DELETE_ERROR', err.reason);
         } else {
+          /* TODO add some user visible confirmation */
           FlowRouter.go('/');
         }
       });
     } else {
-      // do nothings
-      console.log('account not deleted');
+      /* TODO add some user visible confirmation */
     }
   },
 
