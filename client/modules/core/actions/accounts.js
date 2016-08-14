@@ -119,7 +119,7 @@ export default {
       const userId = Meteor.userId();
       Meteor.call('accounts.deleteAccount', userId, (err) => {
         if (err) {
-          LocalState.set('ACCOUNT_ERROR', err.message);
+          LocalState.set('ACCOUNT_DELETE_ERROR', err.message);
         } else {
           FlowRouter.go('/');
         }
