@@ -6,7 +6,7 @@ import {composer, depsMapper} from '../post_create';
 
 describe('core.containers.post_create', () => {
   describe('composer', () => {
-    it('should get SAVING_ERROR from local state', () => {
+    it('should get POSTS_CREATE_ERROR from local state', () => {
       const LocalState = {get: spy()};
       const context = () => ({LocalState});
 
@@ -14,7 +14,7 @@ describe('core.containers.post_create', () => {
 
       const args = LocalState.get.args[0];
       expect(args).to.have.length(1);
-      expect(args[0]).to.be.equal('SAVING_ERROR');
+      expect(args[0]).to.be.equal('POSTS_CREATE_ERROR');
     });
 
     it('should call onData with null and {error}', () => {

@@ -1,6 +1,6 @@
 // actions
 export default {
-  create({ Meteor, LocalState, FlowRouter }, userId, username, title, text) {
+  create({FlowRouter, LocalState, Meteor}, userId, username, title, text) {
     if (!userId) {
       return LocalState.set('POSTS_CREATE_ERROR', 'userId is required');
     }
@@ -17,13 +17,13 @@ export default {
 
     Meteor.call('posts.create', _id, userId, username, title, text, (err) => {
       if (err) {
-        return LocalState.set('POSTS_CREATE_ERROR', err.message);
+        LocalState.set('POSTS_CREATE_ERROR', err.reason);
+      } else {
+        FlowRouter.go(`/post/${_id}`);
       }
     });
-
-    FlowRouter.go(`/post/${_id}`);
   },
-  clearErrors({ LocalState }, errorState) {
+  clearErrors({LocalState}, errorState) {
     return LocalState.set(errorState, null);
   },
 };
