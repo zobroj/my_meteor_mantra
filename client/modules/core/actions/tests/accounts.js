@@ -35,10 +35,24 @@ describe('core.actions.accounts', () => {
       });
 
       describe('after Meteor call', () => {
-        it('should set ACCOUNT_DELETE_ERROR with error reason');
+        it('should set ACCOUNT_DELETE_ERROR with error reason', () => {
+          const confirmStub = stub(window, 'confirm');
+          confirmStub.returns(true);
+          const FlowRouter = {go: spy()};
+          const Meteor = {call: stub(), userId: () => 'someuserid'};
+          const LocalState = {set: spy()};
+          const err = {reason: 'delete account probyo'};
+          Meteor.call.callsArgWith(2, err);
+
+          actions.deleteAccount({FlowRouter, LocalState, Meteor});
+          expect(LocalState.set.args[1]).to.deep.equal([ 'ACCOUNT_DELETE_ERROR', err.reason ]);
+          confirmStub.restore();
+        });
+
         it(`should redirect to '/'`);
       });
     });
+
     describe('if not confirmed', () => {
       it('should do nothing', () => {
         const confirmStub = stub(window, 'confirm');
