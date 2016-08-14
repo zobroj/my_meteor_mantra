@@ -29,6 +29,7 @@ export default {
       if (err && err.reason) {
         LocalState.set('SIGNUP_ERROR', err.reason);
       } else {
+        /* eslint-disable no-shadow */
         Meteor.call('emails.sendAccountVerificationLink', (err) => {
           if (err && err.reason) {
             return LocalState.set('SIGNUP_ERROR', err.reason);

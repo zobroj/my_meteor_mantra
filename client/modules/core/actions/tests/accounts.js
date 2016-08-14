@@ -21,7 +21,7 @@ describe('core.actions.accounts', () => {
     });
 
     describe('if confirmed', () => {
-      var confirmStub, LocalState, FlowRouter;
+      var confirmStub; var LocalState; var FlowRouter;
 
       beforeEach(() => {
         confirmStub = stub(window, 'confirm');
