@@ -36,6 +36,7 @@
     "eslint-plugin-react": "3.15.x",
     "jsdom": "^8.0.4",
     "mocha": "2.x.x",
+    "proxyquire": "^1.7.10",
     "raw-loader": "^0.5.1",
     "react-addons-test-utils": "^15.0.0",
     "sinon": "~1.8.1",

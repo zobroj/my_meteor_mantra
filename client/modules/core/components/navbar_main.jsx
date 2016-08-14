@@ -1,9 +1,9 @@
 import React from 'react';
 import NavbarUser from '../components/navbar_user';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { isActiveRoute } from '../lib/helpers.js';
+import {Nav, Navbar, NavItem} from 'react-bootstrap';
+import {isActiveRoute} from '../lib/helpers.js';
 
-const NavbarMain = ({ logout, user }) => (
+const NavbarMain = ({logout, user}) => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
