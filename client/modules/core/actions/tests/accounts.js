@@ -1,4 +1,4 @@
-const {describe, it} = global;
+const {afterEach, beforeEach, describe, it} = global;
 import {expect} from 'chai';
 import {spy, stub} from 'sinon';
 import actions from '../accounts';
@@ -10,6 +10,46 @@ describe('core.actions.accounts', () => {
       actions.clearErrors({LocalState}, 'SIGNUP_ERROR');
       expect(LocalState.set.callCount).to.be.equal(1);
       expect(LocalState.set.args[0]).to.deep.equal([ 'SIGNUP_ERROR', null ]);
+    });
+  });
+
+  describe('deleteAccount', () => {
+    it('should clear older LocalState for ACCOUNT_DELETE_ERROR', () => {
+      const LocalState = {set: spy()};
+      actions.deleteAccount({LocalState});
+      expect(LocalState.set.args[0]).to.deep.equal([ 'ACCOUNT_DELETE_ERROR', null ]);
+    });
+    describe('if confirmed', () => {
+      it('should call Meteor to delete account', () => {
+        const confirmStub = stub(window, 'confirm');
+        confirmStub.returns(true);
+        const FlowRouter = {go: spy()};
+        const LocalState = {set: spy()};
+        const Meteor = {call: spy(), userId: () => 'someuserid'};
+        actions.deleteAccount({FlowRouter, LocalState, Meteor});
+        const methodArgs = Meteor.call.args[0];
+        expect(methodArgs.slice(0,2)).to.deep.equal(
+          [ 'accounts.deleteAccount', 'someuserid' ]
+        );
+        confirmStub.restore();
+      });
+
+      describe('after Meteor call', () => {
+        it('should set ACCOUNT_DELETE_ERROR with error reason');
+        it(`should redirect to '/'`);
+      });
+    });
+    describe('if not confirmed', () => {
+      it('should do nothing', () => {
+        const confirmStub = stub(window, 'confirm');
+        confirmStub.returns(false);
+        const FlowRouter = {go: spy()};
+        const LocalState = {set: spy()};
+        const Meteor = {call: spy(), userId: () => 'someuserid'};
+        actions.deleteAccount({FlowRouter, LocalState, Meteor});
+        expect(Meteor.call.callCount).to.be.equal(0);
+        confirmStub.restore();
+      });
     });
   });
 
@@ -447,6 +487,5 @@ describe('core.actions.accounts', () => {
         });
       });
     });
-
   });
 });

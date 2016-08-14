@@ -113,17 +113,20 @@ export default {
     });
   },
 
-  deleteAccount({ Meteor, FlowRouter, LocalState }) {
-    if (confirm('Are you sure-sure?')) {
+  deleteAccount({FlowRouter, LocalState, Meteor}) {
+    LocalState.set('ACCOUNT_DELETE_ERROR', null);
+    if (window.confirm('Are you sure-sure?')) {
       const userId = Meteor.userId();
       Meteor.call('accounts.deleteAccount', userId, (err) => {
         if (err) {
-          return LocalState.set('ACCOUNT_ERROR', err.message);
+          LocalState.set('ACCOUNT_ERROR', err.message);
+        } else {
+          FlowRouter.go('/');
         }
       });
-      FlowRouter.go('/');
     } else {
       // do nothings
+      console.log('account not deleted');
     }
   },
 
