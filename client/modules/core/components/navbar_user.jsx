@@ -1,6 +1,7 @@
 import React from 'react';
-import { AuthCheck } from '/client/configs/components';
-import { MenuItem, Nav, NavDropdown, NavItem } from 'react-bootstrap';
+import {AuthCheck} from '/client/configs/components';
+import {MenuItem, Nav, NavDropdown} from 'react-bootstrap';
+import NavbarGuest from './navbar_guest';
 
 class NavbarUser extends React.Component {
   constructor(props) {
@@ -10,14 +11,6 @@ class NavbarUser extends React.Component {
   _logout() {
     const { logout } = this.props;
     logout();
-  }
-  displayGuest() {
-    return (
-      <Nav pullRight>
-        <NavItem eventKey={1} href="/login">LOGIN</NavItem>
-        <NavItem eventKey={2} href="/signup">SIGN UP</NavItem>
-      </Nav>
-    );
   }
   displayUser() {
     const { user } = this.props;
@@ -37,7 +30,8 @@ class NavbarUser extends React.Component {
   render() {
     return (
       <AuthCheck
-        guestMessage={this.displayGuest()} unverifiedMessage={this.displayUser()}
+        guestMessage={<NavbarGuest />}
+        unverifiedMessage={this.displayUser()}
       >{this.displayUser()}</AuthCheck>
     );
   }
