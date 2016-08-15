@@ -1,19 +1,12 @@
-// TESTING DEPENDENCIES
 const {describe, it} = global;
 import {stub} from 'sinon';
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import proxyquire from 'proxyquire';
 
-// COMPONENT DEPENDENCIES
-import {Nav, Navbar, NavItem} from 'react-bootstrap';
 // stub components and helper function
 const isActiveRoute = stub();
-const NavbarUser = () => <div></div>;
-
 const NavbarMain = proxyquire('../navbar_main.jsx', {
-  '../components/navbar_user': NavbarUser,
-  'react-bootstrap': {Nav, Navbar, NavItem},
   '../lib/helpers.js': {isActiveRoute, '@noCallThru': true},
 }).default;
 
