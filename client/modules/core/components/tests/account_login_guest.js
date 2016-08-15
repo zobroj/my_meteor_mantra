@@ -7,7 +7,7 @@ import AccountLoginGuest from '../account_login_guest';
 describe('core.components.account_login_guest', () => {
   it('contains an AppErrorMsg component', () => {
     const el = shallow(<AccountLoginGuest />);
-    expect(el.find('AppErrorMsg')).to.have.length(1);
+    expect(el.find('Panel AppErrorMsg')).to.have.length(1);
   });
 
   it('should show the login form', () => {
@@ -41,6 +41,11 @@ describe('core.components.account_login_guest', () => {
   });
 
   describe('if user clicks on reset password link', () => {
+    it('contains an AppErrorMsg component', () => {
+      const el = shallow(<AccountLoginGuest />);
+      expect(el.find('Modal AppErrorMsg')).to.have.length(1);
+    });
+
     it('should show the reset password modal', () => {
       const el = shallow(<AccountLoginGuest />);
       el.setState({showModal: false});
@@ -48,7 +53,10 @@ describe('core.components.account_login_guest', () => {
       expect(el.state('showModal')).to.equal(true);
     });
 
-    it('should show the reset password form');
+    // it('should show the reset password form', () => {
+    //   // const el = shallow(<AccountLoginGuest />);
+    //   // el.
+    // });
 
     it('should reset password when click on the button');
   });
