@@ -51,14 +51,14 @@ export default {
 
   sendResetPasswordLink({ Meteor, LocalState, FlowRouter }, resetEmail) {
     if (!resetEmail) {
-      return LocalState.set('SEND_RESET_PASSWORD_LINK', 'email address is required');
+      return LocalState.set('RESET_PASSWORD_ERROR', 'email address is required');
     }
 
-    LocalState.set('SEND_RESET_PASSWORD_LINK', null);
+    LocalState.set('RESET_PASSWORD_ERROR', null);
 
     Meteor.call('accounts.sendResetPasswordLink', resetEmail, (err) => {
       if (err && err.reason) {
-        return LocalState.set('SEND_RESET_PASSWORD_LINK', err.reason);
+        return LocalState.set('RESET_PASSWORD_ERROR', err.reason);
       }
       // TODO: return something to let user know email was sent
       // TODO: return something to make the modal close
