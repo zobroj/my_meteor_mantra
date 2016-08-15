@@ -41,12 +41,12 @@ describe('core.components.account_login_guest', () => {
   });
 
   describe('if user clicks on reset password link', () => {
-    it('should show the reset password modal'/* , () => {
-      // const el = shallow(<AccountLoginGuest />);
-      // const div = el.find('#reset-password');
-      // const button = div.find('a').first();
-      // console.log(button.debug());
-    }*/);
+    it('should show the reset password modal', () => {
+      const el = shallow(<AccountLoginGuest />);
+      el.setState({showModal: false});
+      el.find('#reset-password a').simulate('click');
+      expect(el.state('showModal')).to.equal(true);
+    });
 
     it('should show the reset password form');
 
