@@ -39,12 +39,10 @@ export default class Test extends React.Component {
     const { email, password } = this.state;
     login(email, password);
   }
-  _resetPassword(event) {
-    event.preventDefault();
+  _resetPassword() {
     const { sendResetPasswordLink } = this.props;
     const { resetEmail } = this.state;
     sendResetPasswordLink(resetEmail);
-    // console.log('sent?');
   }
   modalResetPassword() {
     const { errorReset } = this.props;
@@ -54,9 +52,9 @@ export default class Test extends React.Component {
           <Modal.Title>Send Reset Password Link</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <AppErrorMsg error={errorReset} />
           <p>Enter the email address for your account</p>
           <form >
-            <AppErrorMsg error={errorReset} />
             <FormGroup>
               <FormControl
                 type="email"
@@ -68,8 +66,15 @@ export default class Test extends React.Component {
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.modalClose}>Close</Button>
-          <Button onClick={this._resetPassword} bsStyle="primary">Reset Password</Button>
+          <Button
+            id="close"
+            onClick={this.modalClose}
+          >Close</Button>
+          <Button
+            id="reset-password"
+            onClick={this._resetPassword}
+            bsStyle="primary"
+          >Reset Password</Button>
         </Modal.Footer>
       </Modal>
     );
@@ -80,8 +85,8 @@ export default class Test extends React.Component {
       <div>
         <Panel header="Log In to Your Account" >
           <form>
-            <AppErrorMsg error={errorLogin} />
             <FormGroup>
+              <AppErrorMsg error={errorLogin} />
               <ControlLabel>Email Address</ControlLabel>
               <FormControl
                 type="email"

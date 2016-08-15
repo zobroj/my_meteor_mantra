@@ -10,6 +10,9 @@ describe('core.components.account_login_guest', () => {
     expect(el.find('Panel AppErrorMsg')).to.have.length(1);
   });
 
+  it('should show error message');
+  // check  which message shows up
+
   it('should show the login form', () => {
     const el = shallow(<AccountLoginGuest />);
     const button = el.find('Button').first();
@@ -41,10 +44,13 @@ describe('core.components.account_login_guest', () => {
   });
 
   describe('if user clicks on reset password link', () => {
-    it('contains an AppErrorMsg component', () => {
+    it('should contains an AppErrorMsg component', () => {
       const el = shallow(<AccountLoginGuest />);
       expect(el.find('Modal AppErrorMsg')).to.have.length(1);
     });
+
+    it('should show error message');
+    // check  which message shows up
 
     it('should show the reset password modal', () => {
       const el = shallow(<AccountLoginGuest />);
@@ -53,11 +59,28 @@ describe('core.components.account_login_guest', () => {
       expect(el.state('showModal')).to.equal(true);
     });
 
-    // it('should show the reset password form', () => {
-    //   // const el = shallow(<AccountLoginGuest />);
-    //   // el.
-    // });
+    it('should have a Close and Reset Password buttons', () => {
+      const el = shallow(<AccountLoginGuest />);
+      const closeButton = el.find('Modal Button#close');
+      expect(closeButton.prop('onClick')).to.be.a('function');
+      const resetButton = el.find('Modal Button#reset-password');
+      expect(resetButton.prop('onClick')).to.be.a('function');
+    });
 
-    it('should reset password when click on the button');
+    it('should close the modal when click on close button');
+
+    it('should reset password when click on the button', done => {
+      const resetEmail = 'the-email';
+      const onClick = () => {
+        expect(resetEmail).to.be.equal(resetEmail);
+        done();
+      };
+      const el = shallow(
+        <AccountLoginGuest sendResetPasswordLink={onClick}/>
+      );
+      el.setState({resetEmail});
+      const resetButton = el.find('Modal Button#reset-password');
+      resetButton.simulate('click');
+    });
   });
 });
