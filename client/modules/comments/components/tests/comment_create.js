@@ -28,6 +28,8 @@ describe('comments.components.comment_create', () => {
 
     const onCreate = () => {
       expect(postId).to.be.equal(postId);
+      expect(user.id).to.be.equal(user.id);
+      expect(user.username).to.be.equal(user.username);
       expect(comment).to.be.equal(comment);
       done();
     };
