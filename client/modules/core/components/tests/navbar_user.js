@@ -20,7 +20,7 @@ describe('core.components.navbar_user', () => {
     it('should contain a link to logout', () => {
       const el = shallow(<NavbarUser {...props} />);
       const logoutLink = el.find('MenuItem').at(0);
-      console.log(logoutLink.debug())
+      /* TODO test button click action */
       expect(logoutLink.html()).to.match(/Log Out/);
     });
 
@@ -32,6 +32,11 @@ describe('core.components.navbar_user', () => {
       );
       expect(prefLink.html()).to.match(/Preferences/);
     });
+  });
+
+  describe('if user is NOT loggedIn', () => {
+    /* TODO add a separate component for this? */
+    it('should display login and signup links');
   });
 
   // it('should contain a link to posts list', () => {
