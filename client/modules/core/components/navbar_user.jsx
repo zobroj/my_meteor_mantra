@@ -29,7 +29,7 @@ class NavbarUser extends React.Component {
           <MenuItem divider />
           <MenuItem
             eventKey={1.2}
-            href={FlowRouter.path(`/user/${user.username}/preferences`)}
+            href={`/user/${user.username}/preferences`}
           >Preferences</MenuItem>
         </NavDropdown>
       </Nav>
