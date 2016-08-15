@@ -1,4 +1,5 @@
 import React from 'react';
+import {AppErrorMsg} from '/client/configs/components';
 import { Button, ControlLabel, FormControl, FormGroup, Modal, Panel } from 'react-bootstrap';
 
 export default class Test extends React.Component {
@@ -82,7 +83,7 @@ export default class Test extends React.Component {
     return (
       <Panel header="Log In to Your Account" footer={footerText} >
         <form onSubmit={this._login}>
-          {errorLogin ? <p style={{ color: 'red' }}>{errorLogin}</p> : null}
+          <AppErrorMsg error={errorLogin} />
           <FormGroup>
             <ControlLabel>Email Address</ControlLabel>
             <FormControl
