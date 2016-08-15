@@ -36,14 +36,7 @@ describe('core.components.navbar_user', () => {
   });
 
   describe('if user is NOT loggedIn', () => {
-    /* TODO add a separate component for this? */
+    /* TODO add a wrapper and separate component for this? */
     it('should display login and signup links');
   });
-
-  // it('should contain a link to posts list', () => {
-  //   const el = shallow(<NavbarUser />);
-  //   const newPostLink = el.find('NavItem').at(0);
-  //   // expect(newPostLink.text()).to.be.equal('Posts');
-  //   expect(newPostLink.prop('href')).to.be.equal('/post');
-  // });
 });
