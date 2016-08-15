@@ -56,7 +56,7 @@ export default class Test extends React.Component {
         <Modal.Body>
           <p>Enter the email address for your account</p>
           <form >
-            {errorReset ? <p style={{ color: 'red' }}>{errorReset}</p> : null}
+            <AppErrorMsg error={errorReset} />
             <FormGroup>
               <FormControl
                 type="email"
