@@ -18,11 +18,13 @@ const AuthCheck = ({
   let guestComponent = guestMessage || DefaultGuestMessage;
   let unverifiedComponent = unverifiedMessage || DefaultUnverifidMessage;
   let loadingComponent = loadingMessage || DefaultLoadingMessage;
+
   if (loggingIn) {
     return (
       <div>{loadingComponent}</div>
     );
   }
+
   if (loggedIn && emailVerified) {
     return (
       <div>{children}</div>
@@ -32,6 +34,7 @@ const AuthCheck = ({
       <div>{unverifiedComponent}</div>
     );
   }
+
   return (
     <div>{guestComponent}</div>
   );
