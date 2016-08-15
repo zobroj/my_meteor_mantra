@@ -21,14 +21,4 @@ export default function () {
       }
     }
   }
-
-  // _module_template example
-  if (!Foobars.findOne()) {
-    for (let lc = 1; lc <= 5; lc++) {
-      const name = `This is the test title ${lc}`;
-      const createdAt = new Date();
-      const foobarId = Meteor.uuid();
-      Foobars.insert({ _id: foobarId, name, createdAt });
-    }
-  }
 }
