@@ -76,38 +76,40 @@ export default class Test extends React.Component {
   }
   render() {
     const { errorLogin } = this.props;
-    const footerText = (
-      <p>Forgot your pasword? <a onClick={this.modalOpen} href="#">Reset it here.</a></p>
-    );
     return (
-      <Panel header="Log In to Your Account" footer={footerText} >
-        <form>
-          <AppErrorMsg error={errorLogin} />
-          <FormGroup>
-            <ControlLabel>Email Address</ControlLabel>
-            <FormControl
-              type="email"
-              placeholder="Enter email"
-              value={this.state.email}
-              onChange={this.handleEmailChange}
-            />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Password</ControlLabel>
-            <FormControl
-              type="password"
-              placeholder="Enter password"
-              value={this.state.pasword}
-              onChange={this.handlePasswordChange}
-            />
-          </FormGroup>
-          <Button
-            onClick={this._login}
-            bsStyle="primary"
-          >Log In</Button>
-        </form>
+      <div>
+        <Panel header="Log In to Your Account" >
+          <form>
+            <AppErrorMsg error={errorLogin} />
+            <FormGroup>
+              <ControlLabel>Email Address</ControlLabel>
+              <FormControl
+                type="email"
+                placeholder="Enter email"
+                value={this.state.email}
+                onChange={this.handleEmailChange}
+              />
+            </FormGroup>
+            <FormGroup>
+              <ControlLabel>Password</ControlLabel>
+              <FormControl
+                type="password"
+                placeholder="Enter password"
+                value={this.state.pasword}
+                onChange={this.handlePasswordChange}
+              />
+            </FormGroup>
+            <Button
+              onClick={this._login}
+              bsStyle="primary"
+            >Log In</Button>
+          </form>
+        </Panel>
+        <div id="reset-password">
+          Forgot your pasword? <a onClick={this.modalOpen} href="#">Reset it here.</a>
+        </div>
         {this.modalResetPassword()}
-      </Panel>
+      </div>
     );
   }
 }
