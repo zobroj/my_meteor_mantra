@@ -11,6 +11,11 @@ const NavbarMain = proxyquire('../navbar_main.jsx', {
 }).default;
 
 describe('core.components.navbar_main', () => {
+  it('should contain navbar_user controls', () => {
+    const el = shallow(<NavbarMain />);
+    expect(el.find('NavbarUser').length).to.be.equal(1);
+  });
+
   it('should contain a link to home', () => {
     // isActiveRoute.returns('active');
     const el = shallow(<NavbarMain />);
@@ -22,7 +27,7 @@ describe('core.components.navbar_main', () => {
   it('should contain a link to posts list', () => {
     const el = shallow(<NavbarMain />);
     const newPostLink = el.find('NavItem').at(0);
-    // expect(newPostLink.text()).to.be.equal('Posts');
+    expect(newPostLink.html()).to.match(/Posts/);
     expect(newPostLink.prop('href')).to.be.equal('/post');
   });
 });
