@@ -3,7 +3,6 @@ import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import NavbarUser from '../navbar_user';
 
-// if loggedIn
 describe('core.components.navbar_user', () => {
   describe('if user is loggedIn', () => {
     var props;
@@ -33,10 +32,5 @@ describe('core.components.navbar_user', () => {
       );
       expect(prefLink.html()).to.match(/Preferences/);
     });
-  });
-
-  describe('if user is NOT loggedIn', () => {
-    /* TODO add a wrapper and separate component for this? */
-    it('should display login and signup links');
   });
 });
