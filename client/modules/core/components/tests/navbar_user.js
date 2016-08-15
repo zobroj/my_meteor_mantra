@@ -17,11 +17,12 @@ describe('core.components.navbar_user', () => {
       expect(dropdownBtn.prop('title')).to.be.equal(props.user.username);
     });
 
-    it('should contain a link to logout', () => {
-      const el = shallow(<NavbarUser {...props} />);
+    it('should contain a link to logout', done => {
+      const onLogout = () => { done(); };
+      const el = shallow(<NavbarUser logout={onLogout} {...props} />);
       const logoutLink = el.find('MenuItem').at(0);
-      /* TODO test button click action */
       expect(logoutLink.html()).to.match(/Log Out/);
+      logoutLink.simulate('click');
     });
 
     it('should contain a link to user preferences', () => {

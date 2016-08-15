@@ -7,8 +7,7 @@ class NavbarUser extends React.Component {
     super(props);
     this._logout = this._logout.bind(this);
   }
-  _logout(event) {
-    event.preventDefault();
+  _logout() {
     const { logout } = this.props;
     logout();
   }
