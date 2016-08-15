@@ -33,8 +33,20 @@ describe('core.components.account_login_guest', () => {
     button.simulate('click');
   });
 
+  it('should show a password reset link', () => {
+    const el = shallow(<AccountLoginGuest />);
+    const div = el.find('#reset-password');
+    const linky = div.find('a').first();
+    expect(linky.prop('onClick')).to.be.a('function');
+  });
+
   describe('if user clicks on reset password link', () => {
-    it('should show the reset password modal');
+    it('should show the reset password modal'/* , () => {
+      // const el = shallow(<AccountLoginGuest />);
+      // const div = el.find('#reset-password');
+      // const button = div.find('a').first();
+      // console.log(button.debug());
+    }*/);
 
     it('should show the reset password form');
 
