@@ -5,8 +5,7 @@ const SummaryGuest = () => (
   <Grid>
     <Row>
       <Col md={12}>
-        <Button bsStyle="primary" href={FlowRouter.path('posts.list')}>Test Page</Button>
-        <Button href={FlowRouter.path('reactbootstrap.examples')}>React Bootstrap Examples</Button>
+        <Button bsStyle="primary" href={FlowRouter.path('posts.list')}>Posts</Button>
       </Col>
     </Row>
   </Grid>
