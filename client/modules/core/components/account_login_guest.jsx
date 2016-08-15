@@ -34,8 +34,7 @@ export default class Test extends React.Component {
   handleResetEmailChange(event) {
     this.setState({ resetEmail: event.target.value });
   }
-  _login(event) {
-    event.preventDefault();
+  _login() {
     const { login } = this.props;
     const { email, password } = this.state;
     login(email, password);
@@ -82,7 +81,7 @@ export default class Test extends React.Component {
     );
     return (
       <Panel header="Log In to Your Account" footer={footerText} >
-        <form onSubmit={this._login}>
+        <form>
           <AppErrorMsg error={errorLogin} />
           <FormGroup>
             <ControlLabel>Email Address</ControlLabel>
@@ -102,7 +101,10 @@ export default class Test extends React.Component {
               onChange={this.handlePasswordChange}
             />
           </FormGroup>
-          <Button bsStyle="primary" type="submit">Log In</Button>
+          <Button
+            onClick={this._login}
+            bsStyle="primary"
+          >Log In</Button>
         </form>
         {this.modalResetPassword()}
       </Panel>
