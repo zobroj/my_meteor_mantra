@@ -1,17 +1,17 @@
 const {describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
-import AccountLoginGuest from '../account_login_guest';
+import AccountLogin from '../account_login';
 
 // if loggedIn
-describe('core.components.account_login_guest', () => {
+describe('core.components.account_login', () => {
   it('should contain an AppErrorMsg component', () => {
-    const el = shallow(<AccountLoginGuest />);
+    const el = shallow(<AccountLogin />);
     expect(el.find('Panel AppErrorMsg')).to.have.length(1);
   });
 
   it('should show the login form', () => {
-    const el = shallow(<AccountLoginGuest />);
+    const el = shallow(<AccountLogin />);
     const form = el.find('form#account-login');
     const button = form.find('Button').first();
     const emailInput = form.find({type: 'email'});
@@ -33,7 +33,7 @@ describe('core.components.account_login_guest', () => {
       done();
     };
     const el = shallow(
-      <AccountLoginGuest login={onLogin} />
+      <AccountLogin login={onLogin} />
     );
     el.setState({email, password});
     const button = el.find('Button').first();
@@ -42,12 +42,12 @@ describe('core.components.account_login_guest', () => {
 
   describe('if user clicks on reset password link', () => {
     it('should contain an AppErrorMsg component', () => {
-      const el = shallow(<AccountLoginGuest />);
+      const el = shallow(<AccountLogin />);
       expect(el.find('Modal AppErrorMsg')).to.have.length(1);
     });
 
     it('should show the reset password modal', () => {
-      const el = shallow(<AccountLoginGuest />);
+      const el = shallow(<AccountLogin />);
       el.setState({showModal: false});
       const linky = el.find('#show-reset-modal a');
       expect(linky.prop('onClick')).to.be.a('function');
@@ -56,7 +56,7 @@ describe('core.components.account_login_guest', () => {
     });
 
     it('should show reset password form', () => {
-      const el = shallow(<AccountLoginGuest />);
+      const el = shallow(<AccountLogin />);
       // IN FORM
       const form = el.find('form#reset-password');
       const emailInput = form.find({type: 'email'});
@@ -72,7 +72,7 @@ describe('core.components.account_login_guest', () => {
     });
 
     it('should close modal when click on close button', () => {
-      const el = shallow(<AccountLoginGuest />);
+      const el = shallow(<AccountLogin />);
       el.setState({showModal: true});
       const closeButton = el.find('Modal Button.close');
       closeButton.simulate('click');
@@ -86,7 +86,7 @@ describe('core.components.account_login_guest', () => {
         done();
       };
       const el = shallow(
-        <AccountLoginGuest sendResetPasswordLink={onClick}/>
+        <AccountLogin sendResetPasswordLink={onClick}/>
       );
       el.setState({resetEmail});
       const resetButton = el.find('Modal Button.submit');

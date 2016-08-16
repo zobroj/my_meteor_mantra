@@ -1,5 +1,6 @@
 import React from 'react';
 import {AppErrorMsg} from '/client/configs/components';
+import AuthEnsureGuest from '../containers/auth_ensure_guest';
 import { Button, ControlLabel, FormControl, FormGroup, Modal, Panel } from 'react-bootstrap';
 
 export default class AccountLoginGuest extends React.Component {
@@ -82,7 +83,7 @@ export default class AccountLoginGuest extends React.Component {
   render() {
     const { errorLogin } = this.props;
     return (
-      <div>
+      <AuthEnsureGuest>
         <Panel header="Log In to Your Account" >
           <form id="account-login">
             <FormGroup>
@@ -114,7 +115,7 @@ export default class AccountLoginGuest extends React.Component {
           Forgot your pasword? <a onClick={this.modalOpen} href="#">Reset it here.</a>
         </div>
         {this.modalResetPassword()}
-      </div>
+      </AuthEnsureGuest>
     );
   }
 }
