@@ -12,9 +12,16 @@ describe('core.components.account_login_guest', () => {
 
   it('should show the login form', () => {
     const el = shallow(<AccountLoginGuest />);
-    const button = el.find('Button').first();
+    const form = el.find('form#account-login');
+    const button = form.find('Button').first();
+    const emailInput = form.find({type: 'email'});
+    const passwordInput = form.find({type: 'password'});
     expect(button.html()).to.match(/Log In/);
     expect(button.prop('onClick')).to.be.a('function');
+    expect(emailInput.prop('value')).to.be.equal('');
+    expect(emailInput.prop('onChange')).to.be.a('function');
+    expect(passwordInput.prop('value')).to.be.equal('');
+    expect(passwordInput.prop('onChange')).to.be.a('function');
   });
 
   it('should login when click on the submit', done => {
@@ -33,13 +40,6 @@ describe('core.components.account_login_guest', () => {
     button.simulate('click');
   });
 
-  it('should show a password reset link', () => {
-    const el = shallow(<AccountLoginGuest />);
-    const div = el.find('#reset-password');
-    const linky = div.find('a').first();
-    expect(linky.prop('onClick')).to.be.a('function');
-  });
-
   describe('if user clicks on reset password link', () => {
     it('should contain an AppErrorMsg component', () => {
       const el = shallow(<AccountLoginGuest />);
@@ -49,22 +49,32 @@ describe('core.components.account_login_guest', () => {
     it('should show the reset password modal', () => {
       const el = shallow(<AccountLoginGuest />);
       el.setState({showModal: false});
-      el.find('#reset-password a').simulate('click');
+      const linky = el.find('#show-reset-modal a');
+      expect(linky.prop('onClick')).to.be.a('function');
+      linky.simulate('click');
       expect(el.state('showModal')).to.equal(true);
     });
 
-    it('should have a Close and Reset Password buttons', () => {
+    it('should show reset password form', () => {
       const el = shallow(<AccountLoginGuest />);
-      const closeButton = el.find('Modal Button#close');
-      expect(closeButton.prop('onClick')).to.be.a('function');
-      const resetButton = el.find('Modal Button#reset-password');
-      expect(resetButton.prop('onClick')).to.be.a('function');
+      // IN FORM
+      const form = el.find('form#reset-password');
+      const emailInput = form.find({type: 'email'});
+      expect(emailInput.prop('value'), 'email').to.be.equal('');
+      expect(emailInput.prop('onChange'), 'email').to.be.a('function');
+      // IN MODAL
+      const closeButton = el.find('Modal Button.close');
+      const resetButton = el.find('Modal Button.submit');
+      expect(closeButton.prop('onClick'), 'close').to.be.a('function');
+      expect(closeButton.html(), 'close').to.match(/Close/);
+      expect(resetButton.prop('onClick'), 'reset').to.be.a('function');
+      expect(resetButton.html(), 'reset').to.match(/Reset/);
     });
 
     it('should close modal when click on close button', () => {
       const el = shallow(<AccountLoginGuest />);
       el.setState({showModal: true});
-      const closeButton = el.find('Modal Button#close');
+      const closeButton = el.find('Modal Button.close');
       closeButton.simulate('click');
       expect(el.state('showModal')).to.equal(false);
     });
@@ -79,7 +89,7 @@ describe('core.components.account_login_guest', () => {
         <AccountLoginGuest sendResetPasswordLink={onClick}/>
       );
       el.setState({resetEmail});
-      const resetButton = el.find('Modal Button#reset-password');
+      const resetButton = el.find('Modal Button.submit');
       resetButton.simulate('click');
     });
   });

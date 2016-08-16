@@ -54,7 +54,7 @@ export default class AccountLoginGuest extends React.Component {
         <Modal.Body>
           <AppErrorMsg error={errorReset} />
           <p>Enter the email address for your account</p>
-          <form >
+          <form id="reset-password">
             <FormGroup>
               <FormControl
                 type="email"
@@ -67,11 +67,11 @@ export default class AccountLoginGuest extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            id="close"
+            className="close"
             onClick={this.modalClose}
           >Close</Button>
           <Button
-            id="reset-password"
+            className="submit"
             onClick={this._resetPassword}
             bsStyle="primary"
           >Reset Password</Button>
@@ -84,7 +84,7 @@ export default class AccountLoginGuest extends React.Component {
     return (
       <div>
         <Panel header="Log In to Your Account" >
-          <form>
+          <form id="account-login">
             <FormGroup>
               <AppErrorMsg error={errorLogin} />
               <ControlLabel>Email Address</ControlLabel>
@@ -100,7 +100,7 @@ export default class AccountLoginGuest extends React.Component {
               <FormControl
                 type="password"
                 placeholder="Enter password"
-                value={this.state.pasword}
+                value={this.state.password}
                 onChange={this.handlePasswordChange}
               />
             </FormGroup>
@@ -110,7 +110,7 @@ export default class AccountLoginGuest extends React.Component {
             >Log In</Button>
           </form>
         </Panel>
-        <div id="reset-password">
+        <div id="show-reset-modal">
           Forgot your pasword? <a onClick={this.modalOpen} href="#">Reset it here.</a>
         </div>
         {this.modalResetPassword()}
