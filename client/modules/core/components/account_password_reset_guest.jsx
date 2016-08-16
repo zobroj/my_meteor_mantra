@@ -28,7 +28,7 @@ class AccountPasswordResetGuest extends React.Component {
   render() {
     const { error } = this.props;
     return (
-      <form onSubmit={this._resetPassword}>
+      <form id="password-reset" onSubmit={this._resetPassword}>
         <AppErrorMsg error={error} />
         <FormGroup>
           <ControlLabel>New Password</ControlLabel>
