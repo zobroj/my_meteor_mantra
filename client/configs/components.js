@@ -7,6 +7,7 @@ import AppErrorMsg from '/client/modules/core/components/app_error_msg';
 import AppVerifiedMsg from '/client/modules/core/containers/app_verified_msg';
 import AppLoading from '/client/modules/core/components/app_loading';
 import AuthEnsureUser from '/client/modules/core/containers/auth_ensure_user';
+import AuthEnsureGuest from '/client/modules/core/containers/auth_ensure_guest';
 
 export {
   NavbarMain,
@@ -18,4 +19,5 @@ export {
   AppLoading,
   AppVerifiedMsg,
   AuthEnsureUser,
+  AuthEnsureGuest,
 };

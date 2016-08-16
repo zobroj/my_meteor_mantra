@@ -1,6 +1,5 @@
 import React from 'react';
-import {AppErrorMsg} from '/client/configs/components';
-import AuthEnsureGuest from '../containers/auth_ensure_guest';
+import {AppErrorMsg, AuthEnsureGuest} from '/client/configs/components';
 import { Button, ControlLabel, FormControl, FormGroup, Modal, Panel } from 'react-bootstrap';
 
 export default class AccountLoginGuest extends React.Component {
