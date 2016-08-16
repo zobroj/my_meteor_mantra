@@ -2,7 +2,7 @@ import React from 'react';
 import {AppErrorMsg} from '/client/configs/components';
 import { Button, ControlLabel, FormControl, FormGroup, Modal, Panel } from 'react-bootstrap';
 
-export default class Test extends React.Component {
+export default class AccountLoginGuest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -119,7 +119,7 @@ export default class Test extends React.Component {
   }
 }
 
-Test.propTypes = {
+AccountLoginGuest.propTypes = {
   errorLogin: React.PropTypes.string,
   errorReset: React.PropTypes.string,
   login: React.PropTypes.func,
