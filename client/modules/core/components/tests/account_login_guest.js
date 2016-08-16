@@ -10,9 +10,6 @@ describe('core.components.account_login_guest', () => {
     expect(el.find('Panel AppErrorMsg')).to.have.length(1);
   });
 
-  it('should show error message');
-  // check  which message shows up
-
   it('should show the login form', () => {
     const el = shallow(<AccountLoginGuest />);
     const button = el.find('Button').first();
@@ -48,9 +45,6 @@ describe('core.components.account_login_guest', () => {
       const el = shallow(<AccountLoginGuest />);
       expect(el.find('Modal AppErrorMsg')).to.have.length(1);
     });
-
-    it('should show error message');
-    // check  which message shows up
 
     it('should show the reset password modal', () => {
       const el = shallow(<AccountLoginGuest />);
