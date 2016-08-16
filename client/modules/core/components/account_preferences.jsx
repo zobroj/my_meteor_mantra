@@ -7,7 +7,7 @@ class AccountPreferences extends React.Component {
     super(props);
     this._deleteAccount = this._deleteAccount.bind(this);
   }
-  _deleteAccount(event) {
+  _deleteAccount() {
     const { deleteAccount } = this.props;
     deleteAccount();
   }

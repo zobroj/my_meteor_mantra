@@ -30,8 +30,4 @@ describe('core.components.account_preferences', () => {
     const button = el.find('Button').first();
     expect(button.prop('onClick')).to.be.a('function');
   });
-
-  it('should delete account when click on the button', () => {
-
-  })
 });
