@@ -1,4 +1,5 @@
 import React from 'react';
+import {AppErrorMsg} from '/client/configs/components';
 import { Button, ControlLabel, FormGroup, FormControl } from 'react-bootstrap';
 
 class AccountPasswordResetGuest extends React.Component {
@@ -28,7 +29,7 @@ class AccountPasswordResetGuest extends React.Component {
     const { error } = this.props;
     return (
       <form onSubmit={this._resetPassword}>
-        {error ? <p style={{ color: 'red' }}>{error}</p> : null}
+        <AppErrorMsg error={error} />
         <FormGroup>
           <ControlLabel>New Password</ControlLabel>
           <FormControl
