@@ -19,7 +19,7 @@ class AccountPasswordResetGuest extends React.Component {
   handlePassword2Change(event) {
     this.setState({ password2: event.target.value });
   }
-  _resetPassword(event) {
+  _resetPassword() {
     const { token, resetPassword } = this.props;
     const { password1, password2 } = this.state;
     resetPassword(token, password1, password2);
