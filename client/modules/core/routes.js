@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'react-mounter';
 import { LayoutSplit, LayoutList, AppNotFound } from '/client/configs/components';
-import AccountSignup from './containers/account_signup';
+import AccountSignupMain from './components/account_signup_main';
 import AccountLoginMain from './components/account_login_main';
 import AccountPasswordResetMain from './components/account_password_reset_main';
 import AccountPreferences from './containers/account_preferences';
@@ -14,7 +14,7 @@ export default function (injectDeps, { FlowRouter }) {
     name: 'accounts.signup',
     action() {
       mount(LayoutSplitCtx, {
-        content: () => (<AccountSignup />),
+        content: () => (<AccountSignupMain />),
       });
     },
   });

@@ -1,9 +1,7 @@
 import React from 'react';
-import AccountLoggedIn from './account_logged_in';
-import { AuthCheck } from '/client/configs/components';
 import { Button, ControlLabel, FormGroup, FormControl, Panel } from 'react-bootstrap';
 
-class AccountSignup extends React.Component {
+class AccountSignupGuest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -36,7 +34,7 @@ class AccountSignup extends React.Component {
     const { email, username, password1, password2 } = this.state;
     signup(email, username, password1, password2);
   }
-  displayGuest() {
+  render() {
     const { error } = this.props;
     return (
       <Panel header="Create a New Account">
@@ -83,18 +81,11 @@ class AccountSignup extends React.Component {
       </Panel>
     );
   }
-  render() {
-    return (
-      <AuthCheck guestMessage={this.displayGuest()}>
-        <AccountLoggedIn />
-      </AuthCheck>
-    );
-  }
 }
 
-export default AccountSignup;
+export default AccountSignupGuest;
 
-AccountSignup.propTypes = {
+AccountSignupGuest.propTypes = {
   error: React.PropTypes.string,
   signup: React.PropTypes.func,
 };
