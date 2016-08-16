@@ -8,7 +8,6 @@ class AccountPreferences extends React.Component {
     this._deleteAccount = this._deleteAccount.bind(this);
   }
   _deleteAccount(event) {
-    event.preventDefault();
     const { deleteAccount } = this.props;
     deleteAccount();
   }
@@ -18,10 +17,10 @@ class AccountPreferences extends React.Component {
       <AuthCheck>
         <Row>
           <Col sm={12}>
-            <ul>
-              <li>Email: {user.email}</li>
-              <li>Username: {user.username}</li>
-              <li>ID: {user.id}</li>
+            <ul className="userInfo">
+              <li id="email">Email: {user.email}</li>
+              <li id="username">Username: {user.username}</li>
+              <li id="id">ID: {user.id}</li>
             </ul>
             <Well>
               <p>For testing purposes: </p>
