@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthCheck } from '/client/configs/components';
+import { AuthEnsureUser } from '/client/configs/components';
 import { Alert, Col, Grid, Row } from 'react-bootstrap';
 
 export default class AppVerifiedMsg extends React.Component {
@@ -54,11 +54,11 @@ export default class AppVerifiedMsg extends React.Component {
   }
   render() {
     return (
-      <AuthCheck
+      <AuthEnsureUser
         unverifiedMessage={this.displayPendingUser()}
         guestMessage={this.displayGuest()}
       >
-      </AuthCheck>
+      </AuthEnsureUser>
     );
   }
 }

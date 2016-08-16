@@ -1,11 +1,11 @@
 import AccountLoggedIn from './account_logged_in';
-import { AuthCheck } from '/client/configs/components';
+import { AuthEnsureUser } from '/client/configs/components';
 import AccountSignupGuest from '../containers/account_signup_guest';
 
 const AccountSignupMain = () => (
-  <AuthCheck guestMessage={<AccountSignupGuest/>}>
+  <AuthEnsureUser guestMessage={<AccountSignupGuest/>}>
     <AccountLoggedIn />
-  </AuthCheck>
+  </AuthEnsureUser>
 );
 
 export default AccountSignupMain;

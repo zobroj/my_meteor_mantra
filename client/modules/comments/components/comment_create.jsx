@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppErrorMsg, AuthCheck } from '/client/configs/components';
+import { AppErrorMsg, AuthEnsureUser } from '/client/configs/components';
 import { Button, FormControl, FormGroup } from 'react-bootstrap';
 
 class CommentCreate extends React.Component {
@@ -23,7 +23,7 @@ class CommentCreate extends React.Component {
   render() {
     const { error } = this.props;
     return (
-      <AuthCheck guestMessage={GuestMessage}>
+      <AuthEnsureUser guestMessage={GuestMessage}>
         <form>
           <AppErrorMsg error={error} />
           <FormGroup>
@@ -36,7 +36,7 @@ class CommentCreate extends React.Component {
           </FormGroup>
           <Button onClick={this._createComment}>Add Comment</Button>
         </form>
-      </AuthCheck>
+      </AuthEnsureUser>
     );
   }
 }

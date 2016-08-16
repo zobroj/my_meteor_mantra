@@ -6,7 +6,7 @@ import AppNotFound from '/client/modules/core/components/app_not_found';
 import AppErrorMsg from '/client/modules/core/components/app_error_msg';
 import AppVerifiedMsg from '/client/modules/core/containers/app_verified_msg';
 import AppLoading from '/client/modules/core/components/app_loading';
-import AuthCheck from '/client/modules/core/containers/auth_check';
+import AuthEnsureUser from '/client/modules/core/containers/auth_ensure_user';
 
 export {
   NavbarMain,
@@ -17,5 +17,5 @@ export {
   AppErrorMsg,
   AppLoading,
   AppVerifiedMsg,
-  AuthCheck,
+  AuthEnsureUser,
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import {AuthCheck} from '/client/configs/components';
+import {AuthEnsureUser} from '/client/configs/components';
 import {MenuItem, Nav, NavDropdown} from 'react-bootstrap';
 import NavbarGuest from './navbar_guest';
 
@@ -29,10 +29,10 @@ class NavbarUser extends React.Component {
   }
   render() {
     return (
-      <AuthCheck
+      <AuthEnsureUser
         guestMessage={<NavbarGuest />}
         unverifiedMessage={this.displayUser()}
-      >{this.displayUser()}</AuthCheck>
+      >{this.displayUser()}</AuthEnsureUser>
     );
   }
 }

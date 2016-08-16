@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthCheck } from '/client/configs/components';
+import { AuthEnsureUser } from '/client/configs/components';
 import { Button, Col, Row, Well } from 'react-bootstrap';
 
 class AccountPreferences extends React.Component {
@@ -14,7 +14,7 @@ class AccountPreferences extends React.Component {
   render() {
     const { user } = this.props;
     return (
-      <AuthCheck>
+      <AuthEnsureUser>
         <Row>
           <Col sm={12}>
             <ul className="userInfo">
@@ -28,7 +28,7 @@ class AccountPreferences extends React.Component {
             </Well>
           </Col>
         </Row>
-      </AuthCheck>
+      </AuthEnsureUser>
     );
   }
 }

@@ -12,7 +12,7 @@ const DefaultUnverifidMessage = (
   <div>This functionality is not available to unverified users.</div>
 );
 
-const AuthCheck = ({
+const AuthEnsureUser = ({
     loggingIn, loggedIn, emailVerified, children, guestMessage, loadingMessage, unverifiedMessage,
   }) => {
   let guestComponent = guestMessage || DefaultGuestMessage;
@@ -40,4 +40,4 @@ const AuthCheck = ({
   );
 };
 
-export default AuthCheck;
+export default AuthEnsureUser;
