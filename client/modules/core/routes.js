@@ -3,7 +3,7 @@ import { mount } from 'react-mounter';
 import { LayoutSplit, LayoutList, AppNotFound } from '/client/configs/components';
 import AccountSignup from './containers/account_signup';
 import AccountLoginMain from './components/account_login_main';
-import AccountPasswordReset from './containers/account_password_reset';
+import AccountPasswordResetMain from './components/account_password_reset_main';
 import AccountPreferences from './containers/account_preferences';
 
 export default function (injectDeps, { FlowRouter }) {
@@ -53,7 +53,7 @@ export default function (injectDeps, { FlowRouter }) {
     name: 'reset-password',
     action(params) {
       mount(LayoutListCtx, {
-        content: () => (<AccountPasswordReset token={params.token} />),
+        content: () => (<AccountPasswordResetMain token={params.token} />),
       });
     },
   });

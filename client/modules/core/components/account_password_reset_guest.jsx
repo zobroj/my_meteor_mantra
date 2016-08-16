@@ -1,9 +1,7 @@
 import React from 'react';
-import AccountLoggedIn from './account_logged_in';
-import { AuthCheck } from '/client/configs/components';
-import { Button, ControlLabel, FormGroup, FormControl, Panel } from 'react-bootstrap';
+import { Button, ControlLabel, FormGroup, FormControl } from 'react-bootstrap';
 
-class AccountPasswordReset extends React.Component {
+class AccountPasswordResetGuest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +18,13 @@ class AccountPasswordReset extends React.Component {
   handlePassword2Change(event) {
     this.setState({ password2: event.target.value });
   }
-  displayGuest() {
+  _resetPassword(event) {
+    event.preventDefault();
+    const { token, resetPassword } = this.props;
+    const { password1, password2 } = this.state;
+    resetPassword(token, password1, password2);
+  }
+  render() {
     const { error } = this.props;
     return (
       <form onSubmit={this._resetPassword}>
@@ -47,26 +51,11 @@ class AccountPasswordReset extends React.Component {
       </form>
     );
   }
-  _resetPassword(event) {
-    event.preventDefault();
-    const { token, resetPassword } = this.props;
-    const { password1, password2 } = this.state;
-    resetPassword(token, password1, password2);
-  }
-  render() {
-    return (
-      <Panel header="Change your password" >
-        <AuthCheck guestMessage={this.displayGuest()}>
-          <AccountLoggedIn />
-        </AuthCheck>
-      </Panel>
-    );
-  }
 }
 
-export default AccountPasswordReset;
+export default AccountPasswordResetGuest;
 
-AccountPasswordReset.propTypes = {
+AccountPasswordResetGuest.propTypes = {
   error: React.PropTypes.string,
   token: React.PropTypes.string,
   resetPassword: React.PropTypes.func,
