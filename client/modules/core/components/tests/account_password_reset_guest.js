@@ -16,10 +16,14 @@ describe('core.components.account_password_reset_guest', () => {
     expect(el.props().resetPassword, 'resetPassword').to.be.defined;
   });
 
-  it('should contain reset password form', () => {
+  it('should show reset password form', () => {
     const el = shallow(<AccountPasswordResetGuest />);
     expect(el.find('form#password-reset').length, 'form').to.be.equal(1);
   });
 
-  it('should resetPassword when button click');
+  it('should resetPassword when click button', () => {
+    const el = shallow(<AccountPasswordResetGuest />);
+    const button = el.find('form Button');
+    console.log(button.debug());
+  });
 });

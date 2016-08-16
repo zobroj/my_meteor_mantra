@@ -20,7 +20,6 @@ class AccountPasswordResetGuest extends React.Component {
     this.setState({ password2: event.target.value });
   }
   _resetPassword(event) {
-    event.preventDefault();
     const { token, resetPassword } = this.props;
     const { password1, password2 } = this.state;
     resetPassword(token, password1, password2);
@@ -28,7 +27,7 @@ class AccountPasswordResetGuest extends React.Component {
   render() {
     const { error } = this.props;
     return (
-      <form id="password-reset" onSubmit={this._resetPassword}>
+      <form id="password-reset">
         <AppErrorMsg error={error} />
         <FormGroup>
           <ControlLabel>New Password</ControlLabel>
@@ -48,7 +47,10 @@ class AccountPasswordResetGuest extends React.Component {
             onChange={this.handlePassword2Change}
           />
         </FormGroup>
-        <Button bsStyle="primary" type="submit">Submit</Button>
+        <Button
+          onClick={this._resetPassword}
+          bsStyle="primary"
+        >Submit</Button>
       </form>
     );
   }
