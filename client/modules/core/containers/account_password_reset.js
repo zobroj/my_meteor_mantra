@@ -1,5 +1,5 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
-import Component from '../components/account_password_reset_guest';
+import Component from '../components/account_password_reset';
 
 export const composer = ({ context, clearErrors }, onData) => {
   const { LocalState } = context();
