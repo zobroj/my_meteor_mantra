@@ -5,7 +5,7 @@ import AccountLoginGuest from '../account_login_guest';
 
 // if loggedIn
 describe('core.components.account_login_guest', () => {
-  it('contains an AppErrorMsg component', () => {
+  it('should contain an AppErrorMsg component', () => {
     const el = shallow(<AccountLoginGuest />);
     expect(el.find('Panel AppErrorMsg')).to.have.length(1);
   });
@@ -44,7 +44,7 @@ describe('core.components.account_login_guest', () => {
   });
 
   describe('if user clicks on reset password link', () => {
-    it('should contains an AppErrorMsg component', () => {
+    it('should contain an AppErrorMsg component', () => {
       const el = shallow(<AccountLoginGuest />);
       expect(el.find('Modal AppErrorMsg')).to.have.length(1);
     });
@@ -67,7 +67,13 @@ describe('core.components.account_login_guest', () => {
       expect(resetButton.prop('onClick')).to.be.a('function');
     });
 
-    it('should close the modal when click on close button');
+    it('should close modal when click on close button', () => {
+      const el = shallow(<AccountLoginGuest />);
+      el.setState({showModal: true});
+      const closeButton = el.find('Modal Button#close');
+      closeButton.simulate('click');
+      expect(el.state('showModal')).to.equal(false);
+    });
 
     it('should reset password when click on the button', done => {
       const resetEmail = 'the-email';
