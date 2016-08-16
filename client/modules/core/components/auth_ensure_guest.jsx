@@ -1,6 +1,5 @@
 import AccountLoggedIn from './account_logged_in';
 
-
 const AuthEnsureGuest = ({loggingIn, loggedIn, children}) => {
   if (loggingIn) {
     return (<div>Loading...</div>);

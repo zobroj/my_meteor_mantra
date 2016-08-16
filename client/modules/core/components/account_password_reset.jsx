@@ -2,7 +2,7 @@ import React from 'react';
 import {AppErrorMsg, AuthEnsureGuest} from '/client/configs/components';
 import { Button, ControlLabel, FormGroup, FormControl, Panel } from 'react-bootstrap';
 
-class AccountPasswordResetGuest extends React.Component {
+export default class AccountPasswordReset extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -60,9 +60,7 @@ class AccountPasswordResetGuest extends React.Component {
   }
 }
 
-export default AccountPasswordResetGuest;
-
-AccountPasswordResetGuest.propTypes = {
+AccountPasswordReset.propTypes = {
   error: React.PropTypes.string,
   token: React.PropTypes.string,
   resetPassword: React.PropTypes.func,
