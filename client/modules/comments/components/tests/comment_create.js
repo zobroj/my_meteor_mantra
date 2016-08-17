@@ -4,8 +4,10 @@ import { shallow } from 'enzyme';
 import CommentCreate from '../comment_create';
 
 describe('comments.components.comment_create', () => {
-  it('contains an <AppErrorMsg/> component', () => {
+  it('contains import components', () => {
     const wrapper = shallow(<CommentCreate />);
+    expect(wrapper.find('UseDeps(Container(AuthEnsureUser))'))
+      .to.have.length(1);
     expect(wrapper.find('AppErrorMsg')).to.have.length(1);
   });
 
