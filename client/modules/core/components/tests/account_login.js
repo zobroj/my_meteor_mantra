@@ -5,8 +5,9 @@ import AccountLogin from '../account_login';
 
 // if loggedIn
 describe('core.components.account_login', () => {
-  it('should contain an AppErrorMsg component', () => {
+  it('should contain component imports', () => {
     const el = shallow(<AccountLogin />);
+    expect(el.find('UseDeps(Container(AuthEnsureGuest))')).to.have.length(1);
     expect(el.find('Panel AppErrorMsg')).to.have.length(1);
   });
 
