@@ -21,8 +21,10 @@ describe('core.actions.accounts', () => {
     });
 
     describe('if confirmed', () => {
-      var confirmStub; var LocalState; var FlowRouter;
-
+      const user = {id: 'someuserid'};
+      var confirmStub;
+      var LocalState;
+      var FlowRouter;
       beforeEach(() => {
         confirmStub = stub(window, 'confirm');
         confirmStub.returns(true);
@@ -35,12 +37,13 @@ describe('core.actions.accounts', () => {
       });
 
       it('should call Meteor to delete account', () => {
-        const Meteor = {call: spy(), userId: () => 'someuserid'};
-        actions.deleteAccount({FlowRouter, LocalState, Meteor});
+        const Meteor = {call: spy()};
+        actions.deleteAccount({FlowRouter, LocalState, Meteor}, 'userId');
         const methodArgs = Meteor.call.args[0];
         expect(methodArgs.slice(0, 2)).to.deep.equal(
-          [ 'accounts.deleteAccount', 'someuserid' ]
+          [ 'accounts.deleteAccount', 'userId' ]
         );
+        expect(methodArgs[2]).to.be.a('function');
       });
 
       describe('after Meteor call', () => {
