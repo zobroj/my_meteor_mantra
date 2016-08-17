@@ -67,7 +67,7 @@ export default class AccountLogin extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            className="close"
+            className="close-modal"
             onClick={this.modalClose}
           >Close</Button>
           <Button
