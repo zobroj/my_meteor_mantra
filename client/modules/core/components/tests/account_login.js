@@ -1,18 +1,35 @@
-const {describe, it} = global;
+const {beforeEach, describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import AccountLogin from '../account_login';
 
 // if loggedIn
 describe('core.components.account_login', () => {
+  let el;
+  const email = 'the-email';
+  const password = 'the-password';
+  const resetEmail = 'the-email';
+  const onLogin = () => {
+    expect(email).to.be.equal(email);
+    expect(password).to.be.equal(password);
+  };
+  const sendResetPasswordLink = () => {
+    expect(resetEmail).to.be.equal(resetEmail);
+  };
+  beforeEach(() => {
+    el = shallow(
+    <AccountLogin
+      login={onLogin}
+      sendResetPasswordLink={sendResetPasswordLink}
+    />
+    );
+  });
   it('should contain component imports', () => {
-    const el = shallow(<AccountLogin />);
     expect(el.find('UseDeps(Container(AuthEnsureGuest))')).to.have.length(1);
     expect(el.find('Panel AppErrorMsg')).to.have.length(1);
   });
 
   it('should show the login form', () => {
-    const el = shallow(<AccountLogin />);
     const form = el.find('form#account-login');
     const button = form.find('Button').first();
     const emailInput = form.find({type: 'email'});
@@ -25,17 +42,7 @@ describe('core.components.account_login', () => {
     expect(passwordInput.prop('onChange')).to.be.a('function');
   });
 
-  it('should login when click on the submit', done => {
-    const email = 'the-email';
-    const password = 'the-password';
-    const onLogin = () => {
-      expect(email).to.be.equal(email);
-      expect(password).to.be.equal(password);
-      done();
-    };
-    const el = shallow(
-      <AccountLogin login={onLogin} />
-    );
+  it('should login when click on the submit', () => {
     el.setState({email, password});
     const button = el.find('Button').first();
     button.simulate('click');
@@ -43,12 +50,10 @@ describe('core.components.account_login', () => {
 
   describe('if user clicks on reset password link', () => {
     it('should contain an AppErrorMsg component', () => {
-      const el = shallow(<AccountLogin />);
       expect(el.find('Modal AppErrorMsg')).to.have.length(1);
     });
 
     it('should show the reset password modal', () => {
-      const el = shallow(<AccountLogin />);
       el.setState({showModal: false});
       const linky = el.find('#show-reset-modal a');
       expect(linky.prop('onClick')).to.be.a('function');
@@ -57,7 +62,6 @@ describe('core.components.account_login', () => {
     });
 
     it('should show reset password form', () => {
-      const el = shallow(<AccountLogin />);
       // IN FORM
       const form = el.find('form#reset-password');
       const emailInput = form.find({type: 'email'});
@@ -73,22 +77,13 @@ describe('core.components.account_login', () => {
     });
 
     it('should close modal when click on close button', () => {
-      const el = shallow(<AccountLogin />);
       el.setState({showModal: true});
       const closeButton = el.find('Modal Button.close');
       closeButton.simulate('click');
       expect(el.state('showModal')).to.equal(false);
     });
 
-    it('should reset password when click on the button', done => {
-      const resetEmail = 'the-email';
-      const onClick = () => {
-        expect(resetEmail).to.be.equal(resetEmail);
-        done();
-      };
-      const el = shallow(
-        <AccountLogin sendResetPasswordLink={onClick}/>
-      );
+    it('should reset password when click on the button', () => {
       el.setState({resetEmail});
       const resetButton = el.find('Modal Button.submit');
       resetButton.simulate('click');
