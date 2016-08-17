@@ -39,7 +39,7 @@ class AccountSignup extends React.Component {
     return (
       <Panel header="Create a New Account">
         <AuthEnsureGuest>
-          <form>
+          <form id="account-signup">
             <AppErrorMsg error={error} />
             <FormGroup>
               <ControlLabel>Email Address</ControlLabel>
@@ -77,7 +77,10 @@ class AccountSignup extends React.Component {
                 onChange={this.handlePassword2Change}
               />
             </FormGroup>
-            <Button onClick={this._signup}>Submit</Button>
+            <Button
+              className="submit"
+              onClick={this._signup}
+            >Submit</Button>
           </form>
         </AuthEnsureGuest>
       </Panel>
