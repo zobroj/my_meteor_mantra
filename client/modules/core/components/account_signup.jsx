@@ -29,8 +29,7 @@ class AccountSignup extends React.Component {
   handlePassword2Change(event) {
     this.setState({ password2: event.target.value });
   }
-  _signup(event) {
-    event.preventDefault();
+  _signup() {
     const { signup } = this.props;
     const { email, username, password1, password2 } = this.state;
     signup(email, username, password1, password2);
@@ -40,7 +39,7 @@ class AccountSignup extends React.Component {
     return (
       <Panel header="Create a New Account">
         <AuthEnsureGuest>
-          <form onSubmit={this._signup}>
+          <form>
             <AppErrorMsg error={error} />
             <FormGroup>
               <ControlLabel>Email Address</ControlLabel>
@@ -78,7 +77,7 @@ class AccountSignup extends React.Component {
                 onChange={this.handlePassword2Change}
               />
             </FormGroup>
-            <Button type="submit">Submit</Button>
+            <Button onClick={this._signup}>Submit</Button>
           </form>
         </AuthEnsureGuest>
       </Panel>
