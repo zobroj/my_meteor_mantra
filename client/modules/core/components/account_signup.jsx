@@ -1,4 +1,5 @@
 import React from 'react';
+import { AuthEnsureGuest } from '/client/configs/components';
 import { Button, ControlLabel, FormGroup, FormControl, Panel } from 'react-bootstrap';
 
 class AccountSignup extends React.Component {
