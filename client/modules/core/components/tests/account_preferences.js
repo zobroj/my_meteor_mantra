@@ -1,7 +1,7 @@
-/* eslint-disable no-unused-expressions */
 const {describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
+import {stub} from 'sinon';
 import AccountPreferences from '../account_preferences';
 
 // if loggedIn
@@ -15,12 +15,6 @@ describe('core.components.account_preferences', () => {
   it('should have component imports', () => {
     const el = shallow(<AccountPreferences user={user} />);
     expect(el.find('UseDeps(Container(AuthEnsureUser))')).to.have.length(1);
-  });
-
-  it('should have req props', () => {
-    const el = shallow(<AccountPreferences user={user} />);
-    expect(el.props().deleteAccount).to.be.defined;
-    expect(el.props().user).to.be.defined;
   });
 
   it('should display user information', () => {
