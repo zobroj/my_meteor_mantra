@@ -14,26 +14,24 @@ describe('core.actions.accounts', () => {
   });
 
   describe('deleteAccount', () => {
+    var confirmStub; var LocalState; var FlowRouter;
+    beforeEach(() => {
+      FlowRouter = {go: spy()};
+      LocalState = {set: spy()};
+      confirmStub = stub(window, 'confirm');
+    });
+    afterEach(() => {
+      confirmStub.restore();
+    });
+
     it('should clear older LocalState for ACCOUNT_DELETE_ERROR', () => {
-      const LocalState = {set: spy()};
       actions.deleteAccount({LocalState});
       expect(LocalState.set.args[0]).to.deep.equal([ 'ACCOUNT_DELETE_ERROR', null ]);
     });
 
     describe('if confirmed', () => {
-      const user = {id: 'someuserid'};
-      var confirmStub;
-      var LocalState;
-      var FlowRouter;
       beforeEach(() => {
-        confirmStub = stub(window, 'confirm');
         confirmStub.returns(true);
-        FlowRouter = {go: spy()};
-        LocalState = {set: spy()};
-      });
-
-      afterEach(() => {
-        confirmStub.restore();
       });
 
       it('should call Meteor to delete account', () => {
@@ -48,17 +46,15 @@ describe('core.actions.accounts', () => {
 
       describe('after Meteor call', () => {
         it('should set ACCOUNT_DELETE_ERROR with error reason', () => {
-          const Meteor = {call: stub(), userId: () => 'someuserid'};
           const err = {reason: 'delete account probyo'};
-          Meteor.call.callsArgWith(2, err);
-          actions.deleteAccount({FlowRouter, LocalState, Meteor});
+          const Meteor = {call: stub().callsArgWith(2, err)};
+          actions.deleteAccount({FlowRouter, LocalState, Meteor}, 'userId');
           expect(LocalState.set.args[1]).to.deep.equal([ 'ACCOUNT_DELETE_ERROR', err.reason ]);
         });
 
         it(`should redirect to '/'`, () => {
-          const Meteor = {call: stub(), userId: () => 'someuserid'};
-          Meteor.call.callsArgWith(2, null);
-          actions.deleteAccount({FlowRouter, LocalState, Meteor});
+          const Meteor = {call: stub().callsArgWith(2, null)};
+          actions.deleteAccount({FlowRouter, LocalState, Meteor}, 'userId');
           expect(FlowRouter.go.args[0][0]).to.be.equal('/');
         });
       });
@@ -66,17 +62,13 @@ describe('core.actions.accounts', () => {
 
     describe('if not confirmed', () => {
       it('should do nothing', () => {
-        const confirmStub = stub(window, 'confirm');
         confirmStub.returns(false);
-        const FlowRouter = {go: spy()};
-        const LocalState = {set: spy()};
-        const Meteor = {call: spy(), userId: () => 'someuserid'};
-        actions.deleteAccount({FlowRouter, LocalState, Meteor});
+        const Meteor = {call: spy()};
+        actions.deleteAccount({FlowRouter, LocalState, Meteor}, 'userId');
         expect(Meteor.call.callCount).to.be.equal(0);
-        confirmStub.restore();
       });
     });
-  });
+  }); // .deleteAccount
 
   describe('login', () => {
     it('should reject if email is not there', () => {
@@ -116,6 +108,7 @@ describe('core.actions.accounts', () => {
       );
       expect(methodArgs[2]).to.be.a('function');
     });
+
     describe('after Meteor call', () => {
       it('should set LOGIN_ERROR with error reason', () => {
         const FlowRouter = {go: spy()};
@@ -130,6 +123,7 @@ describe('core.actions.accounts', () => {
           [ 'LOGIN_ERROR', err.reason ]
         );
       });
+
       it(`should redirect to '/post'`, () => {
         const FlowRouter = {go: spy()};
         const LocalState = {set: spy()};
