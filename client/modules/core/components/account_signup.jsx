@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthEnsureGuest } from '/client/configs/components';
+import { AppErrorMsg, AuthEnsureGuest } from '/client/configs/components';
 import { Button, ControlLabel, FormGroup, FormControl, Panel } from 'react-bootstrap';
 
 class AccountSignup extends React.Component {
@@ -41,7 +41,7 @@ class AccountSignup extends React.Component {
       <Panel header="Create a New Account">
         <AuthEnsureGuest>
           <form onSubmit={this._signup}>
-            {error ? <p style={{ color: 'red' }}>{error}</p> : null}
+            <AppErrorMsg error={error} />
             <FormGroup>
               <ControlLabel>Email Address</ControlLabel>
               <FormControl

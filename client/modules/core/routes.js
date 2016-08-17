@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'react-mounter';
 import { LayoutSplit, LayoutList, AppNotFound } from '/client/configs/components';
-import AccountSignup from './components/account_signup';
+import AccountSignup from './containers/account_signup';
 import AccountLogin from './containers/account_login';
 import AccountPasswordReset from './components/account_password_reset';
 import AccountPreferences from './containers/account_preferences';

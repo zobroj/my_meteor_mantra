@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 const {describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
@@ -5,8 +6,9 @@ import AccountPasswordResetGuest from '../account_password_reset';
 
 // if loggedIn
 describe('core.components.account_password_reset', () => {
-  it('should contain AppErrorMsg component', () => {
+  it('should contain component imports', () => {
     const el = shallow(<AccountPasswordResetGuest />);
+    expect(el.find('UseDeps(Container(AuthEnsureGuest))')).to.have.length(1);
     expect(el.find('AppErrorMsg', 'AppErrorMsg').length).to.be.equal(1);
   });
 
