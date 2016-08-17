@@ -45,7 +45,7 @@ export default class AccountPasswordReset extends React.Component {
               <FormControl
                 type="password"
                 placeholder="Enter password again"
-                value={this.state.pasword2}
+                value={this.state.password2}
                 onChange={this.handlePassword2Change}
               />
             </FormGroup>
