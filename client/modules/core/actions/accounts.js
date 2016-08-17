@@ -114,10 +114,9 @@ export default {
     });
   },
 
-  deleteAccount({FlowRouter, LocalState, Meteor}) {
+  deleteAccount({FlowRouter, LocalState, Meteor}, userId) {
     LocalState.set('ACCOUNT_DELETE_ERROR', null);
     if (window.confirm('Are you sure-sure?')) {
-      const userId = Meteor.userId();
       Meteor.call('accounts.deleteAccount', userId, (err) => {
         if (err && err.reason) {
           LocalState.set('ACCOUNT_DELETE_ERROR', err.reason);
