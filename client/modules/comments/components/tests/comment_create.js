@@ -1,6 +1,7 @@
-const { describe, it } = global;
-import { expect } from 'chai';
-import { shallow } from 'enzyme';
+const {describe, it} = global;
+import {expect} from 'chai';
+import {shallow} from 'enzyme';
+import {stub} from 'sinon';
 import CommentCreate from '../comment_create';
 
 describe('comments.components.comment_create', () => {
@@ -24,32 +25,27 @@ describe('comments.components.comment_create', () => {
     const el = shallow(<CommentCreate />);
     const textarea = el.find('FormControl').first();
     textarea.simulate('change', {target: {value: newText}});
-    expect(el.state('comment')).to.be.equal(newText);
+    expect(el.state('comment'), 'comment').to.be.equal(newText);
   });
 
-  it('should create a new comment when click on the button', done => {
+  it('should create a new comment when click on the button', () => {
     const postId = 'the-id';
     const comment = 'the-text';
     const user = {
       id: 'the-user-id',
       username: 'the-username',
     };
-
-    const onCreate = () => {
-      expect(postId).to.be.equal(postId);
-      expect(user.id).to.be.equal(user.id);
-      expect(user.username).to.be.equal(user.username);
-      expect(comment).to.be.equal(comment);
-      done();
-    };
-
-    const wrapper = shallow(
-      <CommentCreate create={onCreate} postId={postId} user={user}/>
+    const actions = {create: stub()};
+    const el = shallow(
+      <CommentCreate create={actions.create} postId={postId} user={user}/>
     );
-    wrapper.setState({ comment });
-
-    const button = wrapper.find('Button').first();
+    el.setState({comment});
+    const button = el.find('Button').first();
     button.simulate('click');
+    const args = actions.create.args[0];
+    expect(args.slice(0,4)).to.deep.equal(
+      [ user.id, user.username, postId, comment ]
+    );
   });
 
 });
