@@ -36,7 +36,7 @@ describe('core.components.account_signup', () => {
     expect(button.prop('onClick')).to.be.a('function');
   });
 
-  it('should signup user when button click', () => {
+  it('should call signup method on button click', () => {
     const email = 'the-email';
     const username = 'the-username';
     const password1 = 'the-password1';
@@ -46,5 +46,9 @@ describe('core.components.account_signup', () => {
     el.setState({password1});
     el.setState({password2});
     button.simulate('click');
+    const args = actions.signup.args[0];
+    expect(args.slice(0,4)).to.deep.equal(
+      [ email, username, password1, password2 ]
+    );
   });
 });
