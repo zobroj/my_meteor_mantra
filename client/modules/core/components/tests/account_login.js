@@ -4,8 +4,6 @@ import {shallow} from 'enzyme';
 import {stub} from 'sinon';
 import AccountLogin from '../account_login';
 
-
-// if loggedIn
 describe('core.components.account_login', () => {
   describe('Account Login Form', () => {
     let actions;
