@@ -17,7 +17,6 @@ describe('core.components.navbar_main', () => {
   });
 
   it('should contain a link to home', () => {
-    // isActiveRoute.returns('active');
     const el = shallow(<NavbarMain />);
     const homeLink = el.find('a').at(0);
     expect(homeLink.text()).to.be.equal('My Meteor Mantra');

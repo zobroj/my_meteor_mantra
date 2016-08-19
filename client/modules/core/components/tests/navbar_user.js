@@ -1,14 +1,11 @@
-const {beforeEach, describe, it} = global;
+const {describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import NavbarUser from '../navbar_user';
 
 describe('core.components.navbar_user', () => {
   describe('if user is loggedIn', () => {
-    var props;
-    beforeEach(() => {
-      props = {user: {username: 'bob'}};
-    });
+    var props = {user: {username: 'bob'}};
 
     it('should display the username on dropdown button', () => {
       const el = shallow(<NavbarUser {...props} />);

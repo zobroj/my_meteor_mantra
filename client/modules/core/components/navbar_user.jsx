@@ -13,6 +13,7 @@ class NavbarUser extends React.Component {
     logout();
   }
   displayUser() {
+    // defined for both user and guest components
     const { user } = this.props;
     return (
       <Nav pullRight>
@@ -32,7 +33,9 @@ class NavbarUser extends React.Component {
       <AuthEnsureUser
         guestMessage={<NavbarGuest />}
         unverifiedMessage={this.displayUser()}
-      >{this.displayUser()}</AuthEnsureUser>
+      >
+      {this.displayUser()}
+      </AuthEnsureUser>
     );
   }
 }
