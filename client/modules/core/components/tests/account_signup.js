@@ -5,13 +5,25 @@ import {stub} from 'sinon';
 import AccountSignup from '../account_signup';
 
 describe('core.components.account_signup', () => {
+  const EMAIL = 'the-email';
+  const USERNAME = 'the-username';
+  const PASSWORD1 = 'the-password1';
+  const PASSWORD2 = 'the-password2';
   var actions;
   var button;
   var el;
+  var emailInput;
+  var usernameInput;
+  var password1Input;
+  var password2Input;
   beforeEach(() => {
     actions = {signup: stub()};
     el = shallow(<AccountSignup signup={actions.signup}/>);
     button = el.find('Button.submit');
+    emailInput = el.find({type: 'email'});
+    usernameInput = el.find({type: 'text'});
+    password1Input = el.find({placeholder: 'Enter password'});
+    password2Input = el.find({placeholder: 'Confirm password'});
   });
 
   it('should have component imports', () => {
@@ -20,10 +32,6 @@ describe('core.components.account_signup', () => {
   });
 
   it('should render signup form', () => {
-    const emailInput = el.find({type: 'email'});
-    const usernameInput = el.find({type: 'text'});
-    const password1Input = el.find({placeholder: 'Enter password'});
-    const password2Input = el.find({placeholder: 'Confirm password'});
     expect(emailInput).to.have.length(1);
     expect(emailInput.prop('value')).to.be.equal('');
     expect(usernameInput).to.have.length(1);
@@ -36,19 +44,26 @@ describe('core.components.account_signup', () => {
     expect(button.prop('onClick')).to.be.a('function');
   });
 
+  it('should handle input changes', () => {
+    emailInput.simulate('change', {target: {value: EMAIL}});
+    expect(el.state('email'), 'email').to.be.equal(EMAIL);
+    usernameInput.simulate('change', {target: {value: USERNAME}});
+    expect(el.state('username'), 'username').to.be.equal(USERNAME);
+    password1Input.simulate('change', {target: {value: PASSWORD1}});
+    expect(el.state('password1'), 'password1').to.be.equal(PASSWORD1);
+    password2Input.simulate('change', {target: {value: PASSWORD2}});
+    expect(el.state('password2'), 'password2').to.be.equal(PASSWORD2);
+  });
+
   it('should call signup method on button click', () => {
-    const email = 'the-email';
-    const username = 'the-username';
-    const password1 = 'the-password1';
-    const password2 = 'the-password2';
-    el.setState({email});
-    el.setState({username});
-    el.setState({password1});
-    el.setState({password2});
+    el.setState({email: EMAIL});
+    el.setState({username: USERNAME});
+    el.setState({password1: PASSWORD1});
+    el.setState({password2: PASSWORD2});
     button.simulate('click');
     const args = actions.signup.args[0];
     expect(args.slice(0,4)).to.deep.equal(
-      [ email, username, password1, password2 ]
+      [ EMAIL, USERNAME, PASSWORD1, PASSWORD2 ]
     );
   });
 });
