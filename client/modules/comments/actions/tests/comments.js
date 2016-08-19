@@ -1,12 +1,17 @@
-const {describe, it} = global;
+const {beforeEach, describe, it} = global;
 import {expect} from 'chai';
 import {spy, stub} from 'sinon';
 import actions from '../comments';
 
 describe('comments.actions.comments', () => {
   describe('create', () => {
+    var FlowRouter;
+    var LocalState;
+    beforeEach(() => {
+      LocalState = {set: spy()};
+      FlowRouter = {go: spy()};
+    });
     it('should reject if userId is not there', () => {
-      const LocalState = {set: spy()};
       actions.create({LocalState}, null, 'username', 'postId', 'text');
       const args = LocalState.set.args[0];
 
@@ -15,7 +20,6 @@ describe('comments.actions.comments', () => {
     });
 
     it('should reject if username is not there', () => {
-      const LocalState = {set: spy()};
       actions.create({LocalState}, 'userId', null, 'postId', 'text');
       const args = LocalState.set.args[0];
 
@@ -24,7 +28,6 @@ describe('comments.actions.comments', () => {
     });
 
     it('should reject if postId is not there', () => {
-      const LocalState = {set: spy()};
       actions.create({LocalState}, 'userId', 'username', null, 'text');
       const args = LocalState.set.args[0];
 
@@ -33,30 +36,20 @@ describe('comments.actions.comments', () => {
     });
 
     it('should reject if text is not there', () => {
-      const LocalState = {set: spy()};
       actions.create({LocalState}, 'userId', 'username', 'postId', null);
       const args = LocalState.set.args[0];
-
       expect(args[0]).to.be.equal('CREATE_COMMENT_ERROR');
       expect(args[1]).to.match(/required/);
     });
 
     it('should clear older LocalState for CREATE_COMMENT_ERROR', () => {
-      const Meteor = {
-        uuid: spy(),
-        call: spy(),
-      };
-      const LocalState = {set: spy()};
-      const FlowRouter = {go: spy()};
-
+      const Meteor = { uuid: spy(), call: spy() };
       actions.create({LocalState, Meteor, FlowRouter}, 'userId', 'username', 'postId', 'text');
       expect(LocalState.set.args[0]).to.deep.equal([ 'CREATE_COMMENT_ERROR', null ]);
     });
 
     it('should call Meteor.call to save the comment', () => {
       const Meteor = { uuid: () => '_id', call: spy() };
-      const LocalState = {set: spy()};
-      const FlowRouter = {go: spy()};
 
       actions.create({LocalState, Meteor, FlowRouter}, 'userId', 'username', 'postId', 'text');
       const methodArgs = Meteor.call.args[0];
@@ -72,7 +65,6 @@ describe('comments.actions.comments', () => {
       describe('if there is error', () => {
         it('should set CREATE_COMMENT_ERROR with the error message', () => {
           const Meteor = {uuid: () => '_id', call: stub()};
-          const LocalState = {set: spy()};
           const err = {message: 'Oops'};
           Meteor.call.callsArgWith(6, err);
 
