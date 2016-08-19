@@ -10,12 +10,12 @@ export default class AppVerifiedMsg extends React.Component {
     this._resendVerificationEmail = this._resendVerificationEmail.bind(this);
   }
   _resendVerificationEmail() {
+    const {resendVerificationEmail} = this.props;
     this.setState({ resendLinkClicked: true });
-    this.props.resendVerificationEmail();
+    resendVerificationEmail();
     // user can click link after 60 seconds
     const resetState = () => {
       this.setState({ resendLinkClicked: false });
-      console.log(this.state.resendLinkClicked);
     };
     /* TODO this is stupid */
     setTimeout(resetState, 60000);
@@ -35,20 +35,23 @@ export default class AppVerifiedMsg extends React.Component {
   }
   render() {
     const {loggedIn, emailVerified} = this.props;
-    if (loggedIn && !emailVerified) {
-      return (
-        <Grid>
-          <Row>
-            <Col xs={12}>
-              <Alert bsStyle="danger">
-                {this.linkAvailability()}
-              </Alert>
-            </Col>
-          </Row>
-        </Grid>
-      );
+    if (!loggedIn) {
+      return (<div></div>);
     }
-    return (<div></div>);
+    if (loggedIn && emailVerified) {
+      return (<div></div>);
+    }
+    return (
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <Alert bsStyle="danger">
+              {this.linkAvailability()}
+            </Alert>
+          </Col>
+        </Row>
+      </Grid>
+    );
   }
 }
 
