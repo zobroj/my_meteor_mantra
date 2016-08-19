@@ -4,7 +4,6 @@ import {mount} from 'enzyme';
 import sinon from 'sinon';
 import AppVerifiedMsg from '../app_verified_msg';
 
-// if loggedIn
 describe('core.components.app_verified_msg', () => {
   describe('if user is !loggedIn', () => {
     it('should display empty <div/>', () => {

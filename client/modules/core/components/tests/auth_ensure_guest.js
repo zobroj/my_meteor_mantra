@@ -3,7 +3,6 @@ import {expect} from 'chai';
 import {mount} from 'enzyme';
 import AuthEnsureGuest from '../auth_ensure_guest';
 
-// if loggedIn
 describe('core.components.auth_ensure_guest', () => {
   describe('if user is loggingIn', () => {
     it('should display the loading message', () => {
