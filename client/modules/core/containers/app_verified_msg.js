@@ -1,4 +1,5 @@
-import { useDeps, composeAll } from 'mantra-core';
+import {composeAll, composeWithTracker, useDeps} from 'mantra-core';
+import {authComposer} from '/client/configs/composers';
 import Component from '../components/app_verified_msg';
 
 export const depsMapper = (context, actions) => ({
@@ -7,5 +8,6 @@ export const depsMapper = (context, actions) => ({
 });
 
 export default composeAll(
+  composeWithTracker(authComposer),
   useDeps(depsMapper)
 )(Component);

@@ -1,5 +1,4 @@
 import React from 'react';
-import { AuthEnsureUser } from '/client/configs/components';
 import { Alert, Col, Grid, Row } from 'react-bootstrap';
 
 export default class AppVerifiedMsg extends React.Component {
@@ -34,35 +33,27 @@ export default class AppVerifiedMsg extends React.Component {
     if (emailSent) { return mustWait(); }
     return canSendLink();
   }
-  displayPendingUser() {
-    return (
-      <Grid>
-        <Row>
-          <Col xs={12}>
-            <Alert bsStyle="danger">
-              {this.linkAvailability()}
-            </Alert>
-          </Col>
-        </Row>
-      </Grid>
-    );
-  }
-  displayGuest() {
-    return (
-      <div></div>
-    );
-  }
   render() {
-    return (
-      <AuthEnsureUser
-        unverifiedMessage={this.displayPendingUser()}
-        guestMessage={this.displayGuest()}
-      >
-      </AuthEnsureUser>
-    );
+    const {loggedIn, emailVerified} = this.props;
+    if (loggedIn && !emailVerified) {
+      return (
+        <Grid>
+          <Row>
+            <Col xs={12}>
+              <Alert bsStyle="danger">
+                {this.linkAvailability()}
+              </Alert>
+            </Col>
+          </Row>
+        </Grid>
+      );
+    }
+    return (<div></div>);
   }
 }
 
 AppVerifiedMsg.propTypes = {
   resendVerificationEmail: React.PropTypes.func,
+  emailVerified: React.PropTypes.bool,
+  loggedIn: React.PropTypes.bool,
 };
