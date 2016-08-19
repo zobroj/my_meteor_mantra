@@ -1,7 +1,7 @@
-const {beforeEach, describe, it} = global;
+const {afterEach, beforeEach, describe, it} = global;
 import {expect} from 'chai';
 import {mount} from 'enzyme';
-import {assert, stub} from 'sinon';
+import sinon from 'sinon';
 import AppVerifiedMsg from '../app_verified_msg';
 
 // if loggedIn
@@ -23,15 +23,21 @@ describe('core.components.app_verified_msg', () => {
   });
 
   describe('if user is loggedIn but !emailVerified', () => {
-    const actions = {resendVerificationEmail: stub()};
+    var actions;
     var el;
     var link;
+    var sandbox;
     beforeEach(() => {
+      sandbox = sinon.sandbox.create();
+      actions = {resendVerificationEmail: sandbox.stub()};
       el = mount(<AppVerifiedMsg
         resendVerificationEmail={actions.resendVerificationEmail}
         loggedIn={true}
         emailVerified={false} />);
       link = el.find('a');
+    });
+    afterEach(() => {
+      sandbox.restore();
     });
 
     it('should display link by default', () => {
@@ -49,10 +55,15 @@ describe('core.components.app_verified_msg', () => {
       expect(el.state('resendLinkClicked')).to.be.equal(false);
       link.simulate('click');
       expect(el.state('resendLinkClicked')).to.be.equal(true);
-      assert.calledOnce(el.prop('resendVerificationEmail'));
+      sinon.assert.calledOnce(el.prop('resendVerificationEmail'));
     });
 
-    /* TODO test for this case */
+    it('should not allow link to be resent after being sent', () => {
+      el.setState({resendLinkClicked: true});
+      link.simulate('click');
+      sinon.assert.notCalled(el.prop('resendVerificationEmail'));
+    });
+
     it('should allow link to be resent after 60sec');
   });
 });
