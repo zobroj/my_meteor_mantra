@@ -6,8 +6,20 @@ import AppVerifiedMsg from '../app_verified_msg';
 
 // if loggedIn
 describe('core.components.app_verified_msg', () => {
-  describe('if !loggedIn or emailVerified', () => {
-    it('should not display nothing');
+  describe('if user is !loggedIn', () => {
+    it('should display empty <div/>', () => {
+      const el = mount(<AppVerifiedMsg loggedIn={false} />);
+      expect(el.find('div').length).to.be.equal(1);
+    });
+  });
+
+  describe('if user is loggedIn and emailVerified', () => {
+    it('should display empty <div/>', () => {
+      const el = mount(<AppVerifiedMsg
+                        loggedIn={true}
+                        emailVerified={true} />);
+      expect(el.find('div').length).to.be.equal(1);
+    });
   });
 
   describe('if user is loggedIn but !emailVerified', () => {
@@ -15,8 +27,10 @@ describe('core.components.app_verified_msg', () => {
     var el;
     // var link;
     beforeEach(() => {
-      el = shallow(<AppVerifiedMsg
-        resendVerificationEmail={actions.resendVerificationEmail}/>);
+      el = mount(<AppVerifiedMsg
+        resendVerificationEmail={actions.resendVerificationEmail}
+        loggedIn={true}
+        emailVerified={false} />);
       // link = el.find('');
     });
 
@@ -25,11 +39,6 @@ describe('core.components.app_verified_msg', () => {
 
     it('should call method on link click', () => {
       console.log(el.debug())
-      const la = mount(<AppVerifiedMsg
-        resendVerificationEmail={actions.resendVerificationEmail}
-        loggedIn={true}
-        emailVerified={false} />);
-      console.log(la.debug())
     });
 
   })
