@@ -64,6 +64,8 @@ describe('core.components.app_verified_msg', () => {
       sinon.assert.notCalled(el.prop('resendVerificationEmail'));
     });
 
+    /* TODO not critical to figure out how to test
     it('should allow link to be resent after 60sec');
+    */
   });
 });
