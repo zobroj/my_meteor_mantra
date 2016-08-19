@@ -1,8 +1,8 @@
 const {describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
-import LayoutList from '../layout_list';
 import { AppVerifiedMsg, NavbarMain } from '/client/configs/components';
+import LayoutList from '../layout_list';
 
 describe('core.components.layout_list', () => {
   it('should contain component imports', () => {
