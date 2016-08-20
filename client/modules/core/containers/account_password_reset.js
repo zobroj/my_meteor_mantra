@@ -3,12 +3,14 @@ import Component from '../components/account_password_reset';
 
 export const composer = ({ context, clearErrors }, onData) => {
   const { LocalState } = context();
-  const errorState = 'RESET_PASSWORD_ERROR';
-  const error = LocalState.get(errorState);
+  const error = LocalState.get('RESET_PASSWORD_ERROR');
 
   onData(null, { error });
+  const cleanup = () => {
+    clearErrors('RESET_PASSWORD_ERROR');
+  };
 
-  return clearErrors.bind(errorState);
+  return cleanup;
 };
 
 export const depsMapper = (context, actions) => ({
