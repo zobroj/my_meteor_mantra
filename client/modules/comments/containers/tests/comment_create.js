@@ -1,4 +1,4 @@
-const { describe, it } = global;
+const {beforeEach, describe, it} = global;
 import {expect} from 'chai';
 import {stub, spy} from 'sinon';
 import {composer, depsMapper} from '../comment_create';
@@ -41,30 +41,24 @@ describe('comments.containers.comment_create', () => {
   });
 
   describe('depsMapper', () => {
+    var actions;
+    var context;
+    var deps;
+    beforeEach(() => {
+      actions = {comments: {create: spy(), clearErrors: spy()}};
+      context = spy();
+      deps = depsMapper(context, actions);
+    });
+
     describe('actions', () => {
-      it('should map comments.create', () => {
-        const actions = {comments: {create: spy()}};
-
-        const deps = depsMapper({}, actions);
-
-        expect(deps.create).to.be.equal(actions.comments.create);
-      });
-      it('should map comments.clearErrors', () => {
-        const actions = {comments: {clearErrors: spy()}};
-
-        const deps = depsMapper({}, actions);
-
-        expect(deps.clearErrors).to.be.equal(actions.comments.clearErrors);
+      it('should map deps', () => {
+        expect(deps.create, 'create').to.be.equal(actions.comments.create);
+        expect(deps.clearErrors, 'clearErrors').to.be.equal(actions.comments.clearErrors);
       });
     });
 
     describe('context', () => {
       it('should map the whole context as a function', () => {
-        const actions = {comments: {create: spy(), clearErrors: spy()}};
-        const context = spy();
-
-        const deps = depsMapper(context, actions);
-
         expect(deps.context()).to.be.equal(context);
       });
     });
