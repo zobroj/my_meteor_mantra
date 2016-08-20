@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {stub, spy} from 'sinon';
 import {composer, depsMapper} from '../account_password_reset';
 
-describe('comments.containers.account_password_reset', () => {
+describe('core.containers.account_password_reset', () => {
   describe('composer', () => {
     describe('get LocalState', () => {
       var LocalState;

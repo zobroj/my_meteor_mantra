@@ -1,9 +1,9 @@
 const {beforeEach, describe, it} = global;
 import {expect} from 'chai';
-import {assert, stub, spy} from 'sinon';
+import {stub, spy} from 'sinon';
 import {composer, depsMapper} from '../account_login';
 
-describe('comments.containers.account_login', () => {
+describe('core.containers.account_login', () => {
   describe('composer', () => {
     describe('get LocalState', () => {
       var LocalState;

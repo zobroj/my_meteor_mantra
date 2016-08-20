@@ -1,25 +1,23 @@
 const {beforeEach, describe, it} = global;
 import {expect} from 'chai';
 import {spy} from 'sinon';
-import {depsMapper} from '../account_preferences';
+import {depsMapper} from '../app_verified_msg';
 
-describe('core.containers.account_preferences', () => {
+describe('core.containers.app_verified_msg', () => {
   describe('depsMapper', () => {
     var actions;
     var context;
     var deps;
     beforeEach(() => {
-      actions = {accounts: {
-        clearErrors: spy(), deleteAccount: spy()
-      }};
+      actions = {accounts: { resendVerificationEmail: spy() }};
       context = spy();
       deps = depsMapper(context, actions);
     });
 
     describe('actions', () => {
       it('should map deps', () => {
-        expect(deps.clearErrors).to.be.equal(actions.accounts.clearErrors);
-        expect(deps.deleteAccount).to.be.equal(actions.accounts.deleteAccount);
+        expect(deps.resendVerificationEmail)
+          .to.be.equal(actions.accounts.resendVerificationEmail);
       });
     });
 

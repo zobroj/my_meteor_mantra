@@ -3,7 +3,6 @@ import {expect} from 'chai';
 import {mount} from 'enzyme';
 import AuthEnsureUser from '../auth_ensure_user';
 
-// if loggedIn
 describe('core.components.auth_ensure_user', () => {
   describe('if user is loggingIn', () => {
     it('should display loadingComponent', () => {

@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {stub, spy} from 'sinon';
 import {composer, depsMapper} from '../account_signup';
 
-describe('comments.containers.account_signup', () => {
+describe('core.containers.account_signup', () => {
   describe('composer', () => {
     describe('get LocalState', () => {
       var LocalState;
