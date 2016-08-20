@@ -7,9 +7,9 @@ describe('core.actions.accounts', () => {
   describe('clearErrors', () => {
     it('should clear SIGNUP_ERROR local state', () => {
       const LocalState = {set: spy()};
+      LocalState.set('SIGNUP_ERROR', 'hhelleleleo');
       actions.clearErrors({LocalState}, 'SIGNUP_ERROR');
-      expect(LocalState.set.callCount).to.be.equal(1);
-      expect(LocalState.set.args[0]).to.deep.equal([ 'SIGNUP_ERROR', null ]);
+      expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', null ]);
     });
   });
 
