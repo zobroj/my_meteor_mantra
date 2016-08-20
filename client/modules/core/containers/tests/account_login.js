@@ -1,6 +1,6 @@
 const {beforeEach, describe, it} = global;
 import {expect} from 'chai';
-import {stub, spy} from 'sinon';
+import {assert, stub, spy} from 'sinon';
 import {composer, depsMapper} from '../account_login';
 
 describe('comments.containers.account_login', () => {
@@ -40,38 +40,40 @@ describe('comments.containers.account_login', () => {
       });
     });
 
-    // it('should return clearErrors', () => {
-    //   const LocalState = {get: spy()};
-    //   const context = () => ({LocalState});
-    //   const clearErrors = spy();
-    //
-    //   const clearFunc = composer({context, clearErrors}, spy());
-    //
-    //   expect(clearFunc).to.be.equal(clearErrors);
-    // });
+    it('should return cleanup func', () => {
+      const LocalState = {get: spy()};
+      const context = () => ({LocalState});
+      const clearErrors = spy();
+
+      const clearFunc = composer({context, clearErrors}, spy());
+      expect(clearFunc.name).to.be.deep.equal('cleanup');
+    });
   });
 
-  // describe('depsMapper', () => {
-  //   var actions;
-  //   var context;
-  //   var deps;
-  //   beforeEach(() => {
-  //     actions = {comments: {create: spy(), clearErrors: spy()}};
-  //     context = spy();
-  //     deps = depsMapper(context, actions);
-  //   });
-  //
-  //   describe('actions', () => {
-  //     it('should map deps', () => {
-  //       expect(deps.create, 'create').to.be.equal(actions.comments.create);
-  //       expect(deps.clearErrors, 'clearErrors').to.be.equal(actions.comments.clearErrors);
-  //     });
-  //   });
-  //
-  //   describe('context', () => {
-  //     it('should map the whole context as a function', () => {
-  //       expect(deps.context()).to.be.equal(context);
-  //     });
-  //   });
-  // });
+  describe('depsMapper', () => {
+    var actions;
+    var context;
+    var deps;
+    beforeEach(() => {
+      actions = {accounts: {
+        clearErrors: spy(), login: spy(), sendResetPasswordLink: spy()
+      }};
+      context = spy();
+      deps = depsMapper(context, actions);
+    });
+
+    describe('actions', () => {
+      it('should map deps', () => {
+        expect(deps.clearErrors).to.be.equal(actions.accounts.clearErrors);
+        expect(deps.login).to.be.equal(actions.accounts.login);
+        expect(deps.sendResetPasswordLink).to.be.equal(actions.accounts.sendResetPasswordLink);
+      });
+    });
+
+    describe('context', () => {
+      it('should map the whole context as a function', () => {
+        expect(deps.context()).to.be.equal(context);
+      });
+    });
+  });
 });
