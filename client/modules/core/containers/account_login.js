@@ -3,14 +3,17 @@ import Component from '../components/account_login';
 
 export const composer = ({ context, clearErrors }, onData) => {
   const { LocalState } = context();
-  const errorReset = LocalState.get('RESET_PASSWORD_ERROR');
   const errorLogin = LocalState.get('LOGIN_ERROR');
+  const errorReset = LocalState.get('RESET_PASSWORD_ERROR');
 
   onData(null, { errorLogin, errorReset });
 
-  clearErrors.bind(errorLogin);
-  clearErrors.bind(errorReset);
-  // return clearErrors.bind( errorState )
+  const cleanup = () => {
+    clearErrors('LOGIN_ERROR');
+    clearErrors('RESET_PASSWORD_ERROR');
+  };
+
+  return cleanup;
 };
 
 export const depsMapper = (context, actions) => ({
