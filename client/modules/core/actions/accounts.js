@@ -133,4 +133,7 @@ export default {
   clearErrors({ LocalState }, errorState) {
     return LocalState.set(errorState, null);
   },
+  clearErrorsSignup({ LocalState }) {
+    return LocalState.set('SIGNUP_ERROR', null);
+  },
 };
