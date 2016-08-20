@@ -1,18 +1,22 @@
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import Component from '../components/account_signup';
 
-export const composer = ({ context, clearErrorsSignup }, onData) => {
+export const composer = ({context, clearErrors}, onData) => {
   const { LocalState } = context();
   const error = LocalState.get('SIGNUP_ERROR');
 
   onData(null, { error });
 
-  return clearErrorsSignup;
+  const cleanup = () => {
+    clearErrors('SIGNUP_ERROR');
+  };
+
+  return cleanup;
 };
 
 export const depsMapper = (context, actions) => ({
   signup: actions.accounts.signup,
-  clearErrorsSignup: actions.accounts.clearErrorsSignup,
+  clearErrors: actions.accounts.clearErrors,
   context: () => context,
 });
 
