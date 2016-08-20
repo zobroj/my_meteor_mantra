@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {spy} from 'sinon';
 import {depsMapper} from '../account_preferences';
 
-describe('comments.containers.account_password_reset', () => {
+describe('comments.containers.account_preferences', () => {
   describe('depsMapper', () => {
     var actions;
     var context;
