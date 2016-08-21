@@ -17,24 +17,16 @@ describe('posts.components.post_single', () => {
   });
 
   it('should contain component imports', () => {
-    console.log(el.debug())
-  });
-/*
-  it('should display the post title', () => {
-    const el = shallow(<PostSingle post={post} />);
-    expect(el.find('h2').text()).to.be.match(/Nice One/);
+    expect(el.find('UseDeps(Container(CommentList))')).to.have.length(1);
   });
 
   it('should display the post content', () => {
-    const post = {content: 'Nice content'};
-    const el = shallow(<PostSingle post={post} />);
-    expect(el.find('p').text()).to.be.match(/Nice content/);
+    expect(el.find('PageHeader').html(), 'title').to.be.match(/Nice One/);
+    expect(el.find('p#post-info', 'username')
+      .text()).to.be.match(/the-username/);
+    expect(el.find('p#post-info', 'createdAt')
+      .text()).to.contain(post.createdAt.toLocaleDateString());
+    expect(el.find('p#post-text', 'text')
+      .text()).to.be.match(/the-text/);
   });
-
-  it('should display saving indicator if saving prop is there', () => {
-    const post = {saving: true};
-    const el = shallow(<PostSingle post={post} />);
-    expect(el.find('p').first().text()).to.be.match(/saving/i);
-  });
-*/
 });

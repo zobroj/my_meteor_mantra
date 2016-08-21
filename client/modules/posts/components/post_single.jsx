@@ -10,8 +10,8 @@ const PostSingle = ({ post }) => (
         <PageHeader>
           {post.title}
         </PageHeader>
-        <p><strong>{post.username}</strong> - {post.createdAt.toLocaleDateString()}</p>
-        <p>{post.text}</p>
+        <p id="post-info"><strong>{post.username}</strong> - {post.createdAt.toLocaleDateString()}</p>
+        <p id="post-text">{post.text}</p>
       </Col>
     </Row>
     <CommentList postId={post._id} />
