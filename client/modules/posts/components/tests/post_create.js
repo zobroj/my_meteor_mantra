@@ -41,26 +41,12 @@ describe('posts.components.post_create', () => {
     expect(el.state('text'), 'text').to.be.equal(text);
   });
 
-/*
-  it('should create a new post when click on the button', done => {
-    const title = 'the-title';
-    const content = 'the-content';
-
-    const onCreate = (t, c) => {
-      expect(t).to.be.equal(title);
-      expect(c).to.be.equal(content);
-      done();
-    };
-
-    const el = shallow(<PostCreate create={onCreate} />);
-    const instance = el.instance();
-
-    instance.refs = {
-      titleRef: {value: title},
-      contentRef: {value: content}
-    };
-
-    el.find('form').simulate('submit');
+  it('should call create method on button click', () => {
+    el.setState({title, text});
+    button.simulate('click');
+    const args = actions.create.args[0];
+    expect(args.slice(0,4)).to.deep.equal(
+      [ user.id, user.username, title, text ]
+    );
   });
-  */
 });
