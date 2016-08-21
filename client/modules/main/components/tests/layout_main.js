@@ -4,7 +4,7 @@ import {shallow} from 'enzyme';
 import {AppVerifiedMsg, Footer, NavbarMain} from '/client/configs/components';
 import LayoutMain from '../layout_main';
 
-describe('core.components.layout_main', () => {
+describe('main.components.layout_main', () => {
   it('should contain component imports', () => {
     const el = shallow(<LayoutMain />);
     expect(el.contains(<AppVerifiedMsg/>)).to.be.equal(true);
