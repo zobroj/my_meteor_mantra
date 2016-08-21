@@ -1,6 +1,6 @@
 import React from 'react';
-import { AppErrorMsg, AuthEnsureUser } from '/client/configs/components';
-import { Button, ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
+import {AppErrorMsg, AuthEnsureUser} from '/client/configs/components';
+import {Button, ControlLabel, FormControl, FormGroup} from 'react-bootstrap';
 
 class PostCreate extends React.Component {
   constructor(props) {
@@ -19,8 +19,7 @@ class PostCreate extends React.Component {
   handleContentChange(event) {
     this.setState({ text: event.target.value });
   }
-  _createPost(event) {
-    event.preventDefault();
+  _createPost() {
     const { create, user } = this.props;
     const { title, text } = this.state;
     create(user.id, user.username, title, text);
@@ -33,9 +32,9 @@ class PostCreate extends React.Component {
     const { error } = this.props;
     return (
       <AuthEnsureUser guestMessage={GuestMessage}>
-        <form onSubmit={this._createPost}>
+        <form id="post-create-form">
           <AppErrorMsg error={error} />
-          <FormGroup>
+          <FormGroup className="title-input">
             <ControlLabel>Title</ControlLabel>
             <FormControl
               type="text"
@@ -44,7 +43,7 @@ class PostCreate extends React.Component {
               onChange={this.handleTitleChange}
             />
           </FormGroup>
-          <FormGroup>
+          <FormGroup className="text-input">
             <ControlLabel>Content</ControlLabel>
             <FormControl
               type="text"
@@ -53,7 +52,7 @@ class PostCreate extends React.Component {
               onChange={this.handleContentChange}
             />
           </FormGroup>
-          <Button type="submit">New Post</Button>
+          <Button onClick={this._createPost}>New Post</Button>
         </form>
       </AuthEnsureUser>
     );

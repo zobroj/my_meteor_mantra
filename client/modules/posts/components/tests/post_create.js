@@ -12,10 +12,14 @@ describe('posts.components.post_create', () => {
     id: 'the-user-id',
     username: 'the-username'
   };
-  var el;
+  var button; var el; var form; var titleInput; var textInput;
   beforeEach(() => {
     el = shallow(
       <PostCreate create={actions.create} user={user} />);
+    form = el.find('form#post-create-form').first();
+    titleInput = form.find('.title-input FormControl');
+    textInput = form.find('.text-input FormControl');
+    button = form.find('Button').first();
   });
 
   it('should contain component imports', () => {
@@ -24,24 +28,14 @@ describe('posts.components.post_create', () => {
     expect(el.find('AppErrorMsg')).to.have.length(1);
   });
 
-/*
-  it('should show the error if there are any', () => {
-    const error = 'TheError';
-    const el = shallow(<PostCreate error={error} />);
-    expect(el.html()).to.match(/TheError/);
-  });
 
   it('should display the create post form', () => {
-    const el = shallow(<PostCreate />);
-    const title = el.find('input').first();
-    const content = el.find('textarea').first();
-    const form = el.find('form').first();
-
-    expect(title.node.ref).to.be.equal('titleRef');
-    expect(content.node.ref).to.be.equal('contentRef');
-    expect(form.prop('onSubmit')).to.be.a('function');
+    expect(titleInput.prop('value')).to.be.equal('');
+    expect(textInput.prop('value')).to.be.equal('');
+    expect(button.prop('onClick'), 'button').to.be.a('function');
   });
 
+/*
   it('should create a new post when click on the button', done => {
     const title = 'the-title';
     const content = 'the-content';
