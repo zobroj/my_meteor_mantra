@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {spy, stub} from 'sinon';
 import actions from '../posts';
 
-describe('core.actions.posts', () => {
+describe('posts.actions.posts', () => {
   describe('create', () => {
     var LocalState; var FlowRouter;
     beforeEach(() => {

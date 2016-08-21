@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import PostCreate from '../post_create';
 
-describe('core.components.post_create', () => {
+describe('posts.components.post_create', () => {
   it('should show the error if there are any', () => {
     const error = 'TheError';
     const el = shallow(<PostCreate error={error} />);
