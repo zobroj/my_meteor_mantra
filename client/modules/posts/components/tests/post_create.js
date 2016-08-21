@@ -1,9 +1,30 @@
-/* const {describe, it} = global;
+const {beforeEach, describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
+import {stub} from 'sinon';
 import PostCreate from '../post_create';
 
 describe('posts.components.post_create', () => {
+  const actions = {create: stub()};
+  const title = 'the-title';
+  const text = 'the-text';
+  const user = {
+    id: 'the-user-id',
+    username: 'the-username'
+  };
+  var el;
+  beforeEach(() => {
+    el = shallow(
+      <PostCreate create={actions.create} user={user} />);
+  });
+
+  it('should contain component imports', () => {
+    expect(el.find('UseDeps(Container(AuthEnsureUser))'))
+      .to.have.length(1);
+    expect(el.find('AppErrorMsg')).to.have.length(1);
+  });
+
+/*
   it('should show the error if there are any', () => {
     const error = 'TheError';
     const el = shallow(<PostCreate error={error} />);
@@ -41,5 +62,5 @@ describe('posts.components.post_create', () => {
 
     el.find('form').simulate('submit');
   });
+  */
 });
-*/
