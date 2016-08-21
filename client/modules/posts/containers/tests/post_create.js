@@ -1,4 +1,4 @@
-const { describe, it } = global;
+const {beforeEach, describe, it} = global;
 import {expect} from 'chai';
 import {spy, stub} from 'sinon';
 import {composer, depsMapper} from '../post_create';
@@ -28,51 +28,38 @@ describe('posts.containers.post_create', () => {
       expect(args[0]).to.be.equal(null);
       expect(args[1]).to.be.deep.equal({error: 'error'});
     });
-  });
-    /*
 
-    it('should return clearErrors', () => {
+    it('should return cleanup func', () => {
       const LocalState = {get: spy()};
       const context = () => ({LocalState});
       const clearErrors = spy();
 
       const clearFunc = composer({context, clearErrors}, spy());
-
-      expect(clearFunc).to.be.equal(clearErrors);
+      expect(clearFunc.name).to.be.deep.equal('cleanup');
     });
-
-    it('should get SAVING_NEW_POST from local state');
   });
 
   describe('depsMapper', () => {
+    var actions; var context; var deps;
+    beforeEach(() => {
+      actions = {posts: {
+        create: spy(), clearErrors: spy()
+      }};
+      context = spy();
+      deps = depsMapper(context, actions);
+    });
+
     describe('actions', () => {
-      it('should map posts.create', () => {
-        const actions = {posts: {create: spy()}};
-
-        const deps = depsMapper({}, actions);
-
+      it('should map deps', () => {
         expect(deps.create).to.be.equal(actions.posts.create);
-      });
-
-      it('should map posts.clearErrors', () => {
-        const actions = {posts: {clearErrors: spy()}};
-
-        const deps = depsMapper({}, actions);
-
         expect(deps.clearErrors).to.be.equal(actions.posts.clearErrors);
       });
     });
 
     describe('context', () => {
       it('should map the whole context as a function', () => {
-        const actions = {posts: {create: spy(), clearErrors: spy()}};
-        const context = spy();
-
-        const deps = depsMapper(context, actions);
-
         expect(deps.context()).to.be.equal(context);
       });
     });
   });
-  */
 });
