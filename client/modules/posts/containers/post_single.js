@@ -11,8 +11,9 @@ export const composer = ({ context, postId }, onData) => {
     if (!post) {
       LocalState.set('POSTS_ERROR', 'Post not found. Please try again.');
       FlowRouter.go('posts.list');
+    } else {
+      onData(null, { post });
     }
-    onData(null, { post });
   }
 };
 
