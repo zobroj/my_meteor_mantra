@@ -4,12 +4,14 @@ import Component from '../components/post_create';
 
 export const composer = ({ context, clearErrors }, onData) => {
   const { LocalState } = context();
-  const errorState = 'POSTS_CREATE_ERROR';
-  const error = LocalState.get(errorState);
+  const error = LocalState.get('POSTS_CREATE_ERROR');
 
   onData(null, { error });
 
-  return clearErrors.bind(errorState);
+  const cleanup = () => {
+    clearErrors('POSTS_CREATE_ERROR');
+  };
+  return cleanup;
 };
 
 export const depsMapper = (context, actions) => ({

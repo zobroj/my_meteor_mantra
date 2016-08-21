@@ -1,10 +1,9 @@
-/*
 const { describe, it } = global;
 import {expect} from 'chai';
 import {spy, stub} from 'sinon';
 import {composer, depsMapper} from '../post_create';
 
-describe('core.containers.post_create', () => {
+describe('posts.containers.post_create', () => {
   describe('composer', () => {
     it('should get POSTS_CREATE_ERROR from local state', () => {
       const LocalState = {get: spy()};
@@ -16,7 +15,8 @@ describe('core.containers.post_create', () => {
       expect(args).to.have.length(1);
       expect(args[0]).to.be.equal('POSTS_CREATE_ERROR');
     });
-
+  });
+    /*
     it('should call onData with null and {error}', () => {
       const LocalState = {get: stub().returns('error')};
       const context = () => ({LocalState});
@@ -73,5 +73,5 @@ describe('core.containers.post_create', () => {
       });
     });
   });
+  */
 });
-*/
