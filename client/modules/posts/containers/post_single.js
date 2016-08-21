@@ -2,7 +2,7 @@ import PostSingle from '../components/post_single.jsx';
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 
 export const composer = ({ context, postId }, onData) => {
-  const { Meteor, Collections, FlowRouter, LocalState } = context();
+  const {Collections, FlowRouter, LocalState, Meteor} = context();
   const subscription = Meteor.subscribe('posts.single', postId);
 
   if (subscription.ready()) {
@@ -11,9 +11,8 @@ export const composer = ({ context, postId }, onData) => {
     if (!post) {
       LocalState.set('POSTS_ERROR', 'Post not found. Please try again.');
       FlowRouter.go('posts.list');
-    } else {
-      onData(null, { post });
     }
+    onData(null, { post });
   }
 };
 

@@ -1,90 +1,59 @@
-/*
-const {describe, it} = global;
+const {beforeEach, describe, it} = global;
 import {expect} from 'chai';
 import {stub, spy} from 'sinon';
 import {composer} from '../post_single';
 
-describe('core.containers.post_single', () => {
+describe('posts.containers.post_single', () => {
+  const postId = 'the-postid';
+  const post = [ {_id: 'aa'} ];
+  var Collections; var FlowRouter; var LocalState; var Meteor;
+  var context; var onData;
+  beforeEach(() => {
+    Collections = {Posts: {findOne: stub()}};
+    FlowRouter = {go: spy()};
+    LocalState = {set: spy()};
+    Meteor = {subscribe: stub()};
+    onData = spy();
+    context = () => ({Collections, FlowRouter, LocalState, Meteor});
+  });
+
   describe('composer', () => {
-    const Tracker = {nonreactive: cb => cb()};
-    const getCollections = (post) => {
-      const Collections = {
-        Posts: {findOne: stub()}
-      };
-      Collections.Posts.findOne.returns(post);
-      return Collections;
-    };
-
-    it('should subscribe to the given postId via prop', () => {
-      const Meteor = {subscribe: stub()};
+    it('should subscribe to posts.single', () => {
       Meteor.subscribe.returns({ready: () => false});
-      const Collections = getCollections();
-
-      const context = () => ({Meteor, Tracker, Collections});
-      const postId = 'dwd';
-      const onData = spy();
-
       composer({context, postId}, onData);
-      const args = Meteor.subscribe.args[0];
-      expect(args.slice(0, 2)).to.deep.equal([
+      expect(Meteor.subscribe.args[0]).to.deep.equal([
         'posts.single', postId
       ]);
     });
 
-    describe('before subscription ready', () => {
-      describe('with latency componsation', () => {
-        it('should call onData with data', done => {
-          const Meteor = {subscribe: stub()};
-          Meteor.subscribe.returns({ready: () => false});
-          const post = {aa: 10};
-          const Collections = getCollections(post);
-
-          const context = () => ({Meteor, Tracker, Collections});
-          const postId = 'dwd';
-          const onData = (err, data) => {
-            expect(data).to.be.deep.equal({post});
-            done();
-          };
-
+    describe('after subscribed', () => {
+      describe('if post found', () => {
+        it('should get post & pass to onData', () => {
+          Meteor.subscribe.returns({ready: () => true});
+          Collections.Posts.findOne.returns(post);
           composer({context, postId}, onData);
+          expect(onData.args[0]).to.deep.equal([ null, {post} ]);
         });
       });
 
-      describe('with no latency componsation', () => {
-        it('should call onData without nothing', done => {
-          const Meteor = {subscribe: stub()};
-          Meteor.subscribe.returns({ready: () => false});
-          const Collections = getCollections();
-
-          const context = () => ({Meteor, Tracker, Collections});
-          const postId = 'dwd';
-          const onData = (err, data) => {
-            expect(data).to.be.equal(undefined);
-            done();
-          };
-
+      describe('if post is not found', () => {
+        it('should call LocalState to set error', () => {
+          Meteor.subscribe.returns({ready: () => true});
+          Collections.Posts.findOne.returns(null);
           composer({context, postId}, onData);
+          const args = LocalState.set.args[0];
+          expect(args[0]).to.be.equal('POSTS_ERROR');
+          expect(args[1]).to.match(/not found/);
         });
-      });
-    });
 
-    describe('after subscription is ready', () => {
-      it('should call onData with data', done => {
-        const Meteor = {subscribe: stub()};
-        Meteor.subscribe.returns({ready: () => true});
-        const post = {aa: 10};
-        const Collections = getCollections(post);
-
-        const context = () => ({Meteor, Tracker, Collections});
-        const postId = 'dwd';
-        const onData = (err, data) => {
-          expect(data).to.be.deep.equal({post});
-          done();
-        };
-
-        composer({context, postId}, onData);
+        it('should call FlowRouter to redirect to posts.list', () => {
+          Meteor.subscribe.returns({ready: () => true});
+          Collections.Posts.findOne.returns(null);
+          composer({context, postId}, onData);
+          const args = FlowRouter.go.args[0];
+          expect(args[0]).to.be.equal('posts.list');
+        });
       });
     });
   });
 });
-*/
