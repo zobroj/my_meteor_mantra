@@ -41,7 +41,7 @@ class CommentCreate extends React.Component {
   }
 }
 
-const GuestMessage = (
+export const GuestMessage = (
   <div>
     Please login to create a comment.
   </div>
