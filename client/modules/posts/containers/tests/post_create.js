@@ -15,8 +15,7 @@ describe('posts.containers.post_create', () => {
       expect(args).to.have.length(1);
       expect(args[0]).to.be.equal('POSTS_CREATE_ERROR');
     });
-  });
-    /*
+
     it('should call onData with null and {error}', () => {
       const LocalState = {get: stub().returns('error')};
       const context = () => ({LocalState});
@@ -29,6 +28,8 @@ describe('posts.containers.post_create', () => {
       expect(args[0]).to.be.equal(null);
       expect(args[1]).to.be.deep.equal({error: 'error'});
     });
+  });
+    /*
 
     it('should return clearErrors', () => {
       const LocalState = {get: spy()};
