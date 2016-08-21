@@ -1,12 +1,26 @@
-/*
-const {describe, it} = global;
+const {beforeEach, describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import PostSingle from '../post_single';
 
-describe('core.components.post', () => {
+describe('posts.components.post_single', () => {
+  const post = {
+    title: 'Nice One',
+    username: 'the-username',
+    text: 'the-text',
+    _id: 'the-id',
+    createdAt: new Date(),
+  };
+  var el;
+  beforeEach(() => {
+    el = shallow(<PostSingle post={post} />);
+  });
+
+  it('should contain component imports', () => {
+    console.log(el.debug())
+  });
+/*
   it('should display the post title', () => {
-    const post = {title: 'Nice One'};
     const el = shallow(<PostSingle post={post} />);
     expect(el.find('h2').text()).to.be.match(/Nice One/);
   });
@@ -22,5 +36,5 @@ describe('core.components.post', () => {
     const el = shallow(<PostSingle post={post} />);
     expect(el.find('p').first().text()).to.be.match(/saving/i);
   });
-});
 */
+});
