@@ -36,7 +36,7 @@ describe('core.lib.authComposer', () => {
   afterEach(() => {
     sandbox.restore();
   });
-  /* TODO make a sinon sandbox */
+
   describe('should subscribe to users.current', () => {
     describe('before subscribed', () => {
       it('should return null for userId', () => {
