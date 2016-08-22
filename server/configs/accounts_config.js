@@ -1,3 +1,7 @@
+import { Accounts } from 'meteor/accounts-base';
+
+/* eslint-disable no-console */
+/* eslint-disable max-len */
 // server configs
 export default function () {
   // call this to add non-standard Account fields

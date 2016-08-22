@@ -1,4 +1,5 @@
 // server methods
+import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
@@ -18,7 +19,6 @@ export default function () {
       // Demo the latency compensation (Delete this in production)
       Meteor._sleepForMs(500);
       if (!userId) {
-        console.log(`no user account with the address: ${email}`);
         throw new Meteor.Error(
           'sendResetPaswordLink.RESET_PASSWORD_ERROR',
           `User account with the address: ${email} not found. Please try again.`,

@@ -1,4 +1,5 @@
 // server methods
+import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor';
 // import _ from 'lodash';
 

@@ -1,4 +1,5 @@
 // Foobars is _module_template example
+import {Meteor} from 'meteor/meteor';
 import {Posts, Comments} from '/lib/collections';
 
 export default function () {
