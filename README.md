@@ -28,9 +28,11 @@ User authentication is at the component level. For each component that needs acc
 
 Tracking the authComposer will add the props: userId, loggedIn, username, profile, email, emailVerified to the component.
 
+There are two different types of containers that you can wrap your components for authentication: "AuthEnsureUser" and "AuthEnsureGuest". Each respectively allows only the type of user to view the wrapped component. Also, each has a default message for unauthorized users, but these can be overridden with props.
+
 Based on [meteor-auth](https://github.com/remotebase/meteor-auth)
 
-## testing
+## Testing
 To run eslint and mocha tests `npm run test` or to only run mocha tests `npm run testonly` in your console.
 
 ## Todo
