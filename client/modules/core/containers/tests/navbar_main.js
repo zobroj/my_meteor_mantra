@@ -9,7 +9,10 @@ describe('core.containers.navbar_main', () => {
     var context;
     var deps;
     beforeEach(() => {
-      actions = {accounts: { logout: spy() }};
+      actions = {
+        accounts: {logout: spy()},
+        routes: {isActiveRoute: spy()}
+      };
       context = spy();
       deps = depsMapper(context, actions);
     });
@@ -17,6 +20,7 @@ describe('core.containers.navbar_main', () => {
     describe('actions', () => {
       it('should map deps', () => {
         expect(deps.logout).to.be.equal(actions.accounts.logout);
+        expect(deps.isActiveRoute).to.be.equal(actions.routes.isActiveRoute);
       });
     });
 

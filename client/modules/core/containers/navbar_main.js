@@ -3,6 +3,7 @@ import {authComposer} from '/client/configs/composers';
 import NavbarMain from '../components/navbar_main';
 
 export const depsMapper = (context, actions) => ({
+  isActiveRoute: actions.routes.isActiveRoute,
   logout: actions.accounts.logout,
   context: () => context,
 });
