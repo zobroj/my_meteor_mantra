@@ -1,4 +1,4 @@
-const {beforeEach, describe, it} = global;
+const {describe, it} = global;
 import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import { AppVerifiedMsg, NavbarMain } from '/client/configs/components';

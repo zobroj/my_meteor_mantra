@@ -1,5 +1,5 @@
 // Foobars is _module_template example
-import { Posts, Comments, Foobars } from '/lib/collections';
+import {Posts, Comments} from '/lib/collections';
 
 export default function () {
   // Create posts for testing
