@@ -8,6 +8,7 @@ My Meteor Mantra is a basic [Meteor](https://www.meteor.com) boilerplate based o
 * User authentication at the component level
 * Account email verification and password reset tokens sent via Gmail SMTP
 * Basic Bootstrap theme installed from NPM
+* Unit tests all around
 
 ## Setup
 1. Clone or fork the repository
@@ -29,9 +30,11 @@ Tracking the authComposer will add the props: userId, loggedIn, username, profil
 
 Based on [meteor-auth](https://github.com/remotebase/meteor-auth)
 
+## testing
+To run eslint and mocha tests `npm run test` or to only run mocha tests `npm run testonly` in your console.
+
 ## Todo
 * Add admin mode
-* Add testing
 
 ## Reference
 * Inspired by: [Mantra Kickstarter](https://github.com/mantrajs/meteor-mantra-kickstarter)
