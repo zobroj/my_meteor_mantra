@@ -4,15 +4,8 @@ import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import NavbarMain from '../navbar_main';
 
-// import proxyquire from 'proxyquire';
-// // stub components and helper function
-// const isActiveRoute = stub();
-// const NavbarMain = proxyquire('../navbar_main.jsx', {
-//   '../lib/helpers.js': {isActiveRoute, '@noCallThru': true},
-// }).default;
-const actions = {isActiveRoute: stub()};
-
 describe('core.components.navbar_main', () => {
+  const actions = {isActiveRoute: stub()};
   var el;
   beforeEach(() => {
     el = shallow(<NavbarMain isActiveRoute={actions.isActiveRoute} />);
