@@ -17,10 +17,12 @@ export default {
       return LocalState.set('SIGNUP_ERROR', 'password are required to match');
     }
 
-    const usernameAlreadyExists = Meteor.users.findOne({ username });
-    if (usernameAlreadyExists) {
-      return LocalState.set('SIGNUP_ERROR', 'Username already exists');
-    }
+    // check if username is already used
+    Meteor.call('accounts.checkUserExists', username, (err) => {
+      if (err) {
+        return LocalState.set('SIGNUP_ERROR', err.reason);
+      }
+    });
 
     LocalState.set('SIGNUP_ERROR', null);
 

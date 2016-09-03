@@ -28,5 +28,15 @@ export default function () {
         return Accounts.sendResetPasswordEmail(userId);
       }
     },
+    'accounts.checkUserExists'(username) {
+      check(username, String);
+      if (Meteor.users.findOne({username})) {
+        throw new Meteor.Error(
+          'checkUserExists.SIGNUP_ERROR'
+          `Username already exists`,
+          'username exists'
+        );
+      }
+    }
   });
 }
