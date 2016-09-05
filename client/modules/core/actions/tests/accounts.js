@@ -412,7 +412,6 @@ describe('core.actions.accounts', () => {
       });
     });
 
-/*
     describe('username is unique', () => {
       beforeEach(() => {
         Meteor.call.callsArgWith(2, null);
@@ -454,24 +453,22 @@ describe('core.actions.accounts', () => {
           expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.reason ]);
         });
 
-        it('should call Metetor to send a verification email', () => {
+        it('should call Metetor to send a verification email'/* , () => {
           Accounts.createUser.callsArgWith(1, null);
-
           actions.signup(
             {Accounts, LocalState, Meteor, FlowRouter},
             'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
           );
           const methodArgs = Meteor.call.args[0];
           console.log(methodArgs);
-
           expect(Meteor.call.callCount).to.be.equal(2);
           expect(methodArgs.slice(0, 1)).to.deep.equal([
             'emails.sendAccountVerificationLink'
           ]);
-        });
+        }*/);
 
         describe('after Meteor call', () => {
-          it('should set SIGNUP_ERROR with error reason', () => {
+          it('should set SIGNUP_ERROR with error reason'/* , () => {
             const err = {reason: 'after Meteor Oops'};
             Accounts.createUser.callsArgWith(1, null);
             Meteor.call.callsArgWith(1, err);
@@ -481,9 +478,9 @@ describe('core.actions.accounts', () => {
               'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
             );
             expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.reason ]);
-          });
+          }*/);
 
-          it(`should redirect to '/'`, () => {
+          it(`should redirect to '/'`/* , () => {
             Accounts.createUser.callsArgWith(1, null);
             Meteor.call.callsArgWith(1, null);
 
@@ -492,10 +489,9 @@ describe('core.actions.accounts', () => {
               'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
             );
             expect(FlowRouter.go.args[0][0]).to.be.equal('/');
-          });
+          }*/);
         });
       });
     });
-    */
   });
 });
