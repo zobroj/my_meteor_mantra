@@ -390,61 +390,61 @@ describe('core.actions.accounts', () => {
       expect(args[0]).to.be.equal('SIGNUP_ERROR');
       expect(args[1]).to.match(/\bmatch\b.*\brequired\b|\brequired\b.*\bmatch\b/);
     });
-    describe('username exists', () => {
-      it('should reject if username already exists', () => {
-        const username = 'existingUsername';
-        const err = {reason: 'Username already exists'};
 
-        Meteor.call.callsArgWith(2, err);
-        actions.signup(
-          { Meteor, LocalState, FlowRouter, Accounts },
-          'email', username, 'passwordsMatch', 'passwordsMatch'
-        );
-
-        const methodArgs = Meteor.call.args[0];
-        expect(Meteor.call.callCount).to.be.equal(1);
-        expect(methodArgs.slice(0, 2)).to.deep.equal([
-          'accounts.checkUserExists', username
-        ]);
-        const args = LocalState.set.args[0];
-        expect(args[0]).to.be.equal('SIGNUP_ERROR');
-        expect(args[1]).to.match(/exists/);
-      });
+    it('should clear older LocalState for SIGNUP_ERROR', () => {
+      actions.signup(
+        {Accounts, LocalState, Meteor, FlowRouter},
+        'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
+      );
+      expect(LocalState.set.args[0]).to.deep.equal([ 'SIGNUP_ERROR', null ]);
     });
 
-    describe('username is unique', () => {
-      beforeEach(() => {
-        Meteor.call.callsArgWith(2, null);
-      });
+    it('should call Accounts to create the user', () => {
+      actions.signup(
+        {Accounts, LocalState, Meteor, FlowRouter},
+        'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
+      );
+      const methodArgs = Accounts.createUser.args[0];
+      expect(methodArgs.slice(0, 1)).to.deep.equal([
+        {
+          email: 'email',
+          password: 'passwordsMatch',
+          username: 'uniqueUsername'
+        }
+      ]);
+      expect(methodArgs[1]).to.be.a('function');
+    });
 
-      it('should clear older LocalState for SIGNUP_ERROR', () => {
+    describe('after Accounts call', () => {
+      it('should set SIGNUP_ERROR with error reason', () => {
+        const err = {reason: 'after Accounts Oops'};
+        Accounts.createUser.callsArgWith(1, err);
+
         actions.signup(
           {Accounts, LocalState, Meteor, FlowRouter},
           'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
         );
-        expect(LocalState.set.args[0]).to.deep.equal([ 'SIGNUP_ERROR', null ]);
+        expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.reason ]);
       });
 
-      it('should call Accounts to create the user', () => {
+      it('should call Meteor to send a verification email', () => {
+        Accounts.createUser.callsArgWith(1, null);
         actions.signup(
           {Accounts, LocalState, Meteor, FlowRouter},
           'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
         );
-        const methodArgs = Accounts.createUser.args[0];
+        const methodArgs = Meteor.call.args[0];
+        expect(Meteor.call.callCount).to.be.equal(1);
         expect(methodArgs.slice(0, 1)).to.deep.equal([
-          {
-            email: 'email',
-            password: 'passwordsMatch',
-            username: 'uniqueUsername'
-          }
+          'emails.sendAccountVerificationLink'
         ]);
-        expect(methodArgs[1]).to.be.a('function');
       });
 
-      describe('after Accounts call', () => {
+      describe('after Meteor call', () => {
         it('should set SIGNUP_ERROR with error reason', () => {
-          const err = {reason: 'after Accounts Oops'};
-          Accounts.createUser.callsArgWith(1, err);
+          const err = {reason: 'after Meteor Oops'};
+          Accounts.createUser.callsArgWith(1, null);
+          Meteor.call.callsArgWith(1, err);
 
           actions.signup(
             {Accounts, LocalState, Meteor, FlowRouter},
@@ -453,43 +453,15 @@ describe('core.actions.accounts', () => {
           expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.reason ]);
         });
 
-        it('should call Metetor to send a verification email'/* , () => {
+        it(`should redirect to '/'`, () => {
           Accounts.createUser.callsArgWith(1, null);
+          Meteor.call.callsArgWith(1, null);
+
           actions.signup(
             {Accounts, LocalState, Meteor, FlowRouter},
             'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
           );
-          const methodArgs = Meteor.call.args[0];
-          console.log(methodArgs);
-          expect(Meteor.call.callCount).to.be.equal(2);
-          expect(methodArgs.slice(0, 1)).to.deep.equal([
-            'emails.sendAccountVerificationLink'
-          ]);
-        }*/);
-
-        describe('after Meteor call', () => {
-          it('should set SIGNUP_ERROR with error reason'/* , () => {
-            const err = {reason: 'after Meteor Oops'};
-            Accounts.createUser.callsArgWith(1, null);
-            Meteor.call.callsArgWith(1, err);
-
-            actions.signup(
-              {Accounts, LocalState, Meteor, FlowRouter},
-              'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
-            );
-            expect(LocalState.set.args[1]).to.deep.equal([ 'SIGNUP_ERROR', err.reason ]);
-          }*/);
-
-          it(`should redirect to '/'`/* , () => {
-            Accounts.createUser.callsArgWith(1, null);
-            Meteor.call.callsArgWith(1, null);
-
-            actions.signup(
-              {Accounts, LocalState, Meteor, FlowRouter},
-              'email', 'uniqueUsername', 'passwordsMatch', 'passwordsMatch'
-            );
-            expect(FlowRouter.go.args[0][0]).to.be.equal('/');
-          }*/);
+          expect(FlowRouter.go.args[0][0]).to.be.equal('/');
         });
       });
     });

@@ -17,28 +17,20 @@ export default {
       return LocalState.set('SIGNUP_ERROR', 'password are required to match');
     }
 
-    // check if username is already used
-    Meteor.call('accounts.checkUserExists', username, (err) => {
-      if (err) {
-        return LocalState.set('SIGNUP_ERROR', err.reason);
-      }
-    });
-
     LocalState.set('SIGNUP_ERROR', null);
 
     const options = { email, password: password1, username };
     Accounts.createUser(options, (err) => {
       if (err && err.reason) {
-        LocalState.set('SIGNUP_ERROR', err.reason);
-      } else {
-        /* eslint-disable no-shadow */
-        Meteor.call('emails.sendAccountVerificationLink', (err) => {
-          if (err && err.reason) {
-            return LocalState.set('SIGNUP_ERROR', err.reason);
-          }
-        });
-        return FlowRouter.go('/');
+        return LocalState.set('SIGNUP_ERROR', err.reason);
       }
+      /* eslint-disable no-shadow */
+      Meteor.call('emails.sendAccountVerificationLink', (err) => {
+        if (err && err.reason) {
+          return LocalState.set('SIGNUP_ERROR', err.reason);
+        }
+        return FlowRouter.go('/');
+      });
     });
   },
 
